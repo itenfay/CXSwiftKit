@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'CXSwiftKit_Example' do
+  pod 'CXSwiftKit', :path => '../'
+
+  target 'CXSwiftKit_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
