@@ -1,0 +1,16 @@
+PODS:
+  - CXSwiftKit (0.1.0)
+
+DEPENDENCIES:
+  - CXSwiftKit (from `../`)
+
+EXTERNAL SOURCES:
+  CXSwiftKit:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CXSwiftKit: 12c1586670e0a50dfe773f6b2b6fe6d8c405aa22
+
+PODFILE CHECKSUM: e462cd808b369284044263f3732b3f6eb6b91fd6
+
+COCOAPODS: 1.11.3

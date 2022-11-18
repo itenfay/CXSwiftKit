@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		0E5E5D228A2BD536134332C6 /* Pods-CXSwiftKit_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CXSwiftKit_Example.debug.xcconfig"; path = "Target Support Files/Pods-CXSwiftKit_Example/Pods-CXSwiftKit_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		2847EF40D8473230FB01DC52 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		2847EF40D8473230FB01DC52 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		602685A8AB27453ECB711000 /* Pods_CXSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CXSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* CXSwiftKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CXSwiftKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -45,8 +45,8 @@
 		74CDDAC5C9E81B7F844AC099 /* Pods-CXSwiftKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CXSwiftKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CXSwiftKit_Example/Pods-CXSwiftKit_Example.release.xcconfig"; sourceTree = "<group>"; };
 		A5B7B73DF2AABE01658810DF /* Pods-CXSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CXSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-CXSwiftKit_Tests/Pods-CXSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		ADAA609F59616F7C42E66DEC /* Pods_CXSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CXSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E8197D471E76EAF5A5BA8FB1 /* CXSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = CXSwiftKit.podspec; path = ../CXSwiftKit.podspec; sourceTree = "<group>"; };
-		E8AB1DB8FFC25E06F1A95D1E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		E8197D471E76EAF5A5BA8FB1 /* CXSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CXSwiftKit.podspec; path = ../CXSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E8AB1DB8FFC25E06F1A95D1E /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +156,6 @@
 				6545D8A63F03BE22F910D553 /* Pods-CXSwiftKit_Tests.debug.xcconfig */,
 				A5B7B73DF2AABE01658810DF /* Pods-CXSwiftKit_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -479,6 +479,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
@@ -494,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";

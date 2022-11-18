@@ -1,0 +1,22 @@
+{
+  "name": "CXSwiftKit",
+  "version": "0.1.0",
+  "summary": "A short description of CXSwiftKit.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/dyf/CXSwiftKit",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "dyf": "cg@dyf.com"
+  },
+  "source": {
+    "git": "https://github.com/dyf/CXSwiftKit.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "10.0"
+  },
+  "source_files": "CXSwiftKit/Classes/**/*"
+}

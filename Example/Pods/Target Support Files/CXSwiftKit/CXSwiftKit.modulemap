@@ -1,0 +1,6 @@
+framework module CXSwiftKit {
+  umbrella header "CXSwiftKit-umbrella.h"
+
+  export *
+  module * { export * }
+}
