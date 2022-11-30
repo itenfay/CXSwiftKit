@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F2600EF16782C0613FD52E072B739A8 /* Pods-CXSwiftKit_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0B04DB56E9B8106488E66A78E4B50B /* Pods-CXSwiftKit_Example-dummy.m */; };
 		71225CD652B15B71673BE91DE076244D /* Pods-CXSwiftKit_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C88EBD01632CD9B4AA690A0F86F4C06F /* Pods-CXSwiftKit_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79579CF429376090001FFCD8 /* CXSwiftBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79579CF329376090001FFCD8 /* CXSwiftBase.swift */; };
 		79B7AFF929223DF300B878A9 /* CXLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7AFF829223DF300B878A9 /* CXLogger.swift */; };
 		79B7AFFB2922486500B878A9 /* UIDevice+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B7AFFA2922486500B878A9 /* UIDevice+Cx.swift */; };
 		9967A34AA5829AB7B08B8BCEFA3EED88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
@@ -50,6 +51,7 @@
 		5DE86F1AB5C2A2DFBF978425EDD21B57 /* CXSwiftKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CXSwiftKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F3704CF36FD6C84A08752F9CA2F0FA /* Pods-CXSwiftKit_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-CXSwiftKit_Example-frameworks.sh"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		79579CF329376090001FFCD8 /* CXSwiftBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CXSwiftBase.swift; sourceTree = "<group>"; };
 		79B7AFF829223DF300B878A9 /* CXLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXLogger.swift; sourceTree = "<group>"; };
 		79B7AFFA2922486500B878A9 /* UIDevice+Cx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Cx.swift"; sourceTree = "<group>"; };
 		82D8D14ECC8F226EAA1D12EE46FD38DA /* CXSwiftKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CXSwiftKit-prefix.pch"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				79B7AFF829223DF300B878A9 /* CXLogger.swift */,
+				79579CF329376090001FFCD8 /* CXSwiftBase.swift */,
 			);
 			name = Base;
 			path = CXSwiftKit/Classes/Base;
@@ -396,6 +399,7 @@
 				79B7AFF929223DF300B878A9 /* CXLogger.swift in Sources */,
 				B764B0BE2D1FA70EEECC58C84507E5AB /* CXSwiftKit-dummy.m in Sources */,
 				79B7AFFB2922486500B878A9 /* UIDevice+Cx.swift in Sources */,
+				79579CF429376090001FFCD8 /* CXSwiftBase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
