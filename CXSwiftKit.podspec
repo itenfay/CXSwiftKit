@@ -24,12 +24,15 @@ TODO: Add long description of the pod here.
   s.homepage         = 'https://github.com/dyf/CXSwiftKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'dyf' => 'cg@dyf.com' }
-  s.source           = { :git => 'https://github.com/dyf/CXSwiftKit.git', :tag => s.version.to_s }
+  s.author           = { 'chenxing' => 'chenxing640@foxmail.com' }
+  s.source           = { :git => 'https://github.com/chenxing640/CXSwiftKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
+  
+  s.swift_versions = ['4.2', '5.0']
   s.ios.deployment_target = '10.0'
-
+  #s.osx.deployment_target = '10.9'
+  #s.tvos.deployment_target = '9.0'
+  
   s.source_files = 'CXSwiftKit/Classes/**/*'
   
   # s.resource_bundles = {
@@ -39,4 +42,6 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'DYFSwiftKeychain'
+  
 end

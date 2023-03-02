@@ -2,7 +2,7 @@
 //  CXSwiftBase.swift
 //  CXSwiftKit
 //
-//  Created by dyf on 2022/11/30.
+//  Created by chenxing on 2022/11/30.
 //
 
 import Foundation
@@ -17,8 +17,9 @@ public struct CXSwiftBase<T> {
 }
 
 /// Declares a `CXSwiftBaseCompatible` protocol.
-public protocol CXSwiftBaseCompatible: AnyObject {
+public protocol CXSwiftBaseCompatible {
     associatedtype M
+    
     static var cx: CXSwiftBase<M>.Type {get set}
     var cx: CXSwiftBase<M> {get set}
 }

@@ -292,10 +292,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CXSwiftKit_Example/Pods-CXSwiftKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CXSwiftKit/CXSwiftKit.framework",
+				"${BUILT_PRODUCTS_DIR}/DYFSwiftKeychain/DYFSwiftKeychain.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CXSwiftKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DYFSwiftKeychain.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

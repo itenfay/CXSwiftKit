@@ -1,13 +1,14 @@
 use_frameworks!
 
 platform :ios, '10.0'
+source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'CXSwiftKit_Example' do
   pod 'CXSwiftKit', :path => '../'
-
+  # Keychain
+  pod 'DYFSwiftKeychain'
+  
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths
-
-    
   end
 end

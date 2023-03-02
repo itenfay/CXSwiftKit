@@ -1,16 +1,24 @@
 PODS:
-  - CXSwiftKit (0.1.0)
+  - CXSwiftKit (0.1.0):
+    - DYFSwiftKeychain
+  - DYFSwiftKeychain (1.0.3)
 
 DEPENDENCIES:
   - CXSwiftKit (from `../`)
+  - DYFSwiftKeychain
+
+SPEC REPOS:
+  https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
+    - DYFSwiftKeychain
 
 EXTERNAL SOURCES:
   CXSwiftKit:
     :path: "../"
 
 SPEC CHECKSUMS:
-  CXSwiftKit: 12c1586670e0a50dfe773f6b2b6fe6d8c405aa22
+  CXSwiftKit: 7eed411157e7fb06146e8b3d9a2542da5c3aa4de
+  DYFSwiftKeychain: 7fd091a4624bc5fdcbb5b3fa6c4e0a8c4bc9cbe5
 
-PODFILE CHECKSUM: e462cd808b369284044263f3732b3f6eb6b91fd6
+PODFILE CHECKSUM: 92e8edc28a3002fe47bf8095830e3d4fa1aad619
 
 COCOAPODS: 1.11.3

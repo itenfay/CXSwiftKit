@@ -9,14 +9,24 @@
     "file": "LICENSE"
   },
   "authors": {
-    "dyf": "cg@dyf.com"
+    "chenxing": "chenxing640@foxmail.com"
   },
   "source": {
-    "git": "https://github.com/dyf/CXSwiftKit.git",
+    "git": "https://github.com/chenxing640/CXSwiftKit.git",
     "tag": "0.1.0"
   },
+  "swift_versions": [
+    "4.2",
+    "5.0"
+  ],
   "platforms": {
     "ios": "10.0"
   },
-  "source_files": "CXSwiftKit/Classes/**/*"
+  "source_files": "CXSwiftKit/Classes/**/*",
+  "dependencies": {
+    "DYFSwiftKeychain": [
+
+    ]
+  },
+  "swift_version": "5.0"
 }
