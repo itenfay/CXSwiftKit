@@ -11,7 +11,7 @@ import Foundation
 public struct CXSwiftBase<T> {
     public let base: T
     
-    public init(base: T) {
+    public init(_ base: T) {
         self.base = base
     }
 }
@@ -33,8 +33,7 @@ public extension CXSwiftBaseCompatible {
     }
     
     var cx: CXSwiftBase<Self> {
-        get { return CXSwiftBase<Self>(base: self) }
+        get { return CXSwiftBase<Self>(self) }
         set {}
     }
-    
 }

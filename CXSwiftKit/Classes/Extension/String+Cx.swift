@@ -10,25 +10,25 @@ import CommonCrypto
 
 extension String: CXSwiftBaseCompatible {}
 
-public extension CXSwiftBase where T == String {
+extension CXSwiftBase where T == String {
     
     /// Get the length of a string, which can contain emoji.
-    var length: Int {
+    public var length: Int {
         return self.base.utf16.count
     }
     
     /// String to integer number.
-    var intValue: Int? {
+    public var intValue: Int? {
         return Int(self.base)
     }
     
     /// String to double number.
-    var doubleValue: Double? {
+    public var doubleValue: Double? {
         return Double(self.base)
     }
     
-    /// Get a md5 encoded string.
-    var md5: String? {
+    /// Get a MD5 encoded string.
+    public var md5: String? {
         let cStr = self.base.cString(using: String.Encoding.utf8)
         if cStr != nil {
             let digestLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -48,7 +48,9 @@ public extension CXSwiftBase where T == String {
     }
     
     /// Convert a date string to a timestamp，dateFormat: "yyyy-MM-dd HH:mm:ss".
-    func asTimeStamp(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Double? {
+    /// - Parameter dateFormat: <#dateFormat description#>
+    /// - Returns: <#description#>
+    public func asTimestamp(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Double? {
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
         let date = dateFormatter.date(from: self.base)
@@ -56,7 +58,7 @@ public extension CXSwiftBase where T == String {
     }
     
     /// Convert a timestamp to a date string，dateFormat: "yyyy-MM-dd HH:mm:ss".
-    func timeStampAsDateString(with dateFormat: String = "yyyy-MM-dd HH:mm:ss" ) -> String {
+    public func timestampAsDateString(with dateFormat: String = "yyyy-MM-dd HH:mm:ss" ) -> String {
         let ts = NSString.init(string: self.base)
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = dateFormat
@@ -65,7 +67,7 @@ public extension CXSwiftBase where T == String {
     }
     
     // 时间格式转换为Date类型 (传入的字符串要与下方的格式一致！！！)
-    func timeToDate(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+    public func timeToDate(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         guard let date = dateFormatter.date(from: self.base) else {
@@ -75,7 +77,7 @@ public extension CXSwiftBase where T == String {
     }
     
     /// 将 Base64 编码中的"-"，"_"字符串转换成"+"，"/"，字符串长度余4倍的位补"="
-    func safeUrlBase64Decode() -> Data? {
+    public func safeUrlBase64Decode() -> Data? {
         // '-' -> '+'
         // '_' -> '/'
         // 不足4倍长度，补'='
@@ -91,12 +93,12 @@ public extension CXSwiftBase where T == String {
     }
     
     /// Base64 decoding.
-    func base64Decode() -> Data? {
+    public func base64Decode() -> Data? {
         return Data.init(base64Encoded: self.base)
     }
     
     /// Encodes an url.
-    func urlEncode() -> String {
+    public func urlEncode() -> String {
         let encodeUrlString = self.base.addingPercentEncoding(
             withAllowedCharacters: .urlQueryAllowed
         )
@@ -104,9 +106,10 @@ public extension CXSwiftBase where T == String {
     }
     
     /// Encodes an url bestly.
-    func bestUrlEncode() -> String {
+    public func urlEncode2() -> String {
         var allowedCharacters = NSCharacterSet.urlQueryAllowed
-        allowedCharacters.remove(charactersIn: "!*'\"();:@&=+$,/?%#[]% ")
+        //does not include "?" or "/" due to RFC 3986 - Section 3.4
+        allowedCharacters.remove(charactersIn: ":#[]@!$&'()*+,;=")
         let encodeUrlString = self.base.addingPercentEncoding(
             withAllowedCharacters: allowedCharacters
         )
@@ -114,12 +117,12 @@ public extension CXSwiftBase where T == String {
     }
     
     /// Decodes an url.
-    func urlDecode() -> String {
+    public func urlDecode() -> String {
         return self.base.removingPercentEncoding ?? self.base
     }
     
     /// Convert a string to an attributed string.
-    func asAttributedString(with foregroundColor: UIColor, font: UIFont) -> NSAttributedString {
+    public func asAttributedString(with foregroundColor: UIColor, font: UIFont) -> NSAttributedString {
         let attr = NSMutableAttributedString.init(string: self.base)
         attr.addAttribute(
             NSAttributedString.Key.foregroundColor, value: foregroundColor,
@@ -133,7 +136,7 @@ public extension CXSwiftBase where T == String {
     }
     
     /// Copy string to pasteboard.
-    func copyToPasteboard() {
+    public func copyToPasteboard() {
         guard self.base.utf16.count > 0 else {
             return
         }
@@ -145,7 +148,7 @@ public extension CXSwiftBase where T == String {
     ///   - location: 开始的索引位置
     ///   - length: 截取长度
     /// - Returns: 字符串
-    func substring(at location: Int = 0, length: Int) -> String {
+    public func substring(at location: Int = 0, length: Int) -> String {
         if location > self.base.count || (location+length > self.base.count) {
             return self.base
         }
@@ -154,6 +157,31 @@ public extension CXSwiftBase where T == String {
             subStr += self.base[self.base.index(self.base.startIndex, offsetBy: idx)].description
         }
         return subStr
+    }
+    
+    /// Represent the name of a notification.
+    ///
+    /// - Returns: The name of a notification.
+    public func asNotificationName() -> Notification.Name? {
+        return self.base.cx_asNotificationName()
+    }
+    
+}
+
+//MARK: - Notification
+
+extension String {
+    
+    /// Represent the name of a notification.
+    ///
+    /// - Returns: The name of a notification.
+    public func cx_asNotificationName() -> Notification.Name?
+    {
+        // A string for the name of a notification.
+        if self.isEmpty {
+            return nil
+        }
+        return Notification.Name(self)
     }
     
 }
