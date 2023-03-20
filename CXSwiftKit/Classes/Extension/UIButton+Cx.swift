@@ -6,11 +6,32 @@
 //
 
 import UIKit
+#if canImport(Kingfisher)
+import Kingfisher
+#endif
 
 extension CXSwiftBase where T : UIButton {
     
     public func xui(_ alignment: CXButtonImageTextAlignment, padding: CGFloat) {
-        self.base.cx_setx(alignment, padding: padding)
+        //self.base.cx_setx(alignment, padding: padding)
+    }
+    
+    ///  Sets an image to the button for a specified state with a given url string.
+    ///
+    /// - Parameters:
+    ///   - url: A given url string
+    ///   - state: The button state to which the image should be set.
+    ///   - placeholder: A placeholder to show while retrieving the image from the given url string.
+    ///   - headers: Sets the HTTP header fields of the receiver to the given dictionary.
+    ///   - progressBlock: Called when the image downloading progress gets updated.
+    public func setImage(
+        withUrl url: String?,
+        forState state: UIControl.State,
+        placeholder: UIImage? = nil,
+        headers: [String : String] = [:],
+        progressBlock: ((_ receivedSize: Int64, _ totalSize: Int64) -> Void)? = nil)
+    {
+        self.base.cx_setImage(withUrl: url, forState: state, placeholder: placeholder, headers: headers, progressBlock: progressBlock)
     }
     
 }
@@ -43,7 +64,7 @@ extension CXSwiftBase where T : UIButton {
 
 extension UIButton {
     
-    @objc public func cx_setx(_ alignment: CXButtonImageTextAlignment, padding: CGFloat) {
+    @objc public func cx_setX(alignment: CXButtonImageTextAlignment, padding: CGFloat) {
         if imageView?.image != nil && titleLabel?.text != nil {
             // Reset title edge insets and image edge insets.
             titleEdgeInsets = .zero
@@ -155,6 +176,59 @@ extension UIButton {
             titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         }
+    }
+    
+    ///  Sets an image to the button for a specified state with a given url string.
+    ///
+    /// - Parameters:
+    ///   - url: A given url string
+    ///   - state: The button state to which the image should be set.
+    ///   - placeholder: A placeholder to show while retrieving the image from the given url string.
+    ///   - headers: Sets the HTTP header fields of the receiver to the given dictionary.
+    ///   - progressBlock: Called when the image downloading progress gets updated.
+    @objc public func cx_setImage(
+        withUrl url: String?,
+        forState state: UIControl.State,
+        placeholder: UIImage? = nil,
+        headers: [String : String] = [:],
+        progressBlock: ((_ receivedSize: Int64, _ totalSize: Int64) -> Void)? = nil)
+    {
+        guard let _url = url, !_url.isEmpty else {
+            CXLogger.log(level: .info, message: "Invalid url string.")
+            return
+        }
+        #if canImport(Kingfisher)
+        var modifier: AnyModifier? = nil
+        if !headers.isEmpty {
+            modifier = AnyModifier { request in
+                var r = request
+                for key in headers.keys {
+                    if let value = headers[key], !value.isEmpty {
+                        // replace "key" with the field name you need, it's just an example.
+                        r.setValue(value, forHTTPHeaderField: key)
+                    }
+                }
+                return request
+            }
+        }
+        
+        if let _modifier = modifier {
+            self.kf.setImage(
+                with: URL.init(string: imageUrl),
+                for: state,
+                placeholder: placeholder,
+                options: [.requestModifier(_modifier)],
+                progressBlock: progressBlock
+            )
+        } else {
+            self.kf.setImage(
+                with: URL.init(string: imageUrl),
+                for: state,
+                placeholder: placeholder,
+                progressBlock: progressBlock
+            )
+        }
+        #endif
     }
     
 }

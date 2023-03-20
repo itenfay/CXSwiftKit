@@ -5,8 +5,14 @@ source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'CXSwiftKit_Example' do
   pod 'CXSwiftKit', :path => '../'
+  
   # Keychain
   pod 'DYFSwiftKeychain'
+  
+  # Kingfisher
+  pod 'Kingfisher'
+  # SDWebImage
+  pod 'SDWebImage'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths

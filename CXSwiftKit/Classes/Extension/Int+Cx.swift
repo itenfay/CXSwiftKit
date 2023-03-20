@@ -12,6 +12,7 @@ extension Int: CXSwiftBaseCompatible {}
 extension CXSwiftBase where T == Int {
     
     /// Convert the seconds to a string which contains the format(0d0h0m0s).
+    ///
     /// - Parameter sinicized: Whether to convert an English string into Chinese.
     /// - Returns: A string which contains the format(0d0h0m0s).
     public func secondsAsTimeString(sinicized: Bool = true) -> String {

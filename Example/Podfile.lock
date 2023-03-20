@@ -1,15 +1,25 @@
 PODS:
   - CXSwiftKit (0.1.0):
     - DYFSwiftKeychain
-  - DYFSwiftKeychain (1.0.3)
+  - DYFSwiftKeychain (1.1.0)
+  - Kingfisher (5.15.8):
+    - Kingfisher/Core (= 5.15.8)
+  - Kingfisher/Core (5.15.8)
+  - SDWebImage (5.15.5):
+    - SDWebImage/Core (= 5.15.5)
+  - SDWebImage/Core (5.15.5)
 
 DEPENDENCIES:
   - CXSwiftKit (from `../`)
   - DYFSwiftKeychain
+  - Kingfisher (~> 5.0)
+  - SDWebImage
 
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - DYFSwiftKeychain
+    - Kingfisher
+    - SDWebImage
 
 EXTERNAL SOURCES:
   CXSwiftKit:
@@ -17,8 +27,10 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   CXSwiftKit: 7eed411157e7fb06146e8b3d9a2542da5c3aa4de
-  DYFSwiftKeychain: 7fd091a4624bc5fdcbb5b3fa6c4e0a8c4bc9cbe5
+  DYFSwiftKeychain: e1cd3d844beb58ca71ea5408bca25bf62ac704c9
+  Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
 
-PODFILE CHECKSUM: 92e8edc28a3002fe47bf8095830e3d4fa1aad619
+PODFILE CHECKSUM: d60ab56a4c89e54e3f26112332d219ede5df80a3
 
 COCOAPODS: 1.11.3

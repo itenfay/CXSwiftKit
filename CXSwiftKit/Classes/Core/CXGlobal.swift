@@ -9,6 +9,9 @@ import UIKit
 #if canImport(Kingfisher)
 import Kingfisher
 #endif
+#if canImport(SDWebImage)
+import SDWebImage
+#endif
 
 /// f
 ///
@@ -31,6 +34,26 @@ public func cxIsIphoneXSeries() -> Bool
     return isX
 }
 
+
+/// Allocates recursive pthread_mutex associated with ‘obj’ if needed.
+public func cxSynchronize(_ obj: Any, closure: @escaping () -> Void)
+{
+    objc_sync_enter(obj)
+    defer {
+        objc_sync_exit(obj)
+    }
+    closure()
+}
+
+/// Submits a work item to a dispatch queue for asynchronous execution after a specified time.
+/// - Parameters:
+///   - delay: he time interval after which the work item should be executed.
+///   - work: The work item to be invoked on the queue.
+public func cxDelayToDispatch(_ delay: TimeInterval, execute work: @escaping () -> Void)
+{
+    DispatchQueue.cx.mainAsyncAfter(delay, execute: work)
+}
+
 // MARK: - OSS图片处理
 
 /// OSS图片处理：等比缩放，按宽高缩放，如：图片缩放为高100 px：resize,h_100。缩放模式为lfit：m_lfit。
@@ -38,7 +61,8 @@ public func cxIsIphoneXSeries() -> Bool
 ///   - url: 图片地址
 ///   - height: 画布的高度
 /// - Returns: 裁剪图片后新的地址
-public func cxImageResize(withUrl url: String?, height: CGFloat) -> String? {
+public func cxImageResize(withUrl url: String?, height: CGFloat) -> String?
+{
     guard let _url = url else {
         return nil
     }
@@ -58,7 +82,8 @@ public func cxImageResize(withUrl url: String?, height: CGFloat) -> String? {
 ///   - url: 图片地址
 ///   - width: 画布的宽度
 /// - Returns: 裁剪图片后新的地址
-public func cxImageResized(withUrl url: String?, width: CGFloat) -> String? {
+public func cxImageResized(withUrl url: String?, width: CGFloat) -> String?
+{
     guard let _url = url else {
         return nil
     }
@@ -77,7 +102,8 @@ public func cxImageResized(withUrl url: String?, width: CGFloat) -> String? {
 ///   - url: 图片地址
 ///   - longSide: 长边宽度
 /// - Returns: 裁剪图片后新的地址
-public func cxImageResize(withUrl url: String?, longEdgeWidth: CGFloat) -> String? {
+public func cxImageResize(withUrl url: String?, longEdgeWidth: CGFloat) -> String?
+{
     guard let _url = url else {
         return nil
     }
@@ -97,7 +123,8 @@ public func cxImageResize(withUrl url: String?, longEdgeWidth: CGFloat) -> Strin
 ///   - width: 画布的宽度
 ///   - height: 画布的高度
 /// - Returns: 裁剪图片后新的地址
-public func cxImageResize(withUrl url: String?, width: CGFloat, height: CGFloat) -> String? {
+public func cxImageResize(withUrl url: String?, width: CGFloat, height: CGFloat) -> String?
+{
     guard let _url = url else {
         return nil
     }
@@ -117,7 +144,8 @@ public func cxImageResize(withUrl url: String?, width: CGFloat, height: CGFloat)
 ///   - width: 截图宽度，如果指定为0，则自动计算。
 ///   - height: 截图高度，如果指定为0，则自动计算；如果w和h都为0，则输出为原视频宽高。
 /// - Returns: 截取视频后新的图片地址
-public func cxVideoSnapshot(withUrl url: String?, time: Int, width: CGFloat = 0, height: CGFloat = 0) -> String? {
+public func cxVideoSnapshot(withUrl url: String?, time: Int, width: CGFloat = 0, height: CGFloat = 0) -> String?
+{
     guard let _url = url else {
         return nil
     }
@@ -131,9 +159,13 @@ public func cxVideoSnapshot(withUrl url: String?, time: Int, width: CGFloat = 0,
 
 #if canImport(Kingfisher)
 
-// MARK: - Download image
+// MARK: - Kingfisher
 
-public func cxDownloadImage(withUrl url: String, completionHandler: (UIImage?) -> Void)
+/// Gets an image from a given url string.
+public func cxDownloadImage(withUrl url: String,
+                            options: KingfisherOptionsInfo? = nil,
+                            progressBlock: DownloadProgressBlock? = nil,
+                            completionHandler: (UIImage?) -> Void)
 {
     guard let aURL = URL.init(string: url) else {
         DispatchQueue.cx.mainAsync {
@@ -141,7 +173,7 @@ public func cxDownloadImage(withUrl url: String, completionHandler: (UIImage?) -
         }
         return
     }
-    KingfisherManager.shared.retrieveImage(with: aURL) { (result) in
+    KingfisherManager.shared.retrieveImage(with: aURL, options: options, progressBlock: progressBlock) { (result) in
         switch result {
         case .success(let imageResult):
             DispatchQueue.cx.mainAsync {
@@ -156,7 +188,9 @@ public func cxDownloadImage(withUrl url: String, completionHandler: (UIImage?) -
     }
 }
 
-public func cxCalculateKingfisherDiskStorageSize(_ completionHandler: @escaping (String?) -> Void) {
+/// Calculates the size taken by the disk storage of Kingfisher.
+public func cxCalculateKingfisherDiskStorageSize(completionHandler handler: @escaping (String?) -> Void)
+{
     ImageCache.default.calculateDiskStorageSize { result in
         switch result {
         case .success(let size):
@@ -164,20 +198,46 @@ public func cxCalculateKingfisherDiskStorageSize(_ completionHandler: @escaping 
                 fromByteCount: Int64(size),
                 countStyle: .binary
             )
-            completionHandler(sizeString)
+            handler(sizeString)
         case .failure(let error):
             CXLogger.log(level: .error, message: "error: \(error)")
-            completionHandler(nil)
+            handler(nil)
         }
     }
 }
 
-public func cxClearKingfisherCache(_ completionHandler: ((UIImage?) -> Void)? = nil) {
-    let cache = ImageCache.default
-    cache.clearMemoryCache()
-    cache.clearDiskCache {
-        completionHandler?()
-    }
+/// Clears the memory & disk storage of Kingfisher's cache.
+public func cxClearKingfisherCache(completionHandler handler: (() -> Void)? = nil)
+{
+    //ImageCache.default.clearMemoryCache()
+    //ImageCache.default.clearDiskCache(completion: handler)
+    ImageCache.default.clearCache(completion: handler)
+}
+
+/// Clears the expired images from memory & disk storage of Kingfisher's cache.
+public func cxClearKingfisherExpiredCache(completionHandler handler: (() -> Void)? = nil)
+{
+    //ImageCache.default.cleanExpiredMemoryCache()
+    //ImageCache.default.cleanExpiredDiskCache(completion: handler)
+    ImageCache.default.cleanExpiredCache(completion: handler)
+}
+
+/// Sets up the referer of Kingfisher.
+public func cxSetupKingfisherReferer(_ referer: String)
+{
+    let referer = CXKingfisherReferer(headers: ["Referer": referer])
+    KingfisherManager.shared.defaultOptions = [.requestModifier(referer)]
+}
+
+#endif
+
+#if canImport(SDWebImage)
+
+/// Sets up the referer of SDWebImage.
+public func cxSetupSDWebImageReferer(_ referer: String)
+{
+    let sdDownloader = SDWebImageDownloader.shared
+    sdDownloader.setValue(referer, forHTTPHeaderField: "Referer")
 }
 
 #endif

@@ -48,6 +48,7 @@ extension CXSwiftBase where T == String {
     }
     
     /// Convert a date string to a timestamp，dateFormat: "yyyy-MM-dd HH:mm:ss".
+    /// 
     /// - Parameter dateFormat: <#dateFormat description#>
     /// - Returns: <#description#>
     public func asTimestamp(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Double? {
