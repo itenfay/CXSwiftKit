@@ -5,6 +5,8 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(Dispatch)
+import Dispatch
 import Foundation
 
 // Declares an array of string to record the token.
@@ -107,3 +109,5 @@ extension CXSwiftBase where T: DispatchGroup {
     }
     
 }
+
+#endif

@@ -7,7 +7,26 @@
 
 import UIKit
 
+/// Text input type of `UITextField`.
+@objc public enum CXTextInputType: Int {
+    /// `UITextField` is used to enter email addresses.
+    case emailAddress
+    /// `UITextField` is used to enter passwords.
+    case password
+    /// `UITextField` is used to enter generic text.
+    case generic
+}
+
 extension CXSwiftBase where T : UITextField {
+    
+    public var textInutType: CXTextInputType {
+        get {
+            return base.cx_textInutType
+        }
+        set (type) {
+            base.cx_textInutType = type
+        }
+    }
     
     /// Clear text.
     public func clear() {
@@ -54,56 +73,69 @@ extension CXSwiftBase where T : UITextField {
     
     /// Check if textFields text is a valid email format.
     public var hasValidEmail: Bool {
-        guard let _text = base.text else { return false }
-        // http://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
-        return _text.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
-                           options: String.CompareOptions.regularExpression,
-                           range: nil, locale: nil) != nil
+        return base.cx_hasValidEmail
     }
     
     /// Check if text field is empty.
     public var isEmpty: Bool {
-        return base.text?.isEmpty == true
+        return base.cx_isEmpty
     }
     
     /// Return text with no spaces or new lines in beginning and end.
     public var trimmedText: String? {
-        return base.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        return base.cx_trimmedText
     }
     
     /// Left view tint color.
     var leftViewTintColor: UIColor? {
         get {
-            return base.leftView?.tintColor
+            return base.cx_leftViewTintColor
         }
         set {
-            guard let iconView = base.leftView as? UIImageView else {
-                base.leftView?.tintColor = newValue
-                return
-            }
-            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
-            iconView.tintColor = newValue
+            base.cx_leftViewTintColor = newValue
         }
     }
     
     /// Right view tint color.
     var rightViewTintColor: UIColor? {
         get {
-            return base.rightView?.tintColor
+            return base.cx_rightViewTintColor
         }
         set {
-            guard let iconView = base.rightView as? UIImageView else {
-                base.rightView?.tintColor = newValue
-                return
-            }
-            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
-            iconView.tintColor = newValue
+            base.cx_rightViewTintColor = newValue
         }
     }
     
 }
 
 extension UITextField {
+    
+    @objc public var cx_textInutType: CXTextInputType {
+        get {
+            if keyboardType == .emailAddress {
+                return .emailAddress
+            } else if isSecureTextEntry {
+                return .password
+            }
+            return .generic
+        }
+        set {
+            switch newValue {
+            case .emailAddress:
+                keyboardType = .emailAddress
+                autocorrectionType = .no
+                autocapitalizationType = .none
+                isSecureTextEntry = false
+            case .password:
+                keyboardType = .asciiCapable
+                autocorrectionType = .no
+                autocapitalizationType = .none
+                isSecureTextEntry = true
+            case .generic:
+                isSecureTextEntry = false
+            }
+        }
+    }
     
     /// Clear text.
     @objc public func cx_clear() {
@@ -129,6 +161,7 @@ extension UITextField {
     }
     
     /// Add padding to the left of the textfield.
+    ///
     /// - Parameters:
     ///   - image: Left image.
     ///   - padding: The value of padding between icon and the left of textfield.
@@ -163,7 +196,7 @@ extension UITextField {
     }
     
     /// Check if textFields text is a valid email format.
-    @objc public func cx_hasValidEmail() -> Bool {
+    @objc public var cx_hasValidEmail: Bool {
         guard let _text = text else { return false }
         // http://stackoverflow.com/questions/25471114/how-to-validate-an-e-mail-address-in-swift
         return _text.range(of: "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
@@ -172,13 +205,43 @@ extension UITextField {
     }
     
     /// Check if text field is empty.
-    @objc public func cx_isEmpty() -> Bool {
+    @objc public var cx_isEmpty: Bool {
         return text?.isEmpty == true
     }
     
     /// Return text with no spaces or new lines in beginning and end.
-    @objc public func cx_trimmedText() -> String? {
+    @objc public var cx_trimmedText: String? {
         return text?.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
+    /// Left view tint color.
+    @IBInspectable @objc public var cx_leftViewTintColor: UIColor? {
+        get {
+            return leftView?.tintColor
+        }
+        set {
+            guard let iconView = leftView as? UIImageView else {
+                leftView?.tintColor = newValue
+                return
+            }
+            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
+            iconView.tintColor = newValue
+        }
+    }
+    
+    /// Right view tint color.
+    @IBInspectable @objc public var cx_rightViewTintColor: UIColor? {
+        get {
+            return rightView?.tintColor
+        }
+        set {
+            guard let iconView = rightView as? UIImageView else {
+                rightView?.tintColor = newValue
+                return
+            }
+            iconView.image = iconView.image?.withRenderingMode(.alwaysTemplate)
+            iconView.tintColor = newValue
+        }
     }
     
 }

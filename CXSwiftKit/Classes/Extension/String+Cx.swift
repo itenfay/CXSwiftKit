@@ -5,8 +5,10 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(Foundation)
 import Foundation
 import CommonCrypto
+import CoreImage
 
 extension String: CXSwiftBaseCompatible {}
 
@@ -48,7 +50,7 @@ extension CXSwiftBase where T == String {
     }
     
     /// Convert a date string to a timestamp，dateFormat: "yyyy-MM-dd HH:mm:ss".
-    /// 
+    ///
     /// - Parameter dateFormat: <#dateFormat description#>
     /// - Returns: <#description#>
     public func asTimestamp(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Double? {
@@ -164,25 +166,111 @@ extension CXSwiftBase where T == String {
     ///
     /// - Returns: The name of a notification.
     public func asNotificationName() -> Notification.Name? {
-        return self.base.cx_asNotificationName()
-    }
-    
-}
-
-//MARK: - Notification
-
-extension String {
-    
-    /// Represent the name of a notification.
-    ///
-    /// - Returns: The name of a notification.
-    public func cx_asNotificationName() -> Notification.Name?
-    {
         // A string for the name of a notification.
-        if self.isEmpty {
+        if self.base.isEmpty {
             return nil
         }
-        return Notification.Name(self)
+        return Notification.Name(self.base)
+    }
+    
+    /// Generates an image of QRCode.
+    ///
+    /// - Returns: An image of QRCode.
+    public func generateQRCode() -> UIImage? {
+        return generateQRCode(withCenterImage: nil)
+    }
+    
+    /// Generates an image of QRCode with a given center image and center size.
+    ///
+    /// - Parameters:
+    ///   - centerImage: A center image to draw.
+    ///   - centerSize: The size of center image to draw.
+    /// - Returns: An image of QRCode.
+    public func generateQRCode(withCenterImage centerImage: UIImage?, centerSize: CGSize = .init(width: 90, height: 90)) -> UIImage? {
+        let qrFilter = CIFilter(name: "CIQRCodeGenerator")
+        qrFilter?.setDefaults()
+        
+        let data = self.base.data(using: .utf8)
+        qrFilter?.setValue(data, forKey: "inputMessage")
+        
+        let outputImage = qrFilter?.outputImage
+        guard let opImage = outputImage else {
+            return nil
+        }
+        let codeImage = opImage.transformed(by: CGAffineTransform(scaleX: 9, y: 9))
+        let qrImage = UIImage(ciImage: codeImage)
+        let size = qrImage.size
+        UIGraphicsBeginImageContext(size)
+        qrImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
+        if centerImage != nil {
+            let cX = (size.width - centerSize.width) / 2
+            let cY = (size.height - centerSize.height) / 2
+            centerImage!.draw(in: CGRect(x: cX, y: cY, width: centerSize.width, height: centerSize.height))
+        }
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+    
+    /// Generates an image of QRCode with a given background color and foreground color.
+    ///
+    /// - Parameters:
+    ///   - backgroudColor: A background color to draw.
+    ///   - foregroudColor: A foreground color to draw.
+    /// - Returns: An image of QRCode.
+    public func generateQRCode(withBackgroudColor backgroudColor: UIColor, foregroudColor: UIColor) -> UIImage? {
+        return generateQRCode(withBackgroudColor: backgroudColor, foregroudColor: foregroudColor, centerImage: nil)
+    }
+    
+    /// Generates an image of QRCode with a given background color, foreground color, center image and center size.
+    ///
+    /// - Parameters:
+    ///   - backgroudColor: A background color to draw.
+    ///   - foregroudColor: A foreground color to draw.
+    ///   - centerImage: A center image to draw.
+    ///   - centerSize: The size of center image to draw.
+    /// - Returns: An image of QRCode.
+    public func generateQRCode(withBackgroudColor backgroudColor: UIColor, foregroudColor: UIColor, centerImage: UIImage?, centerSize: CGSize = .init(width: 90, height: 90)) -> UIImage? {
+        let qrFilter = CIFilter(name: "CIQRCodeGenerator")
+        qrFilter?.setDefaults()
+        
+        let data = self.base.data(using: .utf8)
+        qrFilter?.setValue(data, forKey: "inputMessage")
+        
+        let outputImage = qrFilter?.outputImage
+        guard let opImage = outputImage else {
+            return nil
+        }
+        
+        let colorFilter = CIFilter(name: "CIFalseColor")
+        colorFilter?.setDefaults()
+        colorFilter?.setValue(opImage, forKey: "inputImage")
+        colorFilter?.setValue(CIColor(cgColor: foregroudColor.cgColor), forKey: "inputColor0")
+        colorFilter?.setValue(CIColor(cgColor: backgroudColor.cgColor), forKey: "inputColor1")
+        let cOutputImage = colorFilter?.outputImage
+        guard let cOpImage = cOutputImage else {
+            return nil
+        }
+        
+        let codeImage = cOpImage.transformed(by: CGAffineTransform(scaleX: 9, y: 9))
+        let qrImage = UIImage(ciImage: codeImage)
+        let size = qrImage.size
+        UIGraphicsBeginImageContext(size)
+        qrImage.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
+        
+        if centerImage != nil {
+            let cX = (size.width - centerSize.width) / 2
+            let cY = (size.height - centerSize.height) / 2
+            centerImage!.draw(in: CGRect(x: cX, y: cY, width: centerSize.width, height: centerSize.height))
+        }
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
     }
     
 }
+
+#endif

@@ -5,7 +5,8 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-import UIKit
+#if canImport(Foundation)
+import Foundation
 #if canImport(Kingfisher)
 import Kingfisher
 
@@ -28,4 +29,6 @@ public class CXKingfisherReferer: ImageDownloadRequestModifier {
     }
     
 }
+#endif
+
 #endif

@@ -5,7 +5,9 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(UIKit)
 import UIKit
+import CoreGraphics
 
 /// A tuple of the components that form the color in the RGB color space.
 public typealias CXColorRGBA = (red: CGFloat?, green: CGFloat?, blue: CGFloat?, alpha: CGFloat)
@@ -25,7 +27,7 @@ extension CXSwiftBase where T : UIColor {
     /// - Parameters:
     ///   - hex: Hex Int (example: 0xDEA3B6).
     ///   - alpha: Optional alpha value (default is 1).
-    public static func cx_color(withHex hex: Int, alpha: CGFloat = 1) -> UIColor?
+    public static func color(withHex hex: Int, alpha: CGFloat = 1) -> UIColor?
     {
         return UIColor.cx_color(withHex: hex, alpha: alpha)
     }
@@ -35,18 +37,18 @@ extension CXSwiftBase where T : UIColor {
     /// - Parameters:
     ///   - hexString: Hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
     ///   - alpha: Optional alpha value (default is 1).
-    public static func cx_color(withHexString hexString: String, alpha: CGFloat = 1) -> UIColor?
+    public static func color(withHexString hexString: String, alpha: CGFloat = 1) -> UIColor?
     {
         return UIColor.cx_color(withHexString: hexString, alpha: alpha)
     }
     
-    /// Converts the color to an image with the specified size.
+    /// Draws an image of the color with the specified size.
     ///
     /// - Parameter size: The size of getting new image.
     /// - Returns: An image of the color with the specified size.
-    public func asImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
+    public func drawImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
     {
-        self.base.cx_asImage(withSize: size)
+        self.base.cx_drawImage(withSize: size)
     }
     
     /// Returns the components that form the color in the RGB color space.
@@ -77,6 +79,12 @@ extension CXSwiftBase where T : UIColor {
     public var brightnessAdjustedColor: UIColor
     {
         return self.base.cx_brightnessAdjustedColor()
+    }
+    
+    /// Returns a hexadecimal string.
+    public var hexString: String
+    {
+        return self.base.cx_hexString
     }
     
 }
@@ -143,17 +151,20 @@ extension UIColor {
         return cx_color(withHex: hexValue, alpha: alpha)
     }
     
-    /// Converts the color to an image with the specified size.
+    /// Draws an image of the color with the specified size.
     ///
     /// - Parameter size: The size of getting new image.
     /// - Returns: An image of the color with the specified size.
-    @objc public func cx_asImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
+    @objc public func cx_drawImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
     {
-        let rect = CGRect.init(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContext(size)
-        let context = UIGraphicsGetCurrentContext()
-        context?.setFillColor(self.cgColor)
-        context?.fill(rect)
+        guard let context = UIGraphicsGetCurrentContext()
+        else {
+            UIGraphicsEndImageContext()
+            return nil
+        }
+        context.setFillColor(self.cgColor)
+        context.fill(CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
@@ -164,7 +175,7 @@ extension UIColor {
     /// - Returns: The components that form the color in the RGB color space.
     @objc public func cx_getRGBA() -> CXRGBComponents
     {
-        var components = CXRGBComponents()
+        let components = CXRGBComponents()
         var red: CGFloat = 0
         var green: CGFloat = 0
         var blue: CGFloat = 0
@@ -226,4 +237,18 @@ extension UIColor {
         return UIColor(red: color, green: color, blue: color, alpha: alpha!)
     }
     
+    /// Returns a hexadecimal string.
+    @objc public var cx_hexString: String
+    {
+        var r: CGFloat = 0
+        var g: CGFloat = 0
+        var b: CGFloat = 0
+        var a: CGFloat = 0
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format:"#%06x", rgb)
+    }
+    
 }
+
+#endif

@@ -5,6 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 extension CXSwiftBase where T : UIViewController {
@@ -30,13 +31,13 @@ extension CXSwiftBase where T : UIViewController {
     }
     
     /// Return the number of controllers in the stack.
-    public func countOfControllersStack() -> Int {
-        self.base.cx_countOfControllersInStack()
+    public var countOfControllersStack: Int {
+        self.base.cx_countOfControllersInStack
     }
     
 }
 
-//MARK: -  UINavigationController
+//MARK: -  UIViewController
 
 extension UIViewController {
     
@@ -93,7 +94,7 @@ extension UIViewController {
     }
     
     /// Return the number of controllers in the stack.
-    @objc public func cx_countOfControllersInStack() -> Int {
+    @objc public var cx_countOfControllersInStack: Int {
         guard let nc = self.navigationController else {
             return 0
         }
@@ -103,3 +104,5 @@ extension UIViewController {
     }
     
 }
+
+#endif

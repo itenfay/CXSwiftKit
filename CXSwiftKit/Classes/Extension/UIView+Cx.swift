@@ -5,7 +5,11 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(UIKit)
 import UIKit
+#if canImport(QuartzCore)
+import QuartzCore
+#endif
 
 extension CXSwiftBase where T : UIView {
     
@@ -127,6 +131,147 @@ extension CXSwiftBase where T : UIView {
         set {
             self.base.cx_size = newValue
         }
+    }
+    
+    /// The corner radius of the view, also inspectable from Storyboard or Xib.
+    public var cornerRadius: CGFloat
+    {
+        get {
+            return self.base.cx_cornerRadius
+        }
+        set {
+            self.base.cx_cornerRadius = newValue
+        }
+    }
+    
+    /// Indicates whether sublayers are clipped to the layer’s bounds, also inspectable from Storyboard or Xib.
+    public var masksToBounds: Bool
+    {
+        get {
+            return self.base.cx_masksToBounds
+        }
+        set {
+            self.base.cx_masksToBounds = newValue
+        }
+    }
+    
+    /// The border color of the view, also inspectable from Storyboard or Xib.
+    public var borderColor: UIColor?
+    {
+        get {
+            return self.base.cx_borderColor
+        }
+        set {
+            self.base.cx_borderColor = newValue
+        }
+    }
+    
+    /// The border width of the view, also inspectable from Storyboard or Xib.
+    public var borderWidth: CGFloat
+    {
+        get {
+            return self.base.cx_borderWidth
+        }
+        set {
+            self.base.cx_borderWidth = newValue
+        }
+    }
+    
+    /// Draws a straight line segment from the start point to the end point.
+    ///
+    /// - Parameters:
+    ///   - startPoint: The point, in user space coordinates, at which to start a new subpath.
+    ///   - endPoint: The location, in user space coordinates, for the end of the new line segment.
+    ///   - color: The color used to draw line.
+    ///   - lineWidth: The line width that specifies.
+    ///   - lineCap: The line cap style that specifies.
+    ///   - lineJoin: The line join style that specifies.
+    ///   - lineDashPattern: The line dash pattern applied to draw line.
+    public func drawLine(
+        startPoint: CGPoint,
+        endPoint: CGPoint,
+        color: UIColor,
+        lineWidth: CGFloat,
+        lineCap: CAShapeLayerLineCap = .butt,
+        lineJoin: CAShapeLayerLineJoin = .miter,
+        lineDashPattern: [NSNumber]? = nil)
+    {
+        self.base.cx_drawLine(startPoint: startPoint, endPoint: endPoint, color: color, lineWidth: lineWidth, lineCap: lineCap, lineJoin: lineJoin, lineDashPattern: lineDashPattern)
+    }
+    
+    /// Draws a color gradient over its background color, filling the shape of the layer (including rounded corners)
+    ///
+    /// - Parameters:
+    ///   - colors: An array of color objects defining the color of each gradient stop.
+    ///   - startPoint: The start point of the gradient when drawn in the layer’s coordinate space.
+    ///   - endPoint: The end point of the gradient when drawn in the layer’s coordinate space.
+    ///   - cornerRadius: The radius to use when drawing rounded corners for the layer’s background.
+    public func addGradientLayer(
+        withColors colors: [UIColor],
+        startPoint: CGPoint = .init(x: 0.5, y: 0.5),
+        endPoint: CGPoint = .init(x: 0.5, y: 1),
+        cornerRadius: CGFloat = 0)
+    {
+        self.base.cx_addGradientLayer(withColors: colors, startPoint: startPoint, endPoint: endPoint, cornerRadius: cornerRadius)
+    }
+    
+    /// Adds the shadow for the view.
+    ///
+    /// - Parameters:
+    ///   - color: The color of the shadow.
+    ///   - opacity: The opacity of the shadow.
+    ///   - offset: he offset of the shadow.
+    ///   - path: A new path object with the rectangular path.
+    public func addShadow(withColor color: UIColor?, opacity: Float, offset: CGSize, path: UIBezierPath)
+    {
+        self.base.cx_addShadow(withColor: color, opacity: opacity, offset: offset, path: path)
+    }
+    
+    /// Adds the shadow for the view.
+    ///
+    /// - Parameters:
+    ///   - color: The color of the shadow.
+    ///   - opacity: The opacity of the shadow.
+    ///   - offset: The offset of the shadow.
+    public func addShadow(withColor color: UIColor?, opacity: Float, offset: CGSize)
+    {
+        self.base.cx_addShadow(withColor: color, opacity: opacity, offset: offset)
+    }
+    
+    /// Adds the shadow for the view.
+    ///
+    /// - Parameters:
+    ///   - color: The color of the shadow.
+    ///   - opacity: The opacity of the shadow.
+    ///   - offset: The offset of the shadow.
+    ///   - roundedCorners: The rounded corners of the shadow.
+    ///   - cornerRadius: The radius of each corner oval.
+    public func addShadow(
+        withColor color: UIColor?,
+        opacity: Float,
+        offset: CGSize,
+        roundedCorners: UIRectCorner = .allCorners,
+        cornerRadius: CGFloat)
+    {
+        self.base.cx_addShadow(withColor: color, opacity: opacity, offset: offset, roundedCorners: roundedCorners, cornerRadius: cornerRadius)
+    }
+    
+    /// Clips corners by the corner radius.
+    ///
+    /// - Parameter radius: The radius of each corner oval. Values larger than half the rectangle’s width or height are clamped appropriately to half the width or height.
+    public func clipCorners(byRadius radius: CGFloat)
+    {
+        self.base.cx_clipCorners(byRadius: radius)
+    }
+    
+    /// Clips corners by the corner radius and the specified corners that you want rounded.
+    ///
+    /// - Parameters:
+    ///   - radius: The radius of each corner oval. Values larger than half the rectangle’s width or height are clamped appropriately to half the width or height.
+    ///   - rectCorner: A bitmask value that identifies the corners that you want rounded.
+    public func clipCorners(byRadius radius: CGFloat, roundedCorners: UIRectCorner)
+    {
+        self.base.cx_clipCorners(byRadius: radius, roundedCorners: roundedCorners)
     }
     
 }
@@ -276,3 +421,224 @@ extension UIView {
     }
     
 }
+
+//MARK: - Layer
+
+#if canImport(QuartzCore)
+
+extension UIView {
+    
+    /// The corner radius of the view, also inspectable from Storyboard or Xib.
+    @IBInspectable @objc public var cx_cornerRadius: CGFloat
+    {
+        get {
+            return layer.cornerRadius
+        }
+        set {
+            layer.cornerRadius = abs(newValue)
+        }
+    }
+    
+    /// Indicates whether sublayers are clipped to the layer’s bounds, also inspectable from Storyboard or Xib.
+    @IBInspectable @objc public var cx_masksToBounds: Bool
+    {
+        get {
+            return layer.masksToBounds
+        }
+        set {
+            layer.masksToBounds = newValue
+        }
+    }
+    
+    /// The border color of the view, also inspectable from Storyboard or Xib.
+    @IBInspectable @objc public var cx_borderColor: UIColor?
+    {
+        get {
+            guard let cgColor = layer.borderColor else { return nil }
+            return UIColor(cgColor: cgColor)
+        }
+        set {
+            guard let color = newValue else {
+                layer.borderColor = nil
+                return
+            }
+            // Fix React-Native conflict issue
+            guard String(describing: type(of: color)) != "__NSCFType" else { return }
+            layer.borderColor = color.cgColor
+        }
+    }
+    
+    /// The border width of the view, also inspectable from Storyboard or Xib.
+    @IBInspectable @objc public var cx_borderWidth: CGFloat
+    {
+        get {
+            return layer.borderWidth
+        }
+        set {
+            layer.borderWidth = newValue
+        }
+    }
+    
+    /// Draws a straight line segment from the start point to the end point.
+    ///
+    /// - Parameters:
+    ///   - startPoint: The point, in user space coordinates, at which to start a new subpath.
+    ///   - endPoint: The location, in user space coordinates, for the end of the new line segment.
+    ///   - color: The color used to draw line.
+    ///   - lineWidth: The line width that specifies.
+    ///   - lineCap: The line cap style that specifies.
+    ///   - lineJoin: The line join style that specifies.
+    ///   - lineDashPattern: The line dash pattern applied to draw line.
+    @objc public func cx_drawLine(
+        startPoint: CGPoint,
+        endPoint: CGPoint,
+        color: UIColor,
+        lineWidth: CGFloat,
+        lineCap: CAShapeLayerLineCap = .butt,
+        lineJoin: CAShapeLayerLineJoin = .miter,
+        lineDashPattern: [NSNumber]? = nil)
+    {
+        let shapeLayer = CAShapeLayer.init()
+        shapeLayer.strokeColor = color.cgColor
+        shapeLayer.lineWidth = lineWidth
+        shapeLayer.lineCap = lineCap
+        shapeLayer.lineJoin = lineJoin
+        shapeLayer.lineDashPattern = lineDashPattern
+        
+        let path = CGMutablePath.init()
+        path.move(to: startPoint)
+        path.addLine(to: endPoint)
+        //path.addLines(between: [startPoint, endPoint])
+        shapeLayer.path = path
+        layer.addSublayer(shapeLayer)
+    }
+    
+    /// Draws a color gradient over its background color, filling the shape of the layer (including rounded corners)
+    ///
+    /// - Parameters:
+    ///   - colors: An array of color objects defining the color of each gradient stop.
+    ///   - startPoint: The start point of the gradient when drawn in the layer’s coordinate space.
+    ///   - endPoint: The end point of the gradient when drawn in the layer’s coordinate space.
+    ///   - cornerRadius: The radius to use when drawing rounded corners for the layer’s background.
+    @objc public func cx_addGradientLayer(
+        withColors colors: [UIColor],
+        startPoint: CGPoint = .init(x: 0.5, y: 0.5),
+        endPoint: CGPoint = .init(x: 0.5, y: 1),
+        cornerRadius: CGFloat = 0)
+    {
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        let gradientLayer = CAGradientLayer.init()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = colors.map{ $0.cgColor }
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        if cornerRadius > 0 {
+            gradientLayer.cornerRadius = cornerRadius
+        }
+        
+        layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    /// Adds the shadow for the view.
+    ///
+    /// - Parameters:
+    ///   - color: The color of the shadow.
+    ///   - opacity: The opacity of the shadow.
+    ///   - offset: he offset of the shadow.
+    ///   - path: A new path object with the rectangular path.
+    @objc public func cx_addShadow(withColor color: UIColor?, opacity: Float, offset: CGSize, path: UIBezierPath)
+    {
+        guard let aColor = color else {
+            return
+        }
+        layer.masksToBounds = false
+        layer.shadowColor = aColor.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowOffset = offset
+        layer.shadowPath = path.cgPath
+    }
+    
+    /// Adds the shadow for the view.
+    ///
+    /// - Parameters:
+    ///   - color: The color of the shadow.
+    ///   - opacity: The opacity of the shadow.
+    ///   - offset: The offset of the shadow.
+    @objc public func cx_addShadow(withColor color: UIColor?, opacity: Float, offset: CGSize)
+    {
+        guard let aColor = color else {
+            return
+        }
+        setNeedsLayout()
+        layoutIfNeeded()
+        let path = UIBezierPath(rect: self.bounds)
+        cx_addShadow(withColor: aColor, opacity: opacity, offset: offset, path: path)
+    }
+    
+    /// Adds the shadow for the view.
+    ///
+    /// - Parameters:
+    ///   - color: The color of the shadow.
+    ///   - opacity: The opacity of the shadow.
+    ///   - offset: The offset of the shadow.
+    ///   - roundedCorners: The rounded corners of the shadow.
+    ///   - cornerRadius: The radius of each corner oval.
+    @objc public func cx_addShadow(
+        withColor color: UIColor?,
+        opacity: Float,
+        offset: CGSize,
+        roundedCorners: UIRectCorner = .allCorners,
+        cornerRadius: CGFloat)
+    {
+        guard let aColor = color else {
+            return
+        }
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        let size = CGSize(width: cornerRadius, height: cornerRadius)
+        let path = UIBezierPath.init(
+            roundedRect: self.bounds,
+            byRoundingCorners: roundedCorners,
+            cornerRadii: size)
+        
+        cx_addShadow(withColor: aColor, opacity: opacity, offset: offset, path: path)
+    }
+    
+    /// Clips corners by the corner radius.
+    ///
+    /// - Parameter radius: The radius of each corner oval. Values larger than half the rectangle’s width or height are clamped appropriately to half the width or height.
+    @objc public func cx_clipCorners(byRadius radius: CGFloat)
+    {
+        cx_clipCorners(byRadius: radius, roundedCorners: .allCorners)
+    }
+    
+    /// Clips corners by the corner radius and the specified corners that you want rounded.
+    ///
+    /// - Parameters:
+    ///   - radius: The radius of each corner oval. Values larger than half the rectangle’s width or height are clamped appropriately to half the width or height.
+    ///   - rectCorner: A bitmask value that identifies the corners that you want rounded.
+    @objc public func cx_clipCorners(byRadius radius: CGFloat, roundedCorners: UIRectCorner)
+    {
+        setNeedsLayout()
+        layoutIfNeeded()
+        
+        let path = UIBezierPath.init(
+            roundedRect: bounds,
+            byRoundingCorners: roundedCorners,
+            cornerRadii: CGSize.init(width: radius, height: radius))
+        
+        let maskLayer = CAShapeLayer.init()
+        maskLayer.frame = bounds
+        maskLayer.path = path.cgPath
+        
+        layer.mask = maskLayer
+    }
+    
+}
+
+#endif
+
+#endif

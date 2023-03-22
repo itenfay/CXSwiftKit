@@ -5,6 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(UIKit)
 import UIKit
 #if canImport(Kingfisher)
 import Kingfisher
@@ -12,8 +13,13 @@ import Kingfisher
 
 extension CXSwiftBase where T : UIButton {
     
-    public func xui(_ alignment: CXButtonImageTextAlignment, padding: CGFloat) {
-        //self.base.cx_setx(alignment, padding: padding)
+    /// Adjust the edge insets of image and title of the button with a given alignment and padding.
+    ///
+    /// - Parameters:
+    ///   - alignment: Button image and text alignment
+    ///   - padding: The value of padding to adjust the edge insets of image and title of the button.
+    public func adjustEdgeInsets(by alignment: CXButtonImageTextAlignment, padding: CGFloat) {
+        self.base.cx_adjustEdgeInsets(by: alignment, padding: padding)
     }
     
     ///  Sets an image to the button for a specified state with a given url string.
@@ -64,7 +70,13 @@ extension CXSwiftBase where T : UIButton {
 
 extension UIButton {
     
-    @objc public func cx_setX(alignment: CXButtonImageTextAlignment, padding: CGFloat) {
+    /// Adjust the edge insets of image and title of the button with a given alignment and padding.
+    ///
+    /// - Parameters:
+    ///   - alignment: Button image and text alignment
+    ///   - padding: The value of padding to adjust the edge insets of image and title of the button.
+    @objc public func cx_adjustEdgeInsets(by alignment: CXButtonImageTextAlignment, padding: CGFloat)
+    {
         if imageView?.image != nil && titleLabel?.text != nil {
             // Reset title edge insets and image edge insets.
             titleEdgeInsets = .zero
@@ -232,3 +244,5 @@ extension UIButton {
     }
     
 }
+
+#endif

@@ -132,6 +132,9 @@
 		791E7CDD29C83C1400290DD3 /* UIColor+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791E7CDC29C83C1400290DD3 /* UIColor+Cx.swift */; };
 		791E7CDF29C858E600290DD3 /* UITextField+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 791E7CDE29C858E600290DD3 /* UITextField+Cx.swift */; };
 		7941FBD77C8DFF65DA889C3820F2090E /* SDWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = B4AC5332875433EAE348653955EA3B38 /* SDWeakProxy.m */; };
+		799100BC29C9603000623494 /* UILabel+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799100BB29C9603000623494 /* UILabel+Cx.swift */; };
+		799100BE29C987C200623494 /* UITextView+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799100BD29C987C200623494 /* UITextView+Cx.swift */; };
+		799100C029C99F2D00623494 /* UIImage+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 799100BF29C99F2D00623494 /* UIImage+Cx.swift */; };
 		7E4ACDCC3CC0F6A1B7EC8ECD64B83D62 /* KingfisherError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64405D937BCCB307955735B4A31F1D53 /* KingfisherError.swift */; };
 		7EF67EC9E306EEBF786C463BAC2113F5 /* SDImageLoadersManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A9D691A409F7C666AE6D4F63528611FB /* SDImageLoadersManager.m */; };
 		831ECABBDC3816842B41919AF75650EA /* CXLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 428585EC19478C52DC2D23531403D63D /* CXLogger.swift */; };
@@ -408,6 +411,9 @@
 		78F15A8FFCE96033C38081DC78ADB631 /* UIImage+Transform.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Transform.m"; path = "SDWebImage/Core/UIImage+Transform.m"; sourceTree = "<group>"; };
 		791E7CDC29C83C1400290DD3 /* UIColor+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Cx.swift"; sourceTree = "<group>"; };
 		791E7CDE29C858E600290DD3 /* UITextField+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Cx.swift"; sourceTree = "<group>"; };
+		799100BB29C9603000623494 /* UILabel+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UILabel+Cx.swift"; sourceTree = "<group>"; };
+		799100BD29C987C200623494 /* UITextView+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextView+Cx.swift"; sourceTree = "<group>"; };
+		799100BF29C99F2D00623494 /* UIImage+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Cx.swift"; sourceTree = "<group>"; };
 		7BE1F2768B3064FEC33BF985D0D7DCB9 /* SDWebImageOptionsProcessor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SDWebImageOptionsProcessor.m; path = SDWebImage/Core/SDWebImageOptionsProcessor.m; sourceTree = "<group>"; };
 		7C7B08522BFAE7E6D1D9F020C56D2CBB /* UIImage+Metadata.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+Metadata.h"; path = "SDWebImage/Core/UIImage+Metadata.h"; sourceTree = "<group>"; };
 		7F79A4EBD6122177F6E8F5F221A811B0 /* DYFSwiftKeychain-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DYFSwiftKeychain-umbrella.h"; sourceTree = "<group>"; };
@@ -718,8 +724,11 @@
 				AE5BE626CDD1914777DC742A0AD6A769 /* UIButton+Cx.swift */,
 				791E7CDC29C83C1400290DD3 /* UIColor+Cx.swift */,
 				2F28327FC5112728D72DA83C0BAEF0C7 /* UIFont+Cx.swift */,
+				799100BF29C99F2D00623494 /* UIImage+Cx.swift */,
 				5D8F0D700020C1979417955B542B1545 /* UIImageView+Cx.swift */,
+				799100BB29C9603000623494 /* UILabel+Cx.swift */,
 				791E7CDE29C858E600290DD3 /* UITextField+Cx.swift */,
+				799100BD29C987C200623494 /* UITextView+Cx.swift */,
 				47C27BA1C041F9E5106D3BFA816BBB23 /* UIView+Cx.swift */,
 				1AF54B823DADB684A5A77353A73F582A /* UIViewController+Cx.swift */,
 			);
@@ -1497,14 +1506,17 @@
 			files = (
 				85F662CE2C289AC27AAF1FE39C4A10EB /* CGFloat+Cx.swift in Sources */,
 				76FF77FC08252D21EF4C5DC66BB64C07 /* CXDevice.swift in Sources */,
+				799100BE29C987C200623494 /* UITextView+Cx.swift in Sources */,
 				4A74C92FD6C18951EDA1977F55162F4B /* CXGlobal.swift in Sources */,
 				1429C61FFA32DFA61F8E5DCF775E7DED /* CXKingfisherReferer.swift in Sources */,
+				799100BC29C9603000623494 /* UILabel+Cx.swift in Sources */,
 				831ECABBDC3816842B41919AF75650EA /* CXLogger.swift in Sources */,
 				24074065121315299C28D82CA73B24E2 /* CXMainBundle.swift in Sources */,
 				791E7CDD29C83C1400290DD3 /* UIColor+Cx.swift in Sources */,
 				02B3475197400A67FFD56183527C179B /* CXSwiftBase.swift in Sources */,
 				68D43BA6CDB9950DB5C88C0BD5FCB41B /* CXSwiftKit-dummy.m in Sources */,
 				DED4DE882B051C2BA7BD0E6525410790 /* CXSwiftUtils.swift in Sources */,
+				799100C029C99F2D00623494 /* UIImage+Cx.swift in Sources */,
 				517621AA0171413F745DD5A9E5BE80F7 /* DispatchQueue+Cx.swift in Sources */,
 				791E7CDF29C858E600290DD3 /* UITextField+Cx.swift in Sources */,
 				5D6B48E2DBAB7C4F200675F06A69E478 /* Int+Cx.swift in Sources */,

@@ -5,6 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 extension CXSwiftBase where T : UIFont {
@@ -182,3 +183,5 @@ extension UIFont {
     }
     
 }
+
+#endif

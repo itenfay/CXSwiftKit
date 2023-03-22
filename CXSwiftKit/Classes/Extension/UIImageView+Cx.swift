@@ -5,6 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(UIKit)
 import UIKit
 #if canImport(Kingfisher)
 import Kingfisher
@@ -13,7 +14,7 @@ import Kingfisher
 extension CXSwiftBase where T : UIImageView {
     
     /// Sets an image to the image view with a data provider.
-    /// 
+    ///
     /// - Parameters:
     ///   - url: A given url string.
     ///   - placeholder: A placeholder to show while retrieving the image from the given url string.
@@ -22,6 +23,49 @@ extension CXSwiftBase where T : UIImageView {
     public func setImage(withUrl url: String?, placeholder: UIImage? = nil, headers: [String : String] = [:], progressBlock: ((_ receivedSize: Int64, _ totalSize: Int64) -> Void)? = nil)
     {
         self.base.cx_setImage(withUrl: url, placeholder: placeholder, headers: headers, progressBlock: progressBlock)
+    }
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameter value: The value that represents the content of QRCode.
+    public func setQRCode(withValue value: String)
+    {
+        base.cx_setQRCode(withValue: value)
+    }
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameters:
+    ///   - value: The value that represents the content of QRCode.
+    ///   - centerImage: A center image to display.
+    ///   - centerSize: The size of center image to display.
+    public func setQRCode(withValue value: String, centerImage: UIImage?, centerSize: CGSize = .init(width: 90, height: 90))
+    {
+        base.cx_setQRCode(withValue: value, centerImage: centerImage, centerSize: centerSize)
+    }
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameters:
+    ///   - value: The value that represents the content of QRCode.
+    ///   - backgroudColor: A background color to display.
+    ///   - foregroudColor: A foreground color to display.
+    public func setQRCode(withValue value: String, backgroudColor: UIColor, foregroudColor: UIColor)
+    {
+        base.cx_setQRCode(withValue: value, backgroudColor: backgroudColor, foregroudColor: foregroudColor)
+    }
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameters:
+    ///   - value: The value that represents the content of QRCode.
+    ///   - backgroudColor: A background color to display.
+    ///   - foregroudColor: A foreground color to display.
+    ///   - centerImage: A center image to display.
+    ///   - centerSize: The size of center image to display.
+    public func setQRCode(withValue value: String, backgroudColor: UIColor, foregroudColor: UIColor, centerImage: UIImage?, centerSize: CGSize = .init(width: 90, height: 90))
+    {
+        base.cx_setQRCode(withValue: value, backgroudColor: backgroudColor, foregroudColor: foregroudColor, centerImage: centerImage, centerSize: centerSize)
     }
     
 }
@@ -74,3 +118,56 @@ extension UIImageView {
     }
     
 }
+
+
+//MARK: - QRCode
+
+extension UIImageView {
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameter value: The value that represents the content of QRCode.
+    @objc public func cx_setQRCode(withValue value: String)
+    {
+        self.image = value.cx.generateQRCode()
+    }
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameters:
+    ///   - value: The value that represents the content of QRCode.
+    ///   - centerImage: A center image to display.
+    ///   - centerSize: The size of center image to display.
+    @objc public func cx_setQRCode(withValue value: String, centerImage: UIImage?, centerSize: CGSize = .init(width: 90, height: 90))
+    {
+        self.image = value.cx.generateQRCode(withCenterImage: centerImage, centerSize: centerSize)
+    }
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameters:
+    ///   - value: The value that represents the content of QRCode.
+    ///   - backgroudColor: A background color to display.
+    ///   - foregroudColor: A foreground color to display.
+    @objc public func cx_setQRCode(withValue value: String, backgroudColor: UIColor, foregroudColor: UIColor)
+    {
+        self.image = value.cx.generateQRCode(withBackgroudColor: backgroudColor, foregroudColor: foregroudColor)
+    }
+    
+    /// Sets an image of QRCode to display in the image view.
+    ///
+    /// - Parameters:
+    ///   - value: The value that represents the content of QRCode.
+    ///   - backgroudColor: A background color to display.
+    ///   - foregroudColor: A foreground color to display.
+    ///   - centerImage: A center image to display.
+    ///   - centerSize: The size of center image to display.
+    @objc public func cx_setQRCode(withValue value: String, backgroudColor: UIColor, foregroudColor: UIColor, centerImage: UIImage?, centerSize: CGSize = .init(width: 90, height: 90))
+    {
+        self.image = value.cx.generateQRCode(withBackgroudColor: backgroudColor, foregroudColor: foregroudColor, centerImage: centerImage, centerSize: centerSize)
+    }
+    
+}
+
+
+#endif
