@@ -11,7 +11,7 @@ import Photos
 
 public class CXTakeScreenshotDetector: NSObject {
     
-    public override init() {
+    @objc public override init() {
         super.init()
         self.setup()
     }
@@ -39,7 +39,7 @@ public class CXTakeScreenshotDetector: NSObject {
         }
     }
     
-    public func detect(handler: @escaping (UIImage?) -> Void) {
+    @objc public func detect(handler: @escaping (UIImage?) -> Void) {
         takeScreenshotHandler = handler
     }
     
