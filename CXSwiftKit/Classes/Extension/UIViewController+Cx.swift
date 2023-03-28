@@ -35,6 +35,12 @@ extension CXSwiftBase where T : UIViewController {
         self.base.cx_countOfControllersInStack
     }
     
+    /// Return an array of children view controllers.
+    /// This array does not include any presented view controllers.
+    public var children: [UIViewController] {
+        self.base.cx_children
+    }
+    
 }
 
 //MARK: -  UIViewController
@@ -101,6 +107,13 @@ extension UIViewController {
         let count = nc.viewControllers.count
         CXLogger.log(level: .info, message: "[Stack] vcs.count: \(count)")
         return count
+    }
+    
+    /// Return an array of children view controllers.
+    /// This array does not include any presented view controllers.
+    @objc public var cx_children: [UIViewController]
+    {
+        return self.children
     }
     
 }

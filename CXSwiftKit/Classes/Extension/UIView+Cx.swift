@@ -7,9 +7,6 @@
 
 #if canImport(UIKit)
 import UIKit
-#if canImport(QuartzCore)
-import QuartzCore
-#endif
 
 extension CXSwiftBase where T : UIView {
     
@@ -274,6 +271,145 @@ extension CXSwiftBase where T : UIView {
         self.base.cx_clipCorners(byRadius: radius, roundedCorners: roundedCorners)
     }
     
+    /// Returns the receiver’s immediate subviews.
+    public var children: [UIView]
+    {
+        return self.base.cx_children
+    }
+    
+    /// Return an optional snapshot image by the specified rectangle.
+    public var screenshot: UIImage?
+    {
+        return base.cx_screenshot
+    }
+    
+    /// Return a snapshot image by the specified rectangle.
+    ///
+    /// - Parameter rect: A rectangle specified in the local coordinate system (bounds) of the view.
+    /// - Returns: An optional image.
+    public func snapshot(byRect rect: CGRect) -> UIImage?
+    {
+        return self.base.cx_snapshot(byRect: rect)
+    }
+    
+    /// Renders an image with the view.
+    ///
+    /// - Returns: An image.
+    public func renderImage() -> UIImage
+    {
+        return self.base.cx_renderImage()
+    }
+    
+    /// Represents whether is the identity transform.
+    public var isIdentity: Bool
+    {
+        return self.base.cx_isIdentity
+    }
+    
+    /// Keeps the original identity transform.
+    ///
+    /// - Parameters:
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   If you specify a negative value or 0, the changes are made without animating them.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the functions ends.
+    public func keepIdentity(
+        withDuration duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        self.base.cx_keepIdentity(withDuration: duration, delay: delay, animated: animated, completion: completion)
+    }
+    
+    /// Translates the view to the specified coordinate.
+    ///
+    /// - Parameters:
+    ///   - tx: The value by which to move the x-axis of the coordinate system.
+    ///   - ty: The value by which to move the y-axis of the coordinate system.
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   If you specify a negative value or 0, the changes are made without animating them.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the translation ends.
+    public func translate(
+        withTx tx: CGFloat,
+        ty: CGFloat,
+        duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        self.base.cx_translate(withTx: tx, ty: ty, duration: duration, delay: delay, animated: animated, completion: completion)
+    }
+    
+    /// Rotates the view to the affine transformation matrix.
+    ///
+    /// - Parameters:
+    ///   - angle: The angle, in radians, by which this matrix rotates the coordinate system axes.
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the rotation ends.
+    public func rotate(
+        withAngle angle: CGFloat = CGFloat.pi/2,
+        duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        self.base.cx_rotate(withAngle: angle, duration: duration, delay: delay, animated: animated, completion: completion)
+    }
+    
+    /// Scales the view to the affine transformation matrix.
+    ///
+    /// - Parameters:
+    ///   - sx: The factor by which to scale the x-axis of the coordinate system.
+    ///   - sy: The factor by which to scale the y-axis of the coordinate system.
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the rotation ends.
+    public func scale(
+        withSx sx: CGFloat,
+        sy: CGFloat,
+        duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        self.base.cx_scale(withSx: sx, sy: sy, duration: duration, delay: delay, animated: animated, completion: completion)
+    }
+    
+    /// Returns the receiver’s recursive subviews.
+    public var recursiveSubviews: [UIView]
+    {
+        return self.base.cx_recursiveSubviews
+    }
+    
+    /// Finds the first responder recursively.
+    public var firstResponder: UIView?
+    {
+        return self.base.cx_firstResponder
+    }
+    
+    /// The insets that you use to determine the safe area for this view.
+    public var cx_safeAreaInsets: UIEdgeInsets
+    {
+        self.base.cx_safeAreaInsets // return
+    }
+    
+    /// Checks if view is in RTL format.
+    public var isRightToLeft: Bool
+    {
+        return self.base.cx_isRightToLeft
+    }
+    
 }
 
 //MARK: - Layout
@@ -423,8 +559,6 @@ extension UIView {
 }
 
 //MARK: - Layer
-
-#if canImport(QuartzCore)
 
 extension UIView {
     
@@ -639,6 +773,244 @@ extension UIView {
     
 }
 
-#endif
+extension UIView {
+    
+    /// Returns the receiver’s immediate subviews.
+    @objc public var cx_children: [UIView]
+    {
+        return subviews
+    }
+    
+    /// Return an optional screenshot image by the specified rectangle.
+    @objc public var cx_screenshot: UIImage?
+    {
+        return cx_snapshot(byRect: bounds)
+    }
+    
+    /// Return a snapshot image by the specified rectangle.
+    ///
+    /// - Parameter rect: A rectangle specified in the local coordinate system (bounds) of the view.
+    /// - Returns: An optional image.
+    @objc public func cx_snapshot(byRect rect: CGRect) -> UIImage?
+    {
+        UIGraphicsBeginImageContextWithOptions(rect.size, false, 0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        
+        //guard let ctx = UIGraphicsGetCurrentContext()
+        //else { return nil }
+        // Renders the layer and its sublayers into the specified context.
+        //layer.render(in: ctx)
+        
+        // Renders a snapshot of the complete view hierarchy as visible onscreen into the current context.
+        drawHierarchy(in: rect, afterScreenUpdates: true)
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        return newImage
+    }
+    
+    /// Renders an image with the view.
+    ///
+    /// - Returns: An image.
+    @objc public func cx_renderImage() -> UIImage
+    {
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+        return renderer.image { ctx in
+            self.layer.render(in: ctx.cgContext)
+        }
+    }
+    
+    /// Represents whether is the identity transform.
+    @objc public var cx_isIdentity: Bool
+    {
+        return transform == .identity
+    }
+    
+    /// Keeps the original identity transform.
+    ///
+    /// - Parameters:
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   If you specify a negative value or 0, the changes are made without animating them.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the functions ends.
+    @objc public func cx_keepIdentity(
+        withDuration duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        if animated {
+            UIView.animate(withDuration: duration, delay: delay, options: []) {
+                self.transform = CGAffineTransform.identity
+            } completion: { finished in
+                if finished { completion?() }
+            }
+        } else {
+            if delay > 0 {
+                DispatchQueue.cx.mainAsyncAfter(delay) {
+                    self.transform = CGAffineTransform.identity
+                    completion?()
+                }
+            } else {
+                transform = .identity
+                completion?()
+            }
+        }
+    }
+    
+    /// Translates the view to the specified coordinate.
+    ///
+    /// - Parameters:
+    ///   - tx: The value by which to move the x-axis of the coordinate system.
+    ///   - ty: The value by which to move the y-axis of the coordinate system.
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   If you specify a negative value or 0, the changes are made without animating them.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the translation ends.
+    @objc public func cx_translate(
+        withTx tx: CGFloat,
+        ty: CGFloat,
+        duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        if animated {
+            UIView.animate(withDuration: duration, delay: delay, options: []) {
+                self.transform = CGAffineTransform(translationX: tx, y: ty)
+            } completion: { finished in
+                if finished { completion?() }
+            }
+        } else {
+            if delay > 0 {
+                DispatchQueue.cx.mainAsyncAfter(delay) {
+                    self.transform = CGAffineTransform(translationX: tx, y: ty)
+                    completion?()
+                }
+            } else {
+                transform = CGAffineTransform(translationX: tx, y: ty)
+                completion?()
+            }
+        }
+    }
+    
+    /// Rotates the view to the affine transformation matrix.
+    ///
+    /// - Parameters:
+    ///   - angle: The angle, in radians, by which this matrix rotates the coordinate system axes.
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the rotation ends.
+    @objc public func cx_rotate(
+        withAngle angle: CGFloat = CGFloat.pi/2,
+        duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        if animated {
+            UIView.animate(withDuration: duration, delay: delay, options: []) {
+                self.transform = CGAffineTransform(rotationAngle: angle)
+            } completion: { finished in
+                if finished { completion?() }
+            }
+        } else {
+            if delay > 0 {
+                DispatchQueue.cx.mainAsyncAfter(delay) {
+                    self.transform = CGAffineTransform(rotationAngle: angle)
+                    completion?()
+                }
+            } else {
+                transform = CGAffineTransform(rotationAngle: angle)
+                completion?()
+            }
+        }
+    }
+    
+    /// Scales the view to the affine transformation matrix.
+    ///
+    /// - Parameters:
+    ///   - sx: The factor by which to scale the x-axis of the coordinate system.
+    ///   - sy: The factor by which to scale the y-axis of the coordinate system.
+    ///   - duration: The total duration of the animations, measured in seconds.
+    ///   - delay: The amount of time (measured in seconds) to wait before beginning the animations.
+    ///   Specify a value of 0 to begin the animations immediately.
+    ///   - animated: The boolean value represents whether want to animate.
+    ///   - completion: A block object to may be executed when the rotation ends.
+    @objc public func cx_scale(
+        withSx sx: CGFloat,
+        sy: CGFloat,
+        duration: TimeInterval = 0.3,
+        delay: TimeInterval = 0,
+        animated: Bool = true,
+        completion: (() -> Void)? = nil)
+    {
+        if animated {
+            UIView.animate(withDuration: duration, delay: delay, options: []) {
+                self.transform = CGAffineTransform(scaleX: sx, y: sy)
+            } completion: { finished in
+                if finished { completion?() }
+            }
+        } else {
+            if delay > 0 {
+                DispatchQueue.cx.mainAsyncAfter(delay) {
+                    self.transform = CGAffineTransform(scaleX: sx, y: sy)
+                    completion?()
+                }
+            } else {
+                transform = CGAffineTransform(scaleX: sx, y: sy)
+                completion?()
+            }
+        }
+    }
+    
+    /// Returns the receiver’s recursive subviews.
+    @objc public var cx_recursiveSubviews: [UIView]
+    {
+        return subviews.reduce(subviews) { $0 + $1.cx_recursiveSubviews }
+    }
+    
+    /// Finds the first responder recursively.
+    @objc public var cx_firstResponder: UIView?
+    {
+        var views = [UIView](arrayLiteral: self)
+        var index = 0
+        repeat {
+            let view = views[index]
+            if view.isFirstResponder {
+                return view
+            }
+            views.append(contentsOf: view.subviews)
+            index += 1
+        } while index < views.count
+        return nil
+    }
+    
+    /// The insets that you use to determine the safe area for this view.
+    @objc public var cx_safeAreaInsets: UIEdgeInsets
+    {
+        if #available(iOS 11.0, *) {
+            return safeAreaInsets
+        } else {
+            return .zero
+        }
+    }
+    
+    /// Checks if view is in RTL format.
+    @objc public var cx_isRightToLeft: Bool
+    {
+        if #available(iOS 10.0, *) {
+            return effectiveUserInterfaceLayoutDirection == .rightToLeft
+        }
+        return false
+    }
+    
+}
 
 #endif

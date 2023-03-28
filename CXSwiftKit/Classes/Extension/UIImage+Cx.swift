@@ -8,7 +8,6 @@
 #if canImport(UIKit)
 import UIKit
 import CoreImage
-import CoreGraphics
 
 extension CXSwiftBase where T : UIImage {
     

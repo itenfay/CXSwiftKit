@@ -5,6 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if canImport(UIKit)
 import UIKit
 
 /// Text input type of `UITextField`.
@@ -245,3 +246,5 @@ extension UITextField {
     }
     
 }
+
+#endif
