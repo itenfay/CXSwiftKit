@@ -5,9 +5,11 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-import Foundation
+#if canImport(UIKit)
 import UIKit
+#if canImport(CoreTelephony)
 import CoreTelephony
+#endif
 import SystemConfiguration.CaptiveNetwork
 #if canImport(DYFSwiftKeychain)
 import DYFSwiftKeychain
@@ -286,6 +288,8 @@ import AdSupport
         return mac
     }
     
+    #if canImport(CoreTelephony)
+    
     /// Returns the subscriber cellular provider.
     public static func getCellularProvider() -> CTCarrier? {
         let info = CTTelephonyNetworkInfo.init()
@@ -346,11 +350,11 @@ import AdSupport
         } else {
             ct = info.currentRadioAccessTechnology
         }
-        guard let _ct = ct else { return "None" }
+        guard let _ct = ct else { return "Unkown" }
         switch _ct {
             //CTRadioAccessTechnologyGPRS: 2G GPRS (Also known as 2.5G)
             //CTRadioAccessTechnologyEdge: 2G EDGE (Also known as 2.5G extension)
-        case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyGPRS: return "2G"
+        case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyEdge: return "2G"
             //CTRadioAccessTechnologyWCDMA: 3G WCDMA
             //CTRadioAccessTechnologyCDMA1x: 3G CDMA (3G spread spectrum technology)
             //CTRadioAccessTechnologyHSDPA: 3G EDGE (Also known as 3.5G)
@@ -370,10 +374,14 @@ import AdSupport
                     return "5G"
                 }
             } else {
-                return "None"
+                return "Unkown"
             }
         }
-        return "None"
+        return "Unkown"
     }
     
+    #endif
+    
 }
+
+#endif
