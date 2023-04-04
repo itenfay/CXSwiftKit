@@ -5,10 +5,9 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
-import Foundation
-#if canImport(Kingfisher)
+#if canImport(Kingfisher) && canImport(Foundation)
 import Kingfisher
+import Foundation
 
 public class CXKingfisherReferer: ImageDownloadRequestModifier {
     
@@ -29,6 +28,5 @@ public class CXKingfisherReferer: ImageDownloadRequestModifier {
     }
     
 }
-#endif
 
 #endif

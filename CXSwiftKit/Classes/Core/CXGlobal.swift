@@ -34,7 +34,6 @@ public func cxIsIphoneXSeries() -> Bool
     return isX
 }
 
-
 /// Allocates recursive pthread_mutex associated with ‘obj’ if needed.
 public func cxSynchronize(_ obj: Any, closure: @escaping () -> Void)
 {

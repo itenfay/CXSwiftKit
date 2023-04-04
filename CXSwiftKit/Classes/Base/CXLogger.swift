@@ -29,33 +29,49 @@ import Foundation
 @objcMembers public class CXLogger: NSObject {
     
     @nonobjc
-    private static var currentDateString: String {
+    private static var currentDateFormatString: String {
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSSZ"
         return dateFormatter.string(from: Date.init())
     }
     
     @nonobjc
-    private static func log(_ level: CXLogLevel, message: String, file: String = #file, method: String = #function, lineNumber: Int = #line) {
-        let fileName = (file as NSString).lastPathComponent
-        let mark = "[F: \(fileName) M: \(method) L: \(lineNumber)]"
+    private static func log(_ level: CXLogLevel, message: String, posi: (file: String, function: String, lineNumber: Int)? = nil) {
+        var logDesc = ""
+        if let _posi = posi {
+            let fileName = (_posi.file as NSString).lastPathComponent
+            logDesc = "[F: \(fileName) M: \(_posi.function) L: \(_posi.lineNumber)]"
+        }
+        logDesc = (logDesc.isEmpty ? "" : logDesc + " ") + message
         if CXLogConfig.enableLog {
-            print("\(currentDateString) [CX] [\(level.description)] \(mark) \(message)")
+            print("\(currentDateFormatString) [CX] [\(level.description)] \(logDesc)")
         } else {
             if level == .error {
-                print("\(currentDateString) [CX] [\(level.description)] \(mark) \(message)")
+                print("\(currentDateFormatString) [CX] [\(level.description)] \(logDesc)")
             }
         }
     }
     
-    /// Outputs the log to the console.
-    public static func log(level: CXLogLevel, message: String) {
-        log(level, message: message)
+    /// Outputs logs to the console(Swift).
+    @nonobjc
+    public static func log(level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
+        log(level, message: message, posi: (file, function, lineNumber))
     }
     
-    /// Outputs the log to the console.
-    public static func log(_ obj: Any, level: CXLogLevel, message: String) {
-        log(level, message: "\(type(of: obj)) \(message)")
+    /// Outputs logs to the console(Swift).
+    @nonobjc
+    public static func log(_ obj: Any, level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
+        log(level, message: "\(type(of: obj)) \(message)", posi: (file, function, lineNumber))
+    }
+    
+    /// Outputs logs to the console(Objective-C).
+    public static func outputLog(level: CXLogLevel, message: String) {
+        log(level, message: message, posi: nil)
+    }
+    
+    /// Outputs logs to the console(Objective-C).
+    public static func outputLog(_ obj: Any, level: CXLogLevel, message: String) {
+        log(level, message: "\(type(of: obj)) \(message)", posi: nil)
     }
     
 }

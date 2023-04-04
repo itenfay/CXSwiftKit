@@ -34,8 +34,11 @@ public class CXTakeScreenshotDetector: NSObject {
     }
     
     private func fetchImage() {
-        CXPermissionManager.shared.fetchLatestImage { [unowned self] imageData in
-            self.takeScreenshotHandler?(imageData != nil ? UIImage(data: imageData!) : nil)
+        CXPermissionManager.shared.fetchLatestImage { [weak self] imageData in
+            self?.takeScreenshotHandler?(
+                imageData != nil
+                ? UIImage(data: imageData!)
+                : nil)
         }
     }
     

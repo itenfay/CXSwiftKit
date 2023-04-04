@@ -8,6 +8,7 @@
 import Foundation
 
 extension Int: CXSwiftBaseCompatible {}
+extension UInt: CXSwiftBaseCompatible {}
 
 extension CXSwiftBase where T == Int {
     
@@ -32,6 +33,24 @@ extension CXSwiftBase where T == Int {
             result = result.replacingOccurrences(of: "s", with: "秒", options: .literal, range: nil)
         }
         return result
+    }
+    
+}
+
+extension CXSwiftBase where T == UInt {
+    
+    public var size: String {
+        if self.base < 1024 {
+            return String.init(format: "%dB", self.base)
+        }
+        else if self.base < 1024 * 1024 {
+            return String(format: "%.2fK", (Float64(self.base)/1024))
+        }
+        else if self.base < 1024 * 1024 * 1024 {
+            return String(format: "%.2fM", (Float64(self.base)/(1024 * 1024)))
+        }  else {
+            return String(format: "%2fG", (Float64(self.base)/(1024 * 1024 * 1024)))
+        }
     }
     
 }

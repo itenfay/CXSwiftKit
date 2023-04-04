@@ -410,6 +410,30 @@ extension CXSwiftBase where T : UIView {
         return self.base.cx_isRightToLeft
     }
     
+    /// Draws a quad curve for a view with the radian, radian and fill color.
+    public func drawQuadCurve(withRadian radian: CGFloat, direction: CXViewRadianDirection = .bottom, fillColor: UIColor? = nil)
+    {
+        self.base.cx_drawQuadCurve(withRadian: radian, direction: direction, fillColor: fillColor)
+    }
+    
+    /// Returns the smallest possible size of the view based on its current constraints.
+    public var layoutSizeFittingSize: CGSize
+    {
+        return self.base.cx_layoutSizeFittingSize
+    }
+    
+    /// Returns the optimal size of the view based on its current constraints.
+    public func layoutSizeFitting(size targetSize: CGSize) -> CGSize
+    {
+        return self.base.cx_layoutSizeFitting(size: targetSize)
+    }
+    
+    /// Returns the optimal size of the view based on its constraints and the specified fitting priorities.
+    public func layoutSizeFitting(size targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize
+    {
+        return self.base.cx_layoutSizeFitting(size: targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+    }
+    
 }
 
 //MARK: - Layout
@@ -1009,6 +1033,165 @@ extension UIView {
             return effectiveUserInterfaceLayoutDirection == .rightToLeft
         }
         return false
+    }
+    
+    /// Returns the smallest possible size of the view based on its constraints.
+    @objc public var cx_layoutSizeFittingSize: CGSize
+    {
+        return cx_layoutSizeFitting(size: UIView.layoutFittingCompressedSize)
+    }
+    
+    /// Returns the optimal size of the view based on its current constraints.
+    @objc public func cx_layoutSizeFitting(size targetSize: CGSize) -> CGSize
+    {
+        return systemLayoutSizeFitting(targetSize)
+    }
+    
+    /// Returns the optimal size of the view based on its constraints and the specified fitting priorities.
+    @objc public func cx_layoutSizeFitting(size targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize
+    {
+        return systemLayoutSizeFitting(
+            targetSize,
+            withHorizontalFittingPriority: horizontalFittingPriority,
+            verticalFittingPriority: verticalFittingPriority)
+    }
+    
+}
+
+/// Defines the enum of radian direction.
+@objc public enum CXViewRadianDirection: Int {
+    case top, left, bottom, right
+}
+
+extension UIView {
+    
+    /// Draws a quad curve for a view with the radian, direction and fill color.
+    @objc public func cx_drawQuadCurve(withRadian radian: CGFloat, direction: CXViewRadianDirection = .bottom, fillColor: UIColor? = nil) {
+        // Don't deal with it if radian is 0.
+        if radian == 0 { return }
+        let tW = frame.width
+        let tH = frame.height
+        #if swift(>=4.2)
+        let height = abs(radian)
+        #else
+        let height = fabs(radian)
+        #endif
+        
+        let x: CGFloat = 0
+        let y: CGFloat = 0
+        
+        var maxRadian: CGFloat = 0
+        switch direction {
+        case .top, .bottom:
+            maxRadian = min(tH, tW/2)
+            break
+        case .left, .right:
+            maxRadian = min(tH/2, tW)
+            break
+        }
+        
+        // The radius of the quad curve is too large.
+        guard height <= maxRadian else {
+            CXLogger.log(level: .error, message: "The radius of the quad curve is too large.")
+            return
+        }
+        
+        var radius: CGFloat = 0
+        switch direction {
+        case .top, .bottom:
+            let c = sqrt(pow(tW/2, 2) + pow(height, 2))
+            let sin_bc = height / c
+            radius = c / (sin_bc * 2)
+            break
+        case .left, .right:
+            let c = sqrt(pow(tH/2, 2) + pow(height, 2))
+            let sin_bc = height / c
+            radius = c / (sin_bc * 2)
+            break
+        }
+        
+        /// Draws arc.
+        let shapeLayer = CAShapeLayer()
+        shapeLayer.fillColor = fillColor?.cgColor ?? UIColor.white.cgColor
+        let path = CGMutablePath.init()
+        switch direction {
+        case .top:
+            if radian > 0 {
+                path.move(to: CGPoint(x: tW, y: height))
+                path.addArc(center: CGPoint(x: tW / 2, y: radius),
+                            radius: radius,
+                            startAngle: 2 * CGFloat.pi - asin((radius - height ) / radius),
+                            endAngle: CGFloat.pi + asin((radius - height ) / radius),
+                            clockwise: true)
+            } else {
+                path.move(to: CGPoint(x: tW, y: y))
+                path.addArc(center: CGPoint(x: tW / 2, y: height - radius),
+                            radius: radius,
+                            startAngle: asin((radius - height ) / radius),
+                            endAngle: CGFloat.pi - asin((radius - height ) / radius),
+                            clockwise: false)
+            }
+            path.addLine(to: CGPoint(x: x, y: tH))
+            path.addLine(to: CGPoint(x: tW, y: tH))
+        case .bottom:
+            if radian > 0 {
+                path.move(to: CGPoint(x: tW, y: tH - height))
+                path.addArc(center: CGPoint(x: tW / 2, y: tH - radius),
+                            radius: radius,
+                            startAngle: asin((radius - height) / radius),
+                            endAngle: CGFloat.pi - asin((radius - height) / radius),
+                            clockwise: false)
+            } else {
+                path.move(to: CGPoint(x: tW, y: tH))
+                path.addArc(center: CGPoint(x: tW / 2, y: tH + radius - height),
+                            radius: radius,
+                            startAngle: 2 * CGFloat.pi - asin((radius - height ) / radius),
+                            endAngle: CGFloat.pi + asin((radius - height ) / radius),
+                            clockwise: true)
+            }
+            path.addLine(to: CGPoint(x: x, y: y))
+            path.addLine(to: CGPoint(x: tW, y: y))
+        case .left:
+            if radian > 0 {
+                path.move(to: CGPoint(x: height, y: y))
+                path.addArc(center: CGPoint(x: radius, y: tH / 2),
+                            radius: radius,
+                            startAngle: CGFloat.pi + asin((radius - height ) / radius),
+                            endAngle: CGFloat.pi - asin((radius - height ) / radius),
+                            clockwise: true)
+            } else {
+                path.move(to: CGPoint(x: x, y: y))
+                path.addArc(center: CGPoint(x: height - radius, y: tH / 2),
+                            radius: radius,
+                            startAngle: 2 * CGFloat.pi - asin((radius - height ) / radius),
+                            endAngle: asin((radius - height ) / radius),
+                            clockwise: false)
+            }
+            path.addLine(to: CGPoint(x: tW, y: tH))
+            path.addLine(to: CGPoint(x: tW, y: y))
+        case .right:
+            if radian > 0 {
+                path.move(to: CGPoint(x: tW - height, y: y))
+                path.addArc(center: CGPoint(x: tW - radius, y: tH / 2),
+                            radius: radius,
+                            startAngle: 1.5 * CGFloat.pi + asin((radius - height) / radius),
+                            endAngle: CGFloat.pi / 2 + asin((radius - height ) / radius),
+                            clockwise: false)
+            } else {
+                path.move(to: CGPoint(x: tW, y: y))
+                path.addArc(center: CGPoint(x: tW + radius - height, y: tH / 2),
+                            radius: radius,
+                            startAngle: CGFloat.pi + asin((radius - height) / radius),
+                            endAngle: CGFloat.pi - asin((radius - height ) / radius),
+                            clockwise: true)
+            }
+            path.addLine(to: CGPoint(x: x, y: tH))
+            path.addLine(to: CGPoint(x: x, y: y))
+        }
+        
+        path.closeSubpath()
+        shapeLayer.path = path
+        layer.mask = shapeLayer
     }
     
 }

@@ -5,21 +5,35 @@ PODS:
   - Kingfisher (5.15.8):
     - Kingfisher/Core (= 5.15.8)
   - Kingfisher/Core (5.15.8)
+  - Protobuf (3.22.1)
   - SDWebImage (5.15.5):
     - SDWebImage/Core (= 5.15.5)
   - SDWebImage/Core (5.15.5)
+  - SSZipArchive (2.4.3)
+  - SVGAPlayer (2.5.7):
+    - SVGAPlayer/Core (= 2.5.7)
+    - SVGAPlayer/ProtoFiles (= 2.5.7)
+  - SVGAPlayer/Core (2.5.7):
+    - SSZipArchive (>= 1.8.1)
+    - SVGAPlayer/ProtoFiles
+  - SVGAPlayer/ProtoFiles (2.5.7):
+    - Protobuf (~> 3.4)
 
 DEPENDENCIES:
   - CXSwiftKit (from `../`)
   - DYFSwiftKeychain
-  - Kingfisher (~> 5.0)
+  - Kingfisher
   - SDWebImage
+  - SVGAPlayer
 
 SPEC REPOS:
   https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git:
     - DYFSwiftKeychain
     - Kingfisher
+    - Protobuf
     - SDWebImage
+    - SSZipArchive
+    - SVGAPlayer
 
 EXTERNAL SOURCES:
   CXSwiftKit:
@@ -29,8 +43,11 @@ SPEC CHECKSUMS:
   CXSwiftKit: 7eed411157e7fb06146e8b3d9a2542da5c3aa4de
   DYFSwiftKeychain: e1cd3d844beb58ca71ea5408bca25bf62ac704c9
   Kingfisher: a3c03d702433fa6cfedabb2bddbe076fb8f2e902
+  Protobuf: d7f7c8329edf5eb8af65547a8ba3e9c1cee927d5
   SDWebImage: fd7e1a22f00303e058058278639bf6196ee431fe
+  SSZipArchive: fe6a26b2a54d5a0890f2567b5cc6de5caa600aef
+  SVGAPlayer: 318b85a78b61292d6ae9dfcd651f3f0d1cdadd86
 
-PODFILE CHECKSUM: d60ab56a4c89e54e3f26112332d219ede5df80a3
+PODFILE CHECKSUM: f47d6d74b56e51cbbe96d12d35584cbc383db505
 
 COCOAPODS: 1.11.3
