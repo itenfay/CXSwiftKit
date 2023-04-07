@@ -188,11 +188,13 @@
 		7854E7C82A5E6A54385E076FFCD65455 /* SDImageCacheConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F340DEDD36FF8343632CEE1A323F2D2B /* SDImageCacheConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		787BA6BBC90B8F6A78707BF992CD8B7D /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66DFFA3BB4A248D9702D3327EF5607EA /* Box.swift */; };
 		78D60356CB5B2F633DAD8F7073777D89 /* SDWebImageDownloaderOperation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5630FC9607E2983410E54F1B27A4F91B /* SDWebImageDownloaderOperation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79035D5C29DECCFA003608F5 /* CXConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79035D5B29DECCFA003608F5 /* CXConfig.swift */; };
 		79326F03BC467AB7B7BD462154CD27F7 /* CXSwiftUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E120FEE8518B22DD5F5C473289E45F /* CXSwiftUtils.swift */; };
 		7941FBD77C8DFF65DA889C3820F2090E /* SDWeakProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = A7BA9729FFBF4966C52AFBD411418292 /* SDWeakProxy.m */; };
 		79484FA929D6DC7500C6005F /* CALayer+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79484FA829D6DC7500C6005F /* CALayer+Cx.swift */; };
 		796B549D29D58C6A00B5D95A /* CXSVGAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B549A29D58C6900B5D95A /* CXSVGAManager.swift */; };
 		796B549F29D58C6A00B5D95A /* CXSVGAOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B549C29D58C6900B5D95A /* CXSVGAOperation.swift */; };
+		797F31B529E003EE006ACEED /* UIApplication+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797F31B429E003EE006ACEED /* UIApplication+Cx.swift */; };
 		79C4EDBF29DC07F500BB3FF0 /* Date+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDBE29DC07F500BB3FF0 /* Date+Cx.swift */; };
 		79C4EDC229DC247D00BB3FF0 /* Array+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDC029DC247D00BB3FF0 /* Array+Cx.swift */; };
 		79C4EDC329DC247D00BB3FF0 /* Dictionary+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDC129DC247D00BB3FF0 /* Dictionary+Cx.swift */; };
@@ -687,10 +689,12 @@
 		7701DA74ADBA29887F71EAA114BCF091 /* GPBUnknownField.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = GPBUnknownField.m; path = objectivec/GPBUnknownField.m; sourceTree = "<group>"; };
 		77B549EE5CB7D8ADE34E44C768816C19 /* GPBExtensionInternals.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = GPBExtensionInternals.h; path = objectivec/GPBExtensionInternals.h; sourceTree = "<group>"; };
 		78E7116AAE0173BEDA93B6E0561F6206 /* SDWebImageTransitionInternal.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SDWebImageTransitionInternal.h; path = SDWebImage/Private/SDWebImageTransitionInternal.h; sourceTree = "<group>"; };
+		79035D5B29DECCFA003608F5 /* CXConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXConfig.swift; sourceTree = "<group>"; };
 		79484FA829D6DC7500C6005F /* CALayer+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CALayer+Cx.swift"; sourceTree = "<group>"; };
 		796B549A29D58C6900B5D95A /* CXSVGAManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSVGAManager.swift; sourceTree = "<group>"; };
 		796B549C29D58C6900B5D95A /* CXSVGAOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSVGAOperation.swift; sourceTree = "<group>"; };
 		796C7621DCBD2C054B6584CC1A42512B /* CXSwiftBase.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CXSwiftBase.swift; sourceTree = "<group>"; };
+		797F31B429E003EE006ACEED /* UIApplication+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Cx.swift"; sourceTree = "<group>"; };
 		79C4EDBE29DC07F500BB3FF0 /* Date+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Cx.swift"; sourceTree = "<group>"; };
 		79C4EDC029DC247D00BB3FF0 /* Array+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Cx.swift"; sourceTree = "<group>"; };
 		79C4EDC129DC247D00BB3FF0 /* Dictionary+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Cx.swift"; sourceTree = "<group>"; };
@@ -1223,6 +1227,7 @@
 		4E4077FD5840C8DC4B231E542414DBA9 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				79035D5B29DECCFA003608F5 /* CXConfig.swift */,
 				AACDFEEDD16E98A78B574ADB71E1C0B6 /* CXLogger.swift */,
 				796C7621DCBD2C054B6584CC1A42512B /* CXSwiftBase.swift */,
 			);
@@ -1449,6 +1454,7 @@
 				A09640FA4863701BCA9E7D311B0113F9 /* Int+Cx.swift */,
 				265572AEFA5DD3EF932666D1A35E8C31 /* NSObject+Cx.swift */,
 				A2D38AFB3416D4D2CA813F77C905728C /* String+Cx.swift */,
+				797F31B429E003EE006ACEED /* UIApplication+Cx.swift */,
 				F3E22A6883621A74E06BA17E4417325A /* UIButton+Cx.swift */,
 				9655B200C8C2F335A33E61A8581BC927 /* UIColor+Cx.swift */,
 				9FDE690E1FADBFAA7F76887158D6B2B8 /* UIFont+Cx.swift */,
@@ -2315,6 +2321,7 @@
 				6BC211F4ED6C247AD13155892B83BDC5 /* CXSwiftKit-dummy.m in Sources */,
 				79C4EDC229DC247D00BB3FF0 /* Array+Cx.swift in Sources */,
 				79326F03BC467AB7B7BD462154CD27F7 /* CXSwiftUtils.swift in Sources */,
+				797F31B529E003EE006ACEED /* UIApplication+Cx.swift in Sources */,
 				796B549D29D58C6A00B5D95A /* CXSVGAManager.swift in Sources */,
 				79C4EDC329DC247D00BB3FF0 /* Dictionary+Cx.swift in Sources */,
 				665750F7CBFDF8C8AA2C372EB672B395 /* CXTakeScreenshotDetector.swift in Sources */,
@@ -2329,6 +2336,7 @@
 				F0BD63D3B6437310EC33DAD4B828A60F /* UIImage+Cx.swift in Sources */,
 				C0FFAE956AAC2E20080EDFC67A94A8F3 /* UIImageView+Cx.swift in Sources */,
 				36B5898066E3FE40C21E314AB92FEBB8 /* UILabel+Cx.swift in Sources */,
+				79035D5C29DECCFA003608F5 /* CXConfig.swift in Sources */,
 				79C4EDBF29DC07F500BB3FF0 /* Date+Cx.swift in Sources */,
 				CB1BBEA8CC3ED5A758AF229BA242B309 /* UITextField+Cx.swift in Sources */,
 				3CC6D56298445CCBEAAAF005433F3BD9 /* UITextView+Cx.swift in Sources */,

@@ -193,6 +193,18 @@ extension CXSwiftBase where T : UIImage {
         return base.cx_kilobytesSize
     }
     
+    /// Clips the new image with the specified parameters.
+    public func addClip(withCornerRadius cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return base.cx_addClip(withCornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
+    /// Clips the new image with the specified parameters.
+    public func addClip(byRoundingCorners corners: UIRectCorner, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return base.cx_addClip(byRoundingCorners: corners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
 }
 
 
@@ -520,6 +532,21 @@ extension UIImage {
     @objc public var cx_kilobytesSize: Int
     {
         return self.cx_bytesSize / 1024
+    }
+    
+    /// Clips the new image with the specified parameters.
+    @objc public func cx_addClip(withCornerRadius cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return cx_addClip(byRoundingCorners: .allCorners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
+    /// Clips the new image with the specified parameters.
+    @objc public func cx_addClip(byRoundingCorners corners: UIRectCorner, cornerRadius: CGFloat, borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return cx_patternColor.cx.makeImageWithSize(size,
+                                                    byRoundingCorners: corners,
+                                                    cornerRadius: cornerRadius,
+                                                    borderWidth: borderWidth, borderColor: borderColor)
     }
     
 }

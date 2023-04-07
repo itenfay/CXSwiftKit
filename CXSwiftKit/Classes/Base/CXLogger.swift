@@ -5,10 +5,11 @@
 //  Created by chenxing on 2022/11/10.
 //
 
+#if canImport(Foundation)
 import Foundation
 
 /// The level of the log.
-@objc public enum CXLogLevel: Int {
+@objc public enum CXLogLevel: UInt8 {
     case info, warning, error
     
     var description: String {
@@ -18,12 +19,6 @@ import Foundation
         case .error: return "Error"
         }
     }
-}
-
-/// The config for the log.
-@objcMembers public class CXLogConfig: NSObject {
-    /// Whether to enable log, the default is true.
-    public static var enableLog: Bool = true
 }
 
 @objcMembers public class CXLogger: NSObject {
@@ -75,3 +70,5 @@ import Foundation
     }
     
 }
+
+#endif

@@ -5,7 +5,9 @@
 //  Created by chenxing on 2023/3/16.
 //
 
+#if canImport(UIKit)
 import UIKit
+#endif
 #if canImport(Kingfisher)
 import Kingfisher
 #endif
@@ -237,6 +239,23 @@ public func cxSetupSDWebImageReferer(_ referer: String)
 {
     let sdDownloader = SDWebImageDownloader.shared
     sdDownloader.setValue(referer, forHTTPHeaderField: "Referer")
+}
+
+#endif
+
+#if canImport(UIKit)
+
+/// A Boolean value that represents whether the idle timer is disabled for the app.
+public func cxIsIdleTimerDisabled() -> Bool
+{
+    // return
+    UIApplication.shared.isIdleTimerDisabled
+}
+
+/// Setting this property to true, disable the “idle timer” to avert system sleep.
+public func cxSetIdleTimerDisabled(_ value: Bool)
+{
+    UIApplication.shared.isIdleTimerDisabled = value
 }
 
 #endif

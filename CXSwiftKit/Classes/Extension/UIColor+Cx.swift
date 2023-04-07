@@ -7,7 +7,6 @@
 
 #if canImport(UIKit)
 import UIKit
-import CoreGraphics
 
 /// A tuple of the components that form the color in the RGB color space.
 public typealias CXColorRGBA = (red: CGFloat?, green: CGFloat?, blue: CGFloat?, alpha: CGFloat)
@@ -85,6 +84,39 @@ extension CXSwiftBase where T : UIColor {
     public var hexString: String
     {
         return self.base.cx_hexString
+    }
+    
+    /// Returns a new image with the specified parameters.
+    public func makeImageWithSize(
+        _ size: CGSize,
+        cornerRadius: CGFloat,
+        borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return base.cx_makeImageWithSize(size, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
+    /// Returns a new image with the specified parameters.
+    public func makeImageWithSize(
+        _ size: CGSize,
+        byRoundingCorners corners: UIRectCorner,
+        cornerRadius: CGFloat,
+        borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return base.cx_makeImageWithSize(size, byRoundingCorners: corners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
+    /// Returns a new image with the specified parameters.
+    public func makeImageWithSize(
+        _ size: CGSize,
+        byRoundingCorners corners: UIRectCorner,
+        cornerRadius: CGFloat,
+        borderWidth: CGFloat,
+        borderColor: UIColor,
+        lineCap: CGLineCap,
+        lineJoin: CGLineJoin,
+        lineDashPhase: CGFloat, lineDashLengths: [CGFloat]) -> UIImage
+    {
+        return base.cx_makeImageWithSize(size, byRoundingCorners: corners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor, lineCap: lineCap, lineJoin: lineJoin, lineDashPhase: lineDashPhase, lineDashLengths: lineDashLengths)
     }
     
 }
@@ -247,6 +279,79 @@ extension UIColor {
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return String(format:"#%06x", rgb)
+    }
+    
+    /// Returns a new image with the specified parameters.
+    @objc public func cx_makeImageWithSize(
+        _ size: CGSize,
+        cornerRadius: CGFloat,
+        borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return cx_makeImageWithSize(size, byRoundingCorners: .allCorners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
+    /// Returns a new image with the specified parameters.
+    @objc public func cx_makeImageWithSize(
+        _ size: CGSize,
+        byRoundingCorners corners: UIRectCorner,
+        cornerRadius: CGFloat,
+        borderWidth: CGFloat, borderColor: UIColor) -> UIImage
+    {
+        return cx_makeImageWithSize(size, byRoundingCorners: corners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor, lineCap: .butt, lineJoin: .miter, lineDashPhase: 0, lineDashLengths: [])
+    }
+    
+    /// Returns a new image with the specified parameters.
+    @objc public func cx_makeImageWithSize(
+        _ size: CGSize,
+        byRoundingCorners corners: UIRectCorner,
+        cornerRadius: CGFloat,
+        borderWidth: CGFloat,
+        borderColor: UIColor,
+        lineCap: CGLineCap,
+        lineJoin: CGLineJoin,
+        lineDashPhase: CGFloat, lineDashLengths: [CGFloat]) -> UIImage
+    {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+        let cornerRadii = CGSize(width: cornerRadius, height: cornerRadius)
+        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: cornerRadii)
+        if #available(iOS 10.0, *) {
+            let renderer = UIGraphicsImageRenderer(size: rect.size)
+            let newImage = renderer.image { context in
+                context.cgContext.setFillColor(self.cgColor)
+                context.cgContext.setStrokeColor(borderColor.cgColor)
+                context.cgContext.setLineWidth(borderWidth)
+                context.cgContext.setLineJoin(lineJoin)
+                context.cgContext.setLineCap(lineCap)
+                if !lineDashLengths.isEmpty {
+                    context.cgContext.setLineDash(phase: lineDashPhase, lengths: lineDashLengths)
+                }
+                path.addClip()
+                context.cgContext.addPath(path.cgPath)
+                context.cgContext.drawPath(using: .fillStroke)
+            }
+            return newImage
+        } else {
+            UIGraphicsBeginImageContext(rect.size)
+            guard let context = UIGraphicsGetCurrentContext()
+            else {
+                UIGraphicsEndImageContext()
+                return UIImage()
+            }
+            context.setFillColor(self.cgColor)
+            context.setStrokeColor(borderColor.cgColor)
+            context.setLineWidth(borderWidth)
+            context.setLineJoin(lineJoin)
+            context.setLineCap(lineCap)
+            if !lineDashLengths.isEmpty {
+                context.setLineDash(phase: lineDashPhase, lengths: lineDashLengths)
+            }
+            path.addClip()
+            context.addPath(path.cgPath)
+            context.drawPath(using: .fillStroke)
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage ?? UIImage()
+        }
     }
     
 }
