@@ -50,10 +50,10 @@ extension CALayer {
     
     private var isRotating: Bool {
         get {
-            return (objc_getAssociatedObject(self, &CXAssociatedKeys.kAnimationIsRotating) as? Bool) ?? false
+            return (objc_getAssociatedObject(self, &CXAssociatedKeys.isAnimationRotating) as? Bool) ?? false
         }
         set {
-            objc_setAssociatedObject(self, &CXAssociatedKeys.kAnimationIsRotating, newValue, .OBJC_ASSOCIATION_ASSIGN)
+            objc_setAssociatedObject(self, &CXAssociatedKeys.isAnimationRotating, newValue, .OBJC_ASSOCIATION_ASSIGN)
         }
     }
     

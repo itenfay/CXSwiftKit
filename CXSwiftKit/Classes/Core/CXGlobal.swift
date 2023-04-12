@@ -15,6 +15,13 @@ import Kingfisher
 import SDWebImage
 #endif
 
+//MARK: - CXAssociatedKeys
+
+internal struct CXAssociatedKeys {
+    static var isAnimationRotating: String = "cx.animation.isRotating"
+    static var textViewPlaceholder: String = "cx.textView.placeholder"
+}
+
 /// f
 ///
 /// - Parameter dimension: 1
@@ -40,9 +47,7 @@ public func cxIsIphoneXSeries() -> Bool
 public func cxSynchronize(_ obj: Any, closure: @escaping () -> Void)
 {
     objc_sync_enter(obj)
-    defer {
-        objc_sync_exit(obj)
-    }
+    defer { objc_sync_exit(obj) }
     closure()
 }
 
@@ -256,6 +261,39 @@ public func cxIsIdleTimerDisabled() -> Bool
 public func cxSetIdleTimerDisabled(_ value: Bool)
 {
     UIApplication.shared.isIdleTimerDisabled = value
+}
+
+// MARK: - Xib.
+
+/// Loads a view from xib.
+public func cxLoadViewFromXib<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIView {
+    guard let `class` = cls else { return nil }
+    guard let name = NSStringFromClass(`class`).components(separatedBy: ".").last else {
+        return nil
+    }
+    let nib = UINib(nibName: name, bundle: bundle)
+    let view = nib.instantiate(withOwner: nil, options: nil).first as? C
+    return view
+}
+
+/// Loads a view controller from xib
+public func cxLoadViewControllerFromXib<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIViewController {
+    guard let `class` = cls else { return nil }
+    let name = NSStringFromClass(`class`).components(separatedBy: ".").last
+    return C.init(nibName: name, bundle: bundle)
+}
+
+// MARK: - Storyboard.
+
+/// Loads a view controller from storyboard.
+public func cxLoadViewControllerFromStoryboard<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIViewController {
+    guard let `class` = cls else { return nil }
+    guard let name = NSStringFromClass(`class`).components(separatedBy: ".").last else {
+        return nil
+    }
+    let sb = UIStoryboard(name: name, bundle: bundle)
+    let vc = sb.instantiateInitialViewController() as? C
+    return vc
 }
 
 #endif

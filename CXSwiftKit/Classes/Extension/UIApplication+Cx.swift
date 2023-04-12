@@ -5,7 +5,8 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-import Foundation
+#if canImport(UIKit)
+import UIKit
 
 extension CXSwiftBase where T : UIApplication {
     
@@ -45,6 +46,55 @@ extension CXSwiftBase where T : UIApplication {
     public func cx_queryCurrentControllerBy(controller: UIViewController?) -> UIViewController?
     {
         return base.cx_queryCurrentControllerBy(controller: controller)
+    }
+    
+    /// Triggers the medium impact feedback.
+    @discardableResult
+    public func makeImpactFeedback() -> UIImpactFeedbackGenerator
+    {
+        return base.cx_makeImpactFeedback()
+    }
+    
+    /// Triggers impact feedback.
+    @discardableResult
+    public func makeImpactFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
+    {
+        return base.cx_makeImpactFeedback(style)
+    }
+    
+    /// Triggers selection feedback.
+    @discardableResult
+    public func makeSelectionFeedback() -> UISelectionFeedbackGenerator
+    {
+        return base.cx_makeSelectionFeedback()
+    }
+    
+    /// Triggers notification feedback.
+    @discardableResult
+    public func makeNotificationFeedback(_ notificationType: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
+    {
+        return base.cx_makeNotificationFeedback(notificationType)
+    }
+    
+    public static func cx_loadView(
+        _ viewType: UIView.Type,
+        inBundle bundle: Bundle? = nil) -> UIView?
+    {
+        return UIApplication.cx_loadView(viewType, inBundle: bundle)
+    }
+    
+    public static func cx_loadViewController(
+        _ viewControllerType: UIViewController.Type,
+        inBundle bundle: Bundle? = nil) -> UIViewController?
+    {
+        return UIApplication.cx_loadViewController(viewControllerType, inBundle: bundle)
+    }
+    
+    public static func cx_loadViewControllerFromStoryboard(
+        _ viewControllerType: UIViewController.Type,
+        inBundle bundle: Bundle? = nil) -> UIViewController?
+    {
+        return UIApplication.cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: bundle)
     }
     
 }
@@ -119,3 +169,75 @@ extension UIApplication {
     }
     
 }
+
+//MARK: - Feedback
+
+extension UIApplication {
+    
+    /// Triggers the medium impact feedback.
+    @discardableResult
+    @objc public func cx_makeImpactFeedback() -> UIImpactFeedbackGenerator
+    {
+        return cx_makeImpactFeedback(.medium)
+    }
+    
+    /// Triggers impact feedback.
+    @discardableResult
+    @objc public func cx_makeImpactFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
+    {
+        let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style)
+        impactFeedbackGenerator.prepare()
+        impactFeedbackGenerator.impactOccurred()
+        return impactFeedbackGenerator
+    }
+    
+    /// Triggers selection feedback.
+    @discardableResult
+    @objc public func cx_makeSelectionFeedback() -> UISelectionFeedbackGenerator
+    {
+        let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
+        return selectionFeedbackGenerator
+    }
+    
+    /// Triggers notification feedback.
+    @discardableResult
+    @objc public func cx_makeNotificationFeedback(_ notificationType: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
+    {
+        let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
+        notificationFeedbackGenerator.prepare()
+        notificationFeedbackGenerator.notificationOccurred(notificationType)
+        return notificationFeedbackGenerator
+    }
+    
+}
+
+//MARK: - Xib & Storyboard
+
+extension UIApplication {
+    
+    @objc public static func cx_loadView(
+        _ viewType: UIView.Type,
+        inBundle bundle: Bundle? = nil) -> UIView?
+    {
+        return cxLoadViewFromXib(viewType, bundle: bundle)
+    }
+    
+    @objc public static func cx_loadViewController(
+        _ viewControllerType: UIViewController.Type,
+        inBundle bundle: Bundle? = nil) -> UIViewController?
+    {
+        return cxLoadViewControllerFromXib(viewControllerType, bundle: bundle)
+    }
+    
+    @objc public static func cx_loadViewControllerFromStoryboard(
+        _ viewControllerType: UIViewController.Type,
+        inBundle bundle: Bundle? = nil) -> UIViewController?
+    {
+        return cxLoadViewControllerFromStoryboard(viewControllerType, bundle: bundle)
+    }
+    
+}
+
+#endif

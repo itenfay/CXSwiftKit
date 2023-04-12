@@ -994,6 +994,38 @@ extension UIView {
         }
     }
     
+    /// Exchanges the subviews at the specified indices with the flip transition.
+    @objc public func cx_flip(from fromView: UIView, to toView: UIView, duration: TimeInterval, repeatCount: Int = 1, completion: @escaping () -> Void)
+    {
+        guard let superview = fromView.superview else { return }
+        guard let fromIndex = superview.subviews.firstIndex(of: fromView),
+              let toIndex = superview.subviews.firstIndex(of: toView)
+        else {
+            return
+        }
+        var animatedCount = repeatCount
+        // Deprecated.
+        //UIView.beginAnimations("TransitionFlipAnimation", context: nil)
+        //UIView.setAnimationDuration(0.5)
+        //UIView.setAnimationCurve(UIView.AnimationCurve.easeInOut)
+        //UIView.setAnimationRepeatCount(Float(repeatCount))
+        //UIView.setAnimationDelegate(delegate)
+        //UIView.setAnimationDidStop(didStopSelector)
+        //UIView.setAnimationTransition(.flipFromLeft, for: superview, cache: true)
+        //superview.exchangeSubview(at: fromIndex, withSubviewAt: toIndex)
+        //UIView.commitAnimations()
+        UIView.animate(withDuration: duration, delay: 0, options: [.curveEaseInOut, .transitionFlipFromLeft]) {
+            superview.exchangeSubview(at: fromIndex, withSubviewAt: toIndex)
+        } completion: { _ in
+            animatedCount -= 1
+            if animatedCount > 0 {
+                self.cx_flip(from: fromView, to: toView, duration: duration, repeatCount: animatedCount, completion: completion)
+            } else {
+                completion()
+            }
+        }
+    }
+    
     /// Returns the receiver’s recursive subviews.
     @objc public var cx_recursiveSubviews: [UIView]
     {

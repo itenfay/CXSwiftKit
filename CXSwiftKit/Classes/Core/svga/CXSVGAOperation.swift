@@ -17,8 +17,8 @@ public class CXSVGAOperation: Operation {
     /// Which bundle is the svga in.
     public private(set) var inBundle: Bundle?
     
-    /// The callback for the operation starting.
-    private var onStartCallback: ((_ op: CXSVGAOperation) -> Void)? = nil
+    /// The closure for the operation starting.
+    private var startInvocation: ((CXSVGAOperation) -> Void)? = nil
     
     /// Whether the operation is executing.
     override public var isExecuting: Bool {
@@ -41,19 +41,19 @@ public class CXSVGAOperation: Operation {
     }
     
     /// Creates an operation for the svga.
-    public class func create(withUrl url: String?, callback: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation {
+    public class func create(withUrl url: String?, invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation {
         let op = CXSVGAOperation()
         op.svgaUrl = url
-        op.onStartCallback = callback
+        op.startInvocation = invocation
         return op
     }
     
     /// Creates an operation for the svga.
-    public class func create(withName name: String?, inBundle bundle: Bundle?, callback: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation {
+    public class func create(withName name: String?, inBundle bundle: Bundle?, invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation {
         let op = CXSVGAOperation()
         op.svgaName = name
         op.inBundle = bundle
-        op.onStartCallback = callback
+        op.startInvocation = invocation
         return op
     }
     
@@ -69,7 +69,7 @@ public class CXSVGAOperation: Operation {
         }
         _isExecuting = true
         OperationQueue.main.addOperation {
-            self.onStartCallback?(self)
+            self.startInvocation?(self)
         }
     }
     

@@ -44,16 +44,6 @@ extension CXSwiftBase where T : NSObject {
     
 }
 
-//MARK: - CXAssociatedKeys
-
-extension NSObject {
-    
-    internal struct CXAssociatedKeys {
-        static var kAnimationIsRotating: String = "cx.animation.isRotating"
-    }
-    
-}
-
 //MARK: - Notification
 
 extension NSObject {

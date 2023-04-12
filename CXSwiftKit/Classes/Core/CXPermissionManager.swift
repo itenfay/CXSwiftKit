@@ -7,47 +7,11 @@
 
 #if canImport(UIKit)
 import UIKit
-#if canImport(Photos)
-import Photos
-#endif
-#if canImport(AVFoundation)
-import AVFoundation
-#endif
 #if canImport(CoreLocation)
 import CoreLocation
 #endif
-#if canImport(Contacts)
-import Contacts
-#endif
-#if canImport(UNNotification)
-import UNNotification
-#endif
-#if canImport(EventKit)
-import EventKit
-#endif
 #if canImport(CoreBluetooth)
 import CoreBluetooth
-#endif
-#if canImport(LocalAuthentication)
-import LocalAuthentication
-#endif
-#if canImport(MediaPlayer)
-import MediaPlayer
-#endif
-#if canImport(CoreMotion)
-import CoreMotion
-#endif
-#if canImport(HealthKit)
-import HealthKit
-#endif
-#if canImport(Intents)
-import Intents
-#endif
-#if canImport(Speech)
-import Speech
-#endif
-#if canImport(AppTrackingTransparency)
-import AppTrackingTransparency
 #endif
 
 public class CXPermissionManager: NSObject {
@@ -100,6 +64,7 @@ public class CXPermissionManager: NSObject {
 //MARK: - Photo Library
 
 #if canImport(Photos)
+import Photos
 
 extension CXPermissionManager {
     
@@ -206,6 +171,7 @@ extension CXPermissionManager {
 //MARK: - Camera & Microphone
 
 #if canImport(AVFoundation)
+import AVFoundation
 
 extension CXPermissionManager {
     
@@ -365,6 +331,7 @@ extension CXPermissionManager: CLLocationManagerDelegate {
 //MARK: - Contacts
 
 #if canImport(Contacts)
+import Contacts
 
 extension CXPermissionManager {
     
@@ -454,6 +421,7 @@ extension CXPermissionManager {
 //MARK: - Notification
 
 #if canImport(UNNotification)
+import UNNotification
 
 extension CXPermissionManager {
     
@@ -512,6 +480,7 @@ extension CXPermissionManager {
 //MARK: - Reminder & Calendar
 
 #if canImport(EventKit)
+import EventKit
 
 extension CXPermissionManager {
     
@@ -627,6 +596,7 @@ extension CXPermissionManager: CBCentralManagerDelegate {
 //MARK: - Device TouchID/FaceID、Passcode
 
 #if canImport(LocalAuthentication)
+import LocalAuthentication
 
 extension CXPermissionManager {
     
@@ -717,6 +687,7 @@ extension CXPermissionManager {
 //MARK: - Apple Music
 
 #if canImport(MediaPlayer)
+import MediaPlayer
 
 extension CXPermissionManager {
     
@@ -761,6 +732,7 @@ extension CXPermissionManager {
         return await requestMediaLibraryAccessStatus() == .authorized
     }
     #endif
+    
 }
 
 #endif
@@ -768,6 +740,7 @@ extension CXPermissionManager {
 //MARK: - Motion
 
 #if canImport(CoreMotion)
+import CoreMotion
 
 extension CXPermissionManager {
     
@@ -804,6 +777,7 @@ extension CXPermissionManager {
 //MARK: - Health
 
 #if canImport(HealthKit)
+import HealthKit
 
 extension CXPermissionManager {
     
@@ -827,7 +801,7 @@ extension CXPermissionManager {
         }
     }
     
-    #if swift(>=5.5) && !os(macOS)
+    #if swift(>=5.5) && !os(tvOS)
     @available(iOS 15.0, watchOS 8.0, macOS 13.0, *)
     public func requestHealthAccess(forReading readingTypes: Set<HKObjectType>, writing writingTypes: Set<HKSampleType>) async -> Bool
     {
@@ -848,6 +822,7 @@ extension CXPermissionManager {
 //MARK: - Siri
 
 #if canImport(Intents)
+import Intents
 
 extension CXPermissionManager {
     
@@ -880,6 +855,7 @@ extension CXPermissionManager {
 //MARK: - Speech
 
 #if canImport(Speech)
+import Speech
 
 extension CXPermissionManager {
     
@@ -912,6 +888,7 @@ extension CXPermissionManager {
 //MARK: - Tracking
 
 #if canImport(AppTrackingTransparency)
+import AppTrackingTransparency
 
 @available(iOS 14, *)
 extension CXPermissionManager {

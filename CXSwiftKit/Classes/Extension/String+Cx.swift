@@ -146,7 +146,8 @@ extension CXSwiftBase where T == String {
         UIPasteboard.general.string = self.base
     }
     
-    /// 截取指定范围的字符串 索引默认从 0 开始
+    /// Intercept the specified range of string, indexes starting from 0 by default.
+    /// 
     /// - Parameters:
     ///   - location: 开始的索引位置
     ///   - length: 截取长度
@@ -269,6 +270,20 @@ extension CXSwiftBase where T == String {
         UIGraphicsEndImageContext()
         
         return newImage
+    }
+    
+    /// The string whether is a telephone.
+    public func evaluateTelephone() -> Bool {
+        let regex = "^1[3456789]\\d{9}$"
+        let pred = NSPredicate(format: "SELF MATCHES %@", regex)
+        return pred.evaluate(with: self)
+    }
+    
+    /// The string whether is a decimal.
+    public func evaluateDecimal() -> Bool {
+        let regex = "^[0-9]+(\\.[0-9]{1,2})?$"
+        let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
+        return pred.evaluate(with: self)
     }
     
 }

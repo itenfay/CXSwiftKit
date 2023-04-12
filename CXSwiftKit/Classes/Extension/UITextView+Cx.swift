@@ -71,6 +71,36 @@ extension CXSwiftBase where T : UITextView {
         base.cx_addLinkClickable(withTarget: target)
     }
     
+    /// The string that displays when there is no other text in the text view.
+    public var placeholder: String
+    {
+        get { base.cx_placeholder }
+        set {
+            base.cx_placeholder = newValue
+        }
+    }
+    
+    /// The placeholder text color.
+    public var placeholderColor: UIColor
+    {
+        get { base.cx_placeholderColor }
+        set {
+            base.cx_placeholderColor = newValue
+        }
+    }
+    
+    /// The styled string that displays when there is no other text in the text view.
+    public var attributedPlaceholder: NSAttributedString?
+    {
+        get { base.cx_attributedPlaceholder }
+        set {
+            base.cx_attributedPlaceholder = newValue
+        }
+    }
+    
+    /// The placeholder text label.
+    public var placeholderLabel: UILabel { base.cx_placeholderLabel }
+    
 }
 
 //MARK: -  UITextView
@@ -173,6 +203,55 @@ extension UITextView {
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false
         delegate = target
+    }
+    
+    /// The string that displays when there is no other text in the text view.
+    @IBInspectable @objc public var cx_placeholder: String
+    {
+        get { cx_placeholderLabel.text ?? "" }
+        set {
+            cx_placeholderLabel.text = newValue
+        }
+    }
+    
+    /// The placeholder text color.
+    @IBInspectable @objc public var cx_placeholderColor: UIColor
+    {
+        get { cx_placeholderLabel.textColor }
+        set {
+            cx_placeholderLabel.textColor = newValue
+        }
+    }
+    
+    /// The styled string that displays when there is no other text in the text view.
+    @objc public var cx_attributedPlaceholder: NSAttributedString?
+    {
+        get { cx_placeholderLabel.attributedText }
+        set {
+            cx_placeholderLabel.attributedText = newValue
+        }
+    }
+    
+    /// The placeholder text label.
+    @objc public var cx_placeholderLabel: UILabel
+    {
+        guard let label = objc_getAssociatedObject(self, &CXAssociatedKeys.textViewPlaceholder) as? UILabel else {
+            // Prevent abnormal display when there is no size.
+            if font == nil {
+                font = UIFont.systemFont(ofSize: 14)
+            }
+            let label = UILabel(frame: bounds)
+            label.backgroundColor = .clear
+            label.numberOfLines = 0
+            label.font = font
+            label.textColor = .lightGray
+            label.sizeToFit()
+            addSubview(label)
+            sendSubviewToBack(label)
+            objc_setAssociatedObject(self, &CXAssociatedKeys.textViewPlaceholder, label, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            return label
+        }
+        return label
     }
     
 }

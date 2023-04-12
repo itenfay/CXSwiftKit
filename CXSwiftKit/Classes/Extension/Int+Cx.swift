@@ -54,3 +54,31 @@ extension CXSwiftBase where T == UInt {
     }
     
 }
+
+extension Int {
+    
+    @discardableResult
+    public static prefix func ++ (left: inout Int) -> Int {
+        left += 1
+        return left
+    }
+    
+    @discardableResult
+    public static postfix func ++ (left: inout Int) -> Int {
+        left += 1
+        return left - 1
+    }
+    
+    @discardableResult
+    public static prefix func -- (left: inout Int) -> Int {
+        left -= 1
+        return left
+    }
+    
+    @discardableResult
+    public static postfix func -- (left: inout Int) -> Int {
+        left -= 1
+        return left + 1
+    }
+    
+}

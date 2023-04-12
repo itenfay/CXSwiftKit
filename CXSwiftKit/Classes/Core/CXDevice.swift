@@ -10,7 +10,9 @@ import UIKit
 #if canImport(CoreTelephony)
 import CoreTelephony
 #endif
+#if canImport(SystemConfiguration)
 import SystemConfiguration.CaptiveNetwork
+#endif
 #if canImport(DYFSwiftKeychain)
 import DYFSwiftKeychain
 #endif
@@ -381,6 +383,14 @@ import AdSupport
     }
     
     #endif
+    
+    public static var isSimulator: Bool {
+        var isSim = false
+        #if arch(i386) || arch(x86_64)
+        isSim = true
+        #endif
+        return isSim
+    }
     
 }
 
