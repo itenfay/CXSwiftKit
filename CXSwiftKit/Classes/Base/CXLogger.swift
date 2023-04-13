@@ -10,11 +10,13 @@ import Foundation
 
 /// The level of the log.
 @objc public enum CXLogLevel: UInt8 {
-    case info, warning, error
+    case debug, info, verbose, warning, error
     
     var description: String {
         switch self {
+        case .debug: return "Debug"
         case .info: return "Info"
+        case .verbose: return "Verbose"
         case .warning: return "Warning"
         case .error: return "Error"
         }
@@ -24,7 +26,7 @@ import Foundation
 @objcMembers public class CXLogger: NSObject {
     
     @nonobjc
-    private static var currentDateFormatString: String {
+    private static var currentDateString: String {
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSSZ"
         return dateFormatter.string(from: Date.init())
@@ -32,41 +34,46 @@ import Foundation
     
     @nonobjc
     private static func log(_ level: CXLogLevel, message: String, posi: (file: String, function: String, lineNumber: Int)? = nil) {
-        var logDesc = ""
-        if let _posi = posi {
-            let fileName = (_posi.file as NSString).lastPathComponent
-            logDesc = "[F: \(fileName) M: \(_posi.function) L: \(_posi.lineNumber)]"
+        var desc = ""
+        if let t = posi {
+            let fileName = (t.file as NSString).lastPathComponent
+            desc = "[F: \(fileName) M: \(t.function) L: \(t.lineNumber)]"
         }
-        logDesc = (logDesc.isEmpty ? "" : logDesc + " ") + message
+        desc = (desc.isEmpty ? "" : desc + " ") + message
         if CXLogConfig.enableLog {
-            print("\(currentDateFormatString) [CX] [\(level.description)] \(logDesc)")
+            print("\(currentDateString) [CX] [\(level.description)] \(desc)")
         } else {
-            if level == .error {
-                print("\(currentDateFormatString) [CX] [\(level.description)] \(logDesc)")
+            if level == .debug {
+                print("\(currentDateString) [CX] [\(level.description)] \(desc)")
             }
         }
     }
     
-    /// Outputs logs to the console(Swift).
+    /// Outputs logs to the console (Swift).
     @nonobjc
     public static func log(level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
         log(level, message: message, posi: (file, function, lineNumber))
     }
     
-    /// Outputs logs to the console(Swift).
+    /// Outputs logs to the console (Swift).
     @nonobjc
     public static func log(_ obj: Any, level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
-        log(level, message: "\(type(of: obj)) \(message)", posi: (file, function, lineNumber))
+        log(level, message: "[\(type(of: obj))] \(message)", posi: (file, function, lineNumber))
     }
     
-    /// Outputs logs to the console(Objective-C).
+    /// Outputs logs to the console (Objective-C).
+    /// e.g.:
+    ///   [CXLogger outputLogWithLevel:CXLogLevelError message:CXLogMessageFormat(@"123")];
     public static func outputLog(level: CXLogLevel, message: String) {
         log(level, message: message, posi: nil)
     }
     
-    /// Outputs logs to the console(Objective-C).
+    /// Outputs logs to the console (Objective-C).
+    /// e.g.:
+    ///   #define CXLogMessageFormat(m) ([NSString stringWithFormat:@"[F: %s, M: %s, L: %d] %@",  __FILE__, __PRETTY_FUNCTION__, __LINE__, (m)])
+    ///   [CXLogger outputLog:self level:CXLogLevelError message:CXLogMessageFormat(@"===")];
     public static func outputLog(_ obj: Any, level: CXLogLevel, message: String) {
-        log(level, message: "\(type(of: obj)) \(message)", posi: nil)
+        log(level, message: "[\(type(of: obj))] \(message)", posi: nil)
     }
     
 }
