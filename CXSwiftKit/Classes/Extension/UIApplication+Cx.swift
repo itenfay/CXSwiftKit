@@ -43,54 +43,26 @@ extension CXSwiftBase where T : UIApplication {
     }
     
     /// Returns the current visible view controller by the specified view controller.
-    public func cx_queryCurrentControllerBy(controller: UIViewController?) -> UIViewController?
+    public func queryCurrentControllerBy(controller: UIViewController?) -> UIViewController?
     {
         return base.cx_queryCurrentControllerBy(controller: controller)
     }
     
-    /// Triggers the medium impact feedback.
-    @discardableResult
-    public func makeImpactFeedback() -> UIImpactFeedbackGenerator
-    {
-        return base.cx_makeImpactFeedback()
-    }
-    
-    /// Triggers impact feedback.
-    @discardableResult
-    public func makeImpactFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
-    {
-        return base.cx_makeImpactFeedback(style)
-    }
-    
-    /// Triggers selection feedback.
-    @discardableResult
-    public func makeSelectionFeedback() -> UISelectionFeedbackGenerator
-    {
-        return base.cx_makeSelectionFeedback()
-    }
-    
-    /// Triggers notification feedback.
-    @discardableResult
-    public func makeNotificationFeedback(_ notificationType: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
-    {
-        return base.cx_makeNotificationFeedback(notificationType)
-    }
-    
-    public static func cx_loadView(
+    public static func loadView(
         _ viewType: UIView.Type,
         inBundle bundle: Bundle? = nil) -> UIView?
     {
         return UIApplication.cx_loadView(viewType, inBundle: bundle)
     }
     
-    public static func cx_loadViewController(
+    public static func loadViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle? = nil) -> UIViewController?
     {
         return UIApplication.cx_loadViewController(viewControllerType, inBundle: bundle)
     }
     
-    public static func cx_loadViewControllerFromStoryboard(
+    public static func loadViewControllerFromStoryboard(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle? = nil) -> UIViewController?
     {
@@ -166,49 +138,6 @@ extension UIApplication {
             return cx_queryCurrentControllerBy(controller: presentedController)
         }
         return controller
-    }
-    
-}
-
-//MARK: - Feedback
-
-extension UIApplication {
-    
-    /// Triggers the medium impact feedback.
-    @discardableResult
-    @objc public func cx_makeImpactFeedback() -> UIImpactFeedbackGenerator
-    {
-        return cx_makeImpactFeedback(.medium)
-    }
-    
-    /// Triggers impact feedback.
-    @discardableResult
-    @objc public func cx_makeImpactFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
-    {
-        let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style)
-        impactFeedbackGenerator.prepare()
-        impactFeedbackGenerator.impactOccurred()
-        return impactFeedbackGenerator
-    }
-    
-    /// Triggers selection feedback.
-    @discardableResult
-    @objc public func cx_makeSelectionFeedback() -> UISelectionFeedbackGenerator
-    {
-        let selectionFeedbackGenerator = UISelectionFeedbackGenerator()
-        selectionFeedbackGenerator.prepare()
-        selectionFeedbackGenerator.selectionChanged()
-        return selectionFeedbackGenerator
-    }
-    
-    /// Triggers notification feedback.
-    @discardableResult
-    @objc public func cx_makeNotificationFeedback(_ notificationType: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
-    {
-        let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
-        notificationFeedbackGenerator.prepare()
-        notificationFeedbackGenerator.notificationOccurred(notificationType)
-        return notificationFeedbackGenerator
     }
     
 }
