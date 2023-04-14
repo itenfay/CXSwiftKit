@@ -114,7 +114,11 @@ public class CXDispatchTimer {
             _timer = DispatchSource.makeTimerSource(flags: .strict, queue: _queue)
             let deadline = DispatchTime.now() + Double(delay) / 1000
             let leeway = DispatchTimeInterval.nanoseconds(Int(leeway))
+            #if swift(>=4)
             _timer!.schedule(deadline: deadline, repeating: !repeats ? .never : .milliseconds(Int(interval)), leeway: leeway)
+            #else
+            _timer!.scheduleRepeating(deadline: deadline, interval: !repeats ? .never : .milliseconds(Int(interval)), leeway: leeway)
+            #endif
             _timer!.setEventHandler { [weak self] in
                 self?.hanleEvent()
             }
