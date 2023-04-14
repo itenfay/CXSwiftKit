@@ -7,6 +7,19 @@
 
 import Foundation
 
+//MARK: - CXBaseModel
+
+#if canImport(HandyJSON)
+import HandyJSON
+public protocol CXBaseModel: HandyJSON {}
+#else
+public protocol CXBaseModel {}
+#endif
+
+//MARK: - CXObjcBaseModel
+
+@objc public protocol CXObjcBaseModel: AnyObject {}
+
 /// Declares a `CXSwiftBase` struct.
 public struct CXSwiftBase<T> {
     public let base: T
@@ -36,4 +49,5 @@ public extension CXSwiftBaseCompatible {
         get { return CXSwiftBase<Self>(self) }
         set {}
     }
+    
 }
