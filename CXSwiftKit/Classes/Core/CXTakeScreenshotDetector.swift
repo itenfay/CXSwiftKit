@@ -5,9 +5,8 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Photos) && canImport(UIKit)
+#if canImport(UIKit) && canImport(Photos)
 import UIKit
-import Photos
 
 public class CXTakeScreenshotDetector: NSObject {
     
@@ -16,7 +15,7 @@ public class CXTakeScreenshotDetector: NSObject {
         self.setup()
     }
     
-    private var takeScreenshotHandler: ((UIImage?) -> Void)?
+    private var takeScreenshotHandler: ((Bool, UIImage?) -> Void)?
     
     private func setup() {
         self.cx.addObserver(self, selector: #selector(userDidTakeScreenshot(_:)), name: UIApplication.userDidTakeScreenshotNotification)
@@ -30,16 +29,18 @@ public class CXTakeScreenshotDetector: NSObject {
             }
         } else {
             CXLogger.log(level: .error, message: "The user didn't granted this app access to the photo library.")
+            takeScreenshotHandler?(false, nil)
         }
     }
     
     private func fetchImage() {
-        CXPermissionManager.shared.fetchLatestImage { [unowned self] imageData in
-            self.takeScreenshotHandler?(imageData != nil ? UIImage(data: imageData!) : nil)
+        CXPermissionManager.shared.fetchLatestImage { [weak self] imageData in
+            let image = imageData != nil ? UIImage(data: imageData!) : nil
+            self?.takeScreenshotHandler?(true, image)
         }
     }
     
-    @objc public func detect(handler: @escaping (UIImage?) -> Void) {
+    @objc public func detect(handler: @escaping (_ authorized: Bool, _ image: UIImage?) -> Void) {
         takeScreenshotHandler = handler
     }
     
