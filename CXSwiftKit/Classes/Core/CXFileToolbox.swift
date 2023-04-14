@@ -193,6 +193,9 @@ public class CXFileToolbox: NSObject {
             }
         } else {
             let ret = array.write(toFile: path, atomically: true)
+            if !ret {
+                CXLogger.log(level: .error, message: "The file isnot written successfully")
+            }
         }
     }
     
@@ -206,6 +209,9 @@ public class CXFileToolbox: NSObject {
             }
         } else {
             let ret = dictionary.write(toFile: path, atomically: true)
+            if !ret {
+                CXLogger.log(level: .error, message: "The file isnot written successfully")
+            }
         }
     }
     
