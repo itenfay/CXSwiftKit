@@ -235,7 +235,7 @@ extension UITextView {
     /// The placeholder text label.
     @objc public var cx_placeholderLabel: UILabel
     {
-        guard let label = objc_getAssociatedObject(self, &CXAssociatedKeys.textViewPlaceholder) as? UILabel else {
+        guard let label = objc_getAssociatedObject(self, &CXAssociatedKey.textViewPlaceholder) as? UILabel else {
             // Prevent abnormal display when there is no size.
             if font == nil {
                 font = UIFont.systemFont(ofSize: 14)
@@ -248,7 +248,7 @@ extension UITextView {
             label.sizeToFit()
             addSubview(label)
             sendSubviewToBack(label)
-            objc_setAssociatedObject(self, &CXAssociatedKeys.textViewPlaceholder, label, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &CXAssociatedKey.textViewPlaceholder, label, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return label
         }
         return label
