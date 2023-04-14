@@ -203,6 +203,7 @@
 		797F31B529E003EE006ACEED /* UIApplication+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797F31B429E003EE006ACEED /* UIApplication+Cx.swift */; };
 		7987E16229E3B6FF00F7165C /* CXWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7987E16129E3B6FF00F7165C /* CXWebSocket.swift */; };
 		7987E16529E3BF5800F7165C /* CXTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7987E16429E3BF5800F7165C /* CXTimer.swift */; };
+		798E9D4229E955E900B6CB63 /* CXCircleProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798E9D4129E955E900B6CB63 /* CXCircleProgressButton.swift */; };
 		79C4EDBF29DC07F500BB3FF0 /* Date+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDBE29DC07F500BB3FF0 /* Date+Cx.swift */; };
 		79C4EDC229DC247D00BB3FF0 /* Array+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDC029DC247D00BB3FF0 /* Array+Cx.swift */; };
 		79C4EDC329DC247D00BB3FF0 /* Dictionary+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDC129DC247D00BB3FF0 /* Dictionary+Cx.swift */; };
@@ -711,6 +712,7 @@
 		797F31B429E003EE006ACEED /* UIApplication+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIApplication+Cx.swift"; sourceTree = "<group>"; };
 		7987E16129E3B6FF00F7165C /* CXWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXWebSocket.swift; sourceTree = "<group>"; };
 		7987E16429E3BF5800F7165C /* CXTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXTimer.swift; sourceTree = "<group>"; };
+		798E9D4129E955E900B6CB63 /* CXCircleProgressButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXCircleProgressButton.swift; sourceTree = "<group>"; };
 		79C4EDBE29DC07F500BB3FF0 /* Date+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Cx.swift"; sourceTree = "<group>"; };
 		79C4EDC029DC247D00BB3FF0 /* Array+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Cx.swift"; sourceTree = "<group>"; };
 		79C4EDC129DC247D00BB3FF0 /* Dictionary+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Cx.swift"; sourceTree = "<group>"; };
@@ -1063,6 +1065,7 @@
 				B4E2F9ADBD8EEE613EE4D97463CE809B /* CXTakeScreenshotDetector.swift */,
 				796B549929D58B9D00B5D95A /* svga */,
 				7987E16329E3BF5800F7165C /* Timer */,
+				798E9D4029E9549100B6CB63 /* ui */,
 				7987E16029E3B6FF00F7165C /* WebSocket */,
 			);
 			name = Core;
@@ -1370,6 +1373,14 @@
 				7987E16429E3BF5800F7165C /* CXTimer.swift */,
 			);
 			path = Timer;
+			sourceTree = "<group>";
+		};
+		798E9D4029E9549100B6CB63 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				798E9D4129E955E900B6CB63 /* CXCircleProgressButton.swift */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 		81ACA9A239C869CA052E803C5DD13074 /* Support Files */ = {
@@ -2363,6 +2374,7 @@
 				79C4EDC229DC247D00BB3FF0 /* Array+Cx.swift in Sources */,
 				79326F03BC467AB7B7BD462154CD27F7 /* CXSwiftUtils.swift in Sources */,
 				797F31B529E003EE006ACEED /* UIApplication+Cx.swift in Sources */,
+				798E9D4229E955E900B6CB63 /* CXCircleProgressButton.swift in Sources */,
 				796B549D29D58C6A00B5D95A /* CXSVGAManager.swift in Sources */,
 				79C4EDC329DC247D00BB3FF0 /* Dictionary+Cx.swift in Sources */,
 				665750F7CBFDF8C8AA2C372EB672B395 /* CXTakeScreenshotDetector.swift in Sources */,
