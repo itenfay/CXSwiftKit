@@ -127,6 +127,12 @@ extension CXSwiftBase where T : UIColor {
         return base.cx_makeImageWithSize(size, byRoundingCorners: corners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor, lineCap: lineCap, lineJoin: lineJoin, lineDashPhase: lineDashPhase, lineDashLengths: lineDashLengths)
     }
     
+    /// Returns the inverse color.
+    public var inverseColor: UIColor
+    {
+        return base.cx_inverseColor
+    }
+    
 }
 
 extension UIColor {
@@ -372,6 +378,19 @@ extension UIColor {
             UIGraphicsEndImageContext()
             return newImage ?? UIImage()
         }
+    }
+    
+    /// Returns the inverse color.
+    @objc public var cx_inverseColor: UIColor
+    {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+            return self
+        }
+        return UIColor(red: 1 - red, green: 1 - green, blue: 1 - blue, alpha: alpha)
     }
     
 }
