@@ -8,6 +8,70 @@
 #if canImport(UIKit)
 import UIKit
 
+//MARK: - Begin of example
+
+//public class CXBaseController: UIViewController {}
+
+//public class CXBaseTransitionController: CXBaseController {
+//    let scalePresentAnimation = CXScalePresentAnimation()
+//    let scaleDismissAnimation = CXScaleDismissAnimation()
+//    let swipeLeftInteractiveTransition = CXSwipeLeftInteractiveTransition()
+//}
+
+//extension CXBaseTransitionController: UIViewControllerTransitioningDelegate {
+//
+//    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        return scalePresentAnimation
+//    }
+//
+//    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+//        scaleDismissAnimation.updateFinalRect(scalePresentAnimation.touchRect)
+//        return scaleDismissAnimation
+//    }
+//
+//    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+//        return swipeLeftInteractiveTransition.interacting ? swipeLeftInteractiveTransition : nil
+//    }
+//}
+
+//public class CXVideosController: CXBaseTransitionController, UITableViewDelegate, UITableViewDataSource {
+//
+//    private lazy var tableView: UITableView = {
+//        let tableView = UITableView(frame: CGRect.zero)
+//        tableView.delegate = self
+//        tableView.dataSource = self
+//        tableView.separatorStyle = .none
+//        tableView.backgroundColor = .clear
+//        if #available(iOS 11.0, *) {
+//            tableView.contentInsetAdjustmentBehavior = .never
+//        }
+//        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.estimatedRowHeight = 50
+//        return tableView
+//    }()
+//
+//    public func numberOfSections(in tableView: UITableView) -> Int {
+//        return 1
+//    }
+//
+//    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 10
+//    }
+//
+//    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        return UITableViewCell()
+//    }
+//
+//    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        _ = scalePresentAnimation.updateRect(with: tableView, indexPath: indexPath, inView: view)
+//        let vc = CXBaseController()
+//        self.present(vc, animated: true, completion: nil)
+//    }
+//
+//}
+
+//MARK: - End of example
+
 public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     @objc public private(set) var touchRect: CGRect = .zero
@@ -20,11 +84,11 @@ public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransiti
         touchRect = rect
     }
     
-    @objc public func convertRect(_ listView: UIScrollView, at indexPath: IndexPath) -> Bool {
-        return convertRect(listView, atIndexPath: indexPath, toView: UIApplication.shared.cx_currentController?.view)
+    @objc public func updateRect(with listView: UIScrollView, indexPath: IndexPath) -> Bool {
+        return updateRect(with: listView, indexPath: indexPath, inView: UIApplication.shared.cx_currentController?.view)
     }
     
-    @objc public func convertRect(_ listView: UIScrollView, atIndexPath indexPath: IndexPath, toView view: UIView?) -> Bool {
+    @objc public func updateRect(with listView: UIScrollView, indexPath: IndexPath, inView view: UIView?) -> Bool {
         if let tv = listView as? UITableView {
             if let cell = tv.cellForRow(at: indexPath) {
                 updateTouchRect(tv.convert(cell.frame, to: view))
@@ -35,8 +99,9 @@ public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransiti
                 updateTouchRect(cv.convert(cell.frame, to: view))
                 return true
             }
+        } else {
+            updateTouchRect(.zero)
         }
-        updateTouchRect(.zero)
         return false
     }
     
