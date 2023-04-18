@@ -64,7 +64,9 @@ import UIKit
 //
 //    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //        _ = scalePresentAnimation.updateRect(with: tableView, indexPath: indexPath, inView: view)
-//        let vc = CXBaseController()
+//        let vc = CXVideosController()
+//        vc.modalPresentationStyle = .overCurrentContext
+//        self.modalPresentationStyle = .currentContext
 //        self.present(vc, animated: true, completion: nil)
 //    }
 //
@@ -75,6 +77,11 @@ import UIKit
 public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     @objc public private(set) var touchRect: CGRect = .zero
+    
+    /// Notification name
+    @objc public class var scaleAnimationDidStart: String {
+        return "cx.scaleAnimation.didStartNotification"
+    }
     
     @objc public override init() {
         super.init()
@@ -124,6 +131,8 @@ public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransiti
         
         toVC.view.center = CGPoint.init(x: initialFrame.origin.x + initialFrame.size.width/2, y: initialFrame.origin.y + initialFrame.size.height/2)
         toVC.view.transform = CGAffineTransform.init(scaleX: initialFrame.size.width/finalFrame.size.width, y: initialFrame.size.height/finalFrame.size.height)
+        
+        cx.postNotification(withName: Self.scaleAnimationDidStart.cx.asNotificationName()!)
         
         //UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .layoutSubviews, animations: {
         //    toVC.view.center = CGPoint.init(x: finalFrame.origin.x + finalFrame.size.width/2, y: finalFrame.origin.y + finalFrame.size.height/2)

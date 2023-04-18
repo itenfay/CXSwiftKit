@@ -12,6 +12,11 @@ public class CXScaleDismissAnimation: NSObject, UIViewControllerAnimatedTransiti
     
     private var finalRect: CGRect
     
+    /// Notification name
+    @objc public class var scaleAnimationDidFinish: String {
+        return "cx.scaleAnimation.didFinishNotification"
+    }
+    
     @objc public override init() {
         self.finalRect = .zero
         super.init()
@@ -67,6 +72,7 @@ public class CXScaleDismissAnimation: NSObject, UIViewControllerAnimatedTransiti
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
             snapshotView?.removeFromSuperview()
+            self.cx.postNotification(withName: Self.scaleAnimationDidFinish.cx.asNotificationName()!)
         }
     }
     
