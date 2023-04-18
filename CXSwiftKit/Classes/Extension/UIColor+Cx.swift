@@ -89,6 +89,14 @@ extension CXSwiftBase where T : UIColor {
     /// Returns a new image with the specified parameters.
     public func makeImageWithSize(
         _ size: CGSize,
+        cornerRadius: CGFloat) -> UIImage
+    {
+        return base.cx_makeImageWithSize(size, cornerRadius: cornerRadius)
+    }
+    
+    /// Returns a new image with the specified parameters.
+    public func makeImageWithSize(
+        _ size: CGSize,
         cornerRadius: CGFloat,
         borderWidth: CGFloat, borderColor: UIColor) -> UIImage
     {
@@ -284,6 +292,14 @@ extension UIColor {
     /// Returns a new image with the specified parameters.
     @objc public func cx_makeImageWithSize(
         _ size: CGSize,
+        cornerRadius: CGFloat) -> UIImage
+    {
+        return cx_makeImageWithSize(size, cornerRadius: cornerRadius, borderWidth: 0, borderColor: .clear)
+    }
+    
+    /// Returns a new image with the specified parameters.
+    @objc public func cx_makeImageWithSize(
+        _ size: CGSize,
         cornerRadius: CGFloat,
         borderWidth: CGFloat, borderColor: UIColor) -> UIImage
     {
@@ -318,8 +334,10 @@ extension UIColor {
             let renderer = UIGraphicsImageRenderer(size: rect.size)
             let newImage = renderer.image { context in
                 context.cgContext.setFillColor(self.cgColor)
-                context.cgContext.setStrokeColor(borderColor.cgColor)
-                context.cgContext.setLineWidth(borderWidth)
+                if borderWidth > 0 {
+                    context.cgContext.setLineWidth(borderWidth)
+                    context.cgContext.setStrokeColor(borderColor.cgColor)
+                }
                 context.cgContext.setLineJoin(lineJoin)
                 context.cgContext.setLineCap(lineCap)
                 if !lineDashLengths.isEmpty {
@@ -338,8 +356,10 @@ extension UIColor {
                 return UIImage()
             }
             context.setFillColor(self.cgColor)
-            context.setStrokeColor(borderColor.cgColor)
-            context.setLineWidth(borderWidth)
+            if borderWidth > 0 {
+                context.setLineWidth(borderWidth)
+                context.setStrokeColor(borderColor.cgColor)
+            }
             context.setLineJoin(lineJoin)
             context.setLineCap(lineCap)
             if !lineDashLengths.isEmpty {
