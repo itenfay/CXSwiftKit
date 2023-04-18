@@ -32,6 +32,9 @@ internal struct CXAssociatedKey {
     static var labelRichTextClickAction = "cx.label.richText.clickAction"
 }
 
+public let cxScreenWidth = CGFloat.cx.screenWidth
+public let cxScreenHeight = CGFloat.cx.screenHeight
+
 /// f
 ///
 /// - Parameter dimension: 1
