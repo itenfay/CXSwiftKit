@@ -281,7 +281,7 @@ extension UILabel {
         let count = CFArrayGetCount(lines)
         var origins = Array<CGPoint>(repeating: .zero, count: count)
         CTFrameGetLineOrigins(frame, CFRange(location: 0, length: 0), &origins)
-        var transform = cx_transformForCoreText
+        let transform = cx_transformForCoreText
         let verticalOffset: CGFloat = 0
         
         for i in 0..<origins.count {
@@ -310,7 +310,7 @@ extension UILabel {
                 }
                 let linkCount = cx_attributeStrings.count
                 for i in 0..<linkCount {
-                    var model = cx_attributeStrings[i]
+                    let model = cx_attributeStrings[i]
                     if NSLocationInRange(index, model.range) {
                         result?(model.string, model.range, i)
                         return true
