@@ -32,6 +32,18 @@ internal struct CXAssociatedKey {
     static var labelRichTextClickAction = "cx.label.richText.clickAction"
 }
 
+extension Optional {
+    
+    /// True if the Optional is .None. Useful to avoid if-let.
+    public var cx_isNil: Bool {
+        if case .none = self {
+            return true
+        }
+        return false
+    }
+    
+}
+
 public let cxScreenWidth = CGFloat.cx.screenWidth
 public let cxScreenHeight = CGFloat.cx.screenHeight
 
