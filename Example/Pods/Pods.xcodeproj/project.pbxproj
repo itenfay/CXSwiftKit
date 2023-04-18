@@ -199,6 +199,7 @@
 		795AB1E829EE41FE00BC0AF5 /* CXSwipeLeftInteractiveTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795AB1E229EE41FE00BC0AF5 /* CXSwipeLeftInteractiveTransition.swift */; };
 		795AB1E929EE41FE00BC0AF5 /* CXScalePresentAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795AB1E329EE41FE00BC0AF5 /* CXScalePresentAnimation.swift */; };
 		795AB1EA29EE41FE00BC0AF5 /* CXScaleDismissAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795AB1E429EE41FE00BC0AF5 /* CXScaleDismissAnimation.swift */; };
+		795AB1EC29EE9ED500BC0AF5 /* CXSwipeContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795AB1EB29EE9ED500BC0AF5 /* CXSwipeContext.swift */; };
 		7968470C29E682A100615729 /* URL+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968470B29E682A100615729 /* URL+Cx.swift */; };
 		7968970E29E53D6000D1FCDC /* CXDispatchTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7968970D29E53D6000D1FCDC /* CXDispatchTimer.swift */; };
 		796B549D29D58C6A00B5D95A /* CXSVGAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796B549A29D58C6900B5D95A /* CXSVGAManager.swift */; };
@@ -713,6 +714,7 @@
 		795AB1E229EE41FE00BC0AF5 /* CXSwipeLeftInteractiveTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSwipeLeftInteractiveTransition.swift; sourceTree = "<group>"; };
 		795AB1E329EE41FE00BC0AF5 /* CXScalePresentAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXScalePresentAnimation.swift; sourceTree = "<group>"; };
 		795AB1E429EE41FE00BC0AF5 /* CXScaleDismissAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXScaleDismissAnimation.swift; sourceTree = "<group>"; };
+		795AB1EB29EE9ED500BC0AF5 /* CXSwipeContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSwipeContext.swift; sourceTree = "<group>"; };
 		7968470B29E682A100615729 /* URL+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URL+Cx.swift"; sourceTree = "<group>"; };
 		7968970D29E53D6000D1FCDC /* CXDispatchTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXDispatchTimer.swift; sourceTree = "<group>"; };
 		796B549A29D58C6900B5D95A /* CXSVGAManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSVGAManager.swift; sourceTree = "<group>"; };
@@ -1071,6 +1073,7 @@
 				BD0D70B32100C07A51AB44E23AE24040 /* CXMainBundle.swift */,
 				ECF8BF5EBC6B1C61A3EC82A5B750CB4E /* CXPermissionManager.swift */,
 				A1E120FEE8518B22DD5F5C473289E45F /* CXSwiftUtils.swift */,
+				795AB1EB29EE9ED500BC0AF5 /* CXSwipeContext.swift */,
 				B4E2F9ADBD8EEE613EE4D97463CE809B /* CXTakeScreenshotDetector.swift */,
 				796B549929D58B9D00B5D95A /* svga */,
 				7987E16329E3BF5800F7165C /* Timer */,
@@ -2379,6 +2382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				795AB1EC29EE9ED500BC0AF5 /* CXSwipeContext.swift in Sources */,
 				B47062BF8A53DD582B9E29DA773CD300 /* CGFloat+Cx.swift in Sources */,
 				8A97772C43E7EB420BC02A7ACB0162E0 /* CXDevice.swift in Sources */,
 				7987E16229E3B6FF00F7165C /* CXWebSocket.swift in Sources */,
