@@ -386,6 +386,12 @@ extension CXSwiftBase where T : UIView {
         self.base.cx_scale(withSx: sx, sy: sy, duration: duration, delay: delay, animated: animated, completion: completion)
     }
     
+    /// Exchanges the subviews at the specified indices with the flip transition.
+    public func flip(from fromView: UIView, to toView: UIView, duration: TimeInterval, repeatCount: Int = 1, completion: @escaping () -> Void)
+    {
+        self.base.cx_flip(from: fromView, to: toView, duration: duration, repeatCount: repeatCount, completion: completion)
+    }
+    
     /// Returns the receiver’s recursive subviews.
     public var recursiveSubviews: [UIView]
     {
@@ -995,7 +1001,13 @@ extension UIView {
     }
     
     /// Exchanges the subviews at the specified indices with the flip transition.
-    @objc public func cx_flip(from fromView: UIView, to toView: UIView, duration: TimeInterval, repeatCount: Int = 1, completion: @escaping () -> Void)
+    @objc public func cx_flip(from fromView: UIView, to toView: UIView, duration: TimeInterval, completion: @escaping () -> Void)
+    {
+        cx_flip(from: fromView, to: toView, duration: duration, repeatCount: 1, completion: completion)
+    }
+    
+    /// Exchanges the subviews at the specified indices with the flip transition.
+    @objc public func cx_flip(from fromView: UIView, to toView: UIView, duration: TimeInterval, repeatCount: Int, completion: @escaping () -> Void)
     {
         guard let superview = fromView.superview else { return }
         guard let fromIndex = superview.subviews.firstIndex(of: fromView),
