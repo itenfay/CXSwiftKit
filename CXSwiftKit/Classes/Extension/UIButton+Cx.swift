@@ -213,14 +213,14 @@ extension UIButton {
         var modifier: AnyModifier? = nil
         if !headers.isEmpty {
             modifier = AnyModifier { request in
-                var r = request
+                var _request = request
                 for key in headers.keys {
                     if let value = headers[key], !value.isEmpty {
                         // replace "key" with the field name you need, it's just an example.
-                        r.setValue(value, forHTTPHeaderField: key)
+                        _request.setValue(value, forHTTPHeaderField: key)
                     }
                 }
-                return request
+                return _request
             }
         }
         
