@@ -7,8 +7,12 @@
 
 #if canImport(Foundation)
 import Foundation
+#if canImport(CommonCrypto)
 import CommonCrypto
+#endif
+#if canImport(CoreImage)
 import CoreImage
+#endif
 
 extension String: CXSwiftBaseCompatible {}
 
@@ -29,6 +33,7 @@ extension CXSwiftBase where T == String {
         return Double(self.base)
     }
     
+    #if canImport(CommonCrypto)
     /// Get a MD5 encoded string.
     public var md5: String? {
         let cStr = self.base.cString(using: String.Encoding.utf8)
@@ -48,6 +53,7 @@ extension CXSwiftBase where T == String {
         }
         return nil
     }
+    #endif
     
     /// Convert a date string to a timestamp，dateFormat: "yyyy-MM-dd HH:mm:ss".
     ///
@@ -140,14 +146,14 @@ extension CXSwiftBase where T == String {
     
     /// Copy string to pasteboard.
     public func copyToPasteboard() {
-        guard self.base.utf16.count > 0 else {
+        guard self.length > 0 else {
             return
         }
         UIPasteboard.general.string = self.base
     }
     
     /// Intercept the specified range of string, indexes starting from 0 by default.
-    /// 
+    ///
     /// - Parameters:
     ///   - location: 开始的索引位置
     ///   - length: 截取长度
@@ -174,6 +180,7 @@ extension CXSwiftBase where T == String {
         return Notification.Name(self.base)
     }
     
+    #if canImport(CoreImage)
     /// Generates an image of QRCode.
     ///
     /// - Returns: An image of QRCode.
@@ -271,6 +278,7 @@ extension CXSwiftBase where T == String {
         
         return newImage
     }
+    #endif
     
     /// The string whether is a telephone.
     public func evaluateTelephone() -> Bool {
@@ -284,6 +292,38 @@ extension CXSwiftBase where T == String {
         let regex = "^[0-9]+(\\.[0-9]{1,2})?$"
         let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
         return pred.evaluate(with: self)
+    }
+    
+    /// NSLocalizedString shorthand.
+    public var localizedString: String {
+        return localizedString(withValue: "", comment: "")
+    }
+    
+    /// Returns a localized string from a table that Xcode generates for you when exporting localizations.
+    ///
+    /// - Parameters:
+    ///   - value: The localized string for the development locale. For other locales, return this value if key isn’t found in the table.
+    ///   - comment: The comment to place above the key-value pair in the strings file. This parameter provides the translator with some context about the localized string’s presentation to the user.
+    ///   - tableName: The name of the table containing the key-value pairs. This defaults to the table in Localizable.strings when tableName is nil or an empty string.
+    ///   - bundle: The bundle containing the table’s strings file. The main bundle is used if one isn’t specified.
+    /// - Returns: The result of sending localizedString(forKey:value:table:) to bundle, passing the specified key, value, and tableName.
+    public func localizedString(withValue value: String, comment: String, table tableName: String? = nil, bundle: Bundle = .main) -> String {
+        return NSLocalizedString(self.base, tableName: tableName, bundle: bundle, value: value, comment: comment)
+    }
+    
+    /// Returns a localized version of the string designated by the specified key and residing in the specified table.
+    ///
+    /// - Parameters:
+    ///   - value: The value to return if key is nil or if a localized string for key can’t be found in the table.
+    ///   - tableName: The receiver’s string table to search. If tableName is nil or is an empty string, the method attempts to use the table in Localizable.strings.
+    ///   - bundle: The bundle containing the table’s strings file. The main bundle is used if one isn’t specified.
+    /// - Returns: A localized version of the string designated by key in table tableName. This method returns the following when key is nil or not found in table:
+    /// * If key is nil and value is nil, returns an empty string.
+    /// * If key is nil and value is non-nil, returns value.
+    /// * If key is not found and value is nil or an empty string, returns key.
+    /// * If key is not found and value is non-nil and not empty, return value.
+    public func localizedString(withValue value: String?, table tableName: String? = "", bundle: Bundle = .main) -> String {
+        return bundle.localizedString(forKey: self.base, value: value, table: tableName)
     }
     
 }
