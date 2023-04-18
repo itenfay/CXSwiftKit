@@ -48,6 +48,10 @@ extension CXSwiftBase where T == CALayer {
 
 extension CALayer {
     
+    fileprivate var kAnimationRotating: String {
+        return "cx.animation.rotation"
+    }
+    
     private var isRotating: Bool {
         get {
             return (objc_getAssociatedObject(self, &CXAssociatedKey.isAnimationRotating) as? Bool) ?? false
@@ -73,7 +77,7 @@ extension CALayer {
         rotationAnimation.duration = 20
         // Avoid clicking the Home button to return, and the animation will stop.
         rotationAnimation.isRemovedOnCompletion = false
-        add(rotationAnimation, forKey: "cx.animation.rotation")
+        add(rotationAnimation, forKey: kAnimationRotating)
         isRotating = true
     }
     
@@ -110,7 +114,7 @@ extension CALayer {
     
     /// Remove rotating animation.
     @objc public func cx_removeRotating() {
-        removeAnimation(forKey: "cx.animation.rotation")
+        removeAnimation(forKey: kAnimationRotating)
         isRotating = false
     }
     
