@@ -25,6 +25,7 @@ extension CXSwiftBase where T : UIImageView {
         self.base.cx_setImage(withUrl: url, placeholder: placeholder, headers: headers, progressBlock: progressBlock)
     }
     
+    #if canImport(CoreImage)
     /// Sets an image of QRCode to display in the image view.
     ///
     /// - Parameter value: The value that represents the content of QRCode.
@@ -67,8 +68,11 @@ extension CXSwiftBase where T : UIImageView {
     {
         base.cx_setQRCode(withValue: value, backgroudColor: backgroudColor, foregroudColor: foregroudColor, centerImage: centerImage, centerSize: centerSize)
     }
+    #endif
     
 }
+
+//MARK: - Kingfisher
 
 extension UIImageView {
     
@@ -119,11 +123,11 @@ extension UIImageView {
     
 }
 
-
 //MARK: - QRCode
 
 extension UIImageView {
     
+    #if canImport(CoreImage)
     /// Sets an image of QRCode to display in the image view.
     ///
     /// - Parameter value: The value that represents the content of QRCode.
@@ -166,6 +170,7 @@ extension UIImageView {
     {
         self.image = value.cx.generateQRCode(withBackgroudColor: backgroudColor, foregroudColor: foregroudColor, centerImage: centerImage, centerSize: centerSize)
     }
+    #endif
     
 }
 
