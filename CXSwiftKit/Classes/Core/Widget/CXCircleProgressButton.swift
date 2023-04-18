@@ -20,12 +20,14 @@ public class CXCircleProgressButton: UIButton {
     @objc public var trackColor: UIColor?
     /// Represents the progress color.
     @objc public var progressColor: UIColor?
-    /// Represents the line widht of progress bar.
-    @objc public var lineWidth: CGFloat = 0
+    /// Represents the line widht of progress bar, default is 2.0.
+    @objc public var lineWidth: CGFloat = 2.0
     /// Represents the animation duration of progress bar.
     @objc public var animationDuration: TimeInterval = 0
-    /// Represents the track margin from the outmost edge.
+    /// Represents the distance that is from the track to the outmost edge, default is 0.
     @objc public var trackMargin: CGFloat = 0
+    /// Represents the progress whether is reverse.
+    @objc public var reverse: Bool = false
     
     /// Represents the track layer.
     private var trackLayer: CAShapeLayer!
@@ -34,7 +36,7 @@ public class CXCircleProgressButton: UIButton {
     /// Represents the progress layer.
     private var progressLayer: CAShapeLayer!
     
-    /// Represents the callback when the progress completed.
+    /// The callback invoked when the progress completed.
     @objc public var onFinish: (() -> Void)?
     
     @objc public override init(frame: CGRect) {
@@ -48,7 +50,7 @@ public class CXCircleProgressButton: UIButton {
     private func makeTrackLayer() -> CAShapeLayer {
         let trackLayer = CAShapeLayer()
         trackLayer.frame = bounds
-        trackLayer.fillColor = trackBackgroundColor?.cgColor ?? UIColor.black.withAlphaComponent(0.1).cgColor
+        trackLayer.fillColor = trackBackgroundColor?.cgColor ?? UIColor.clear.cgColor //UIColor.black.withAlphaComponent(0.1).cgColor
         trackLayer.lineWidth = lineWidth > 0 ? lineWidth : 2.0
         trackLayer.strokeColor = trackColor?.cgColor ?? UIColor.red.cgColor
         trackLayer.strokeStart = 0.0
@@ -72,17 +74,17 @@ public class CXCircleProgressButton: UIButton {
     
     private func makeProgressLayer() -> CAShapeLayer {
         let progressLayer = CAShapeLayer()
-        progressLayer.frame = self.bounds
+        progressLayer.frame = bounds
         progressLayer.fillColor = UIColor.clear.cgColor
         progressLayer.lineWidth = lineWidth > 0 ? lineWidth : 2.0
         progressLayer.lineCap = .round
         progressLayer.strokeColor = progressColor?.cgColor ?? UIColor.lightGray.cgColor
         progressLayer.strokeStart = 0
         
-        let animation = CABasicAnimation(keyPath: "cx.animation.strokeEnd")
-        animation.duration = self.animationDuration
-        animation.fromValue = 0.0
-        animation.toValue = 1.0
+        let animation = CABasicAnimation(keyPath: "strokeEnd")
+        animation.duration = animationDuration
+        animation.fromValue = reverse ? 1.0 : 0.0
+        animation.toValue = reverse ? 0.0 : 1.0
         animation.isRemovedOnCompletion = true
         animation.delegate = self
         progressLayer.add(animation, forKey: nil)
@@ -97,8 +99,11 @@ public class CXCircleProgressButton: UIButton {
 extension CXCircleProgressButton {
     
     /// Start animating with the duration.
-    @objc public func startAnimation(withDuration duration: Double) {
-        animationDuration = duration
+    @objc public func startAnimation() {
+        assert(animationDuration > 0, "Please set animationDuration that is greater than zero.")
+        //if animationDuration <= 0 {
+        //fatalError("Please set animationDuration that is greater than zero.")
+        //}
         if bezierPath == nil {
             bezierPath = makeBezierPath()
         }
@@ -110,6 +115,7 @@ extension CXCircleProgressButton {
         }
         layer.addSublayer(trackLayer)
         layer.addSublayer(progressLayer)
+        backgroundColor = .clear
     }
     
     /// Stop animating.
@@ -120,14 +126,15 @@ extension CXCircleProgressButton {
         if progressLayer != nil {
             progressLayer.removeAllAnimations()
             progressLayer.removeFromSuperlayer()
+            onFinish?()
         }
         bezierPath = nil
         trackLayer = nil
         progressLayer = nil
     }
     
-    /// Return a value that whether to contain animation.
-    @objc public func hasAnimation() -> Bool {
+    /// Return a value that whether to the progress layer is animating.
+    @objc public func isAnimating() -> Bool {
         return progressLayer != nil
     }
     
@@ -139,7 +146,7 @@ extension CXCircleProgressButton: CAAnimationDelegate {
     
     public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if flag {
-            onFinish?()
+            stopAnimation()
         }
     }
     
