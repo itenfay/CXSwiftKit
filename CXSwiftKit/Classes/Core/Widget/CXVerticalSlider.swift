@@ -72,7 +72,9 @@ public class CXVerticalSlider: UIView {
     
     /// The callback invoked when the value changed.
     @objc public var onValueChanged: ((_ value: Float, _ ended: Bool) -> Void)?
+    
     private var awakedFromNib: Bool = false
+    private var isAlreadySet: Bool = false
     
     @objc public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -112,8 +114,9 @@ public class CXVerticalSlider: UIView {
     
     public override func layoutSubviews() {
         super.layoutSubviews()
-        if awakedFromNib {
+        if awakedFromNib && !isAlreadySet {
             setup()
+            isAlreadySet = true
         }
     }
     
