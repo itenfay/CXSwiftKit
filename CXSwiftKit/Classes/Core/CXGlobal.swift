@@ -30,6 +30,10 @@ internal struct CXAssociatedKey {
     static var labelRichTextEffectDict = "cx.label.richText.effectDict"
     static var labelRichTextHasClickAction = "cx.label.richText.hasClickAction"
     static var labelRichTextClickAction = "cx.label.richText.clickAction"
+    
+    /// The key for the white indicator of button.
+    static var buttonWhiteIndicator = "cx.button.whiteIndicator"
+    static var buttonCurrentText = "cx.button.currentText"
 }
 
 extension Optional {

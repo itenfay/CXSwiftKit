@@ -40,6 +40,18 @@ extension CXSwiftBase where T : UIButton {
         self.base.cx_setImage(withUrl: url, forState: state, placeholder: placeholder, headers: headers, progressBlock: progressBlock)
     }
     
+    #if os(iOS) || os(tvOS)
+    public var whiteIndicator: UIActivityIndicatorView
+    {
+        get {
+            return base.cx_whiteIndicator
+        }
+        set (indicator) {
+            base.cx_whiteIndicator = indicator
+        }
+    }
+    #endif
+    
 }
 
 /// An enum for button image and text alignment.
@@ -243,6 +255,58 @@ extension UIButton {
         #endif
     }
     
+    #if os(iOS) || os(tvOS)
+    @objc public var cx_whiteIndicator: UIActivityIndicatorView {
+        get {
+            var indicator = objc_getAssociatedObject(self, &CXAssociatedKey.buttonWhiteIndicator) as? UIActivityIndicatorView
+            if indicator == nil {
+                if #available(iOS 13.0, tvOS 13.0, *) {
+                    indicator = UIActivityIndicatorView(style: .medium)
+                } else {
+                    indicator = UIActivityIndicatorView(style: .white)
+                }
+                indicator!.center = CGPoint(x: self.bounds.width / 2,
+                                            y: self.bounds.height / 2)
+                addSubview(indicator!)
+            }
+            self.cx_whiteIndicator = indicator!
+            // Reset its center.
+            indicator!.center = CGPoint(x: self.bounds.width / 2,
+                                        y: self.bounds.height / 2)
+            return indicator!
+        }
+        set {
+            objc_setAssociatedObject(self, &CXAssociatedKey.buttonWhiteIndicator, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    #endif
+    
 }
+
+#if canImport(RxSwift) && canImport(RxCocoa)
+
+extension Reactive where Base: UIButton {
+    
+    public var isShowIndicator: Binder<Bool> {
+        return Binder(self.base, binding: { button, active in
+            if active {
+                objc_setAssociatedObject(button, &CXAssociatedKey.buttonCurrentText, button.currentTitle, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                button.setTitle("", for: .normal)
+                button.cx.whiteIndicator.startAnimating()
+                button.isUserInteractionEnabled = false
+            }
+            else{
+                button.cx.whiteIndicator.stopAnimating()
+                if let title = objc_getAssociatedObject(button, &CXAssociatedKey.buttonCurrentText) as? String {
+                    button.setTitle(title, for: .normal)
+                }
+                button.isUserInteractionEnabled = true
+            }
+        })
+    }
+    
+}
+
+#endif
 
 #endif
