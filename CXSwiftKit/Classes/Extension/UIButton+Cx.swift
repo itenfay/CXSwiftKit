@@ -7,9 +7,6 @@
 
 #if canImport(UIKit)
 import UIKit
-#if canImport(Kingfisher)
-import Kingfisher
-#endif
 
 extension CXSwiftBase where T : UIButton {
     
@@ -18,7 +15,8 @@ extension CXSwiftBase where T : UIButton {
     /// - Parameters:
     ///   - alignment: Button image and text alignment
     ///   - padding: The value of padding to adjust the edge insets of image and title of the button.
-    public func adjustEdgeInsets(by alignment: CXButtonImageTextAlignment, padding: CGFloat) {
+    public func adjustEdgeInsets(by alignment: CXButtonImageTextAlignment, padding: CGFloat)
+    {
         self.base.cx_adjustEdgeInsets(by: alignment, padding: padding)
     }
     
@@ -202,6 +200,14 @@ extension UIButton {
         }
     }
     
+}
+
+#if canImport(Kingfisher)
+import Kingfisher
+#endif
+
+extension UIButton {
+    
     ///  Sets an image to the button for a specified state with a given url string.
     ///
     /// - Parameters:
@@ -252,6 +258,8 @@ extension UIButton {
                 progressBlock: progressBlock
             )
         }
+        #else
+        CXLogger.log(level: .warning, message: "Please import Kingfisher.")
         #endif
     }
     
@@ -284,10 +292,12 @@ extension UIButton {
 }
 
 #if canImport(RxSwift) && canImport(RxCocoa)
+import RxCocoa
+import RxSwift
 
 extension Reactive where Base: UIButton {
     
-    public var isShowIndicator: Binder<Bool> {
+    public var cx_isShowIndicator: Binder<Bool> {
         return Binder(self.base, binding: { button, active in
             if active {
                 objc_setAssociatedObject(button, &CXAssociatedKey.buttonCurrentText, button.currentTitle, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
