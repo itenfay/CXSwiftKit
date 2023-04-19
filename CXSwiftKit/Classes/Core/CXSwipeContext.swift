@@ -12,6 +12,8 @@ public class CXSwipeContext: NSObject {
     
     private var beginPoint: CGPoint = .zero
     private var onCompletionHandler: ((UISwipeGestureRecognizer.Direction, Bool) -> Void)?
+    /// The value represents the action can be triggered.
+    @objc public var triggeredValue: CGFloat = 80
     
     @objc public override init() {
         super.init()
@@ -51,11 +53,11 @@ public class CXSwipeContext: NSObject {
             }
             let endPoint = gestureRecognizer.location(in: attachedView)
             if direction == .down {
-                if abs(endPoint.y - attachedView.cx_centerY) < 100 {
+                if abs(endPoint.y - attachedView.cx.centerY) < triggeredValue {
                     onCompletionHandler?(direction, true)
                 }
             } else if direction == .right {
-                if abs(endPoint.x - attachedView.cx_centerX) < 50 {
+                if abs(endPoint.x - attachedView.cx.left) > triggeredValue {
                     onCompletionHandler?(direction, true)
                 }
             }
