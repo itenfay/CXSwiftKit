@@ -62,11 +62,12 @@ extension CXSwiftBase where T : UIApplication {
         return UIApplication.cx_loadViewController(viewControllerType, inBundle: bundle)
     }
     
-    public static func loadViewControllerFromStoryboard(
+    public static func cx_loadViewControllerFromStoryboard(
         _ viewControllerType: UIViewController.Type,
-        inBundle bundle: Bundle? = nil) -> UIViewController?
+        inBundle bundle: Bundle? = nil,
+        withIdentifier identifier: String? = nil) -> UIViewController?
     {
-        return UIApplication.cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: bundle)
+        return UIApplication.cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: bundle, withIdentifier: identifier)
     }
     
 }
@@ -147,24 +148,50 @@ extension UIApplication {
 extension UIApplication {
     
     @objc public static func cx_loadView(
+        _ viewType: UIView.Type) -> UIView?
+    {
+        return cx_loadView(viewType, inBundle: nil)
+    }
+    
+    @objc public static func cx_loadView(
         _ viewType: UIView.Type,
-        inBundle bundle: Bundle? = nil) -> UIView?
+        inBundle bundle: Bundle?) -> UIView?
     {
         return cxLoadViewFromXib(viewType, bundle: bundle)
     }
     
     @objc public static func cx_loadViewController(
+        _ viewControllerType: UIViewController.Type) -> UIViewController?
+    {
+        return cx_loadViewController(viewControllerType, inBundle: nil)
+    }
+    
+    @objc public static func cx_loadViewController(
         _ viewControllerType: UIViewController.Type,
-        inBundle bundle: Bundle? = nil) -> UIViewController?
+        inBundle bundle: Bundle?) -> UIViewController?
     {
         return cxLoadViewControllerFromXib(viewControllerType, bundle: bundle)
     }
     
     @objc public static func cx_loadViewControllerFromStoryboard(
-        _ viewControllerType: UIViewController.Type,
-        inBundle bundle: Bundle? = nil) -> UIViewController?
+        _ viewControllerType: UIViewController.Type) -> UIViewController?
     {
-        return cxLoadViewControllerFromStoryboard(viewControllerType, bundle: bundle)
+        return cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: nil)
+    }
+    
+    @objc public static func cx_loadViewControllerFromStoryboard(
+        _ viewControllerType: UIViewController.Type,
+        inBundle bundle: Bundle?) -> UIViewController?
+    {
+        return cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: bundle, withIdentifier: nil)
+    }
+    
+    @objc public static func cx_loadViewControllerFromStoryboard(
+        _ viewControllerType: UIViewController.Type,
+        inBundle bundle: Bundle?,
+        withIdentifier identifier: String?) -> UIViewController?
+    {
+        return cxLoadViewControllerFromStoryboard(viewControllerType, bundle: bundle, withIdentifier: identifier)
     }
     
 }
