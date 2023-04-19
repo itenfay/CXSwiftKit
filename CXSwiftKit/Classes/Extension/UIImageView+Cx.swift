@@ -118,6 +118,8 @@ extension UIImageView {
                 progressBlock:progressBlock
             )
         }
+        #else
+        CXLogger.log(level: .warning, message: "Please import Kingfisher.")
         #endif
     }
     
