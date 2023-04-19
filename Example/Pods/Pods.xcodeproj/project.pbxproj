@@ -212,6 +212,9 @@
 		7987E16229E3B6FF00F7165C /* CXWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7987E16129E3B6FF00F7165C /* CXWebSocket.swift */; };
 		7987E16529E3BF5800F7165C /* CXTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7987E16429E3BF5800F7165C /* CXTimer.swift */; };
 		798E9D4229E955E900B6CB63 /* CXCircleProgressButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798E9D4129E955E900B6CB63 /* CXCircleProgressButton.swift */; };
+		79908C1C29EFE47A00DB0FBA /* KafkaRefresh+RxCx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79908C1929EFE47A00DB0FBA /* KafkaRefresh+RxCx.swift */; };
+		79908C1D29EFE47A00DB0FBA /* Kingfisher+RxCx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79908C1A29EFE47A00DB0FBA /* Kingfisher+RxCx.swift */; };
+		79908C1E29EFE47A00DB0FBA /* MJRefresh+RxCx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79908C1B29EFE47A00DB0FBA /* MJRefresh+RxCx.swift */; };
 		79C4EDBF29DC07F500BB3FF0 /* Date+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDBE29DC07F500BB3FF0 /* Date+Cx.swift */; };
 		79C4EDC229DC247D00BB3FF0 /* Array+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDC029DC247D00BB3FF0 /* Array+Cx.swift */; };
 		79C4EDC329DC247D00BB3FF0 /* Dictionary+Cx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C4EDC129DC247D00BB3FF0 /* Dictionary+Cx.swift */; };
@@ -730,6 +733,9 @@
 		7987E16129E3B6FF00F7165C /* CXWebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXWebSocket.swift; sourceTree = "<group>"; };
 		7987E16429E3BF5800F7165C /* CXTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXTimer.swift; sourceTree = "<group>"; };
 		798E9D4129E955E900B6CB63 /* CXCircleProgressButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXCircleProgressButton.swift; sourceTree = "<group>"; };
+		79908C1929EFE47A00DB0FBA /* KafkaRefresh+RxCx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "KafkaRefresh+RxCx.swift"; sourceTree = "<group>"; };
+		79908C1A29EFE47A00DB0FBA /* Kingfisher+RxCx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Kingfisher+RxCx.swift"; sourceTree = "<group>"; };
+		79908C1B29EFE47A00DB0FBA /* MJRefresh+RxCx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MJRefresh+RxCx.swift"; sourceTree = "<group>"; };
 		79C4EDBE29DC07F500BB3FF0 /* Date+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Cx.swift"; sourceTree = "<group>"; };
 		79C4EDC029DC247D00BB3FF0 /* Array+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Cx.swift"; sourceTree = "<group>"; };
 		79C4EDC129DC247D00BB3FF0 /* Dictionary+Cx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Cx.swift"; sourceTree = "<group>"; };
@@ -1423,6 +1429,16 @@
 			path = Widget;
 			sourceTree = "<group>";
 		};
+		79908C1829EFE47A00DB0FBA /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				79908C1929EFE47A00DB0FBA /* KafkaRefresh+RxCx.swift */,
+				79908C1A29EFE47A00DB0FBA /* Kingfisher+RxCx.swift */,
+				79908C1B29EFE47A00DB0FBA /* MJRefresh+RxCx.swift */,
+			);
+			path = Rx;
+			sourceTree = "<group>";
+		};
 		81ACA9A239C869CA052E803C5DD13074 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1542,6 +1558,7 @@
 				7901AEA029E3F1DC002D806A /* Double+Cx.swift */,
 				A09640FA4863701BCA9E7D311B0113F9 /* Int+Cx.swift */,
 				265572AEFA5DD3EF932666D1A35E8C31 /* NSObject+Cx.swift */,
+				79908C1829EFE47A00DB0FBA /* Rx */,
 				A2D38AFB3416D4D2CA813F77C905728C /* String+Cx.swift */,
 				797F31B429E003EE006ACEED /* UIApplication+Cx.swift */,
 				F3E22A6883621A74E06BA17E4417325A /* UIButton+Cx.swift */,
@@ -2423,9 +2440,11 @@
 				6A6E64FCC36F7D1C2B053E055E43D549 /* DispatchQueue+Cx.swift in Sources */,
 				795AB1E629EE41FE00BC0AF5 /* CXConfig.swift in Sources */,
 				8793B814AD966A491F1B7DA34AF1093C /* Int+Cx.swift in Sources */,
+				79908C1E29EFE47A00DB0FBA /* MJRefresh+RxCx.swift in Sources */,
 				796B549F29D58C6A00B5D95A /* CXSVGAOperation.swift in Sources */,
 				C6E886CF2F4A0D09A258E8ED78D0357E /* NSObject+Cx.swift in Sources */,
 				795AB1E829EE41FE00BC0AF5 /* CXSwipeLeftInteractiveTransition.swift in Sources */,
+				79908C1C29EFE47A00DB0FBA /* KafkaRefresh+RxCx.swift in Sources */,
 				F802C1DE092A6D2D0753BDBBA0B1BE07 /* String+Cx.swift in Sources */,
 				192BA2AE0A438C2944C5452D4D4DDE75 /* UIButton+Cx.swift in Sources */,
 				F4BD5D8C405510D04F2D2FC76B30E61B /* UIColor+Cx.swift in Sources */,
@@ -2435,6 +2454,7 @@
 				C0FFAE956AAC2E20080EDFC67A94A8F3 /* UIImageView+Cx.swift in Sources */,
 				795AB1E729EE41FE00BC0AF5 /* CXSwiftBase.swift in Sources */,
 				792766D129EF92C2000E909D /* CXStreamReader.swift in Sources */,
+				79908C1D29EFE47A00DB0FBA /* Kingfisher+RxCx.swift in Sources */,
 				795AB1EA29EE41FE00BC0AF5 /* CXScaleDismissAnimation.swift in Sources */,
 				36B5898066E3FE40C21E314AB92FEBB8 /* UILabel+Cx.swift in Sources */,
 				79C4EDBF29DC07F500BB3FF0 /* Date+Cx.swift in Sources */,
