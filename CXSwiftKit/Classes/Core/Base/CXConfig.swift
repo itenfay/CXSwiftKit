@@ -52,6 +52,8 @@ public class CXConfig: NSObject {
             if let reader = CXLineReader(path: embeddedProvisionPath) {
                 while let line = reader.nextLine {
                     if line.contains("<key>Name</key>") {
+                        // <string>xxx Ad Hoc Provisioning Profile: com.xxx.xxx</string>
+                        // <string>com.xxx.xxx InHouse</string>
                         let nextLine = reader.nextLine?.lowercased() ?? ""
                         if nextLine.contains("ad hoc") ||
                             nextLine.contains("adhoc") {
