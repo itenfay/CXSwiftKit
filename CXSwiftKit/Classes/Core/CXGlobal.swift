@@ -5,15 +5,8 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(UIKit)
-import UIKit
-#endif
-#if canImport(Kingfisher)
-import Kingfisher
-#endif
-#if canImport(SDWebImage)
-import SDWebImage
-#endif
+#if canImport(Foundation)
+import Foundation
 
 //MARK: - CXAssociatedKey
 
@@ -193,6 +186,7 @@ public func cxVideoSnapshot(withUrl url: String?, time: Int, width: CGFloat = 0,
 }
 
 #if canImport(Kingfisher)
+import Kingfisher
 
 // MARK: - Kingfisher
 
@@ -267,6 +261,7 @@ public func cxSetupKingfisherReferer(_ referer: String)
 #endif
 
 #if canImport(SDWebImage)
+import SDWebImage
 
 /// Sets up the referer of SDWebImage.
 public func cxSetupSDWebImageReferer(_ referer: String)
@@ -278,6 +273,7 @@ public func cxSetupSDWebImageReferer(_ referer: String)
 #endif
 
 #if canImport(UIKit)
+import UIKit
 
 /// A Boolean value that represents whether the idle timer is disabled for the app.
 public func cxIsIdleTimerDisabled() -> Bool
@@ -315,14 +311,21 @@ public func cxLoadViewControllerFromXib<C>(_ cls: C.Type?, bundle: Bundle? = nil
 // MARK: - Storyboard.
 
 /// Loads a view controller from storyboard.
-public func cxLoadViewControllerFromStoryboard<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIViewController {
+public func cxLoadViewControllerFromStoryboard<C>(_ cls: C.Type?, bundle: Bundle? = nil, withIdentifier identifier: String? = nil) -> C? where C: UIViewController {
     guard let `class` = cls else { return nil }
     guard let name = NSStringFromClass(`class`).components(separatedBy: ".").last else {
         return nil
     }
     let sb = UIStoryboard(name: name, bundle: bundle)
-    let vc = sb.instantiateInitialViewController() as? C
+    var vc: C?
+    if identifier != nil {
+        vc = sb.instantiateViewController(withIdentifier: identifier!) as? C
+    } else {
+        vc = sb.instantiateInitialViewController() as? C
+    }
     return vc
 }
+
+#endif
 
 #endif
