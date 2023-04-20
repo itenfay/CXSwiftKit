@@ -42,7 +42,7 @@ extension CXSwiftBase where T : UIViewController {
     }
     
     /// Embed the specified child controller in the specified view.
-    public func embedChild(controller: UIViewController, inView view: UIView) {
+    public func embedChild(controller: UIViewController, inView view: UIView? = nil) {
         self.base.cx_embedChild(controller: controller, inView: view)
     }
     
@@ -131,9 +131,14 @@ extension UIViewController {
 extension UIViewController {
     
     /// Embed the specified child controller in the specified view.
-    @objc public func cx_embedChild(controller: UIViewController, inView view: UIView) {
+    @objc public func cx_embedChild(controller: UIViewController) {
+        cx_embedChild(controller: controller, inView: nil)
+    }
+    
+    /// Embed the specified child controller in the specified view.
+    @objc public func cx_embedChild(controller: UIViewController, inView view: UIView?) {
         self.addChild(controller)
-        controller.view.cx.constrain(to: view)
+        controller.view.cx.constrain(to: view ?? self.view)
         controller.didMove(toParent: self)
     }
     
