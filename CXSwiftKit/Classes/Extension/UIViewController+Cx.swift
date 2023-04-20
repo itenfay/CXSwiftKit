@@ -41,6 +41,16 @@ extension CXSwiftBase where T : UIViewController {
         self.base.cx_children
     }
     
+    /// Embed the specified child controller in the specified view.
+    public func embedChild(controller: UIViewController, inView view: UIView) {
+        self.base.cx_embedChild(controller: controller, inView: view)
+    }
+    
+    /// Remove the specified child controller from the parent controller.
+    public func removeChild(controller: UIViewController) {
+        self.base.cx_removeChild(controller: controller)
+    }
+    
 }
 
 //MARK: -  UIViewController
@@ -52,7 +62,7 @@ extension UIViewController {
         guard let nc = self.navigationController else {
             return false
         }
-        CXLogger.log(level: .info, message: "[Stack] Info: \(nc.viewControllers)")
+        CXLogger.log(level: .info, message: "[Stack] vcs: \(nc.viewControllers)")
         for vc in nc.viewControllers {
             if vc.isKind(of: cls) {
                 return true
@@ -75,7 +85,7 @@ extension UIViewController {
             }
             let reversedVcs = Array.init(vcs.reversed())
             nc.viewControllers = Array.init(reversedVcs)
-            CXLogger.log(level: .info, message: "[Stack] Info: \(reversedVcs)")
+            CXLogger.log(level: .info, message: "[Stack] vcs: \(reversedVcs)")
         }
     }
     
@@ -85,7 +95,7 @@ extension UIViewController {
             return nil
         }
         let reversedVcs = Array(nc.viewControllers.reversed())
-        CXLogger.log(level: .info, message: "[Stack] Reversed Info: \(reversedVcs)")
+        CXLogger.log(level: .info, message: "[Stack] vcs: \(reversedVcs)")
         return reversedVcs.first { $0.isKind(of: cls) }
     }
     
@@ -95,7 +105,7 @@ extension UIViewController {
             return 0
         }
         let vcs = nc.viewControllers.filter { $0.isKind(of: cls) }
-        CXLogger.log(level: .info, message: "[Stack] Found vcs: \(vcs)")
+        CXLogger.log(level: .info, message: "[Stack] vcs: \(vcs)")
         return vcs.count
     }
     
@@ -114,6 +124,24 @@ extension UIViewController {
     @objc public var cx_children: [UIViewController]
     {
         return self.children
+    }
+    
+}
+
+extension UIViewController {
+    
+    /// Embed the specified child controller in the specified view.
+    @objc public func cx_embedChild(controller: UIViewController, inView view: UIView) {
+        self.addChild(controller)
+        controller.view.cx.constrain(to: view)
+        controller.didMove(toParent: self)
+    }
+    
+    /// Remove the specified child controller from the parent controller.
+    @objc public func cx_removeChild(controller: UIViewController) {
+        controller.willMove(toParent: nil)
+        controller.view.removeFromSuperview()
+        controller.removeFromParent()
     }
     
 }
