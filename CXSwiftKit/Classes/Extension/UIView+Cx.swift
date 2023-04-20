@@ -405,7 +405,7 @@ extension CXSwiftBase where T : UIView {
     }
     
     /// The insets that you use to determine the safe area for this view.
-    public var cx_safeAreaInsets: UIEdgeInsets
+    public var safeAreaInsets: UIEdgeInsets
     {
         self.base.cx_safeAreaInsets // return
     }
@@ -438,6 +438,21 @@ extension CXSwiftBase where T : UIView {
     public func layoutSizeFitting(size targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize
     {
         return self.base.cx_layoutSizeFitting(size: targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
+    }
+    
+    /// Adds the subviews.
+    public func add(subviews: UIView...) {
+        subviews.forEach(self.base.addSubview)
+    }
+    
+    /// Adds the subviews.
+    public func addSubViews(_ views: [UIView]) {
+        self.base.cx_addSubViews(views)
+    }
+    
+    /// Constrains itself to view.
+    public func constrain(to view: UIView) {
+        self.base.cx_constrain(to: view)
     }
     
 }
@@ -1236,6 +1251,30 @@ extension UIView {
         path.closeSubpath()
         shapeLayer.path = path
         layer.mask = shapeLayer
+    }
+    
+}
+
+extension UIView {
+    
+    /// Adds the subviews.
+    public func cx_add(subviews: UIView...) {
+        subviews.forEach(addSubview)
+    }
+    
+    /// Adds the subviews.
+    @objc public func cx_addSubViews(_ views: [UIView]) {
+        views.forEach(addSubview)
+    }
+    
+    /// Constrains itself to view.
+    @objc public func cx_constrain(to view: UIView) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        view.cx_add(subviews: self)
+        self.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        self.leadingAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        self.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
     
 }
