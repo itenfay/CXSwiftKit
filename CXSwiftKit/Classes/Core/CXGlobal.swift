@@ -8,6 +8,10 @@
 #if canImport(Foundation)
 import Foundation
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
 //MARK: - CXAssociatedKey
 
 internal struct CXAssociatedKey {
@@ -41,8 +45,10 @@ extension Optional {
     
 }
 
-public let cxScreenWidth = CGFloat.cx.screenWidth
-public let cxScreenHeight = CGFloat.cx.screenHeight
+/// The width of a rectangle of the screen.
+public let cxScreenWidth: CGFloat = CGFloat.cx.screenWidth
+/// The height of a rectangle of the screen.
+public let cxScreenHeight: CGFloat = CGFloat.cx.screenHeight
 
 /// f
 ///
@@ -50,8 +56,10 @@ public let cxScreenHeight = CGFloat.cx.screenHeight
 /// - Returns: s
 public func cxFitScale(at dimension: CGFloat) -> CGFloat
 {
-    return (CGFloat.cx.screenWidth / 375) * dimension
+    return (cxScreenWidth / 375) * dimension
 }
+
+#if canImport(UIKit)
 
 /// xxx
 ///
@@ -60,10 +68,36 @@ public func cxIsIphoneXSeries() -> Bool
 {
     var isX = false
     if #available(iOS 11.0, *) {
-        isX = (UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0) > CGFloat(0.0)
+        isX = (UIApplication.shared.cx.keyWindow?.safeAreaInsets.bottom ?? 0) > 0
     }
     return isX
 }
+
+public func cxWindowSafeAreaInset() -> UIEdgeInsets
+{
+    var insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
+    if #available(iOS 11.0, *) {
+        insets = UIApplication.shared.cx.keyWindow?.safeAreaInsets ?? insets
+    }
+    return insets
+}
+
+public let cxSafeAreaTop: CGFloat = cxWindowSafeAreaInset().top == 0 ? 20 : cxWindowSafeAreaInset().top
+public let cxSafeAreaBottom: CGFloat = cxWindowSafeAreaInset().bottom
+/// The height of the status bar.
+public let cxStatusBarHeight: CGFloat = cxSafeAreaTop
+/// The height of the navigation bar.
+public let cxNavigationBarHeight: CGFloat = 44 + cxStatusBarHeight
+/// The height of the tab bar.
+public let cxTabBarHeight: CGFloat = 49 + cxSafeAreaBottom
+
+#else
+public let cxSafeAreaTop: CGFloat = 20
+public let cxSafeAreaBottom: CGFloat = 0
+public let cxStatusBarHeight: CGFloat = cxSafeAreaTop
+public let cxNavigationBarHeight: CGFloat = 44
+public let cxTabBarHeight: CGFloat = 49
+#endif
 
 /// Allocates recursive pthread_mutex associated with ‘obj’ if needed.
 public func cxSynchronize(_ obj: Any, closure: @escaping () -> Void)
