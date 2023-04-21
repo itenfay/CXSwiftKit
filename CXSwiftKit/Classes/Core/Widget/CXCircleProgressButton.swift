@@ -63,7 +63,7 @@ public class CXCircleProgressButton: UIButton {
         let width: CGFloat  = frame.width / 2
         let height: CGFloat = frame.height / 2
         let center = CGPoint(x: width, y: height)
-        let radius = height - trackMargin
+        let radius = min(width, height) - trackMargin
         let bezierPath = UIBezierPath(arcCenter: center,
                                       radius: radius,
                                       startAngle: cxDegreesToRadius(-90),
@@ -115,7 +115,6 @@ extension CXCircleProgressButton {
         }
         layer.addSublayer(trackLayer)
         layer.addSublayer(progressLayer)
-        backgroundColor = .clear
     }
     
     /// Stop animating.
