@@ -28,6 +28,8 @@ class ViewController: UIViewController {
         }
         vSlider.setValue(50, animated: true)
         
+        progressButton.backgroundColor = .white
+        progressButton.cx.cornerRadius = progressButton.cx.width/2
         progressButton.trackColor = UIColor.gray
         progressButton.progressColor = UIColor.orange
         progressButton.lineWidth = 4.0
@@ -38,6 +40,7 @@ class ViewController: UIViewController {
             print("The progress is finished.")
         }
         progressButton.startAnimation()
+        
     }
     
     override func didReceiveMemoryWarning() {

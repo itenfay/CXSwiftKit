@@ -32,7 +32,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VuN-vb-fR9" customClass="CXCircleProgressButton" customModule="CXSwiftKit">
-                                <rect key="frame" x="202" y="213" width="111" height="122"/>
+                                <rect key="frame" x="202" y="213" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
