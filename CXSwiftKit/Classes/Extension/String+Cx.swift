@@ -326,6 +326,11 @@ extension CXSwiftBase where T == String {
         return bundle.localizedString(forKey: self.base, value: value, table: tableName)
     }
     
+    /// Returns a Boolean value indicating whether a string has characters.
+    public func isNotEmpty() -> Bool {
+        return !self.base.isEmpty
+    }
+    
 }
 
 #endif
