@@ -15,7 +15,7 @@ import Kingfisher
 extension Reactive where Base: UIImageView {
     
     public var cx_imageURL: Binder<URL?> {
-        return self.imageURL(withPlaceholder: UIColor.lightGray.cx.drawImage())
+        return self.cx_imageURL(withPlaceholder: UIColor.lightGray.cx.drawImage())
     }
     
     public func cx_imageURL(
