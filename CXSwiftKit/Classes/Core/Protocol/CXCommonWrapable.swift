@@ -7,15 +7,12 @@
 
 #if canImport(Foundation)
 import Foundation
-
 #if canImport(SVProgressHUD)
 import SVProgressHUD
 #endif
-
 #if canImport(SwiftMessages)
 import SwiftMessages
 #endif
-
 #if canImport(Toaster)
 import Toaster
 #endif
