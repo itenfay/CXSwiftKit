@@ -7,6 +7,9 @@
 
 #if canImport(UIKit)
 import UIKit
+#if canImport(OverlayController)
+import OverlayController
+#endif
 
 extension CXSwiftBase where T : UIView {
     
@@ -454,6 +457,38 @@ extension CXSwiftBase where T : UIView {
     public func constrain(to view: UIView) {
         self.base.cx_constrain(to: view)
     }
+    
+    /// Present the view.
+    public func present(_ view: UIView?, completion: (() -> Void)? = nil) {
+        self.base.cx_present(view, completion: completion)
+    }
+    
+    /// Present the view, the overlay view is subview of the view.
+    public func present(_ view: UIView?, overlayView: UIView?, overlayRatio: CGFloat = 0.7, overlayDirection: CXOverlayDirection = .bottom, completion: (() -> Void)? = nil) {
+        self.base.cx_present(view, overlayView: overlayView, overlayRatio: overlayRatio, overlayDirection: overlayDirection, completion: completion)
+    }
+    
+    /// Dismiss the view.
+    public func dismiss(completion: (() -> Void)? = nil) {
+        self.base.cx_dismiss(completion: completion)
+    }
+    
+    /// Dismiss the view, the overlay view is subview of the view.
+    public func dismiss(overlayView: UIView?, completion: (() -> Void)? = nil)
+    {
+        self.base.cx_dismiss(overlayView: overlayView, completion: completion)
+    }
+    
+    #if canImport(OverlayController)
+    public func ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle = .black(opacity: 0.7), position: OverlayLayoutPosition = .bottom, positionOffset: CGFloat = 0, style: OverlaySlideStyle = .fromToBottom, windowLevel: OverlayWindowLevel = .low, isDismissOnMaskTouched: Bool = true, isPanGestureEnabled: Bool = true, panDismissPercent: CGFloat = 0.5, duration: TimeInterval = 0.3, completion: (() -> Void)? = nil)
+    {
+        self.base.cx_ovcPresent(view, maskStyle: maskStyle, position: position, positionOffset: positionOffset, style: style, windowLevel: windowLevel, isDismissOnMaskTouched: isDismissOnMaskTouched, isPanGestureEnabled: isPanGestureEnabled, panDismissPercent: panDismissPercent, duration: duration, completion: completion)
+    }
+    
+    public func ovcDismiss(duration: TimeInterval = 0.3, completion: (() -> Void)? = nil) {
+        self.base.cx_ovcDismiss(duration: duration, completion: completion)
+    }
+    #endif
     
 }
 
@@ -1276,6 +1311,124 @@ extension UIView {
         self.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         self.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
     }
+    
+}
+
+//MARK: - CXViewWrapable
+
+extension UIView: CXViewWrapable {
+    
+    private var cx_overlayDirection: CXOverlayDirection? {
+        get {
+            return objc_getAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection) as? CXOverlayDirection
+        }
+        set {
+            objc_setAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    
+    /// Present the view.
+    public func cx_present(_ view: UIView?, completion: (() -> Void)? = nil) {
+        cx_present(view, overlayView: nil, overlayRatio: 1.0, overlayDirection: .bottom, completion: completion)
+    }
+    
+    /// Present the view, the overlay view is subview of the view.
+    public func cx_present(_ view: UIView?, overlayView: UIView?, overlayRatio: CGFloat = 0.7, overlayDirection: CXOverlayDirection = .bottom, completion: (() -> Void)? = nil) {
+        guard let _view = view else { return }
+        addSubview(_view)
+        var aView = overlayView ?? _view
+        let ratio: CGFloat = overlayView != nil ? overlayRatio : 1.0
+        switch overlayDirection {
+        case .top: aView.cx.y = -ratio * aView.cx.height
+        case .left: aView.cx.x = -ratio * aView.cx.width
+        case .bottom: aView.cx.y = cxScreenHeight
+        case .right: aView.cx.x = cxScreenWidth
+        }
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction,
+            .beginFromCurrentState
+        ]
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+            switch overlayDirection {
+            case .top: aView.cx.y = 0
+            case .left: aView.cx.x = 0
+            case .bottom: aView.cx.y = (1 - ratio) * cxScreenHeight
+            case .right: aView.cx.x = (1 - ratio) * cxScreenWidth
+            }
+        } completion: { _ in
+            completion?()
+        }
+    }
+    
+    /// Dismiss the view.
+    public func cx_dismiss(completion: (() -> Void)? = nil) {
+        cx_dismiss(overlayView: nil, completion: completion)
+    }
+    
+    /// Dismiss the view, the overlay view is subview of the view.
+    public func cx_dismiss(overlayView: UIView?, completion: (() -> Void)? = nil) {
+        guard let _ = superview, let overlayDirection = cx_overlayDirection else {
+            return
+        }
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction,
+            .beginFromCurrentState
+        ]
+        var aView = overlayView ?? self
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+            switch overlayDirection {
+            case .top: aView.cx.y = -cxScreenHeight
+            case .left: aView.cx.x = -cxScreenWidth
+            case .bottom: aView.cx.y = cxScreenHeight
+            case .right: aView.cx.x = cxScreenWidth
+            }
+        } completion: { _ in
+            self.removeFromSuperview()
+            completion?()
+        }
+    }
+    
+}
+
+//MARK: - CXSwiftViewWrapable
+
+extension UIView: CXSwiftViewWrapable {
+    
+    #if canImport(OverlayController)
+    private var cx_overlayController: OverlayController? {
+        get {
+            return objc_getAssociatedObject(self, &CXAssociatedKey.presentByOverlayController) as? OverlayController
+        }
+        set (ovc) {
+            objc_setAssociatedObject(self, &CXAssociatedKey.presentByOverlayController, ovc, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    public func cx_ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle = .black(opacity: 0.7), position: OverlayLayoutPosition = .bottom, positionOffset: CGFloat = 0, style: OverlaySlideStyle = .fromToBottom, windowLevel: OverlayWindowLevel = .low, isDismissOnMaskTouched: Bool = true, isPanGestureEnabled: Bool = true, panDismissPercent: CGFloat = 0.5, duration: TimeInterval = 0.3, completion: (() -> Void)? = nil)
+    {
+        guard let aView = view else { return }
+        aView.cx_overlayController = OverlayController(view: aView)
+        aView.cx_overlayController?.maskStyle = maskStyle
+        aView.cx_overlayController?.layoutPosition = position
+        aView.cx_overlayController?.offsetSpacing = positionOffset
+        aView.cx_overlayController?.presentationStyle = presentationStyle
+        aView.cx_overlayController?.windowLevel = windowLevel
+        aView.cx_overlayController?.isDismissOnMaskTouched = isDismissOnMaskTouched
+        aView.cx_overlayController?.isPanGestureEnabled = isPanGestureEnabled
+        aView.cx_overlayController?.panDismissRatio = panDismissPercent
+        aView.cx_overlayController?.present(in: self, duration: duration, completion: completion)
+    }
+    
+    public func cx_ovcDismiss(duration: TimeInterval = 0.3, completion: (() -> Void)? = nil) {
+        if cx_overlayController == nil { return }
+        cx_overlayController!.dissmiss(duration: duration, completion: { [weak self] in
+            completion?()
+            self?.cx_overlayController = nil
+        })
+    }
+    #endif
     
 }
 
