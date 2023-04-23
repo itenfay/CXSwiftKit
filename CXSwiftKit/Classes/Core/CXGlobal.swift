@@ -7,7 +7,6 @@
 
 #if canImport(Foundation)
 import Foundation
-
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -59,20 +58,20 @@ public let cxScreenWidth: CGFloat = CGFloat.cx.screenWidth
 /// The height of a rectangle of the screen.
 public let cxScreenHeight: CGFloat = CGFloat.cx.screenHeight
 
-/// f
+/// Fit scale by the specified demension.
 ///
-/// - Parameter dimension: 1
-/// - Returns: s
-public func cxFitScale(at dimension: CGFloat) -> CGFloat
+/// - Parameter dimension: The dimension to scale.
+/// - Returns: A new fit dimension.
+public func cxFitScale(by dimension: CGFloat) -> CGFloat
 {
     return (cxScreenWidth / 375) * dimension
 }
 
 #if canImport(UIKit)
 
-/// xxx
+/// Represents the device whether is x series of iPhone.
 ///
-/// - Returns: A boolean value.
+/// - Returns: A boolean value represents the device whether is x series of iPhone.
 public func cxIsIphoneXSeries() -> Bool
 {
     var isX = false
@@ -101,11 +100,13 @@ public let cxNavigationBarHeight: CGFloat = 44 + cxStatusBarHeight
 public let cxTabBarHeight: CGFloat = 49 + cxSafeAreaBottom
 
 #else
+
 public let cxSafeAreaTop: CGFloat = 20
 public let cxSafeAreaBottom: CGFloat = 0
 public let cxStatusBarHeight: CGFloat = cxSafeAreaTop
 public let cxNavigationBarHeight: CGFloat = 44
 public let cxTabBarHeight: CGFloat = 49
+
 #endif
 
 /// Allocates recursive pthread_mutex associated with ‘obj’ if needed.
@@ -125,13 +126,13 @@ public func cxDelayToDispatch(_ delay: TimeInterval, execute work: @escaping () 
     DispatchQueue.cx.mainAsyncAfter(delay, execute: work)
 }
 
-// MARK: - OSS图片处理
+// MARK: - OSS Image Handle
 
-/// OSS图片处理：等比缩放，按宽高缩放，如：图片缩放为高100 px：resize,h_100。缩放模式为lfit：m_lfit。
+/// Resize image by the height. e.g.: height=100, px：resize,h_100, scale mode(lfit): m_lfit.
 /// - Parameters:
-///   - url: 图片地址
-///   - height: 画布的高度
-/// - Returns: 裁剪图片后新的地址
+///   - url: The url of the image.
+///   - height: The height to scale.
+/// - Returns: A new url after resizing.
 public func cxImageResize(withUrl url: String?, height: CGFloat) -> String?
 {
     guard let _url = url else {
@@ -144,15 +145,15 @@ public func cxImageResize(withUrl url: String?, height: CGFloat) -> String?
     }
     
     // e.g.: http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,h_100,m_lfit
-    return _url + "?x-oss-process=image/resize,h_\(Int(height)),m_lfit,limit_1"
+    return _url + "?x-oss-process=image/resize,h_\(Int(height)),m_lfit"
 }
 
-/// OSS图片处理：等比缩放，按宽高缩放，如：图片缩放为宽100 px：resize,w_100。缩放模式为lfit：m_lfit。
-/// limit_0：按指定参数进行缩放。,limit_1：表示不按指定参数进行缩放，直接返回原图。
+/// Resize image by the width. e.g.: width=100, px：resize,w_100, scale mode(lfit)：m_lfit.
+/// limit_0：scale by the specified parameters, limit_1：scale without the specified parameters, return the original image.
 /// - Parameters:
-///   - url: 图片地址
-///   - width: 画布的宽度
-/// - Returns: 裁剪图片后新的地址
+///   - url: The url of the image.
+///   - width: The width to scale.
+/// - Returns: A new url after resizing.
 public func cxImageResized(withUrl url: String?, width: CGFloat) -> String?
 {
     guard let _url = url else {
@@ -164,15 +165,14 @@ public func cxImageResized(withUrl url: String?, width: CGFloat) -> String?
         return _url
     }
     // e.g.: http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,w_100,m_lfit
-    return _url + "?x-oss-process=image/resize,w_\(Int(width)),m_lfit,limit_1"
+    return _url + "?x-oss-process=image/resize,w_\(Int(width)),m_lfit,limit_0"
 }
 
-/// OSS图片处理：按长边缩放，如：图片缩放为长边100 px，即resize,l_100。
-/// limit_0：按指定参数进行缩放。,limit_1：表示不按指定参数进行缩放，直接返回原图。
+/// Resize image by the long edge. e.g.: width=100, px: resize,l_100.
 /// - Parameters:
-///   - url: 图片地址
-///   - longSide: 长边宽度
-/// - Returns: 裁剪图片后新的地址
+///   - url: The url of the image.
+///   - longEdgeWidth: The long edge width to scale.
+/// - Returns: A new url after resizing.
 public func cxImageResize(withUrl url: String?, longEdgeWidth: CGFloat) -> String?
 {
     guard let _url = url else {
@@ -187,13 +187,12 @@ public func cxImageResize(withUrl url: String?, longEdgeWidth: CGFloat) -> Strin
     return _url + "?x-oss-process=image/resize,l_\(Int(longEdgeWidth))"
 }
 
-/// OSS图片处理：固定宽高，自动裁剪，如：原图缩放成宽高100 px：resize,h_100,w_100，缩放模式fill：m_fill。
-/// limit_0：按指定参数进行缩放。,limit_1：表示不按指定参数进行缩放，直接返回原图。
+/// Resize image by the specified width and height. e.g.: width=height=100, px：resize,h_100,w_100, scale model(fill)：m_fill.
 /// - Parameters:
-///   - url: 图片地址
-///   - width: 画布的宽度
-///   - height: 画布的高度
-/// - Returns: 裁剪图片后新的地址
+///   - url: The url of the image.
+///   - width: The width to scale.
+///   - height: The height to scale.
+/// - Returns: A new url after resizing.
 public func cxImageResize(withUrl url: String?, width: CGFloat, height: CGFloat) -> String?
 {
     guard let _url = url else {
@@ -205,16 +204,16 @@ public func cxImageResize(withUrl url: String?, width: CGFloat, height: CGFloat)
         return _url
     }
     // e.g.: http://image-demo.oss-cn-hangzhou.aliyuncs.com/example.jpg?x-oss-process=image/resize,m_fill,h_100,w_100
-    return _url + "?x-oss-process=image/resize,m_fill,h_\(Int(width)),w_\(Int(height)),limit_1"
+    return _url + "?x-oss-process=image/resize,m_fill,h_\(Int(width)),w_\(Int(height))"
 }
 
-/// OSSfast模式截取视频图片。
+/// Take snapshot of the video at the specified time with the `OSSfast` mode.
 /// - Parameters:
-///   - url: 视频地址
-///   - t: 指定截图时间。
-///   - width: 截图宽度，如果指定为0，则自动计算。
-///   - height: 截图高度，如果指定为0，则自动计算；如果w和h都为0，则输出为原视频宽高。
-/// - Returns: 截取视频后新的图片地址
+///   - url: The url of the video.
+///   - time: The specified time。
+///   - width: The width to snapshot, if zero, auto-calculates its width.
+///   - height: The height to snapshot, if zero, auto-calculates its height, if all is zero, return the size of the original video.
+/// - Returns: A new url after taking snapshot.
 public func cxVideoSnapshot(withUrl url: String?, time: Int, width: CGFloat = 0, height: CGFloat = 0) -> String?
 {
     guard let _url = url else {
@@ -316,7 +315,6 @@ public func cxSetupSDWebImageReferer(_ referer: String)
 #endif
 
 #if canImport(UIKit)
-import UIKit
 
 /// A Boolean value that represents whether the idle timer is disabled for the app.
 public func cxIsIdleTimerDisabled() -> Bool
