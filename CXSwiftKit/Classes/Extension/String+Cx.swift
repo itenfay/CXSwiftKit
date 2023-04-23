@@ -57,26 +57,26 @@ extension CXSwiftBase where T == String {
     
     /// Convert a date string to a timestamp，dateFormat: "yyyy-MM-dd HH:mm:ss".
     ///
-    /// - Parameter dateFormat: <#dateFormat description#>
-    /// - Returns: <#description#>
-    public func asTimestamp(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Double? {
-        let dateFormatter = DateFormatter.init()
+    /// - Parameter dateFormat: The date format string used by the receiver.
+    /// - Returns: The interval between the date value and 00:00:00 UTC on 1 January 1970.
+    public func toTimestamp(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Double? {
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         let date = dateFormatter.date(from: self.base)
         return date?.timeIntervalSince1970
     }
     
     /// Convert a timestamp to a date string，dateFormat: "yyyy-MM-dd HH:mm:ss".
-    public func timestampAsDateString(with dateFormat: String = "yyyy-MM-dd HH:mm:ss" ) -> String {
-        let ts = NSString.init(string: self.base)
-        let dateFormatter = DateFormatter.init()
+    public func toDateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let ts = NSString(string: self.base)
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
-        let date = Date.init(timeIntervalSince1970: ts.doubleValue)
+        let date = Date(timeIntervalSince1970: ts.doubleValue)
         return dateFormatter.string(from: date)
     }
     
-    // 时间格式转换为Date类型 (传入的字符串要与下方的格式一致！！！)
-    public func timeToDate(with dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+    /// Convert a date string to a date object.
+    public func toDate(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         guard let date = dateFormatter.date(from: self.base) else {
@@ -85,28 +85,51 @@ extension CXSwiftBase where T == String {
         return date
     }
     
-    /// 将 Base64 编码中的"-"，"_"字符串转换成"+"，"/"，字符串长度余4倍的位补"="
-    public func safeUrlBase64Decode() -> Data? {
+    /// Return a Base-64 encoded string.
+    public func base64Encode() -> String? {
+        guard let data = self.base.data(using: .utf8) else {
+            return nil
+        }
+        return data.base64EncodedString()
+    }
+    
+    /// Return a Base-64 encoded string for the url.
+    public func safeUrlBase64Encode() -> String? {
+        guard let base = self.base.cx.base64Encode() else {
+            return nil
+        }
+        var base64Str = "" + base
+        base64Str = base64Str.replacingOccurrences(of: "+", with: "-")
+        base64Str = base64Str.replacingOccurrences(of: "/", with: "_")
+        base64Str = base64Str.replacingOccurrences(of: "=", with: "")
+        return base64Str
+    }
+    
+    /// The Base-64 decoding for the url.
+    public func safeUrlBase64Decode() -> String? {
         // '-' -> '+'
         // '_' -> '/'
-        // 不足4倍长度，补'='
+        // Less than 4 times the length, complement' ='
         var base64Str = "" + self.base
         base64Str = base64Str.replacingOccurrences(of: "-", with: "+")
         base64Str = base64Str.replacingOccurrences(of: "_", with: "/")
         let mod4 = base64Str.count % 4
         if mod4 > 0 {
-            let padding = String.init(repeating: "=", count: 4 - mod4)
+            let padding = String(repeating: "=", count: 4 - mod4)
             base64Str.append(padding)
         }
-        return Data.init(base64Encoded: base64Str)
+        return base64Str.cx.base64Decode()
     }
     
-    /// Base64 decoding.
-    public func base64Decode() -> Data? {
-        return Data.init(base64Encoded: self.base)
+    /// Return a Base-64 decoded string.
+    public func base64Decode() -> String? {
+        guard let data = Data.init(base64Encoded: self.base) else {
+            return nil
+        }
+        return String(data: data, encoding: .utf8)
     }
     
-    /// Encodes an url.
+    /// Encode an url.
     public func urlEncode() -> String {
         let encodeUrlString = self.base.addingPercentEncoding(
             withAllowedCharacters: .urlQueryAllowed
@@ -114,8 +137,8 @@ extension CXSwiftBase where T == String {
         return encodeUrlString ?? self.base
     }
     
-    /// Encodes an url bestly.
-    public func urlEncode2() -> String {
+    /// Encode an url.
+    public func customUrlEncode() -> String {
         var allowedCharacters = NSCharacterSet.urlQueryAllowed
         //does not include "?" or "/" due to RFC 3986 - Section 3.4
         allowedCharacters.remove(charactersIn: ":#[]@!$&'()*+,;=")
@@ -155,9 +178,9 @@ extension CXSwiftBase where T == String {
     /// Intercept the specified range of string, indexes starting from 0 by default.
     ///
     /// - Parameters:
-    ///   - location: 开始的索引位置
-    ///   - length: 截取长度
-    /// - Returns: 字符串
+    ///   - location: The index to start.
+    ///   - length: The length from start index to end index.
+    /// - Returns: A substring with the specified range of string.
     public func substring(at location: Int = 0, length: Int) -> String {
         if location > self.base.count || (location+length > self.base.count) {
             return self.base
