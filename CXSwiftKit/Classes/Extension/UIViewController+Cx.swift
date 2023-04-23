@@ -51,6 +51,26 @@ extension CXSwiftBase where T : UIViewController {
         self.base.cx_removeChild(controller: controller)
     }
     
+    /// Present the view controller.
+    public func present(_ controller: UIViewController?, completion: (() -> Void)? = nil) {
+        self.base.cx_present(controller, completion: completion)
+    }
+    
+    /// Present the view controller, the overlay view is subview of the controller's view
+    public func present(_ controller: UIViewController?, overlayView: UIView?, overlayRatio: CGFloat = 0.7, overlayDirection: CXOverlayDirection = .bottom, completion: (() -> Void)? = nil) {
+        self.base.cx_present(controller, overlayView: overlayView, overlayRatio: overlayRatio, overlayDirection: overlayDirection, completion: completion)
+    }
+    
+    /// Dismiss the view controller.
+    public func dismiss(completion: (() -> Void)? = nil) {
+        self.base.cx_dismiss(completion: completion)
+    }
+    
+    /// Dismiss the view controller, the overlay view is subview of the controller's view
+    public func dismiss(overlayView: UIView?, completion: (() -> Void)? = nil) {
+        self.base.cx_dismiss(overlayView: overlayView, completion: completion)
+    }
+    
 }
 
 //MARK: -  UIViewController
@@ -147,6 +167,87 @@ extension UIViewController {
         controller.willMove(toParent: nil)
         controller.view.removeFromSuperview()
         controller.removeFromParent()
+    }
+    
+}
+
+//MARK: - CXViewControllerWrapable
+
+extension UIViewController: CXViewControllerWrapable {
+    
+    private var cx_overlayDirection: CXOverlayDirection? {
+        get {
+            return objc_getAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection) as? CXOverlayDirection
+        }
+        set {
+            objc_setAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
+        }
+    }
+    
+    /// Present the view controller.
+    public func cx_present(_ controller: UIViewController?, completion: (() -> Void)? = nil) {
+        cx_present(controller, overlayView: nil, overlayRatio: 1.0, overlayDirection: .bottom, completion: completion)
+    }
+    
+    /// Present the view controller, the overlay view is subview of the controller's view
+    public func cx_present(_ controller: UIViewController?, overlayView: UIView?, overlayRatio: CGFloat = 0.7, overlayDirection: CXOverlayDirection = .bottom, completion: (() -> Void)? = nil) {
+        guard let vc = controller else { return }
+        addChild(vc)
+        view.addSubview(vc.view)
+        vc.cx_overlayDirection = overlayDirection
+        var aView = overlayView ?? vc.view!
+        let ratio: CGFloat = overlayView != nil ? overlayRatio : 1.0
+        switch overlayDirection {
+        case .top: aView.cx.y = -ratio * aView.cx.height
+        case .left: aView.cx.x = -ratio * aView.cx.width
+        case .bottom: aView.cx.y = cxScreenHeight
+        case .right: aView.cx.x = cxScreenWidth
+        }
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction,
+            .beginFromCurrentState
+        ]
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+            switch overlayDirection {
+            case .top: aView.cx.y = 0
+            case .left: aView.cx.x = 0
+            case .bottom: aView.cx.y = (1 - ratio) * cxScreenHeight
+            case .right: aView.cx.x = (1 - ratio) * cxScreenWidth
+            }
+        } completion: { _ in
+            completion?()
+        }
+    }
+    
+    /// Dismiss the view controller.
+    public func cx_dismiss(completion: (() -> Void)? = nil) {
+        cx_dismiss(overlayView: nil, completion: completion)
+    }
+    
+    /// Dismiss the view controller, the overlay view is subview of the controller's view
+    public func cx_dismiss(overlayView: UIView?, completion: (() -> Void)? = nil) {
+        guard let _ = parent, let overlayDirection = cx_overlayDirection else {
+            return
+        }
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction,
+            .beginFromCurrentState
+        ]
+        var aView = overlayView ?? view!
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+            switch overlayDirection {
+            case .top: aView.cx.y = -cxScreenHeight
+            case .left: aView.cx.x = -cxScreenWidth
+            case .bottom: aView.cx.y = cxScreenHeight
+            case .right: aView.cx.x = cxScreenWidth
+            }
+        } completion: { _ in
+            self.view.removeFromSuperview()
+            self.removeFromParent()
+            completion?()
+        }
     }
     
 }
