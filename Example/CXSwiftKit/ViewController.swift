@@ -41,6 +41,18 @@ class ViewController: UIViewController {
         }
         progressButton.startAnimation()
         
+        saveImageToPhotosAlbum()
+    }
+    
+    func saveImageToPhotosAlbum() {
+        let image = UIImage(named: "avatar")
+        image!.saveToPhotosAlbum { image, error, context in
+            if error == nil {
+                CXLogger.log(level: .info, message: "saved complelely!")
+            } else {
+                CXLogger.log(level: .error, message: "error=\(error!)")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

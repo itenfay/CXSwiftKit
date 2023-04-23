@@ -9,12 +9,15 @@ target 'CXSwiftKit_Example' do
   # Keychain
   pod 'DYFSwiftKeychain'
   
+  # -- TEST --
   # Kingfisher
   pod 'Kingfisher'
   # SDWebImage
   pod 'SDWebImage'
   # SVGA
   pod 'SVGAPlayer'
+  # OverlayController
+  pod 'OverlayController'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths
