@@ -31,6 +31,15 @@ internal struct CXAssociatedKey {
     /// The key for the white indicator of button.
     static var buttonWhiteIndicator = "cx.button.whiteIndicator"
     static var buttonCurrentText = "cx.button.currentText"
+    
+    /// The key for saving image to photos album.
+    static var imageSavedToPhotosAlbum = "cx.imageSavedTo.photosalbum"
+    
+    /// The key for presenting overlay direction.
+    static var presentOverlayDirection = "cx.present.overlayDirection"
+    
+    /// The key for presenting view by overlay controller.
+    static var presentByOverlayController = "cx.presentView.overlayController"
 }
 
 extension Optional {
