@@ -7,7 +7,28 @@
 
 #if canImport(UIKit)
 import UIKit
+#if canImport(CoreImage)
 import CoreImage
+#endif
+
+public class CXPhotosAlbumImageContext: NSObject {
+    
+    private var completionHandler: ((UIImage?, NSError?, AnyObject?) -> Void)?
+    
+    @objc func imageSavedCallback(
+        image: UIImage?, // return nil in iOS 15.0 or newer.
+        didFinishSavingWithError error: NSError?,
+        contextInfo: AnyObject?)
+    {
+        completionHandler?(image, error, contextInfo)
+    }
+    
+    @objc func onObserve(completionHandler: @escaping (UIImage?, NSError?, AnyObject?) -> Void)
+    {
+        self.completionHandler = completionHandler
+    }
+    
+}
 
 extension CXSwiftBase where T : UIImage {
     
@@ -223,6 +244,7 @@ extension UIImage {
     /// - Returns: A string value of QRCode.
     @objc public var cx_stringValue: String?
     {
+        #if canImport(CoreImage)
         guard let cgImage = self.cgImage else {
             return nil
         }
@@ -239,6 +261,9 @@ extension UIImage {
         }
         let codeFeature = features.first as! CIQRCodeFeature
         return codeFeature.messageString
+        #else
+        return nil
+        #endif
     }
     
     /// Extracts a color object from the specified rectangle.
@@ -247,7 +272,8 @@ extension UIImage {
     ///   - rect: The rectangle to extract.
     ///   - alpha: The opacity value of the color object.
     /// - Returns: A color object.
-    @objc public func cx_extractColor(inRect rect: CGRect, alpha: CGFloat = 0) -> UIColor {
+    @objc public func cx_extractColor(inRect rect: CGRect, alpha: CGFloat = 0) -> UIColor
+    {
         let colorSpace = CGColorSpaceCreateDeviceRGB()
         var pixelData: [UInt8] = [0, 0, 0, 0]
         
@@ -547,6 +573,35 @@ extension UIImage {
                                                     byRoundingCorners: corners,
                                                     cornerRadius: cornerRadius,
                                                     borderWidth: borderWidth, borderColor: borderColor)
+    }
+    
+}
+
+//MARK: - Save to photos album
+
+extension UIImage {
+    
+    fileprivate var cx_paImageContext: CXPhotosAlbumImageContext? {
+        get {
+            return objc_getAssociatedObject(self, &CXAssociatedKey.imageSavedToPhotosAlbum) as? CXPhotosAlbumImageContext
+        }
+        set (objc) {
+            objc_setAssociatedObject(self, &CXAssociatedKey.imageSavedToPhotosAlbum, objc, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    /// The image would be saved to photos album.
+    @objc public func saveToPhotosAlbum(completionHandler: @escaping (_ image: UIImage?, _ error: NSError?, _ contextInfo: AnyObject?) -> Void) {
+        cx_paImageContext = CXPhotosAlbumImageContext()
+        cx_paImageContext?.onObserve(completionHandler: { [weak self] (image, error, contextInfo) in
+            completionHandler(image, error, contextInfo)
+            self?.cx_paImageContext = nil
+        })
+        UIImageWriteToSavedPhotosAlbum(
+            self,
+            cx_paImageContext,
+            #selector(CXPhotosAlbumImageContext.imageSavedCallback(image:didFinishSavingWithError:contextInfo:)),
+            nil)
     }
     
 }
