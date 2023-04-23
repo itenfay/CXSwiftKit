@@ -7,24 +7,22 @@
 
 #if canImport(Foundation)
 import Foundation
-
-//MARK: - CXCommonWrapable
-
 #if canImport(SVProgressHUD)
 import SVProgressHUD
 #endif
-
 #if canImport(SwiftMessages)
 import SwiftMessages
 #endif
-
 #if canImport(Toaster)
 import Toaster
 #endif
 
+//MARK: - CXCommonWrapable
+
 extension NSObject: CXCommonWrapable {
     
     #if canImport(SVProgressHUD)
+    //Set up.
     //SVProgressHUD.setDefaultStyle(.dark)
     //SVProgressHUD.setDefaultMaskType(.custom)
     //SVProgressHUD.setDefaultAnimationType(.flat)
@@ -132,6 +130,7 @@ extension NSObject: CXCommonWrapable {
     
     #if canImport(Toaster)
     //import Toast_Swift
+    //
     //func setupToaster()
     //{
     //    ToastManager.shared.isTapToDismissEnabled = true
