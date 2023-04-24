@@ -67,7 +67,7 @@ extension CXSwiftBase where T == String {
     }
     
     /// Convert a timestamp to a date string，dateFormat: "yyyy-MM-dd HH:mm:ss".
-    public func toDateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+    public func tsToDateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
         let ts = NSString(string: self.base)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
@@ -83,6 +83,20 @@ extension CXSwiftBase where T == String {
             return nil
         }
         return date
+    }
+    
+    /// The specified date whether is greater than the current date.
+    public func greaterThanCurrentDate() -> Bool {
+        let ts = self.toTimestamp() ?? 0
+        let currTS = Date().timeIntervalSince1970
+        return ts > currTS
+    }
+    
+    /// The specified date whether is greater than or equal to the current date.
+    public func greaterThanOrEqualToCurrentDate() -> Bool {
+        let ts = self.toTimestamp() ?? 0
+        let currTS = Date().timeIntervalSince1970
+        return ts >= currTS
     }
     
     /// Return a Base-64 encoded string.
