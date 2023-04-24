@@ -11,6 +11,10 @@ import UIKit
 import CoreImage
 #endif
 
+//The local image selector.
+//let image = #imageLiteral(
+//let image = #imageLiteral(resourceName: "xxx")
+
 public class CXPhotosAlbumImageContext: NSObject {
     
     private var completionHandler: ((UIImage?, NSError?, AnyObject?) -> Void)?
