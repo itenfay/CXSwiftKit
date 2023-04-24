@@ -46,10 +46,26 @@ extension CXSwiftBase where T == Date {
         return base.cx_chineseZodiac
     }
     
+    /// Return a string representation of date, default format of the date is "yyyy-MM-dd HH:mm:ss".
+    public func dateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        return base.cx_dateString(dateFormat)
+    }
+    
+    /// Return a string representation of date, e.g.: 2023-06-01.
+    public func dayDateString() -> String {
+        return base.cx_dayDateString()
+    }
+    
+    /// Return a string representation of date, e.g.: 2023.06.01.
+    public func dotDateString() -> String {
+        return base.cx_dotDateString()
+    }
+    
 }
 
 extension Date {
     
+    /// The current date between the time zone and Greenwich Mean Time.
     public func cx_dateFromGMT() -> Date {
         let seconds = TimeZone.current.secondsFromGMT(for: self)
         return self.addingTimeInterval(TimeInterval(seconds))
@@ -108,6 +124,27 @@ extension Date {
     /// Return the chinese zodiac of chinese lunar.
     public var cx_chineseZodiac: String {
         return self.cx_chineseLunarComponents.chineseZodiac
+    }
+    
+    /// Return a string representation of date, default format of the date is "yyyy-MM-dd HH:mm:ss".
+    public func cx_dateString(_ dateFormat: String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let dateFormatter = DateFormatter.init()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self)
+    }
+    
+    /// Return a string representation of date, e.g.: 2023-06-01.
+    public func cx_dayDateString() -> String {
+        let dateFormatter = DateFormatter.init()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: self)
+    }
+    
+    /// Return a string representation of date, e.g.: 2023.06.01.
+    public func cx_dotDateString() -> String {
+        let dateFormatter = DateFormatter.init()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        return dateFormatter.string(from: self)
     }
     
 }
