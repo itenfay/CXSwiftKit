@@ -5,9 +5,12 @@
 //  Created by chenxing on 2022/5/9.
 //
 
-#if canImport(UIKit) && canImport(QuartzCore) && canImport(DZNEmptyDataSet)
+#if canImport(UIKit)
 import UIKit
+#if canImport(QuartzCore)
 import QuartzCore
+#endif
+#if canImport(DZNEmptyDataSet)
 import DZNEmptyDataSet
 
 @objc public protocol CXEmptyDataSetPresentable: AnyObject {
@@ -158,6 +161,7 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
     }
     
     public func imageAnimation(forEmptyDataSet scrollView: UIScrollView!) -> CAAnimation! {
+        #if canImport(QuartzCore)
         let animation = CABasicAnimation(keyPath: "transform")
         animation.fromValue = NSValue(caTransform3D: CATransform3DIdentity)
         animation.toValue = NSValue(caTransform3D: CATransform3DMakeRotation(CGFloat.pi/2, 0, 0, 1))
@@ -165,6 +169,9 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
         animation.isCumulative = true
         animation.repeatCount = Float.greatestFiniteMagnitude
         return animation
+        #else
+        return nil
+        #endif
     }
     
     public func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
@@ -245,5 +252,7 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
     }
     
 }
+
+#endif
 
 #endif

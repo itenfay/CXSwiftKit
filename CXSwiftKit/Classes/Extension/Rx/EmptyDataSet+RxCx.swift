@@ -1,12 +1,13 @@
 //
 //  EmptyDataSet+RxCx.swift
-//  CaogenApp
+//  CXSwiftKit
 //
-//  Created by Jack on 2022/8/17.
+//  Created by chenxing on 2022/8/17.
 //
 
-#if canImport(Foundation) && canImport(RxSwift) && canImport(RxCocoa)
+#if canImport(Foundation)
 import Foundation
+#if canImport(RxSwift) && canImport(RxCocoa)
 import RxSwift
 import RxCocoa
 
@@ -40,5 +41,7 @@ extension Reactive where Base: CXEmptyDataSetMediator {
     }
     
 }
+
+#endif
 
 #endif
