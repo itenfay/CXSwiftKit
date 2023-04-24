@@ -71,7 +71,7 @@ extension NSMutableAttributedString {
         if index < 0 || index >= self.string.cx.length {
             return
         }
-        let attachment = NSTextAttachment.init()
+        let attachment = NSTextAttachment()
         attachment.image = image
         attachment.bounds = rect
         let attrString = NSAttributedString(attachment: attachment)
@@ -86,6 +86,7 @@ extension NSMutableAttributedString {
             range: NSRange(location: 0, length: self.string.cx.length)
         )
     }
+    
 }
 
 #endif
