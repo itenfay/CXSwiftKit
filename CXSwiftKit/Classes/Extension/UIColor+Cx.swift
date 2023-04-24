@@ -8,6 +8,9 @@
 #if canImport(UIKit)
 import UIKit
 
+//The color selector.
+//let color = #colorLiteral(
+
 /// A tuple of the components that form the color in the RGB color space.
 public typealias CXColorRGBA = (red: CGFloat?, green: CGFloat?, blue: CGFloat?, alpha: CGFloat)
 
