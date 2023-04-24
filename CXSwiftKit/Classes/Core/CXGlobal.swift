@@ -227,10 +227,10 @@ public func cxVideoSnapshot(withUrl url: String?, time: Int, width: CGFloat = 0,
     return _url + "?x-oss-process=video/snapshot,t_\(time),f_jpg,w_\(Int(width)),h_\(Int(height)),m_fast"
 }
 
+// MARK: - Kingfisher
+
 #if canImport(Kingfisher)
 import Kingfisher
-
-// MARK: - Kingfisher
 
 /// Gets an image from a given url string.
 public func cxDownloadImage(withUrl url: String,
@@ -302,6 +302,8 @@ public func cxSetupKingfisherReferer(_ referer: String)
 
 #endif
 
+//MARK: - SDWebImage
+
 #if canImport(SDWebImage)
 import SDWebImage
 
@@ -310,6 +312,41 @@ public func cxSetupSDWebImageReferer(_ referer: String)
 {
     let sdDownloader = SDWebImageDownloader.shared
     sdDownloader.setValue(referer, forHTTPHeaderField: "Referer")
+}
+
+public func cxSDWebDownloadImage(
+    with url: String,
+    options: SDWebImageDownloaderOptions = [],
+    progress: ((Int, Int, URL?) -> Void)? = nil,
+    completion: @escaping (UIImage?, Data?, Error?) -> Void)
+{
+    let sdDownloader = SDWebImageDownloader.shared
+    sdDownloader.downloadImage(with: URL(string: url), options: options) { (receivedSize, expectedSize, targetURL) in
+        progress?(receivedSize, expectedSize, targetURL)
+    } completed: { (image, data, error, finished) in
+        completion(image, data, error)
+    }
+}
+
+/// Synchronously Clear all memory cached images.
+public func cxClearSDWebImageMemory()
+{
+    SDImageCache.shared.clearMemory()
+}
+
+/// Asynchronously clear all disk cached images.
+public func cxClearSDWebImageDisk(completion: (() -> Void)? = nil)
+{
+    SDImageCache.shared.clearDisk {
+        completion?()
+    }
+}
+
+/// Asynchronously remove all expired cached image from disk.
+public func cxClearSDWebImageExpiredFiles(completion: (() -> Void)? = nil) {
+    SDImageCache.shared.deleteOldFiles {
+        completion?()
+    }
 }
 
 #endif
