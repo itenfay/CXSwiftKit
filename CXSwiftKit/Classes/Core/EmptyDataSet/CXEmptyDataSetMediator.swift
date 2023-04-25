@@ -22,44 +22,8 @@ public class CXEmptyDataSetMediator: NSObject, CXEmptyDataSetPresentable {
     /// The current list view.
     @objc public weak var listView: UIScrollView?
     
-    /// The background color for empty data set.
-    @objc public var backgroundColor: UIColor = UIColor.cx.color(withHexString: "#FFFFFF")!
-    /// The title for empty data set.
-    @objc public var title: String?
-    /// The title color for empty data set.
-    @objc public var titleColor: UIColor = UIColor.cx.color(withHexString: "#333333")!
-    /// The title font for empty data set.
-    @objc public var titleFont: UIFont = UIFont.cx.regularPingFang(ofSize: 13)
-    
-    /// The description for empty data set.
-    @objc public var descriptionString: String?
-    /// The description color for empty data set.
-    @objc public var descriptionColor: UIColor = UIColor.cx.color(withHexString: "#333333")!
-    /// The description font for empty data set.
-    @objc public var descriptionFont: UIFont = UIFont.cx.regularPingFang(ofSize: 13)
-    
-    /// The image font for empty data set.
-    @objc public var image: UIImage?
-    /// The loading animated image for empty data set.
-    @objc public var loadingAnimatedImage: UIImage?
-    
-    /// The button title for empty data set.
-    @objc public var buttonTitle: String?
-    /// The button color for empty data set.
-    @objc public var buttonColor: UIColor = UIColor.cx.color(withHexString: "#9D1420")!
-    /// The button font for empty data set.
-    @objc public var buttonFont: UIFont = UIFont.cx.regularPingFang(ofSize: 13)
-    /// The button normal image font for empty data set.
-    @objc public var buttonNormalImage: UIImage?
-    /// The button highlighted image font for empty data set.
-    @objc public var buttonHighlightedImage: UIImage?
-    
-    /// The vertical offset for empty data set.
-    @objc public var verticalOffset: CGFloat = 0
-    /// The vertical distance for empty data set.
-    @objc public var verticalSpace: CGFloat = 20
-    /// The reload is default enabled.
-    @objc public var reloadEnabled: Bool = true
+    /// The style controls the title, title color, image of empty data set, etc.
+    @objc public var style: CXEmptyDataSetStyle = CXEmptyDataSetStyle()
     
     /// The boolean value for empty data set.
     @objc public var shouldDisplay: Bool = true
@@ -68,23 +32,13 @@ public class CXEmptyDataSetMediator: NSObject, CXEmptyDataSetPresentable {
     /// The boolean value for empty data set.
     @objc public var shouldAllowScroll: Bool = true
     
-    /// The style controls the title, title color, image of empty data set.
-    @objc public var style: CXEmptyDataSetStyle? {
-        didSet {
-            title = style?.title
-            if let tColor = style?.titleColor {
-                titleColor = tColor
-            }
-            if let tImage = style?.image {
-                image = tImage
-            }
-            forceToRefreshLayout()
-        }
-    }
+    /// The reload is default enabled.
+    @objc public var reloadEnabled: Bool = true
     
-    @objc public var isLoading: Bool = false {
+    /// The boolean value controls the refresh of empty data set.
+    private var isLoading: Bool = false {
         didSet {
-            forceToRefreshLayout()
+            reloadEmptyDataSet()
         }
     }
     
@@ -116,8 +70,8 @@ public class CXEmptyDataSetMediator: NSObject, CXEmptyDataSetPresentable {
         }
     }
     
-    /// Force to refresh layout of the target list view.
-    @objc public func forceToRefreshLayout() {
+    /// Reload the empty data set.
+    @objc public func reloadEmptyDataSet() {
         listView?.reloadEmptyDataSet()
     }
     
@@ -128,14 +82,14 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
     //MARK: - DZNEmptyDataSetSource
     
     public func backgroundColor(forEmptyDataSet scrollView: UIScrollView!) -> UIColor! {
-        return backgroundColor
+        return style.backgroundColor
     }
     
     public func title(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        if let title = title, !title.isEmpty {
+        if let title = style.title, !title.isEmpty {
             let attrs = [
-                NSAttributedString.Key.font: titleFont,
-                NSAttributedString.Key.foregroundColor: titleColor
+                NSAttributedString.Key.font : style.titleFont,
+                NSAttributedString.Key.foregroundColor : style.titleColor
             ]
             return NSAttributedString.init(string: title, attributes: attrs)
         }
@@ -143,10 +97,10 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
     }
     
     public func description(forEmptyDataSet scrollView: UIScrollView!) -> NSAttributedString! {
-        if let description = descriptionString, !description.isEmpty {
+        if let description = style.descriptionString, !description.isEmpty {
             let attrs = [
-                NSAttributedString.Key.font: descriptionFont,
-                NSAttributedString.Key.foregroundColor: descriptionColor
+                NSAttributedString.Key.font : style.descriptionFont,
+                NSAttributedString.Key.foregroundColor : style.descriptionColor
             ]
             return NSAttributedString(string: description, attributes: attrs)
         }
@@ -155,9 +109,9 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
     
     public func image(forEmptyDataSet scrollView: UIScrollView!) -> UIImage! {
         if reloadEnabled && isLoading {
-            return loadingAnimatedImage ?? UIImage()
+            return style.loadingAnimatedImage ?? UIImage()
         }
-        return image
+        return style.image
     }
     
     public func imageAnimation(forEmptyDataSet scrollView: UIScrollView!) -> CAAnimation! {
@@ -175,10 +129,10 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
     }
     
     public func buttonTitle(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> NSAttributedString! {
-        if let title = buttonTitle, !title.isEmpty {
+        if let title = style.buttonTitle, !title.isEmpty {
             let attrs = [
-                NSAttributedString.Key.font: buttonFont,
-                NSAttributedString.Key.foregroundColor: buttonColor
+                NSAttributedString.Key.font : style.buttonFont,
+                NSAttributedString.Key.foregroundColor : style.buttonColor
             ]
             return NSAttributedString.init(string: title, attributes: attrs)
         }
@@ -187,32 +141,32 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
     
     public func buttonImage(forEmptyDataSet scrollView: UIScrollView!, for state: UIControl.State) -> UIImage! {
         if state == .normal {
-            return buttonNormalImage
+            return style.buttonNormalImage
         } else if state == .highlighted {
-            return buttonHighlightedImage
+            return style.buttonHighlightedImage
         }
         return nil
     }
     
     /// Additionally, you can also adjust the vertical alignment of the content view (ie: useful when there is tableHeaderView visible)
     public func verticalOffset(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        guard let listView = listView else {
-            return verticalOffset
+        guard let tListView = listView else {
+            return style.verticalOffset
         }
-        if listView.isKind(of: UITableView.self) {
-            if verticalOffset != 0 {
-                return verticalOffset
+        if tListView.isKind(of: UITableView.self) {
+            if style.verticalOffset != 0 {
+                return style.verticalOffset
             } else {
-                if let tableView = listView as? UITableView, let headerView = tableView.tableHeaderView {
+                if let tableView = tListView as? UITableView, let headerView = tableView.tableHeaderView {
                     return headerView.frame.size.height/2
                 }
             }
         }
-        return verticalOffset
+        return style.verticalOffset
     }
     
     public func spaceHeight(forEmptyDataSet scrollView: UIScrollView!) -> CGFloat {
-        return verticalSpace
+        return style.verticalSpace
     }
     
     //MARK: - DZNEmptyDataSetDelegate
