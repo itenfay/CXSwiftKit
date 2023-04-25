@@ -24,38 +24,38 @@ import AdSupport
 @objcMembers public class CXDevice: NSObject {
     
     /// The key for storaging the device identifier.
-    @nonobjc fileprivate static let kDeviceIdentifierStoragekey = "CXDeviceIdentifierStoragekey"
+    @nonobjc fileprivate let kDeviceIdentifierStorage = "CXDeviceIdentifierStoragekey"
     
     /// The system version for the OS.
-    public static let systemVersion = UIDevice.current.systemVersion
+    public var systemVersion: String { UIDevice.current.systemVersion }
     
     /// The system name for the OS.
-    public static let systemName = UIDevice.current.systemName
+    public var systemName: String { UIDevice.current.systemName }
     
     /// The name for the device.
-    public static let deviceName = UIDevice.current.name
+    public var deviceName: String { UIDevice.current.name }
     
     /// The model for the device.
-    public static let model = UIDevice.current.model
+    public var model: String { UIDevice.current.model }
     
     /// The localized model for the device，e.g.: "A1533".
-    public static let localizedModel = UIDevice.current.localizedModel
+    public var localizedModel: String { UIDevice.current.localizedModel }
     
     /// IDFV: Returns a string created from the UUID, such as “E621E1F8-C36C-495A-93FC-0C247A3E6E5F”
-    public static let idfv: String = UIDevice.current.identifierForVendor?.uuidString ?? uuid()
+    public var idfv: String { UIDevice.current.identifierForVendor?.uuidString ?? uuid() }
     
     #if CXAdTracking
     /// IDFA: Returns a string created from the UUID, such as “E621E1F8-C36C-495A-93FC-0C247A3E6E5F”
-    public static let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
+    public var idfa: String { ASIdentifierManager.shared().advertisingIdentifier.uuidString }
     #endif
     
     #if CXAdTracking
     /// A Boolean value that indicates whether the user has limited ad tracking enabled.
-    public static let isAdTrackingEnabled = ASIdentifierManager.shared().isAdvertisingTrackingEnabled
+    public var isAdTrackingEnabled: Bool { ASIdentifierManager.shared().isAdvertisingTrackingEnabled }
     #endif
     
     /// Creates a Universally Unique Identifier (UUID) string.
-    public static func uuid() -> String {
+    public func uuid() -> String {
         let uuidRef = CFUUIDCreate(kCFAllocatorDefault)
         let strRef = CFUUIDCreateString(kCFAllocatorDefault, uuidRef)
         /// (strRef! as String).replacingOccurrences(of: "-", with: "")
@@ -64,15 +64,16 @@ import AdSupport
     }
     
     /// Creates an identifier for the device, if exists, return it.
-    public static func identifier() -> String {
+    public func identifier() -> String {
         #if canImport(DYFSwiftKeychain)
-        let kc = DYFSwiftKeychain.init()
-        guard let deviceId = kc.get(kDeviceIdentifierStoragekey) else {
+        let kc = DYFSwiftKeychain()
+        guard let deviceId = kc.get(kDeviceIdentifierStorage) else {
             let id = idfv
-            kc.set(id, forKey: kDeviceIdentifierStoragekey)
+            kc.set(id, forKey: kDeviceIdentifierStorage)
+            CXLogger.log(level: .info, message: "deviceId=\(id)")
             return id
         }
-        CXLogger.log(level: .info, message: "deviceId: \(deviceId)")
+        CXLogger.log(level: .info, message: "deviceId=\(deviceId)")
         return deviceId
         #else
         return idfv
@@ -80,7 +81,7 @@ import AdSupport
     }
     
     /// The machine for the device, e.g.: "iPhone15,3".
-    public static func machine() -> String {
+    public func machine() -> String {
         var systemInfo = utsname.init()
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
@@ -94,7 +95,7 @@ import AdSupport
     }
     
     /// The machine model name for the device. View: https://www.theiphonewiki.com/wiki/Models.
-    public static func modelName() -> String {
+    public func modelName() -> String {
         let identifier = machine()
         CXLogger.log(level: .info, message: "machine: \(identifier)")
         switch identifier {
@@ -188,7 +189,7 @@ import AdSupport
     }
     
     /// Return an ip address.
-    public static func ipAddress() -> String? {
+    public func ipAddress() -> String? {
         var addresses = [String]()
         
         // Get list of all interfaces on the local machine:
@@ -229,7 +230,7 @@ import AdSupport
     }
     
     /// Returns a mac address.
-    public static func macAddress() -> String {
+    public func macAddress() -> String {
         let index = Int32(if_nametoindex("en0"))
         let bsdData = "en0".data(using: String.Encoding.utf8)
         var mib: [Int32] = [CTL_NET, AF_ROUTE, 0, AF_LINK, NET_RT_IFLIST, index]
@@ -267,7 +268,7 @@ import AdSupport
     }
     
     /// Returns the ssid for the current network.
-    public static func ssid() -> String? {
+    public func ssid() -> String? {
         let interfaces: NSArray = CNCopySupportedInterfaces()!
         var ssid: String? = nil
         for sub in interfaces {
@@ -279,7 +280,7 @@ import AdSupport
     }
     
     /// Returns the WiFi mac for the current network.
-    public static func wifiMac() -> String? {
+    public func wifiMac() -> String? {
         let interfaces: NSArray = CNCopySupportedInterfaces()!
         var mac: String? = nil
         for sub in interfaces {
@@ -291,9 +292,8 @@ import AdSupport
     }
     
     #if canImport(CoreTelephony)
-    
     /// Returns the subscriber cellular provider.
-    public static func getCellularProvider() -> CTCarrier? {
+    public func getCellularProvider() -> CTCarrier? {
         let info = CTTelephonyNetworkInfo.init()
         if #available(iOS 12.0, *) {
             return info.serviceSubscriberCellularProviders?.values.first
@@ -303,20 +303,20 @@ import AdSupport
     }
     
     /// Returns the mobile country code.
-    public static func mobileCountryCode() -> String? {
+    public func mobileCountryCode() -> String? {
         let carrier = getCellularProvider()
         return carrier?.mobileCountryCode
     }
     
     /// Returns the mobile network code.
-    public static func mobileNetworkCode() -> String? {
+    public func mobileNetworkCode() -> String? {
         let carrier = getCellularProvider()
         return carrier?.mobileNetworkCode
     }
     
     ///IMSI：International Mobile Subscriber Identification Number.
     ///IMSI：MCC(Mobile Country Code)，MNC(Mobile Network Code)
-    public static func imsi() -> String {
+    public func imsi() -> String {
         if let carrier = getCellularProvider() {
             let countryCode = carrier.mobileCountryCode
             let networkCode = carrier.mobileNetworkCode
@@ -328,13 +328,13 @@ import AdSupport
     }
     
     /// Return the iso country code, e.g.: "cn".
-    public static func isoCountryCode() -> String? {
+    public func isoCountryCode() -> String? {
         let carrier = getCellularProvider()
         return carrier?.isoCountryCode
     }
     
     /// Returns the carrier name.
-    public static func carrierName() -> String {
+    public func carrierName() -> String {
         let carrier = getCellularProvider()
         var carrierName = "No carrier"
         if self.isoCountryCode() != nil {
@@ -344,7 +344,7 @@ import AdSupport
     }
     
     /// Return the carrier net type.
-    public static func carrierNetType() -> String {
+    public func carrierNetType() -> String {
         let info = CTTelephonyNetworkInfo.init()
         let ct: String?
         if #available(iOS 12.0, *) {
@@ -352,8 +352,8 @@ import AdSupport
         } else {
             ct = info.currentRadioAccessTechnology
         }
-        guard let _ct = ct else { return "Unkown" }
-        switch _ct {
+        guard let tct = ct else { return "Unkown" }
+        switch tct {
             //CTRadioAccessTechnologyGPRS: 2G GPRS (Also known as 2.5G)
             //CTRadioAccessTechnologyEdge: 2G EDGE (Also known as 2.5G extension)
         case CTRadioAccessTechnologyGPRS, CTRadioAccessTechnologyEdge: return "2G"
@@ -372,7 +372,7 @@ import AdSupport
             //CTRadioAccessTechnologyNR: 5G NR
             //CTRadioAccessTechnologyNRNSA: 5G NRNSA
             if #available(iOS 14.1, *) {
-                if _ct == CTRadioAccessTechnologyNR || _ct == CTRadioAccessTechnologyNRNSA {
+                if tct == CTRadioAccessTechnologyNR || tct == CTRadioAccessTechnologyNRNSA {
                     return "5G"
                 }
             } else {
@@ -381,10 +381,9 @@ import AdSupport
         }
         return "Unkown"
     }
-    
     #endif
     
-    public static var isSimulator: Bool {
+    public var isSimulator: Bool {
         var isSim = false
         #if arch(i386) || arch(x86_64)
         isSim = true
