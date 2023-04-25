@@ -12,9 +12,9 @@ import RxSwift
 import RxCocoa
 
 public enum CXEmptyDataSetType {
-    // You can customize title decription, use the default title if nil.
+    // Customize title decription, use the default title if nil.
     case emptyData(desc: String?)
-    // You can customize error title decription, use the default title if nil.
+    // Customize error title decription, use the default title if nil.
     case networkError(desc: String?)
 }
 
@@ -22,21 +22,25 @@ extension Reactive where Base: CXEmptyDataSetMediator {
     
     public var empty: Binder<CXEmptyDataSetType> {
         return Binder(base) { (target, type) in
+            let style = target.style
             switch type {
             case .emptyData(let desc):
-                let style = CXEmptyDataSetStyle.emptyStyle
                 if let description = desc, description.cx.isNotEmpty() {
                     style.title = description
+                } else {
+                    style.title = CXEmptyDataSetStyle.emptyTitle
                 }
                 target.style = style
             case .networkError(let desc):
-                let style = CXEmptyDataSetStyle.networkErrorStyle
                 if let description = desc, description.cx.isNotEmpty() {
                     style.title = description
+                } else {
+                    style.title = CXEmptyDataSetStyle.networkErrorTitle
                 }
                 target.style = style
             }
             target.bindEmptyDataSet()
+            target.reloadEmptyDataSet()
         }
     }
     
