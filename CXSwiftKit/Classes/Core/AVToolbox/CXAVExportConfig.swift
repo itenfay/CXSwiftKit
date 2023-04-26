@@ -5,7 +5,8 @@
 //  Created by chenxing on 2021/9/26.
 //
 
-import AVFoundation
+#if canImport(Foundation)
+import Foundation
 
 public class CXAVExportConfig: NSObject {
     
@@ -54,3 +55,5 @@ public class CXAVExportConfig: NSObject {
     }
     
 }
+
+#endif
