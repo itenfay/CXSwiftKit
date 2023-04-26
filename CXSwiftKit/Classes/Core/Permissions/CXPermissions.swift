@@ -156,6 +156,7 @@ extension CXCameraPermission {
     }
     
     #if swift(>=5.5)
+    @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let granted = await AVCaptureDevice.requestAccess(for: AVMediaType.video)
@@ -209,6 +210,7 @@ extension CXMicrophonePermission {
     }
     
     #if swift(>=5.5)
+    @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let granted = await AVCaptureDevice.requestAccess(for: AVMediaType.audio)
@@ -700,7 +702,7 @@ extension CXDeviceBiometricsPermission {
     }
     
     #if swift(>=5.5)
-    @available(iOS 8.0, *)
+    @available(iOS 13.0, *)
     public func evaluateDeviceBiometrics() async -> CXPermissionResult
     {
         var result: CXPermissionResult
@@ -741,7 +743,7 @@ extension CXDevicePasscodePermission {
     }
     
     #if swift(>=5.5)
-    @available(iOS 8.0, *)
+    @available(iOS 13.0, *)
     public func evaluateDevicePasscode() async -> CXPermissionResult
     {
         do {
@@ -793,6 +795,7 @@ extension CXContactsPermission {
     }
     
     #if swift(>=5.5)
+    @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let contactStore = CNContactStore()
