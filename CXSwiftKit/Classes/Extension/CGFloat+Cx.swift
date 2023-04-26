@@ -26,6 +26,17 @@ extension CXSwiftBase where T == CGFloat {
         return CGFloat.cx_screenHeight
     }
     
+    #if os(iOS) && canImport(UIKit)
+    public static var safeAreaTop: CGFloat { CGFloat.cx_safeAreaTop }
+    public static var safeAreaBottom: CGFloat { CGFloat.cx_safeAreaBottom }
+    /// The height of the status bar.
+    public static var statusBarHeight: CGFloat { CGFloat.cx_statusBarHeight }
+    /// The height of the navigation bar.
+    public static var navigationBarHeight: CGFloat { CGFloat.cx_navigationBarHeight }
+    /// The height of the tab bar.
+    public static var tabBarHeight: CGFloat { CGFloat.cx_tabBarHeight }
+    #endif
+    
 }
 
 extension CGFloat {
@@ -47,6 +58,17 @@ extension CGFloat {
         return 0
         #endif
     }
+    
+    #if os(iOS) && canImport(UIKit)
+    public static var cx_safeAreaTop: CGFloat { cxSafeAreaTop }
+    public static var cx_safeAreaBottom: CGFloat { cxSafeAreaBottom }
+    /// The height of the status bar.
+    public static var cx_statusBarHeight: CGFloat { cxStatusBarHeight }
+    /// The height of the navigation bar.
+    public static var cx_navigationBarHeight: CGFloat { cxNavigationBarHeight }
+    /// The height of the tab bar.
+    public static var cx_tabBarHeight: CGFloat { cxTabBarHeight }
+    #endif
     
 }
 

@@ -67,6 +67,7 @@ public func cxFitScale(by dimension: CGFloat) -> CGFloat
     return (cxScreenWidth / 375) * dimension
 }
 
+#if os(iOS)
 #if canImport(UIKit)
 
 /// Represents the device whether is x series of iPhone.
@@ -107,6 +108,7 @@ public let cxStatusBarHeight: CGFloat = cxSafeAreaTop
 public let cxNavigationBarHeight: CGFloat = 44
 public let cxTabBarHeight: CGFloat = 49
 
+#endif
 #endif
 
 /// Allocates recursive pthread_mutex associated with ‘obj’ if needed.
