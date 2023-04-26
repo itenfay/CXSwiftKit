@@ -33,7 +33,7 @@ extension CXSwiftBase where T == String {
         return Double(self.base)
     }
     
-    #if canImport(CommonCrypto)
+#if canImport(CommonCrypto)
     /// Get a MD5 encoded string.
     public var md5: String? {
         let cStr = self.base.cString(using: String.Encoding.utf8)
@@ -53,7 +53,7 @@ extension CXSwiftBase where T == String {
         }
         return nil
     }
-    #endif
+#endif
     
     /// Convert a date string to a timestamp，dateFormat: "yyyy-MM-dd HH:mm:ss".
     ///
@@ -217,7 +217,7 @@ extension CXSwiftBase where T == String {
         return Notification.Name(self.base)
     }
     
-    #if canImport(CoreImage)
+#if canImport(CoreImage)
     /// Generates an image of QRCode.
     ///
     /// - Returns: An image of QRCode.
@@ -315,7 +315,7 @@ extension CXSwiftBase where T == String {
         
         return newImage
     }
-    #endif
+#endif
     
     /// The string whether is a telephone.
     public func evaluateTelephone() -> Bool {
@@ -366,6 +366,12 @@ extension CXSwiftBase where T == String {
     /// Returns a Boolean value indicating whether a string has characters.
     public func isNotEmpty() -> Bool {
         return !self.base.isEmpty
+    }
+    
+    /// Returns a new string made by adding to the receiver a given string.
+    public func addPathComponent(_ string: String) -> String {
+        let nsStr = NSString(string: self.base)
+        return nsStr.appendingPathComponent(string)
     }
     
 }
