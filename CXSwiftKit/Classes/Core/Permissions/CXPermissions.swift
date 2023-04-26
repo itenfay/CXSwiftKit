@@ -38,7 +38,7 @@ extension CXPhotosPermission {
     /// Prompts the user to grant the app permission to access the photo library.
     ///
     /// - Returns: Information about your app’s authorization to access the user’s photo library.
-    //#if swift(>=5.5)
+    #if swift(>=5.5)
     @available(iOS 14, *)
     public func requestAccess() async -> CXPermissionResult
     {
@@ -46,7 +46,7 @@ extension CXPhotosPermission {
         let result = CXPermissionResult(type: type, status: transform(for: status))
         return result
     }
-    //#endif
+    #endif
     
     /// Prompts the user to grant the app permission to access the photo library.
     ///
@@ -155,14 +155,14 @@ extension CXCameraPermission {
         }
     }
     
-    //#if swift(>=5.5)
+    #if swift(>=5.5)
     @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let granted = await AVCaptureDevice.requestAccess(for: AVMediaType.video)
         return CXPermissionResult(type: type, status: granted ? .authorized : status)
     }
-    //#endif
+    #endif
     
     /// Prompts the user to grant the app permission to access the camera.
     ///
@@ -209,14 +209,14 @@ extension CXMicrophonePermission {
         return CXCameraPermission().transform(for: status)
     }
     
-    //#if swift(>=5.5)
+    #if swift(>=5.5)
     @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let granted = await AVCaptureDevice.requestAccess(for: AVMediaType.audio)
         return CXPermissionResult(type: type, status: granted ? .authorized : status)
     }
-    //#endif
+    #endif
     
     /// Prompts the user to grant the app permission to access the camera.
     ///
@@ -702,7 +702,7 @@ extension CXDeviceBiometricsPermission {
         }
     }
     
-    //#if swift(>=5.5)
+    #if swift(>=5.5)
     @available(iOS 13.0, *)
     public func evaluateDeviceBiometrics() async -> CXPermissionResult
     {
@@ -716,7 +716,7 @@ extension CXDeviceBiometricsPermission {
         }
         return result
     }
-    //#endif
+    #endif
     
 }
 
@@ -743,7 +743,7 @@ extension CXDevicePasscodePermission {
         }
     }
     
-    //#if swift(>=5.5)
+    #if swift(>=5.5)
     @available(iOS 13.0, *)
     public func evaluateDevicePasscode() async -> CXPermissionResult
     {
@@ -755,7 +755,7 @@ extension CXDevicePasscodePermission {
         }
         return CXPermissionResult(type: type, status: .unauthorized)
     }
-    //#endif
+    #endif
     
 }
 
@@ -796,7 +796,7 @@ extension CXContactsPermission {
         }
     }
     
-    //#if swift(>=5.5)
+    #if swift(>=5.5)
     @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
@@ -809,7 +809,7 @@ extension CXContactsPermission {
         }
         return CXPermissionResult(type: type, status: .unauthorized)
     }
-    //#endif
+    #endif
     
     @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
@@ -1164,8 +1164,7 @@ extension CXHealthPermission {
     }
     #endif
     
-    //#if swift(>=5.5) && !os(tvOS)
-    #if !os(tvOS)
+    #if swift(>=5.5) && !os(tvOS)
     @available(iOS 15.0, watchOS 8.0, macOS 13.0, *)
     public func requestAccess(forReading readingTypes: Set<HKObjectType>, writing writingTypes: Set<HKSampleType>) async -> CXPermissionResult
     {
@@ -1221,7 +1220,7 @@ extension CXMediaPermission {
         }
     }
     
-    //#if swift(>=5.5)
+    #if swift(>=5.5)
     @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
@@ -1232,7 +1231,7 @@ extension CXMediaPermission {
         //    return CXPermissionResult(type: type, status: .disabled)
         //}
     }
-    //#endif
+    #endif
     
     @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
