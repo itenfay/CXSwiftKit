@@ -73,7 +73,7 @@ public class CXFileToolbox: NSObject {
             }
             let dstURL = cacheURL.appendingPathComponent(pathComponent)
             var isDir: ObjCBool = false
-            let isDirExist = FileManager.default.fileExists(atPath: dstURL.path, isDirectory: &isDir)
+            let isDirExist = FileManager.default.fileExists(atPath: dstURL.cx_path, isDirectory: &isDir)
             if isDirExist && isDir.boolValue {}
             else {
                 try FileManager.default.createDirectory(at: dstURL, withIntermediateDirectories: true)
