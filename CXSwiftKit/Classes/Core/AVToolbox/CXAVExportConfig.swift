@@ -12,7 +12,7 @@ public class CXAVExportConfig: NSObject {
     
     /// Remove an item at specified path.
     @discardableResult
-    public func removeItem(atPath path: String) -> Bool {
+    @objc public func removeItem(atPath path: String) -> Bool {
         if FileManager.default.fileExists(atPath: path) {
             do {
                 try FileManager.default.removeItem(atPath: path)
@@ -22,6 +22,17 @@ public class CXAVExportConfig: NSObject {
             }
         }
         return false
+    }
+    
+    /// A new string made by deleting the extension (if any, and only the last) from the receiver.
+    @objc public func fileName(withURL url: URL) -> String {
+        return url.deletingPathExtension().lastPathComponent
+    }
+    
+    /// Export the file url with the directory and file name.
+    @objc public func exportFileURL(withDirName dirName: String, fileName: String) -> URL? {
+        let t = exportFileURL(with: dirName, fileName: fileName)
+        return t.0 ? t.1 : nil
     }
     
     /// Export the file url with the directory and file name.
@@ -37,8 +48,14 @@ public class CXAVExportConfig: NSObject {
     }
     
     /// The caches directory(Library/Caches).
-    public func cachesDirectory() -> String {
+    @objc public func cachesDirectory() -> String {
         return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).map(\.path)[0]
+    }
+    
+    /// Make a directory with the specified name in caches directory.
+    @objc public func makeDirectory(withName name: String) -> String? {
+        let t = makeDirectory(with: name)
+        return t.0 ? t.1 : nil
     }
     
     /// Make a directory with the specified name in caches directory.

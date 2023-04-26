@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '0.1.0'
-  s.summary          = 'A short description of CXSwiftKit.'
+  s.version          = '1.0.10'
+  s.summary          = 'CXSwiftKit provides rich extensions of swift language, also supports Objective-C.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,10 +18,10 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  CXSwiftKit provides rich extensions of swift language, also supports Objective-C.
                        DESC
 
-  s.homepage         = 'https://github.com/dyf/CXSwiftKit'
+  s.homepage         = 'https://github.com/chenxing640/CXSwiftKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'chenxing' => 'chenxing640@foxmail.com' }
@@ -33,6 +33,8 @@ TODO: Add long description of the pod here.
   #s.osx.deployment_target = '10.9'
   #s.tvos.deployment_target = '9.0'
   
+  s.requires_arc = true
+  
   s.source_files = 'CXSwiftKit/Classes/**/*'
   
   # s.resource_bundles = {
@@ -42,6 +44,27 @@ TODO: Add long description of the pod here.
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'DYFSwiftKeychain'
+  
+#  s.subspec "Core" do |core|
+#      core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
+#      core.dependency 'DYFSwiftKeychain'
+#
+#      core.subspec "Base" do |base|
+#          base.source_files = 'CXSwiftKit/Classes/Core/Base/*.{swift}'
+#      end
+#
+#      core.subspec "AVToolbox" do |avtb|
+#          avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
+#      end
+#
+#  end
+#
+#  s.subspec "Extension" do |ext|
+#      ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
+#
+#      ext.subspec "Rx" do |rx|
+#          rx.source_files = 'CXSwiftKit/Classes/Extension/Rx/*.{swift}'
+#      end
+#  end
   
 end
