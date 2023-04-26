@@ -543,6 +543,7 @@ extension CXNotificationPermission {
 
 //MARK: - Bluetooth
 
+/// The app's Info.plist must contain a `NSBluetoothPeripheralUsageDescription` key.
 public class CXBluetoothPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .bluetooth }
     
@@ -763,6 +764,7 @@ extension CXDevicePasscodePermission {
 
 //MARK: - Contacts
 
+/// The app's Info.plist must contain a `NSContactsUsageDescription` key.
 public class CXContactsPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .contacts }
 }
@@ -976,6 +978,7 @@ extension CXCalendarPermission {
 
 //MARK: - Motion
 
+/// The app's Info.plist must contain a `NSMotionUsageDescription` key.
 public class CXMotionPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .motion }
 }
