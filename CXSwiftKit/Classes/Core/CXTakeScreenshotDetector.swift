@@ -7,6 +7,7 @@
 
 #if canImport(UIKit) && canImport(Photos)
 import UIKit
+import Photos
 
 public class CXTakeScreenshotDetector: NSObject {
     
@@ -17,13 +18,18 @@ public class CXTakeScreenshotDetector: NSObject {
     
     private var takeScreenshotHandler: ((Bool, UIImage?) -> Void)?
     
+    private lazy var photosPermission: CXPhotosPermission = {
+        let photosPermission = CXPhotosPermission()
+        return photosPermission
+    }()
+    
     private func setup() {
         self.cx.addObserver(self, selector: #selector(userDidTakeScreenshot(_:)), name: UIApplication.userDidTakeScreenshotNotification)
     }
     
     @objc private func userDidTakeScreenshot(_ notification: Notification) {
         CXLogger.log(level: .info, message: "The user takes screenshot.")
-        if CXPermissionManager.shared.photoLibraryAuthorized {
+        if photosPermission.authorized {
             DispatchQueue.cx.mainAsyncAfter(3.0) {
                 self.fetchImage()
             }
@@ -34,7 +40,7 @@ public class CXTakeScreenshotDetector: NSObject {
     }
     
     private func fetchImage() {
-        CXPermissionManager.shared.fetchLatestImage { [weak self] imageData in
+        photosPermission.fetchLatestImage { [weak self] imageData in
             let image = imageData != nil ? UIImage(data: imageData!) : nil
             self?.takeScreenshotHandler?(true, image)
         }

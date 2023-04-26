@@ -316,10 +316,12 @@ extension CXPermissionManager: CLLocationManagerDelegate {
         let _error = error as NSError
         if _error.code == CLAuthorizationStatus.notDetermined.rawValue {
             CXLogger.log(level: .info, message: "User has not yet made a choice with regards to this application.")
+            locationUpdatedHandler?(false, 0, 0, _error)
         } else if _error.code == CLAuthorizationStatus.restricted.rawValue {
             CXLogger.log(level: .info, message: "This application is not authorized to use location services.")
             locationUpdatedHandler?(false, 0, 0, _error)
         } else if _error.code == CLAuthorizationStatus.denied.rawValue {
+            CXLogger.log(level: .info, message: "The user denied the use of location services for the app or they are disabled globally in Settings.")
             locationUpdatedHandler?(false, 0, 0, _error)
         }
     }
@@ -375,10 +377,13 @@ extension CXPermissionManager {
     /// Fetches contacts from the contacts store app.
     ///
     /// - Parameter completion: A block called, when enumeration of all contacts matching a contact fetch request.
-    public func fetchContacts(completion: @escaping (CNContact?) -> Void) {
+    public func fetchContacts(completion: @escaping ([CNContact]) -> Void) {
         /// Specified keys.
         let keysToFetch = [CNContactGivenNameKey as NSString,
                            CNContactFamilyNameKey as NSString,
+                           CNContactMiddleNameKey as NSString,
+                           CNContactNamePrefixKey as NSString,
+                           CNContactPreviousFamilyNameKey as NSString,
                            CNContactPhoneNumbersKey as NSString,
                            CNContactEmailAddressesKey as NSString,
                            CNContactBirthdayKey as NSString,
@@ -387,6 +392,7 @@ extension CXPermissionManager {
         let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch)
         let contactStore = CNContactStore()
         do {
+            var tContacts: [CNContact] = []
             try contactStore.enumerateContacts(with: fetchRequest, usingBlock: { contact, stop in
                 //let familyName = contact.familyName
                 //let givenName = contact.givenName
@@ -406,11 +412,14 @@ extension CXPermissionManager {
                 //    string = string.replacingOccurrences(of: " ", with: "")
                 //    string = string.replacingOccurrences(of: " ", with: "")
                 //}
-                completion(contact)
+                tContacts.append(contact)
+                if stop.pointee.boolValue {
+                    completion(tContacts)
+                }
             })
         } catch let error {
             CXLogger.log(level: .error, message: "error=\(error)")
-            completion(nil)
+            completion([])
         }
     }
     
