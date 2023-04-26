@@ -1218,14 +1218,15 @@ extension CXMediaPermission {
     }
     
     #if swift(>=5.5)
+    @available(iOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
-        if #available(iOS 9.3, *) {
+        //if #available(iOS 9.3, *) {
             let status = await MPMediaLibrary.requestAuthorization()
             return CXPermissionResult(type: type, status: transform(for: status))
-        } else {
-            return CXPermissionResult(type: type, status: .disabled)
-        }
+        //} else {
+        //    return CXPermissionResult(type: type, status: .disabled)
+        //}
     }
     #endif
     
