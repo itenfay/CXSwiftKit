@@ -29,7 +29,7 @@ public class CXAVExportConfig: NSObject {
         let fileURL = URL(fileURLWithPath: directory).appendingPathComponent(fileName)
         CXLogger.log(level: .info, message: "fileURL=\(fileURL)")
         if success {
-            removeItem(atPath: fileURL.path)
+            removeItem(atPath: fileURL.cx_path)
             return (true, fileURL)
         }
         return (false, fileURL)
