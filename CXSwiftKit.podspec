@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '1.0.10'
+  s.version          = '1.0.12'
   s.summary          = 'CXSwiftKit provides rich extensions of swift language, also supports Objective-C.'
 
 # This description is used to generate tags and improve search results.
