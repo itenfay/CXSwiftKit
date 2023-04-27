@@ -40,13 +40,13 @@ public class CXScaleDismissAnimation: NSObject, UIViewControllerAnimatedTransiti
             return
         }
         
-        let centerFrame = CGRect.init(x: cxScreenWidth/2, y: cxScreenHeight/2, width: 0, height: 0)
+        let centerFrame = CGRect.init(x: CGFloat.cx.screenWidth/2, y: CGFloat.cx.screenHeight/2, width: 0, height: 0)
         var snapshotView: UIView?
         var scaleRatio: CGFloat = 1.0
         var finalFrame: CGRect = .zero
         snapshotView = fromVC.view.snapshotView(afterScreenUpdates: false)
         snapshotView?.layer.zPosition = 20
-        scaleRatio = fromVC.view.frame.width / (finalRect != .zero ? finalRect.width : cxScreenWidth)
+        scaleRatio = fromVC.view.frame.width / (finalRect != .zero ? finalRect.width : CGFloat.cx.screenWidth)
         CXLogger.log(level: .info, message: "scaleRatio=\(scaleRatio)")
         finalFrame = finalRect != .zero ? finalRect : centerFrame
         

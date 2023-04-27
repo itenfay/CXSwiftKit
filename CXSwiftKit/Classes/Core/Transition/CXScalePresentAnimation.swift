@@ -123,8 +123,10 @@ public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransiti
         let containerView = transitionContext.containerView
         containerView.addSubview(toVC.view)
         
+        let screenWidth = CGFloat.cx.screenWidth
+        let screenHeight = CGFloat.cx.screenHeight
         let rectW: CGFloat = 100
-        let centerFrame = CGRect(x: (cxScreenWidth - rectW)/2, y: (cxScreenHeight  - rectW)/2, width: rectW, height: rectW)
+        let centerFrame = CGRect(x: (screenWidth - rectW)/2, y: (screenHeight  - rectW)/2, width: rectW, height: rectW)
         let initialFrame = touchRect != .zero ? touchRect : centerFrame
         let finalFrame = transitionContext.finalFrame(for: toVC)
         let duration: TimeInterval = transitionDuration(using: transitionContext)

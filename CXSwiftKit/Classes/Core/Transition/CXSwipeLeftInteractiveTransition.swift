@@ -27,7 +27,7 @@ public class CXSwipeLeftInteractiveTransition: UIPercentDrivenInteractiveTransit
         pan.delegate = self
         presentingVC?.view.addGestureRecognizer(pan)
         panGesture = pan
-        viewControllerCenter = presentingVC?.view.center ?? CGPoint(x: cxScreenWidth/2, y: cxScreenHeight/2)
+        viewControllerCenter = presentingVC?.view.center ?? CGPoint(x: CGFloat.cx.screenWidth/2, y: CGFloat.cx.screenHeight/2)
     }
     
     @objc public func enablePanGesture(_ isEnabled: Bool) {
@@ -51,7 +51,7 @@ public class CXSwipeLeftInteractiveTransition: UIPercentDrivenInteractiveTransit
             interacting = true
             break
         case .changed:
-            var progress: CGFloat = translation.x / cxScreenWidth
+            var progress: CGFloat = translation.x / CGFloat.cx.screenWidth
             progress = CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
             let ratio: CGFloat = 1.0 - (progress * 0.5)
             presentingVC?.view.center = CGPoint.init(x: viewControllerCenter.x + translation.x * ratio, y: viewControllerCenter.y + translation.y * ratio)
@@ -59,11 +59,11 @@ public class CXSwipeLeftInteractiveTransition: UIPercentDrivenInteractiveTransit
             update(progress)
             break
         case .cancelled, .ended:
-            var progress: CGFloat = translation.x / cxScreenWidth
+            var progress: CGFloat = translation.x / CGFloat.cx.screenWidth
             progress = CGFloat(fminf(fmaxf(Float(progress), 0.0), 1.0))
             if progress < 0.2 {
                 UIView.animate(withDuration: TimeInterval(progress), delay: 0.0, options: .curveEaseOut, animations: {
-                    self.presentingVC?.view.center = CGPoint.init(x: cxScreenWidth / 2, y: cxScreenHeight / 2)
+                    self.presentingVC?.view.center = CGPoint.init(x:  CGFloat.cx.screenWidth / 2, y: CGFloat.cx.screenHeight / 2)
                     self.presentingVC?.view.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
                 }) { finished in
                     self.interacting = false

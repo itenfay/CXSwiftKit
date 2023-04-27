@@ -191,7 +191,7 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
         if isLoading { return }
         isLoading = true
         onReload?()
-        cxDelayToDispatch(1.5) {
+        DispatchQueue.cx.mainAsyncAfter(1.5) {
             self.isLoading = false
         }
     }
@@ -200,7 +200,7 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
         if isLoading { return }
         isLoading = true
         onReload?()
-        cxDelayToDispatch(1.5) {
+        DispatchQueue.cx.mainAsyncAfter(1.5) {
             self.isLoading = false
         }
     }

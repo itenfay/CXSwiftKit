@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '1.0.12'
+  s.version          = '1.1.2'
   s.summary          = 'CXSwiftKit provides rich extensions of swift language, also supports Objective-C.'
 
 # This description is used to generate tags and improve search results.
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   
   s.requires_arc = true
   
-  s.source_files = 'CXSwiftKit/Classes/**/*'
+  #s.source_files = 'CXSwiftKit/Classes/**/*'
   
   # s.resource_bundles = {
   #   'CXSwiftKit' => ['CXSwiftKit/Assets/*.png']
@@ -45,26 +45,75 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
   
-#  s.subspec "Core" do |core|
-#      core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
-#      core.dependency 'DYFSwiftKeychain'
-#
-#      core.subspec "Base" do |base|
-#          base.source_files = 'CXSwiftKit/Classes/Core/Base/*.{swift}'
-#      end
-#
-#      core.subspec "AVToolbox" do |avtb|
-#          avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
-#      end
-#
-#  end
-#
-#  s.subspec "Extension" do |ext|
-#      ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
-#
-#      ext.subspec "Rx" do |rx|
-#          rx.source_files = 'CXSwiftKit/Classes/Extension/Rx/*.{swift}'
-#      end
-#  end
+  s.subspec "Base" do |base|
+    base.source_files = 'CXSwiftKit/Classes/Base/*.{swift}'
+  end
+  
+  s.subspec "Protocol" do |pt|
+    pt.source_files = 'CXSwiftKit/Classes/Protocol/*.{swift}'
+  end
+  
+  s.subspec "Extension" do |ext|
+    ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
+    ext.dependency 'CXSwiftKit/Base'
+    ext.dependency 'CXSwiftKit/Protocol'
+  end
+  
+  s.subspec "FileOperation" do |fo|
+    fo.source_files = 'CXSwiftKit/Classes/FileOperation/*.{swift}'
+    fo.dependency 'CXSwiftKit/Extension'
+  end
+  
+  s.subspec "Core" do |core|
+    core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
+    #core.dependency 'DYFSwiftKeychain'
+    core.dependency 'CXSwiftKit/Extension'
+    core.dependency 'CXSwiftKit/FileOperation'
+    
+    core.subspec "AVToolbox" do |avtb|
+      avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
+      avtb.dependency 'CXSwiftKit/FileOperation'
+    end
+    
+    core.subspec "EmptyDataSet" do |eds|
+      eds.source_files = 'CXSwiftKit/Classes/Core/EmptyDataSet/*.{swift}'
+      eds.dependency 'CXSwiftKit/Extension'
+    end
+    
+    core.subspec "Permissions" do |pm|
+      pm.source_files = 'CXSwiftKit/Classes/Core/Permissions/*.{swift}'
+      pm.dependency 'CXSwiftKit/Base'
+    end
+    
+    core.subspec "svga" do |svga|
+      svga.source_files = 'CXSwiftKit/Classes/Core/svga/*.{swift}'
+      svga.dependency 'CXSwiftKit/Base'
+    end
+    
+    core.subspec "Timer" do |timer|
+      timer.source_files = 'CXSwiftKit/Classes/Core/Timer/*.{swift}'
+    end
+    
+    core.subspec "Transition" do |transition|
+      transition.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
+      transition.dependency 'CXSwiftKit/Extension'
+    end
+    
+    core.subspec "WebSocket" do |ws|
+      ws.source_files = 'CXSwiftKit/Classes/Core/WebSocket/*.{swift}'
+      ws.dependency 'CXSwiftKit/Base'
+    end
+    
+    core.subspec "Widget" do |wd|
+      wd.source_files = 'CXSwiftKit/Classes/Core/Widget/*.{swift}'
+      wd.dependency 'CXSwiftKit/Base'
+    end
+    
+  end
+  
+  s.subspec "Rx" do |rx|
+    rx.source_files = 'CXSwiftKit/Classes/Rx/*.{swift}'
+    rx.dependency 'CXSwiftKit/Core/EmptyDataSet'
+  end
   
 end

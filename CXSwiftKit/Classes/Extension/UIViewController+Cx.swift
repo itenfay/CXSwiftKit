@@ -200,8 +200,8 @@ extension UIViewController: CXViewControllerWrapable {
         switch overlayDirection {
         case .top: aView.cx.y = -ratio * aView.cx.height
         case .left: aView.cx.x = -ratio * aView.cx.width
-        case .bottom: aView.cx.y = cxScreenHeight
-        case .right: aView.cx.x = cxScreenWidth
+        case .bottom: aView.cx.y = CGFloat.cx.screenHeight
+        case .right: aView.cx.x = CGFloat.cx.screenWidth
         }
         let animationOptions: UIView.AnimationOptions = [
             .curveEaseInOut,
@@ -212,8 +212,8 @@ extension UIViewController: CXViewControllerWrapable {
             switch overlayDirection {
             case .top: aView.cx.y = 0
             case .left: aView.cx.x = 0
-            case .bottom: aView.cx.y = (1 - ratio) * cxScreenHeight
-            case .right: aView.cx.x = (1 - ratio) * cxScreenWidth
+            case .bottom: aView.cx.y = (1 - ratio) * CGFloat.cx.screenHeight
+            case .right: aView.cx.x = (1 - ratio) * CGFloat.cx.screenWidth
             }
         } completion: { _ in
             completion?()
@@ -238,15 +238,15 @@ extension UIViewController: CXViewControllerWrapable {
         var aView = overlayView ?? view!
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
             switch overlayDirection {
-            case .top: aView.cx.y = -cxScreenHeight
-            case .left: aView.cx.x = -cxScreenWidth
-            case .bottom: aView.cx.y = cxScreenHeight
-            case .right: aView.cx.x = cxScreenWidth
+            case .top: aView.cx.y = -CGFloat.cx.screenHeight
+            case .left: aView.cx.x = -CGFloat.cx.screenWidth
+            case .bottom: aView.cx.y = CGFloat.cx.screenHeight
+            case .right: aView.cx.x = CGFloat.cx.screenWidth
             }
         } completion: { _ in
             self.view.removeFromSuperview()
             self.removeFromParent()
-            completion?()
+                completion?()
         }
     }
     

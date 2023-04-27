@@ -62,7 +62,7 @@ public class CXFileToolbox: NSObject {
     }
     
     /// Creates a cache directory with the given path component and returns the specified URL.
-    @objc public class func cacheURL(ByAppendingPathComponent pathComponent: String = "") -> URL? {
+    @objc public class func cacheURL(byAppendingPathComponent pathComponent: String = "") -> URL? {
         do {
             let cacheURL = try FileManager.default.url(for: .cachesDirectory,
                                                        in: .userDomainMask,
@@ -99,7 +99,7 @@ public class CXFileToolbox: NSObject {
     @objc public class func filePath(withURL url: URL, usingCustomFileName: String?, atDirectory directory: String?) -> String {
         var rootURL: URL?
         if let dir = directory, !dir.isEmpty {
-            rootURL = cacheURL(ByAppendingPathComponent: dir)
+            rootURL = cacheURL(byAppendingPathComponent: dir)
         } else {
             rootURL = cacheURL()
         }

@@ -143,7 +143,7 @@ extension NSObject: CXCommonWrapable {
     //    style.imageSize = CGSize(width: 20, height: 20)
     //    ToastManager.shared.style = style
     //    ToastView.appearance().bottomOffsetPortrait = cxScreenHeight/2 - 10
-    //    let sizeScale: CGFloat = (cxScreenWidth < 375) ? 0.9 : 1.0
+    //    let sizeScale: CGFloat = (CGFloat.cx.screenWidth < 375) ? 0.9 : 1.0
     //    ToastView.appearance().font = UIFont.systemFont(ofSize: sizeScale * 16)
     //}
     
@@ -157,13 +157,13 @@ extension NSObject: CXCommonWrapable {
         let appearance = ToastView.appearance()
         appearance.backgroundColor = UIColor.init(white: 0, alpha: 0.7)
         appearance.textColor = .white
-        let sizeScale: CGFloat = (cxScreenWidth < 375) ? 0.9 : 1.0
+        let sizeScale: CGFloat = (CGFloat.cx.screenWidth < 375) ? 0.9 : 1.0
         appearance.font = .systemFont(ofSize: sizeScale * 16)
         appearance.textInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         if bottomOffsetPortrait > 0 {
-            appearance.bottomOffsetPortrait = cxTabBarHeight + bottomOffsetPortrait
+            appearance.bottomOffsetPortrait = CGFloat.cx.tabBarHeight + bottomOffsetPortrait
         } else {
-            appearance.bottomOffsetPortrait = cxScreenHeight/2 - 10
+            appearance.bottomOffsetPortrait = CGFloat.cx.screenHeight/2 - 10
         }
         //appearance.cornerRadius = 10 // TODU: Ambiguous use of 'cornerRadius'
         if maxWidthRatio > 0 {
