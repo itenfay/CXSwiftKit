@@ -5,7 +5,9 @@
 //  Created by chenxing on 2022/11/30.
 //
 
+#if canImport(Foundation)
 import Foundation
+#endif
 
 //MARK: - CXBaseModel
 
