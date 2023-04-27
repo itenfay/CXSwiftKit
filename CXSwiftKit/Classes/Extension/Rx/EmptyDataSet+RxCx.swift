@@ -20,7 +20,7 @@ public enum CXEmptyDataSetType {
 
 extension Reactive where Base: CXEmptyDataSetMediator {
     
-    public var empty: Binder<CXEmptyDataSetType> {
+    public var cx_empty: Binder<CXEmptyDataSetType> {
         return Binder(base) { (target, type) in
             let style = target.style
             switch type {
