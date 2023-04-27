@@ -40,7 +40,7 @@ import Foundation
             desc = "[F: \(fileName) M: \(li.function) L: \(li.lineNumber)]"
         }
         desc = (desc.isEmpty ? "" : desc + " ") + message
-        if CXLogConfig.enableLog {
+        if CXConfig.enableLog {
             print("\(currentDateString) [\(level.description)] [CX] \(desc)")
         } else {
             if level == .debug || level == .verbose {
