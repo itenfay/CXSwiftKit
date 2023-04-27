@@ -48,26 +48,26 @@ extension CXSwiftBase where T : UIApplication {
         return base.cx_queryCurrentControllerBy(controller: controller)
     }
     
-    public static func loadView(
+    public static func instantiateView(
         _ viewType: UIView.Type,
         inBundle bundle: Bundle? = nil) -> UIView?
     {
-        return UIApplication.cx_loadView(viewType, inBundle: bundle)
+        return UIApplication.cx_instantiateView(viewType, inBundle: bundle)
     }
     
-    public static func loadViewController(
+    public static func instantiateViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle? = nil) -> UIViewController?
     {
-        return UIApplication.cx_loadViewController(viewControllerType, inBundle: bundle)
+        return UIApplication.cx_instantiateViewController(viewControllerType, inBundle: bundle)
     }
     
-    public static func cx_loadViewControllerFromStoryboard(
+    public static func instantiateSbViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle? = nil,
         withIdentifier identifier: String? = nil) -> UIViewController?
     {
-        return UIApplication.cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: bundle, withIdentifier: identifier)
+        return UIApplication.cx_instantiateSbViewController(viewControllerType, inBundle: bundle, withIdentifier: identifier)
     }
     
 }
@@ -147,51 +147,51 @@ extension UIApplication {
 
 extension UIApplication {
     
-    @objc public static func cx_loadView(
+    @objc public static func cx_instantiateView(
         _ viewType: UIView.Type) -> UIView?
     {
-        return cx_loadView(viewType, inBundle: nil)
+        return cx_instantiateView(viewType, inBundle: nil)
     }
     
-    @objc public static func cx_loadView(
+    @objc public static func cx_instantiateView(
         _ viewType: UIView.Type,
         inBundle bundle: Bundle?) -> UIView?
     {
-        return cxLoadViewFromXib(viewType, bundle: bundle)
+        return cxInstantiateXibView(viewType, bundle: bundle)
     }
     
-    @objc public static func cx_loadViewController(
+    @objc public static func cx_instantiateViewController(
         _ viewControllerType: UIViewController.Type) -> UIViewController?
     {
-        return cx_loadViewController(viewControllerType, inBundle: nil)
+        return cx_instantiateViewController(viewControllerType, inBundle: nil)
     }
     
-    @objc public static func cx_loadViewController(
+    @objc public static func cx_instantiateViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle?) -> UIViewController?
     {
-        return cxLoadViewControllerFromXib(viewControllerType, bundle: bundle)
+        return cxInstantiateXibViewController(viewControllerType, bundle: bundle)
     }
     
-    @objc public static func cx_loadViewControllerFromStoryboard(
+    @objc public static func cx_instantiateSbViewController(
         _ viewControllerType: UIViewController.Type) -> UIViewController?
     {
-        return cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: nil)
+        return cx_instantiateSbViewController(viewControllerType, inBundle: nil)
     }
     
-    @objc public static func cx_loadViewControllerFromStoryboard(
+    @objc public static func cx_instantiateSbViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle?) -> UIViewController?
     {
-        return cx_loadViewControllerFromStoryboard(viewControllerType, inBundle: bundle, withIdentifier: nil)
+        return cx_instantiateSbViewController(viewControllerType, inBundle: bundle, withIdentifier: nil)
     }
     
-    @objc public static func cx_loadViewControllerFromStoryboard(
+    @objc public static func cx_instantiateSbViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle?,
         withIdentifier identifier: String?) -> UIViewController?
     {
-        return cxLoadViewControllerFromStoryboard(viewControllerType, bundle: bundle, withIdentifier: identifier)
+        return cxInstantiateSbViewController(viewControllerType, bundle: bundle, withIdentifier: identifier)
     }
     
 }

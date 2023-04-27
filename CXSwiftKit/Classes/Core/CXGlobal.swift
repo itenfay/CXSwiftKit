@@ -370,8 +370,9 @@ public func cxSetIdleTimerDisabled(_ value: Bool)
 
 // MARK: - Xib.
 
-/// Loads a view from xib.
-public func cxLoadViewFromXib<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIView {
+/// Instantiates a view from xib.
+public func cxInstantiateXibView<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIView
+{
     guard let `class` = cls else { return nil }
     guard let name = NSStringFromClass(`class`).components(separatedBy: ".").last else {
         return nil
@@ -381,8 +382,9 @@ public func cxLoadViewFromXib<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? wh
     return view
 }
 
-/// Loads a view controller from xib
-public func cxLoadViewControllerFromXib<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIViewController {
+/// Instantiates a view controller from xib.
+public func cxInstantiateXibViewController<C>(_ cls: C.Type?, bundle: Bundle? = nil) -> C? where C: UIViewController
+{
     guard let `class` = cls else { return nil }
     let name = NSStringFromClass(`class`).components(separatedBy: ".").last
     return C.init(nibName: name, bundle: bundle)
@@ -390,8 +392,9 @@ public func cxLoadViewControllerFromXib<C>(_ cls: C.Type?, bundle: Bundle? = nil
 
 // MARK: - Storyboard.
 
-/// Loads a view controller from storyboard.
-public func cxLoadViewControllerFromStoryboard<C>(_ cls: C.Type?, bundle: Bundle? = nil, withIdentifier identifier: String? = nil) -> C? where C: UIViewController {
+/// Instantiates a view controller from storyboard.
+public func cxInstantiateSbViewController<C>(_ cls: C.Type?, bundle: Bundle? = nil, withIdentifier identifier: String? = nil) -> C? where C: UIViewController
+{
     guard let `class` = cls else { return nil }
     guard let name = NSStringFromClass(`class`).components(separatedBy: ".").last else {
         return nil
