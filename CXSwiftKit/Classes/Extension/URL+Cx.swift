@@ -56,6 +56,9 @@ extension CXSwiftBase where T == URL {
     /// Return the path, or an empty string if the URL has an empty path.
     public var path: String { base.cx_path }
     
+    /// Return a Boolean value that indicates whether the resource is a directory.
+    public var isDirectory: Bool! { base.cx_isDirectory }
+    
 }
 
 #if canImport(AVFoundation)
@@ -175,6 +178,11 @@ extension URL {
         } else {
             return path
         }
+    }
+    
+    /// Return a Boolean value that indicates whether the resource is a directory.
+    public var cx_isDirectory: Bool! {
+        return (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory
     }
     
 }
