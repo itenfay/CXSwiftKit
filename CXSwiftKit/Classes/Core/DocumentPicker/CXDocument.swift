@@ -10,7 +10,7 @@ import UIKit
 
 public class CXDocument: UIDocument {
     
-    var data: Data?
+    @objc public var data: Data?
     
     public override func contents(forType typeName: String) throws -> Any {
         guard let data = data else { return Data() }
