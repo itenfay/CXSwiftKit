@@ -20,7 +20,6 @@ open class CXDocumentPicker: NSObject {
     private var sourceType: CXDocumentSourceType!
     private var documents = [CXDocument]()
     private var documentTypes: [String] = []
-    private var mutex = DispatchSemaphore(value: 1)
     
     @objc public var actionSheetTitle: String = "Select"
     @objc public var actionSheetFileTitle: String = "File"
@@ -28,11 +27,11 @@ open class CXDocumentPicker: NSObject {
     @objc public var actionSheetCancelTitle: String = "Cancel"
     @objc public var fullScreenEnabled: Bool = false
     
-    convenience init(controller: UIViewController) {
+    @objc public convenience init(controller: UIViewController) {
         self.init(controller: controller, delegate: nil)
     }
     
-    init(controller: UIViewController, delegate: CXDocumentDelegate?) {
+    @objc public init(controller: UIViewController, delegate: CXDocumentDelegate?) {
         self.controller = controller
         self.delegate = delegate
     }
@@ -40,36 +39,34 @@ open class CXDocumentPicker: NSObject {
     private func presentDocumentPicker() {
         if sourceType == .folder {
             if #available(iOS 14.0, *) {
-                let audioType = UTType.audio
-                if documentTypes.contains(audioType.identifier) {
-                    documentTypes.removeAll { $0 == audioType.identifier }
+                if documentTypes.isEmpty {
+                    documentTypes.append(UTType.item.identifier)
                 }
-                var types = documentTypes.compactMap { UTType.init($0) }
                 let folderType = UTType.folder
-                if !documentTypes.contains(folderType.identifier) { types.append(folderType) }
+                if !documentTypes.contains(folderType.identifier) {
+                    documentTypes.append(folderType.identifier)
+                }
+                let types = documentTypes.compactMap { UTType($0) }
                 picker = UIDocumentPickerViewController.init(forOpeningContentTypes: types)
             } else {
-                let audioType = kUTTypeAudio as String
-                if documentTypes.contains(audioType) { documentTypes.removeAll { $0 == audioType } }
+                if documentTypes.isEmpty {
+                    documentTypes.append(kUTTypeItem as String)
+                }
                 let folderType = kUTTypeFolder as String
                 if !documentTypes.contains(folderType) { documentTypes.append(folderType) }
                 picker = UIDocumentPickerViewController.init(documentTypes: documentTypes, in: .open)
             }
         } else if sourceType == .file {
             if #available(iOS 14.0, *) {
-                let folderType = UTType.folder
-                if documentTypes.contains(folderType.identifier) {
-                    documentTypes.removeAll { $0 == folderType.identifier }
+                if documentTypes.isEmpty {
+                    documentTypes.append(UTType.data.identifier)
                 }
-                var types = documentTypes.compactMap { UTType.init($0) }
-                let audioType = UTType.audio
-                if !documentTypes.contains(audioType.identifier) { types.append(audioType) }
+                let types = documentTypes.compactMap { UTType($0) }
                 picker = UIDocumentPickerViewController.init(forOpeningContentTypes: types)
             } else {
-                let folderType = kUTTypeFolder as String
-                if documentTypes.contains(folderType) { documentTypes.removeAll { $0 == folderType } }
-                let audioType = kUTTypeAudio as String
-                if !documentTypes.contains(audioType) { documentTypes.append(audioType) }
+                if documentTypes.isEmpty {
+                    documentTypes.append(kUTTypeData as String)
+                }
                 picker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
             }
         }
@@ -103,7 +100,9 @@ open class CXDocumentPicker: NSObject {
         }
     }
     
-    @objc public func present() {
+    @objc public func present(documentTypes: [String]) {
+        self.documentTypes = documentTypes
+        
         // Select
         let alertController = UIAlertController(title: actionSheetTitle, message: nil, preferredStyle: .actionSheet)
         
@@ -154,28 +153,39 @@ extension CXDocumentPicker: UIDocumentPickerDelegate {
     }
     
     private func appendDocument(from pickedURL: URL) {
-        mutex.wait()
         switch sourceType {
         case .file:
             let document = CXDocument(fileURL: pickedURL)
             documents.append(document)
-            mutex.signal()
         case .folder:
             let shouldStopAccessing = pickedURL.startAccessingSecurityScopedResource()
             defer {
                 if shouldStopAccessing { pickedURL.stopAccessingSecurityScopedResource() }
             }
-            NSFileCoordinator().coordinate(readingItemAt: pickedURL, error: NSErrorPointer.none) { (folderURL) in
-                let keys: [URLResourceKey] = [.nameKey, .isDirectoryKey]
-                if let urls = FileManager.default.enumerator(at: folderURL, includingPropertiesForKeys: keys) {
-                    for case let fileURL as URL in urls {
-                        if !fileURL.cx.isDirectory {
+            NSFileCoordinator().coordinate(readingItemAt: pickedURL, error: NSErrorPointer.none) { folderURL in
+                let resourceKeys = Set<URLResourceKey>([.nameKey, .isDirectoryKey])
+                if let directoryEnumerator = FileManager.default.enumerator(
+                    at: folderURL,
+                    includingPropertiesForKeys: Array(resourceKeys),
+                    options: .skipsHiddenFiles)
+                {
+                    for case let fileURL as URL in directoryEnumerator {
+                        guard let resourceValues = try? fileURL.resourceValues(forKeys: resourceKeys),
+                              let isDirectory = resourceValues.isDirectory,
+                              let name = resourceValues.name
+                        else {
+                            continue
+                        }
+                        if isDirectory {
+                            if name == "_extras" {
+                                directoryEnumerator.skipDescendants()
+                            }
+                        } else {
                             let document = CXDocument(fileURL: fileURL)
                             self.documents.append(document)
                         }
                     }
                 }
-                self.mutex.signal()
             }
         case .none: break
         }
