@@ -37,6 +37,14 @@ extension CXSwiftBase where T == CGFloat {
     public static var tabBarHeight: CGFloat { CGFloat.cx_tabBarHeight }
     #endif
     
+    public var degreesToRadians: CGFloat {
+        return base.cx_degreesToRadians
+    }
+    
+    public var cx_radiansToDegrees: CGFloat {
+        return base.cx_radiansToDegrees
+    }
+    
 }
 
 extension CGFloat {
@@ -69,6 +77,14 @@ extension CGFloat {
     /// The height of the tab bar.
     public static var cx_tabBarHeight: CGFloat { cxTabBarHeight }
     #endif
+    
+    public var cx_degreesToRadians: Self {
+        return self * .pi / 180
+    }
+    
+    public var cx_radiansToDegrees: Self {
+        return self * 180 / .pi
+    }
     
 }
 
