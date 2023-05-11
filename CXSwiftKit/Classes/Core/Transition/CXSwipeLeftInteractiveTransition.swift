@@ -11,7 +11,7 @@ import UIKit
 public class CXSwipeLeftInteractiveTransition: UIPercentDrivenInteractiveTransition, UIGestureRecognizerDelegate {
     
     @objc public private(set) var interacting: Bool = false
-    @objc public var classBlackList: [AnyClass] = []
+    @objc public var classWhiteList: [AnyClass] = []
     
     @objc public private(set) weak var presentingVC: UIViewController?
     private var viewControllerCenter: CGPoint = .zero
@@ -99,7 +99,7 @@ public class CXSwipeLeftInteractiveTransition: UIPercentDrivenInteractiveTransit
                 return false
             }
         }
-        for cls in classBlackList {
+        for cls in classWhiteList {
             if touchView.superview?.isKind(of: cls) == true {
                 return false
             }
