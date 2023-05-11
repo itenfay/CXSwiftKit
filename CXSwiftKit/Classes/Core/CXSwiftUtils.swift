@@ -30,6 +30,21 @@ public class CXSwiftUtils: NSObject {
         return string.cx.length
     }
     
+    /// Makes the vibrate system sound.
+    @objc public static func makeVibrate(completion: (() -> Void)?) {
+        #if canImport(AudioToolbox)
+        cxMakeVibrate(completion: completion)
+        #endif
+    }
+    
+    /// Creates a notification with a given name and sender and posts it to the notification center.
+    @objc public static func notify(name aName: Notification.Name,
+                                    object anObject: Any? = nil,
+                                    userInfo aUserInfo: [AnyHashable: Any]? = nil)
+    {
+        cxNotify(name: aName, object: anObject, userInfo: aUserInfo)
+    }
+    
 }
 
 #if canImport(HandyJSON)
