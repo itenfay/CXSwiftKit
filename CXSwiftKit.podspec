@@ -77,7 +77,6 @@ Pod::Spec.new do |s|
     
     core.subspec "DocumentPicker" do |dp|
       dp.source_files = 'CXSwiftKit/Classes/Core/DocumentPicker/*.{swift}'
-      dp.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "EmptyDataSet" do |eds|
