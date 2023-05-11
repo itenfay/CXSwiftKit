@@ -19,6 +19,7 @@ public class CXApplePayContext: NSObject {
     
     @objc public private(set) var currentPaymentRequest: PKPaymentRequest?
     
+    @objc public var onPaymentAction: (() -> Void)?
     @objc public var shouldMakePayments: ((Bool) -> Void)?
     @objc public var shouldSupportPaymentNetworks: ((Bool) -> Void)?
     @objc public var willAuthorizePayment: (() -> Void)?
@@ -27,6 +28,33 @@ public class CXApplePayContext: NSObject {
     @objc public var didSelectPaymentMethod: ((PKPaymentMethod) -> Void)?
     @objc public var didSelectShippingContact: ((PKContact) -> Void)?
     @objc public var didSelectShippingMethod: ((PKShippingMethod) -> Void)?
+    
+    @objc public func makeOSPaymentButton(frame: CGRect) -> PKPaymentButton {
+        return makeOSPaymentButton(frame: frame, type: .buy, style: .black)
+    }
+    
+    @objc public func makeOSPaymentButton(frame: CGRect, type: PKPaymentButtonType, style: PKPaymentButtonStyle) -> PKPaymentButton {
+        let paymentButton = PKPaymentButton(paymentButtonType: type, paymentButtonStyle: style)
+        paymentButton.frame = frame
+        paymentButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
+        return paymentButton
+    }
+    
+    @objc public func makePaymentButton(frame: CGRect) -> PKPaymentButton {
+        return makePaymentButton(frame: frame, image: nil)
+    }
+    
+    @objc public func makePaymentButton(frame: CGRect, image: UIImage?) -> PKPaymentButton {
+        let bgImage = image ?? UIImage(named: "ApplePay_Payment_Mark")
+        let paymentButton = PKPaymentButton(frame: frame)
+        paymentButton.setBackgroundImage(bgImage, for: .normal)
+        paymentButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
+        return paymentButton
+    }
+    
+    @objc private func paymentAction(_ sender: PKPaymentButton) {
+        onPaymentAction?()
+    }
     
     /// Returns whether the user can make payments.
     @objc public var canMakePayments: Bool {
