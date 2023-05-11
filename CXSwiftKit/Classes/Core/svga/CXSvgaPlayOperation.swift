@@ -1,5 +1,5 @@
 //
-//  CXSVGAOperation.swift
+//  CXSvgaPlayOperation.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/5/14.
@@ -8,7 +8,7 @@
 #if os(iOS) && canImport(Foundation)
 import Foundation
 
-public class CXSVGAOperation: Operation {
+public class CXSvgaPlayOperation: Operation {
     
     /// The url for the svga.
     public private(set) var svgaUrl: String?
@@ -18,7 +18,7 @@ public class CXSVGAOperation: Operation {
     public private(set) var inBundle: Bundle?
     
     /// The closure for the operation starting.
-    private var startInvocation: ((CXSVGAOperation) -> Void)? = nil
+    private var startInvocation: ((CXSvgaPlayOperation) -> Void)? = nil
     
     /// Whether the operation is executing.
     override public var isExecuting: Bool {
@@ -43,9 +43,9 @@ public class CXSVGAOperation: Operation {
     /// Creates an operation for the svga.
     public class func create(
         withUrl url: String?,
-        invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation
+        invocation: @escaping (CXSvgaPlayOperation) -> Void) -> CXSvgaPlayOperation
     {
-        let op = CXSVGAOperation()
+        let op = CXSvgaPlayOperation()
         op.svgaUrl = url
         op.startInvocation = invocation
         return op
@@ -55,9 +55,9 @@ public class CXSVGAOperation: Operation {
     public class func create(
         withName name: String?,
         inBundle bundle: Bundle?,
-        invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation
+        invocation: @escaping (CXSvgaPlayOperation) -> Void) -> CXSvgaPlayOperation
     {
-        let op = CXSVGAOperation()
+        let op = CXSvgaPlayOperation()
         op.svgaName = name
         op.inBundle = bundle
         op.startInvocation = invocation

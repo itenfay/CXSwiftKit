@@ -1,5 +1,5 @@
 //
-//  CXSVGAManager.swift
+//  CXSvgaPlayManager.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/5/14.
@@ -12,9 +12,9 @@ import SVGAPlayer
     @objc var svgaPlayer: SVGAPlayer? { get set }
 }
 
-public class CXSVGAManager: NSObject, CXSVGAPlayPresentable {
+public class CXSvgaPlayManager: NSObject, CXSVGAPlayPresentable {
     
-    @objc public static let shared = CXSVGAManager()
+    @objc public static let shared = CXSvgaPlayManager()
     
     @objc public private(set) var svgaParser: SVGAParser!
     
@@ -30,7 +30,7 @@ public class CXSVGAManager: NSObject, CXSVGAPlayPresentable {
     
     @objc public var svgaAnimatedToPercentageHandler: ((_ percentage: CGFloat) -> Void)?
     
-    private var currentOp: CXSVGAOperation?
+    private var currentOp: CXSvgaPlayOperation?
     private var retryCount: Int8 = 3
     private var animationFinished: Bool = false
     private let mutex = DispatchSemaphore(value: 1)
@@ -44,9 +44,9 @@ public class CXSVGAManager: NSObject, CXSVGAPlayPresentable {
     @objc public func playWithUrl(_ url: String?, loops: Int = 1, clearsAfterStop: Bool = true) {
         svgaPlayer?.loops = Int32(loops)
         svgaPlayer?.clearsAfterStop = clearsAfterStop
-        let operation = CXSVGAOperation.create(withUrl: url) { [weak self] op in
-            self?.currentOp = op
-            self?.play(withOperation: op)
+        let operation = CXSvgaPlayOperation.create(withUrl: url) { [unowned self] op in
+            self.currentOp = op
+            self.play(withOperation: op)
         }
         queue.addOperation(operation)
     }
@@ -54,50 +54,46 @@ public class CXSVGAManager: NSObject, CXSVGAPlayPresentable {
     @objc public func playWithName(_ name: String?, inBundle bundle: Bundle? = nil, loops: Int = 1, clearsAfterStop: Bool = true) {
         svgaPlayer?.loops = Int32(loops)
         svgaPlayer?.clearsAfterStop = clearsAfterStop
-        let operation = CXSVGAOperation.create(withName: name, inBundle: bundle) { [weak self] op in
-            self?.currentOp = op
-            self?.play(withOperation: op)
+        let operation = CXSvgaPlayOperation.create(withName: name, inBundle: bundle) { [unowned self] op in
+            self.currentOp = op
+            self.play(withOperation: op)
         }
         queue.addOperation(operation)
     }
     
-    private func play(withOperation op: CXSVGAOperation) {
+    private func play(withOperation op: CXSvgaPlayOperation) {
         if let url = op.svgaUrl, !url.isEmpty {
-            svgaParser.parse(with: URL.init(string: url)!) { videoItem in
-                let manager = CXSVGAManager.shared
-                manager.displaySvga(withHidden: false)
-                manager.svgaPlayer?.videoItem = videoItem
-                manager.svgaPlayer?.startAnimation()
-            } failureBlock: { error in
-                let manager = CXSVGAManager.shared
+            svgaParser.parse(with: URL.init(string: url)!) { [unowned self] videoItem in
+                self.displaySvga(withHidden: false)
+                self.svgaPlayer?.videoItem = videoItem
+                self.svgaPlayer?.startAnimation()
+            } failureBlock: { [unowned self] error in
                 if error != nil {
                     CXLogger.log(level: .error, message: "error=\(error!)")
                 }
-                manager.retryToPlay(withOperation: op)
+                self.retryToPlay(withOperation: op)
             }
         } else if let name = op.svgaName, !name.isEmpty {
-            svgaParser.parse(withNamed: name, in: op.inBundle) { videoItem in
-                let manager = CXSVGAManager.shared
+            svgaParser.parse(withNamed: name, in: op.inBundle) { [unowned self] videoItem in
                 if videoItem != nil {
-                    manager.displaySvga(withHidden: false)
-                    manager.svgaPlayer?.videoItem = videoItem
-                    manager.svgaPlayer?.startAnimation()
+                    self.displaySvga(withHidden: false)
+                    self.svgaPlayer?.videoItem = videoItem
+                    self.svgaPlayer?.startAnimation()
                 } else {
-                    manager.finishAnimating()
+                    self.finishAnimating()
                 }
-            } failureBlock: { error in
-                let manager = CXSVGAManager.shared
+            } failureBlock: { [unowned self] error in
                 if error != nil {
                     CXLogger.log(level: .error, message: "error=\(error!)")
                 }
-                manager.retryToPlay(withOperation: op)
+                self.retryToPlay(withOperation: op)
             }
         } else {
             finishAnimating()
         }
     }
     
-    private func retryToPlay(withOperation op: CXSVGAOperation) {
+    private func retryToPlay(withOperation op: CXSvgaPlayOperation) {
         if retryCount == 0 {
             finishAnimating()
         } else {
@@ -137,7 +133,7 @@ public class CXSVGAManager: NSObject, CXSVGAPlayPresentable {
     
 }
 
-extension CXSVGAManager: SVGAPlayerDelegate {
+extension CXSvgaPlayManager: SVGAPlayerDelegate {
     
     func svgaPlayerDidFinishedAnimation(_ player: SVGAPlayer!) {
         animationFinished = true
