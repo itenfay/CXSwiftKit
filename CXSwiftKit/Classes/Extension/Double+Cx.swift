@@ -5,8 +5,6 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-import Foundation
-
 extension Double: CXSwiftBaseCompatible {}
 
 extension CXSwiftBase where T == Double {
@@ -21,13 +19,23 @@ extension CXSwiftBase where T == Double {
     }
     
     /// Converts the seconds to a audio duration format.
-    public func toAudioDurationFormat() -> String {
-        return base.cx_toAudioDurationFormat()
+    public func toAudioTimeString() -> String {
+        return base.cx_toAudioTimeString()
     }
     
     /// Converts the seconds to a film duration format.
-    public func toFilmDurationFormat() -> String {
-        return base.cx_toFilmDurationFormat()
+    public func toFilmTimeString() -> String {
+        return base.cx_toFilmTimeString()
+    }
+    
+    /// Converts the meters to the latitude.
+    public func metersToLatitude() -> Double {
+        return base.cx_metersToLatitude()
+    }
+    
+    /// Converts the meters to the longitude.
+    public func metersToLongitude() -> Double {
+        return base.cx_metersToLongitude()
     }
     
 }
@@ -51,20 +59,30 @@ extension Double {
     }
     
     /// Converts the seconds to a audio duration format.
-    public func cx_toAudioDurationFormat() -> String {
+    public func cx_toAudioTimeString() -> String {
         let min = Int(self / 60)
         let seconds = Int(self) % 60
         return String(format: "%02ld:%02ld", min, seconds)
     }
     
     /// Converts the seconds to a film duration format.
-    public func cx_toFilmDurationFormat() -> String {
+    public func cx_toFilmTimeString() -> String {
         let min = Int(self / 60)
         let hours = min / 60
         let seconds = Int(self) % 60
         return hours > 0
         ? String(format: "%02ld:%02ld:%02ld", hours, min, seconds)
         : String(format: "%02ld:%02ld", min, seconds)
+    }
+    
+    /// Converts the meters to the latitude.
+    public func cx_metersToLatitude() -> Double {
+        return self / (6360500.0)
+    }
+    
+    /// Converts the meters to the longitude.
+    public func cx_metersToLongitude() -> Double {
+        return self / (5602900.0)
     }
     
 }
