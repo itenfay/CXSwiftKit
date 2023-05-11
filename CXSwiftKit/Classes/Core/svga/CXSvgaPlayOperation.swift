@@ -41,7 +41,10 @@ public class CXSVGAOperation: Operation {
     }
     
     /// Creates an operation for the svga.
-    public class func create(withUrl url: String?, invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation {
+    public class func create(
+        withUrl url: String?,
+        invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation
+    {
         let op = CXSVGAOperation()
         op.svgaUrl = url
         op.startInvocation = invocation
@@ -49,7 +52,11 @@ public class CXSVGAOperation: Operation {
     }
     
     /// Creates an operation for the svga.
-    public class func create(withName name: String?, inBundle bundle: Bundle?, invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation {
+    public class func create(
+        withName name: String?,
+        inBundle bundle: Bundle?,
+        invocation: @escaping (CXSVGAOperation) -> Void) -> CXSVGAOperation
+    {
         let op = CXSVGAOperation()
         op.svgaName = name
         op.inBundle = bundle

@@ -29,6 +29,7 @@ public class CXSVGAManager: NSObject, CXSVGAPlayPresentable {
     }
     
     @objc public var svgaAnimatedToPercentageHandler: ((_ percentage: CGFloat) -> Void)?
+    
     private var currentOp: CXSVGAOperation?
     private var retryCount: Int8 = 3
     private var animationFinished: Bool = false

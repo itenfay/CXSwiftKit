@@ -64,7 +64,7 @@ public class CXScreenRecorder: NSObject {
         for i in 0..<smartAlbums.count {
             let assetCollection = smartAlbums[i]
             let assetsFetchResult: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: assetCollection, options: nil)
-            if assetCollection.localizedTitle == "视频" {
+            if assetCollection.localizedTitle == "视频" || assetCollection.localizedTitle?.lowercased().contains("video") == true {
                 if assetsFetchResult.count > 0 {
                     let phAsset: PHAsset = assetsFetchResult.lastObject!
                     _ = PHVideoRequestOptions()
