@@ -522,6 +522,14 @@ extension CXSwiftBase where T : UIView {
         return self.base.cx_safeCenterYAnchor
     }
     
+    public var safeWidthAnchor: NSLayoutDimension {
+        return self.base.cx_safeWidthAnchor
+    }
+    
+    public var safeHeightAnchor: NSLayoutDimension {
+        return self.base.cx_safeHeightAnchor
+    }
+    
 }
 
 //MARK: - Layout
@@ -1470,9 +1478,7 @@ extension UIView {
     
     @objc public func cx_makeConstraints(maker: @escaping (CXConstraintMaker) -> CXConstraintMaker) {
         assert(superview != nil, "The receiver’s superview is nil.")
-        guard let spView = superview else {
-            return
-        }
+        guard let spView = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         
         let cMaker = maker(CXConstraintMaker())
@@ -1542,54 +1548,71 @@ extension UIView {
     
     @objc public func cx_makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> CXConstraintMaker) {
         assert(superview != nil, "The receiver’s superview is nil.")
-        guard let spView = superview else {
-            return
-        }
+        guard let spView = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         
         let cMaker = maker(CXConstraintMaker())
         if cMaker.top.isEqual {
-            cx_safeTopAnchor.constraint(equalTo: spView.cx_safeTopAnchor, constant: cMaker.top.value).isActive = true
+            topAnchor.constraint(equalTo: spView.cx_safeTopAnchor, constant: cMaker.top.value).isActive = true
         } else if cMaker.top.isGreaterThanOrEqual {
-            cx_safeTopAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeTopAnchor, constant: cMaker.top.value).isActive = true
+            topAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeTopAnchor, constant: cMaker.top.value).isActive = true
         } else if cMaker.top.isLessThanOrEqual {
-            cx_safeTopAnchor.constraint(lessThanOrEqualTo: spView.cx_safeTopAnchor, constant: cMaker.top.value).isActive = true
+            topAnchor.constraint(lessThanOrEqualTo: spView.cx_safeTopAnchor, constant: cMaker.top.value).isActive = true
         }
         if cMaker.leading.isEqual {
-            cx_safeLeadingAnchor.constraint(equalTo: spView.cx_safeLeadingAnchor, constant: cMaker.leading.value).isActive = true
+            leftAnchor.constraint(equalTo: spView.cx_safeLeadingAnchor, constant: cMaker.leading.value).isActive = true
         } else if cMaker.leading.isGreaterThanOrEqual {
-            cx_safeLeadingAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeLeadingAnchor, constant: cMaker.leading.value).isActive = true
+            leftAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeLeadingAnchor, constant: cMaker.leading.value).isActive = true
         } else if cMaker.leading.isLessThanOrEqual {
-            cx_safeLeadingAnchor.constraint(lessThanOrEqualTo: spView.cx_safeLeadingAnchor, constant: cMaker.leading.value).isActive = true
+            leftAnchor.constraint(lessThanOrEqualTo: spView.cx_safeLeadingAnchor, constant: cMaker.leading.value).isActive = true
         }
         if cMaker.bottom.isEqual {
-            cx_safeBottomAnchor.constraint(equalTo: spView.cx_safeBottomAnchor, constant: cMaker.bottom.value).isActive = true
+            bottomAnchor.constraint(equalTo: spView.cx_safeBottomAnchor, constant: cMaker.bottom.value).isActive = true
         } else if cMaker.bottom.isGreaterThanOrEqual {
-            cx_safeBottomAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeBottomAnchor, constant: cMaker.bottom.value).isActive = true
+            bottomAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeBottomAnchor, constant: cMaker.bottom.value).isActive = true
         } else if cMaker.bottom.isLessThanOrEqual {
-            cx_safeBottomAnchor.constraint(lessThanOrEqualTo: spView.cx_safeBottomAnchor, constant: cMaker.bottom.value).isActive = true
+            bottomAnchor.constraint(lessThanOrEqualTo: spView.cx_safeBottomAnchor, constant: cMaker.bottom.value).isActive = true
         }
         if cMaker.trailing.isEqual {
-            cx_safeTrailingAnchor.constraint(equalTo: spView.cx_safeTrailingAnchor, constant: cMaker.trailing.value).isActive = true
+            rightAnchor.constraint(equalTo: spView.cx_safeTrailingAnchor, constant: cMaker.trailing.value).isActive = true
         } else if cMaker.trailing.isGreaterThanOrEqual {
-            cx_safeTrailingAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeTrailingAnchor, constant: cMaker.trailing.value).isActive = true
+            rightAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeTrailingAnchor, constant: cMaker.trailing.value).isActive = true
         } else if cMaker.trailing.isLessThanOrEqual {
-            cx_safeTrailingAnchor.constraint(lessThanOrEqualTo: spView.cx_safeTrailingAnchor, constant: cMaker.trailing.value).isActive = true
+            rightAnchor.constraint(lessThanOrEqualTo: spView.cx_safeTrailingAnchor, constant: cMaker.trailing.value).isActive = true
         }
         
         if cMaker.centerX.isEqual {
-            cx_safeCenterXAnchor.constraint(equalTo: spView.cx_safeCenterXAnchor, constant: cMaker.centerX.value).isActive = true
+            centerXAnchor.constraint(equalTo: spView.cx_safeCenterXAnchor, constant: cMaker.centerX.value).isActive = true
         } else if cMaker.centerX.isGreaterThanOrEqual {
-            cx_safeCenterXAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeCenterXAnchor, constant: cMaker.centerX.value).isActive = true
+            centerXAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeCenterXAnchor, constant: cMaker.centerX.value).isActive = true
         } else if cMaker.centerX.isLessThanOrEqual {
-            cx_safeCenterXAnchor.constraint(lessThanOrEqualTo: spView.cx_safeCenterXAnchor, constant: cMaker.centerX.value).isActive = true
+            centerXAnchor.constraint(lessThanOrEqualTo: spView.cx_safeCenterXAnchor, constant: cMaker.centerX.value).isActive = true
         }
         if cMaker.centerY.isEqual {
-            cx_safeCenterYAnchor.constraint(equalTo: spView.cx_safeCenterYAnchor, constant: cMaker.centerY.value).isActive = true
+            centerYAnchor.constraint(equalTo: spView.cx_safeCenterYAnchor, constant: cMaker.centerY.value).isActive = true
         } else if cMaker.centerY.isGreaterThanOrEqual {
-            cx_safeCenterYAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeCenterYAnchor, constant: cMaker.centerY.value).isActive = true
+            centerYAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeCenterYAnchor, constant: cMaker.centerY.value).isActive = true
         } else if cMaker.centerY.isLessThanOrEqual {
-            cx_safeCenterYAnchor.constraint(lessThanOrEqualTo: spView.cx_safeCenterYAnchor, constant: cMaker.centerY.value).isActive = true
+            centerYAnchor.constraint(lessThanOrEqualTo: spView.cx_safeCenterYAnchor, constant: cMaker.centerY.value).isActive = true
+        }
+        
+        if cMaker.width.value != 0 {
+            if cMaker.width.isEqual {
+                widthAnchor.constraint(equalTo: spView.cx_safeWidthAnchor, constant: cMaker.width.value).isActive = true
+            } else if cMaker.width.isGreaterThanOrEqual {
+                widthAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeWidthAnchor, constant: cMaker.width.value).isActive = true
+            } else if cMaker.width.isLessThanOrEqual {
+                widthAnchor.constraint(lessThanOrEqualTo: spView.cx_safeWidthAnchor, constant: cMaker.width.value).isActive = true
+            }
+        }
+        if cMaker.height.value != 0 {
+            if cMaker.height.isEqual {
+                heightAnchor.constraint(equalTo: spView.cx_safeHeightAnchor, constant: cMaker.height.value).isActive = true
+            } else if cMaker.height.isGreaterThanOrEqual {
+                heightAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeHeightAnchor, constant: cMaker.height.value).isActive = true
+            } else if cMaker.height.isLessThanOrEqual {
+                heightAnchor.constraint(lessThanOrEqualTo: spView.cx_safeHeightAnchor, constant: cMaker.height.value).isActive = true
+            }
         }
     }
     
@@ -1633,6 +1656,20 @@ extension UIView {
             return safeAreaLayoutGuide.centerYAnchor
         }
         return centerYAnchor
+    }
+    
+    @objc public var cx_safeWidthAnchor: NSLayoutDimension {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.widthAnchor
+        }
+        return widthAnchor
+    }
+    
+    @objc public var cx_safeHeightAnchor: NSLayoutDimension {
+        if #available(iOS 11.0, *) {
+            return safeAreaLayoutGuide.heightAnchor
+        }
+        return heightAnchor
     }
     
 }
