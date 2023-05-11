@@ -7,6 +7,9 @@
 
 #if canImport(UIKit)
 import UIKit
+#if canImport(CoreText)
+import CoreText
+#endif
 
 extension CXSwiftBase where T : UILabel {
     
