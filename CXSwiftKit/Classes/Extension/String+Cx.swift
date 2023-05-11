@@ -317,18 +317,69 @@ extension CXSwiftBase where T == String {
     }
     #endif
     
-    /// The string whether is a telephone.
+    /// The string whether is a valid number.
+    public func validNumber() -> Bool{
+        do {
+            let pattern = "^[0-9]*$"
+            let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
+            let results = regex.matches(in: self.base, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, self.length))
+            return results.count > 0
+        } catch {
+            return false
+        }
+    }
+    
+    /// The string whether is a telephone number.
     public func evaluateTelephone() -> Bool {
         let regex = "^1[3456789]\\d{9}$"
         let pred = NSPredicate(format: "SELF MATCHES %@", regex)
-        return pred.evaluate(with: self)
+        return pred.evaluate(with: self.base)
     }
     
-    /// The string whether is a decimal.
+    /// The string whether is a decimal number.
     public func evaluateDecimal() -> Bool {
         let regex = "^[0-9]+(\\.[0-9]{1,2})?$"
         let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
-        return pred.evaluate(with: self)
+        return pred.evaluate(with: self.base)
+    }
+    
+    /// The string whether is safe password.
+    public func evaluateSafePassword() -> Bool {
+        let regex = "^[a-zA-Z0-9]{6,16}+$"
+        let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
+        return pred.evaluate(with: self.base)
+    }
+    
+    /// Returns the time string by comparing current time.
+    public func timeStringByComparingCurrentTime() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let timeDate = formatter.date(from: self.base) else {
+            return ""
+        }
+        let currentDate = Date()
+        let timeInterval = currentDate.timeIntervalSince(timeDate)
+        var temp: Double = 0
+        var result = String()
+        if (timeInterval/60 < 1) {
+            result = "刚刚"
+        } else if ((timeInterval/60) < 60) {
+            temp = timeInterval/60
+            result = String(format:"%ld分钟前", Int(temp))
+        } else if ((timeInterval/60/60) < 24) {
+            temp = timeInterval/60/60
+            result = String(format:"%ld小时前", Int(temp))
+        } else if ((timeInterval/60/60/24) < 30) {
+            temp = timeInterval/60/60/24
+            result = String(format:"%ld天前", Int(temp))
+        } else if ((timeInterval/60/60/24/30) < 12) {
+            temp = timeInterval/60/60/24/30
+            result = String(format:"%ld月前", Int(temp))
+        } else {
+            temp = timeInterval/60/60/24/30/12;
+            result = String(format:"%ld年前", Int(temp))
+        }
+        return result
     }
     
     /// NSLocalizedString shorthand.
