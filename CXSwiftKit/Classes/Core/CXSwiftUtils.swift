@@ -45,6 +45,11 @@ public class CXSwiftUtils: NSObject {
         cxNotify(name: aName, object: anObject, userInfo: aUserInfo)
     }
     
+    /// Returns the time string by comparing current time.
+    @objc public static func timeStringByComparingCurrentTime(_ string: String) -> String {
+        return string.cx.timeStringByComparingCurrentTime()
+    }
+    
 }
 
 #if canImport(HandyJSON)
