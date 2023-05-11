@@ -9,6 +9,11 @@
 import Foundation
 import PassKit
 
+/// For In-App-Purchase, please see:
+/// - [ObjC](https://github.com/chenxing640/DYFStoreKit)
+/// - [Swift](https://github.com/chenxing640/DYFStore)
+
+/// The class for Apple payment.
 public class CXApplePayContext: NSObject {
     
     @objc public weak var controller: UIViewController!
