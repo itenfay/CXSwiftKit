@@ -22,12 +22,12 @@
         case .devicePasscode:   return "DevicePasscode"   // Passcode
         case .contacts:         return "Contacts"
         case .reminder:         return "Reminder"
-        case .event:            return "Event"
+        case .event:            return "Calendar"
         case .motion:           return "Motion"
         case .speech:           return "Speech"
-        case .intents:          return "Intents"     // Siri
+        case .intents:          return "Siri"        // Siri
         case .health:           return "Health"      // Health
-        case .media:            return "Media"       // Apple Music
+        case .media:            return "AppleMusic"  // Apple Music
         case .appTracking:      return "AppTracking"
         }
     }
