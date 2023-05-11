@@ -78,6 +78,7 @@ public func cxSynchronize(_ obj: Any, closure: @escaping () -> Void)
 }
 
 /// Submits a work item to a dispatch queue for asynchronous execution after a specified time.
+///
 /// - Parameters:
 ///   - delay: he time interval after which the work item should be executed.
 ///   - work: The work item to be invoked on the queue.
@@ -86,9 +87,55 @@ public func cxDelayToDispatch(_ delay: TimeInterval, execute work: @escaping () 
     DispatchQueue.cx.mainAsyncAfter(delay, execute: work)
 }
 
+/// Unsafely converts an unmanaged class reference to a pointer.
+public func cxToUnsafeMutableRawPointer(_ instance: AnyObject) -> UnsafeMutableRawPointer
+{
+    return Unmanaged.passUnretained(instance).toOpaque()
+}
+
+/// Return the type of the specified parameter.
+public func cxType<E>(of e: E) -> E.Type
+{
+    return type(of: e)
+}
+
+/// Creates a notification with a given name and sender and posts it to the notification center.
+public func cxNotify(name aName: Notification.Name,
+                     object anObject: Any? = nil,
+                     userInfo aUserInfo: [AnyHashable: Any]? = nil)
+{
+    NotificationCenter.default.post(name: aName, object: anObject, userInfo: aUserInfo)
+}
+
+/// For more, please view：
+/// - [ObjC](https://github.com/chenxing640/DYFRuntimeProvider)
+/// - [Swift](https://github.com/chenxing640/DYFSwiftRuntimeProvider)
+@discardableResult
+public func cxSwizzling(_ cls: AnyClass?, _ selector: Selector, withClass swizzledClass: AnyClass? = nil, withSelector swizzledSelector: Selector) -> Bool {
+    let swizzledCls: AnyClass? = swizzledClass ?? cls
+    guard let originalMethod = class_getInstanceMethod(cls, selector),
+          let swizzledMethod = class_getInstanceMethod(swizzledCls, swizzledSelector)
+    else {
+        return false
+    }
+    method_exchangeImplementations(originalMethod, swizzledMethod)
+    return true
+}
+
+#if canImport(AudioToolbox)
+import AudioToolbox
+
+/// Makes the vibrate system sound.
+public func cxMakeVibrate(completion: (() -> Void)? = nil) {
+    AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, completion)
+}
+
+#endif
+
 // MARK: - OSS Image Handle
 
 /// Resize image by the height. e.g.: height=100, px：resize,h_100, scale mode(lfit): m_lfit.
+///
 /// - Parameters:
 ///   - url: The url of the image.
 ///   - height: The height to scale.
@@ -109,6 +156,7 @@ public func cxImageResize(withUrl url: String?, height: CGFloat) -> String?
 }
 
 /// Resize image by the width. e.g.: width=100, px：resize,w_100, scale mode(lfit)：m_lfit.
+///
 /// limit_0：scale by the specified parameters, limit_1：scale without the specified parameters, return the original image.
 /// - Parameters:
 ///   - url: The url of the image.
@@ -129,6 +177,7 @@ public func cxImageResized(withUrl url: String?, width: CGFloat) -> String?
 }
 
 /// Resize image by the long edge. e.g.: width=100, px: resize,l_100.
+///
 /// - Parameters:
 ///   - url: The url of the image.
 ///   - longEdgeWidth: The long edge width to scale.
@@ -148,6 +197,7 @@ public func cxImageResize(withUrl url: String?, longEdgeWidth: CGFloat) -> Strin
 }
 
 /// Resize image by the specified width and height. e.g.: width=height=100, px：resize,h_100,w_100, scale model(fill)：m_fill.
+///
 /// - Parameters:
 ///   - url: The url of the image.
 ///   - width: The width to scale.
@@ -168,6 +218,7 @@ public func cxImageResize(withUrl url: String?, width: CGFloat, height: CGFloat)
 }
 
 /// Take snapshot of the video at the specified time with the `OSSfast` mode.
+///
 /// - Parameters:
 ///   - url: The url of the video.
 ///   - time: The specified time。
