@@ -50,9 +50,9 @@ Pod::Spec.new do |s|
   end
   
   s.subspec "ApplePay" do |applepay|
-      applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
-      applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
-      applepay.dependency 'CXSwiftKit/Base'
+    applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
+    applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
+    applepay.dependency 'CXSwiftKit/Base'
   end
   
   s.subspec "Protocol" do |pt|
@@ -68,6 +68,11 @@ Pod::Spec.new do |s|
   s.subspec "FileOperation" do |fo|
     fo.source_files = 'CXSwiftKit/Classes/FileOperation/*.{swift}'
     fo.dependency 'CXSwiftKit/Extension'
+  end
+  
+  s.subspec "LiveGift" do |livegift|
+    livegift.source_files = 'CXSwiftKit/Classes/LiveGift/*.{swift}'
+    livegift.dependency 'CXSwiftKit/Extension'
   end
   
   s.subspec "Core" do |core|

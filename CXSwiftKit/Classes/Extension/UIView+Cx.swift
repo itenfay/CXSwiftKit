@@ -490,11 +490,11 @@ extension CXSwiftBase where T : UIView {
     }
     #endif
     
-    public func makeConstraints(maker: @escaping (CXConstraintMaker) -> CXConstraintMaker) {
+    public func makeConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         self.base.cx_makeConstraints(maker: maker)
     }
     
-    public func makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> CXConstraintMaker) {
+    public func makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         self.base.cx_makeSafeAreaConstraints(maker: maker)
     }
     
@@ -1476,12 +1476,14 @@ extension UIView: CXSwiftViewWrapable {
 
 extension UIView {
     
-    @objc public func cx_makeConstraints(maker: @escaping (CXConstraintMaker) -> CXConstraintMaker) {
+    @objc public func cx_makeConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         assert(superview != nil, "The receiver’s superview is nil.")
         guard let spView = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         
-        let cMaker = maker(CXConstraintMaker())
+        let cMaker = CXConstraintMaker()
+        maker(cMaker)
+        
         if cMaker.top.isEqual {
             topAnchor.constraint(equalTo: spView.topAnchor, constant: cMaker.top.value).isActive = true
         } else if cMaker.top.isGreaterThanOrEqual {
@@ -1546,12 +1548,14 @@ extension UIView {
         }
     }
     
-    @objc public func cx_makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> CXConstraintMaker) {
+    @objc public func cx_makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         assert(superview != nil, "The receiver’s superview is nil.")
         guard let spView = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         
-        let cMaker = maker(CXConstraintMaker())
+        let cMaker = CXConstraintMaker()
+        maker(cMaker)
+        
         if cMaker.top.isEqual {
             topAnchor.constraint(equalTo: spView.cx_safeTopAnchor, constant: cMaker.top.value).isActive = true
         } else if cMaker.top.isGreaterThanOrEqual {
