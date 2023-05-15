@@ -75,6 +75,11 @@ Pod::Spec.new do |s|
     livegift.dependency 'CXSwiftKit/Extension'
   end
   
+  s.subspec "NetWork" do |network|
+    network.source_files = 'CXSwiftKit/Classes/NetWork/*.{swift}'
+    network.dependency 'CXSwiftKit/Base'
+  end
+  
   s.subspec "Core" do |core|
     core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
     #core.dependency 'DYFSwiftKeychain'
