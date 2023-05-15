@@ -20,7 +20,7 @@ public class CXLiveGiftView: UIView {
             self.countModifier?(self.countLabel, self.currentGiftCount)
             if self.currentGiftCount > 1 {
                 self.setGiftCountAnimation(gift: self.countLabel)
-                NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(hide), object: nil)
+                self.cancelAction(self, selector: #selector(hide))
                 self.perform(#selector(hide), with: nil, afterDelay: TimeInterval(animationTime))
             } else {
                 self.perform(#selector(hide), with: nil, afterDelay: TimeInterval(animationTime))
@@ -48,7 +48,7 @@ public class CXLiveGiftView: UIView {
         return label
     }()
     
-    lazy var giftView: UIImageView = {
+    lazy var giftImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.sizeThatFits(CGSize(width: 60, height: 60))
         return imageView
@@ -78,6 +78,11 @@ public class CXLiveGiftView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public func cancelAction(_ target: Any, selector: Selector, object: Any? = nil) {
+        NSObject.cancelPreviousPerformRequests(withTarget: target, selector: selector, object: object)
+    }
+    
 }
 
 extension CXLiveGiftView {
@@ -100,23 +105,23 @@ extension CXLiveGiftView {
         
         self.addSubview(backGroundView)
         backGroundView.addSubview(contentLabel)
-        self.addSubview(giftView)
+        self.addSubview(giftImageView)
         self.addSubview(countLabel)
         
         backGroundView.frame = CGRect(x: 2, y: 50, width: 220, height: 30)
-        backGroundView.addCorner(roundingCorners: [UIRectCorner.bottomRight, UIRectCorner.topRight], cornerSize: CGSize(width: 15, height: 15))
+        backGroundView.lg_addCorner(roundingCorners: [UIRectCorner.bottomRight, UIRectCorner.topRight], cornerSize: CGSize(width: 15, height: 15))
         contentLabel.frame = CGRect(x: 2, y: backGroundView.bounds.size.height/2 - 10/2, width: 150, height: 10)
-        giftView.frame = CGRect(x: 148, y: 0, width: 80, height: 80)
+        giftImageView.frame = CGRect(x: 148, y: 0, width: 80, height: 80)
         countLabel.frame = CGRect(x: 225, y: 50, width: 50, height: 30)
     }
     
     func show(giftModel: CXLiveGiftModel, isfinished: animationFinished? = nil) {
         self.giftModel = giftModel
         self.giftEndCallBack = isfinished
-        giftView.image = UIImage(named: giftModel.giftName)
+        giftImageView.image = UIImage(named: giftModel.giftName)
         contentLabel.text = giftModel.giftDescription
         backgroundModifier?(backGroundView)
-        giftIconModifier?(giftView)
+        giftIconModifier?(giftImageView)
         contentModifier?(contentLabel, contentLabel.text ?? "")
         self.isHidden = false
         if let callBack = giftKeyCallBack, self.currentGiftCount == 0 {
@@ -163,7 +168,7 @@ extension CXLiveGiftView {
 
 extension UIView {
     
-    public func addCorner(roundingCorners: UIRectCorner, cornerSize: CGSize) {
+    public func lg_addCorner(roundingCorners: UIRectCorner, cornerSize: CGSize) {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundingCorners, cornerRadii: cornerSize)
         let cornerLayer = CAShapeLayer()
         cornerLayer.frame = bounds
