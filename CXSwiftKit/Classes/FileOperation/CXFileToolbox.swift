@@ -52,7 +52,7 @@ public class CXFileToolbox: NSObject {
             let isDirExist = FileManager.default.fileExists(atPath: path, isDirectory: &isDir)
             if isDirExist && isDir.boolValue {}
             else {
-                try FileManager.default.createDirectory(at: URL(fileURLWithPath: path), withIntermediateDirectories: true)
+                try FileManager.default.createDirectory(at: URL(localFilePath: path), withIntermediateDirectories: true)
             }
             return true
         } catch {
@@ -71,7 +71,7 @@ public class CXFileToolbox: NSObject {
             if pathComponent.isEmpty {
                 return cacheURL
             }
-            let dstURL = cacheURL.appendingPathComponent(pathComponent)
+            let dstURL = cacheURL.cx_appendingPathComponent(pathComponent)
             var isDir: ObjCBool = false
             let isDirExist = FileManager.default.fileExists(atPath: dstURL.cx_path, isDirectory: &isDir)
             if isDirExist && isDir.boolValue {}
@@ -105,14 +105,14 @@ public class CXFileToolbox: NSObject {
         }
         var filePathURL: URL?
         if let name = usingCustomFileName, !name.isEmpty {
-            filePathURL = rootURL?.appendingPathComponent(name)
+            filePathURL = rootURL?.cx_appendingPathComponent(name)
         } else {
             let fileName = fileName(withURL: url)
             let fileExt  = pathExtension(withURL: url)
             let file = (fileName.cx.md5 ?? fileName) + "." + fileExt
-            filePathURL = rootURL?.appendingPathComponent(file)
+            filePathURL = rootURL?.cx_appendingPathComponent(file)
         }
-        return filePathURL?.path ?? ""
+        return filePathURL?.cx_path ?? ""
     }
     
     /// The file’s size in bytes at the specified path.
@@ -167,7 +167,7 @@ public class CXFileToolbox: NSObject {
     /// Writes the specified data synchronously to specified path.
     @objc public class func write(data: Data, toPath path: String) {
         do {
-            let fileHandle = try FileHandle(forUpdating: URL(fileURLWithPath: path))
+            let fileHandle = try FileHandle(forUpdating: URL(localFilePath: path))
             if #available(macOS 10.15.4, iOS 13.4, watchOS 6.2, tvOS 13.4, *) {
                 try fileHandle.seekToEnd()
                 try fileHandle.write(contentsOf: data)
@@ -187,7 +187,7 @@ public class CXFileToolbox: NSObject {
     @objc public class func write(array: NSArray, toPath path: String) {
         if #available(macOS 10.13, iOS 11.0, watchOS 4.0, tvOS 11.0, *) {
             do {
-                try array.write(to: URL(fileURLWithPath: path))
+                try array.write(to: URL(localFilePath: path))
             } catch {
                 CXLogger.log(level: .error, message: "error=\(error)")
             }
@@ -203,7 +203,7 @@ public class CXFileToolbox: NSObject {
     @objc public class func write(dictionary: NSDictionary, toPath path: String) {
         if #available(macOS 10.13, iOS 11.0, watchOS 4.0, tvOS 11.0, *) {
             do {
-                try dictionary.write(to: URL(fileURLWithPath: path))
+                try dictionary.write(to: URL(localFilePath: path))
             } catch {
                 CXLogger.log(level: .error, message: "error=\(error)")
             }
