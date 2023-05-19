@@ -425,6 +425,11 @@ extension CXSwiftBase where T == String {
         return nsStr.appendingPathComponent(string)
     }
     
+    /// Returns a Boolean value indicating whether a string is equal to self.base.
+    public func equalsIgnoreCase(_ string: String) -> Bool {
+        return self.base.lowercased() == string.lowercased()
+    }
+    
 }
 
 #endif
