@@ -26,7 +26,7 @@ private struct MoyaApi: TargetType {
         case .download(let url, _):
             return url
         default:
-            return URL(string: "")!
+            return URL(string: "\(request.baseUrl)") ?? URL(string: "https://host.error")!
         }
     }
     
@@ -35,7 +35,7 @@ private struct MoyaApi: TargetType {
         case .download(_, _):
             return ""
         default:
-            return request.url
+            return request.path
         }
     }
     
@@ -50,7 +50,9 @@ private struct MoyaApi: TargetType {
         }
     }
     
-    var sampleData: Data = "".data(using: .utf8)!
+    var sampleData: Data {
+        return request.sampleData
+    }
     
     var task: Task {
         switch request.taskType {
@@ -81,18 +83,49 @@ private struct MoyaApi: TargetType {
         switch request.taskType {
         case .download(let url, let toDirectory):
             let fileName = url.lastPathComponent
-            return cxAssetRootDir.appendingPathComponent(toDirectory).appendingPathComponent(fileName)
+            return cxAssetRootDir.nwAppendingPathComponent(toDirectory).nwAppendingPathComponent(fileName)
         default:
             return cxAssetRootDir
         }
     }
     
     var downloadDestination: DownloadDestination {
-        CXLogger.log(level: .info, message: "localLocation=\(localLocation)")
         return { _, _ in return (self.localLocation, .removePreviousFile) }
     }
     
 }
+
+//**************************************************************************************************************
+// e.g.:
+// Downloads an image to the local.
+//let url = "https://atts.w3cschool.cn/attachments/image/20171028/1509160178371523.png"
+//CXNetWorkManager.shared.request(api: StreamAPI(downloadURL: URL(string: url)!, toDirectory: "Images")) { result in
+//    switch result {
+//    case .success(let data):
+//        print("filePath: \(String(data: data, encoding: .utf8))")
+//    case .failure(let error):
+//        print("error: \(error)")
+//    }
+//}
+
+// Gets an image data.
+//let base = "https://xxx.xxx.xx"
+//let imgCodePath = "/auth/v1/verify/phoneImgCode"
+//CXNetWorkManager.shared.request(api: API(baseUrl: base, path: imgCodePath, method: .get)) { result in
+//    switch result {
+//    case .success(let data):
+//        let image = UIImage(data: data)
+//        print("imageData: \(data), image: \(image)")
+//    case .failure(let error):
+//        print("error: \(error)")
+//    }
+//}
+
+// Gets cookies, and so on.
+//CXNetWorkManager.shared.onRequestCompletion = { [weak self] response in
+//    print("response: \(response), httpURLRespone: \(response.response)")
+//}
+//**************************************************************************************************************
 
 public class CXNetWorkManager {
     
@@ -109,7 +142,13 @@ public class CXNetWorkManager {
     public var timeoutInterval: TimeInterval = 15
     /// The moya plugins.
     public var plugins: [PluginType] = []
+    /// Track inflights.
     public var trackInflights: Bool = false
+    
+    /// The closure decides how a request should be stubbed.
+    private var stubClosure: MoyaProvider<MoyaApi>.StubClosure = MoyaProvider.neverStub
+    /// The closure represents a request has been completed.
+    public var onRequestCompletion: ((Moya.Response) -> Void)?
     
     /// Invokes this method when update the parameters.
     public func updateProvider() {
@@ -120,41 +159,39 @@ public class CXNetWorkManager {
                 closure(.success(urlRequest))
             } else {
                 closure(.failure(MoyaError.requestMapping(endpoint.url)))
-            }} , plugins: plugins, trackInflights: trackInflights)
+            }}, stubClosure: stubClosure, plugins: plugins, trackInflights: trackInflights)
     }
     
     /// Send a request.
     public func send(_ request: CXRequest, completionHandler: @escaping (Result<Data,Error>) -> Void) {
+        //self.updateStub(request)
         let target = MoyaApi(request: request)
         self.request(target: target, completion: completionHandler)
     }
     
     private func request(target: MoyaApi, completion: @escaping (Result<Data, Error>) -> Void) {
-        apiProvider.request(target) { (res) in
-            switch res {
-            case .success(let a):
-                completion(.success(a.data))
+        apiProvider.request(target) { [unowned self] result in
+            switch result {
+            case .success(let response):
+                self.onRequestCompletion?(response)
+                completion(.success(response.data))
             case .failure:
-                completion(.failure(res.error!))
+                completion(.failure(result.error!))
             }
         }
     }
     
-    public func request(api: IOAPI, response: ((CXResponseResult<Data>) -> Void)?) {
-        let completionHandler: ((Result<Data, Error>) -> Void) = { result in
-            switch result {
-            case .success(let data):
-                response?(.success(data))
-            case .failure(let error):
-                response?(.failure(.requestFailed(error)))
-            }
-        }
+    /// Executes a request.
+    public func request(api: APIType, response: ((CXResponseResult<Data>) -> Void)?) {
+        var downloadPath = ""
         
         switch api.taskType {
-        case .download(_, let toDirectory):
+        case .download(let url, let toDirectory):
             do {
-                let targetURL = cxAssetRootDir.appendingPathComponent(toDirectory)
+                let targetURL = cxAssetRootDir.nwAppendingPathComponent(toDirectory)
                 try FileManager.default.createDirectory(at: targetURL, withIntermediateDirectories: true)
+                let fileName = url.lastPathComponent
+                downloadPath = targetURL.nwAppendingPathComponent(fileName).nwPath
             } catch let error {
                 response?(.failure(.innerError(error.localizedDescription)))
                 return
@@ -162,9 +199,52 @@ public class CXNetWorkManager {
         default: break
         }
         
-        var request = CXRequest(url: api.url, method: api.method, taskType: api.taskType)
+        let completionHandler: ((Result<Data, Error>) -> Void) = { result in
+            switch result {
+            case .success(let data):
+                if downloadPath.isEmpty {
+                    response?(.success(data))
+                } else {
+                    response?(.success(downloadPath.data(using: .utf8) ?? Data()))
+                }
+            case .failure(let error):
+                response?(.failure(.requestFailed(error)))
+            }
+        }
+        
+        var request = CXRequest(baseUrl: api.baseUrl, path: api.path, method: api.method, taskType: api.taskType)
         request.updateHeaders(api.headers)
+        request.setupSampleData(api.sampleData)
         CXNetWorkManager.shared.send(request, completionHandler: completionHandler)
+    }
+    
+    private func updateStub(_ request: CXRequest) {
+        if !request.sampleData.isEmpty {
+            stubClosure = MoyaProvider.delayedStub(1)
+        } else {
+            stubClosure = MoyaProvider.neverStub
+        }
+        updateProvider()
+    }
+    
+}
+
+extension URL {
+    
+    public func nwAppendingPathComponent(_ path: String) -> URL {
+        if #available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *) {
+            return appending(path: path, directoryHint: .inferFromPath)
+        } else {
+            return appendingPathComponent(path)
+        }
+    }
+    
+    public var nwPath: String {
+        if #available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *) {
+            return path(percentEncoded: false)
+        } else {
+            return path
+        }
     }
     
 }

@@ -34,21 +34,31 @@ public enum CXTaskType {
 /// The necessary information of a request.
 public struct CXRequest {
     
-    public private(set) var url: String
+    public private(set) var baseUrl: String
+    public private(set) var path: String
     public private(set) var method: CXRequestMethod
     public private(set) var headers: [String : String] = ["Content-Type" : "application/x-www-form-urlencoded"]
     public private(set) var taskType: CXTaskType
+    public private(set) var sampleData: Data = "".data(using: .utf8)!
     
-    public init(url: String, method: CXRequestMethod, taskType: CXTaskType) {
-        self.url = url
+    public init(baseUrl: String, path: String, method: CXRequestMethod, taskType: CXTaskType) {
+        self.baseUrl = baseUrl
+        self.path = path
         self.method = method
         self.taskType = taskType
     }
     
     public mutating func updateHeaders(_ headers: [String : String]?) {
-        if let _headers_ = headers, !_headers_.isEmpty {
-            self.headers = _headers_
+        guard let _headers = headers, !_headers.isEmpty else { return }
+        for (k, v) in _headers {
+            //self.headers.updateValue(v, forKey: k)
+            self.headers[k] = v
         }
+    }
+    
+    public mutating func setupSampleData(_ data: Data?) {
+        guard let sampleData = data else { return }
+        self.sampleData = sampleData
     }
     
 }
