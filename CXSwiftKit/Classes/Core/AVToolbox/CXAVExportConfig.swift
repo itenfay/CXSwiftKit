@@ -26,7 +26,7 @@ public class CXAVExportConfig: NSObject {
     
     /// A new string made by deleting the extension (if any, and only the last) from the receiver.
     @objc public func fileName(withURL url: URL) -> String {
-        return url.deletingPathExtension().lastPathComponent
+        return CXFileToolbox.fileName(withURL: url)
     }
     
     /// Export the file url with the directory and file name.
@@ -38,7 +38,7 @@ public class CXAVExportConfig: NSObject {
     /// Export the file url with the directory and file name.
     public func exportFileURL(with dirName: String, fileName: String) -> (Bool, URL) {
         let (success, directory) = makeDirectory(with: dirName)
-        let fileURL = URL(fileURLWithPath: directory).appendingPathComponent(fileName)
+        let fileURL = URL(localFilePath: directory).cx.appendingPathComponent(fileName)
         CXLogger.log(level: .info, message: "fileURL=\(fileURL)")
         if success {
             removeItem(atPath: fileURL.cx_path)
@@ -60,7 +60,7 @@ public class CXAVExportConfig: NSObject {
     
     /// Make a directory with the specified name in caches directory.
     public func makeDirectory(with name: String) -> (Bool, String) {
-        let dirPath = URL(fileURLWithPath: cachesDirectory()).appendingPathComponent(name).path
+        let dirPath = URL(localFilePath: cachesDirectory()).cx_appendingPathComponent(name).cx.path
         CXLogger.log(level: .info, message: "dirPath=\(dirPath)")
         do {
             try FileManager.default.createDirectory(atPath: dirPath, withIntermediateDirectories: true, attributes: nil)
