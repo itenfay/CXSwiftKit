@@ -59,6 +59,9 @@ extension CXSwiftBase where T == URL {
     /// Return a Boolean value that indicates whether the resource is a directory.
     public var isDirectory: Bool! { base.cx_isDirectory }
     
+    /// Returns a URL by appending the specified path component to self.
+    public func appendingPathComponent(_ path: String) -> URL { base.cx_appendingPathComponent(path) }
+    
 }
 
 #if canImport(AVFoundation)
@@ -183,6 +186,24 @@ extension URL {
     /// Return a Boolean value that indicates whether the resource is a directory.
     public var cx_isDirectory: Bool! {
         return (try? resourceValues(forKeys: [.isDirectoryKey]))?.isDirectory
+    }
+    
+    /// Returns a URL by appending the specified path component to self.
+    public func cx_appendingPathComponent(_ path: String) -> URL {
+        if #available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *) {
+            return appending(path: path, directoryHint: .inferFromPath)
+        } else {
+            return appendingPathComponent(path)
+        }
+    }
+    
+    /// Creates a file URL that references the local file or directory at path.
+    public init(localFilePath path: String) {
+        if #available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *) {
+            self.init(filePath: path, directoryHint: .inferFromPath, relativeTo: nil)
+        } else {
+            self.init(fileURLWithPath: path)
+        }
     }
     
 }
