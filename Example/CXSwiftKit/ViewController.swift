@@ -41,7 +41,7 @@ class ViewController: UIViewController {
         }
         progressButton.startAnimation()
         
-        saveImageToPhotosAlbum()
+        //saveImageToPhotosAlbum()
     }
     
     func saveImageToPhotosAlbum() {
