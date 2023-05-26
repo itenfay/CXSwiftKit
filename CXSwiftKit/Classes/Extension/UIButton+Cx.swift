@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 extension CXSwiftBase where T : UIButton {
@@ -38,7 +38,6 @@ extension CXSwiftBase where T : UIButton {
         self.base.cx_setImage(withUrl: url, forState: state, placeholder: placeholder, headers: headers, progressBlock: progressBlock)
     }
     
-    #if os(iOS) || os(tvOS)
     public var whiteIndicator: UIActivityIndicatorView
     {
         get {
@@ -48,7 +47,6 @@ extension CXSwiftBase where T : UIButton {
             base.cx_whiteIndicator = indicator
         }
     }
-    #endif
     
 }
 
@@ -263,7 +261,6 @@ extension UIButton {
         #endif
     }
     
-    #if os(iOS) || os(tvOS)
     @objc public var cx_whiteIndicator: UIActivityIndicatorView {
         get {
             var indicator = objc_getAssociatedObject(self, &CXAssociatedKey.buttonWhiteIndicator) as? UIActivityIndicatorView
@@ -287,7 +284,6 @@ extension UIButton {
             objc_setAssociatedObject(self, &CXAssociatedKey.buttonWhiteIndicator, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    #endif
     
 }
 

@@ -5,8 +5,10 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+import Foundation
 #if canImport(UIKit)
 import UIKit
+#endif
 #if canImport(CoreTelephony)
 import CoreTelephony
 #endif
@@ -17,7 +19,7 @@ import SystemConfiguration.CaptiveNetwork
 import DYFSwiftKeychain
 #endif
 /// Needs the advertising SDK to use it.
-#if CXAdTracking
+#if CXAdTracking && !os(watchOS)
 import AdSupport
 #endif
 
@@ -26,6 +28,7 @@ import AdSupport
     /// The key for storaging the device identifier.
     @nonobjc fileprivate let kDeviceIdentifierStorage = "CXDeviceIdentifierStoragekey"
     
+    #if os(iOS) || os(tvOS)
     /// The system version for the OS.
     public var systemVersion: String { UIDevice.current.systemVersion }
     
@@ -43,14 +46,15 @@ import AdSupport
     
     /// IDFV: Returns a string created from the UUID, such as “E621E1F8-C36C-495A-93FC-0C247A3E6E5F”
     public var idfv: String { UIDevice.current.identifierForVendor?.uuidString ?? uuid() }
-    
-    #if CXAdTracking
-    /// IDFA: Returns a string created from the UUID, such as “E621E1F8-C36C-495A-93FC-0C247A3E6E5F”
-    public var idfa: String { ASIdentifierManager.shared().advertisingIdentifier.uuidString }
     #endif
     
-    #if CXAdTracking
+    #if !os(watchOS) && CXAdTracking
+    /// IDFA: Returns a string created from the UUID, such as “E621E1F8-C36C-495A-93FC-0C247A3E6E5F”
+    @available(iOS 6.0, macOS 10.14, tvOS 6.0, *)
+    public var idfa: String { ASIdentifierManager.shared().advertisingIdentifier.uuidString }
+    
     /// A Boolean value that indicates whether the user has limited ad tracking enabled.
+    @available(iOS 6.0, macOS 10.14, tvOS 6.0, *)
     public var isAdTrackingEnabled: Bool { ASIdentifierManager.shared().isAdvertisingTrackingEnabled }
     #endif
     
@@ -64,11 +68,16 @@ import AdSupport
     }
     
     /// Creates an identifier for the device, if exists, return it.
-    public func identifier() -> String {
+    public var identifier: String {
         #if canImport(DYFSwiftKeychain)
         let kc = DYFSwiftKeychain()
         guard let deviceId = kc.get(kDeviceIdentifierStorage) else {
-            let id = idfv
+            var id = ""
+            #if os(iOS) || os(tvOS)
+            id = idfv
+            #else
+            id = uuid()
+            #endif
             kc.set(id, forKey: kDeviceIdentifierStorage)
             CXLogger.log(level: .info, message: "deviceId=\(id)")
             return id
@@ -76,10 +85,15 @@ import AdSupport
         CXLogger.log(level: .info, message: "deviceId=\(deviceId)")
         return deviceId
         #else
+        #if os(iOS) || os(tvOS)
         return idfv
+        #else
+        return uuid()
+        #endif
         #endif
     }
     
+    #if os(iOS)
     /// The machine for the device, e.g.: "iPhone15,3".
     public func machine() -> String {
         var systemInfo = utsname.init()
@@ -187,6 +201,7 @@ import AdSupport
         default: return identifier
         }
     }
+    #endif
     
     /// Return an ip address.
     public func ipAddress() -> String? {
@@ -267,6 +282,7 @@ import AdSupport
         return macAddressDataBytes.map({ String(format:"%02x", $0) }).joined(separator: ":")
     }
     
+    #if os(iOS)
     /// Returns the ssid for the current network.
     public func ssid() -> String? {
         let interfaces: NSArray = CNCopySupportedInterfaces()!
@@ -382,6 +398,7 @@ import AdSupport
         return "Unkown"
     }
     #endif
+    #endif
     
     public var isSimulator: Bool {
         var isSim = false
@@ -392,5 +409,3 @@ import AdSupport
     }
     
 }
-
-#endif

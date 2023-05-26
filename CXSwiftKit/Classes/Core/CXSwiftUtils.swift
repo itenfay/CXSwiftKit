@@ -5,7 +5,6 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 public class CXSwiftUtils: NSObject {
@@ -34,6 +33,8 @@ public class CXSwiftUtils: NSObject {
     @objc public static func makeVibrate(completion: (() -> Void)?) {
         #if canImport(AudioToolbox)
         cxMakeVibrate(completion: completion)
+        #else
+        CXLogger.log(level: .error, message: "Can't import AudioToolbox...")
         #endif
     }
     
@@ -95,6 +96,4 @@ extension CXSwiftUtils {
     }
     
 }
-#endif
-
 #endif

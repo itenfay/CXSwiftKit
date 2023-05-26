@@ -5,13 +5,15 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 public class CXAppContext: NSObject {
     
+    #if os(iOS)
     /// This is private because the use of 'appConfiguration' is preferred.
     private var isTestFlight: Bool { Bundle.main.appStoreReceiptURL?.lastPathComponent == "sandboxReceipt" }
+    #endif
+    
     @objc public var embeddedProvisionPath: String { Bundle.main.path(forResource: "embedded", ofType: "mobileprovision") ?? "" }
     
     /// This can be used to add debug statements.
@@ -23,6 +25,7 @@ public class CXAppContext: NSObject {
         #endif
     }
     
+    #if os(iOS)
     @objc public var configuration: AppConfiguration {
         if isDebug {
             return .debug
@@ -172,6 +175,7 @@ public class CXAppContext: NSObject {
         UIApplication.shared.open(aURL, options: options, completionHandler: completion)
     }
     #endif
+    #endif
     
     /// Constructed from the bundle’s Info.plist file, that contains information about the receiver.
     @objc public var infoDictionary: [String : Any] { Bundle.main.infoDictionary ?? [:] }
@@ -192,5 +196,3 @@ public class CXAppContext: NSObject {
     @objc public var executableName: String { Bundle.main.object(forInfoDictionaryKey: "CFBundleExecutable") as? String ?? "" }
     
 }
-
-#endif

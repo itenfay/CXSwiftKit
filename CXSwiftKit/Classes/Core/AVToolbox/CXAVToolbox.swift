@@ -5,7 +5,7 @@
 //  Created by chenxing on 2021/9/26.
 //
 
-#if canImport(AVFoundation)
+#if !os(watchOS) && canImport(AVFoundation)
 import AVFoundation
 
 public class CXAVToolbox: NSObject {

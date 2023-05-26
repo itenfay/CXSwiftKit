@@ -5,8 +5,8 @@
 //  Created by chenxing on 2022/10/19.
 //
 
-#if canImport(Foundation)
-import Foundation
+#if os(iOS) || os(tvOS)
+import UIKit
 
 //MARK: - EmptyDataSetStyle
 

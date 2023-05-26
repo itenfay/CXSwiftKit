@@ -5,7 +5,6 @@
 //  Created by chenxing on 2021/5/20.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 public class CXTimer: NSObject {
@@ -103,5 +102,3 @@ public class CXTimer: NSObject {
     }
     
 }
-
-#endif

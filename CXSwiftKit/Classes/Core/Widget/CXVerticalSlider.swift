@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/6/8.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 public class CXVerticalSlider: UIView {

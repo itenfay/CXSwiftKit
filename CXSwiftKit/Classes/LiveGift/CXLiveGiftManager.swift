@@ -5,7 +5,7 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(UIKit)
+#if os(iOS)
 import UIKit
 import Foundation
 

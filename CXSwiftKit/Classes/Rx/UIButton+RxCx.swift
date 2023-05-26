@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/8/17.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 #if canImport(RxSwift) && canImport(RxCocoa)
 import RxSwift
@@ -35,5 +35,4 @@ extension Reactive where Base: UIButton {
 }
 
 #endif
-
 #endif

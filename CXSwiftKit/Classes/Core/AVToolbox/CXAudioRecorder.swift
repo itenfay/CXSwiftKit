@@ -5,7 +5,7 @@
 //  Created by chenxing on 2021/9/26.
 //
 
-#if canImport(Foundation) && canImport(AVFAudio)
+#if !os(tvOS) && canImport(AVFAudio)
 import Foundation
 import AVFAudio
 
@@ -144,11 +144,10 @@ public class CXAudioRecorder: NSObject {
     /// Stops recording and closes the audio file.
     @objc public func stop() {
         recorder?.stop()
+        let session = AVAudioSession.sharedInstance()
         if category == .quiet {
-            let session = AVAudioSession.sharedInstance()
             try? session.setActive(false, options: [])
         } else {
-            let session = AVAudioSession.sharedInstance()
             try? session.setCategory(.playAndRecord, options: .defaultToSpeaker)
             try? session.setActive(true, options: [])
         }

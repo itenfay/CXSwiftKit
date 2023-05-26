@@ -5,12 +5,14 @@
 //  Created by chenxing on 2021/9/26.
 //
 
-#if canImport(AVFoundation) && canImport(Photos)
+#if !os(watchOS) && canImport(AVFoundation)
 import AVFoundation
+#if canImport(Photos)
 import Photos
+#endif
 
 /// Describes the export preset quality.
-@objc public enum ExportPresetQuality: UInt8 {
+@objc public enum CXExportPreset: UInt8 {
     case low
     case medium
     case highest
@@ -36,10 +38,11 @@ public class CXVideoToolbox: NSObject {
         return AVAssetExportSession(asset: asset, presetName: presetName)
     }
     
+    #if canImport(Photos)
     /// Convert the original video to `mp4` format video.
     @objc public static func toMP4(
         withAsset resourceAsset: PHAsset,
-        quality: ExportPresetQuality,
+        quality: CXExportPreset,
         completionHandler: @escaping (_ fileURL: URL?, _ data: Data?, _ error: NSError?) -> Void)
     {
         let toolbox = CXVideoToolbox()
@@ -63,35 +66,28 @@ public class CXVideoToolbox: NSObject {
             }
         }
     }
+    #endif
     
     /// Convert the original video to `mp4` format video.
     @objc public static func toMP4(
         withURLAsset asset: AVURLAsset,
-        quality: ExportPresetQuality,
-        completionHandler: @escaping (_ fileURL: URL?, _ data: Data?, _ error: NSError?) -> Void)
-    {
-        toMP4(withAssetURL: asset.url, quality: quality, completionHandler: completionHandler)
-    }
-    
-    /// Convert the original video to `mp4` format video.
-    @objc public static func toMP4(
-        withAssetURL assetURL: URL,
-        quality: ExportPresetQuality,
+        quality: CXExportPreset,
         completionHandler: @escaping (_ fileURL: URL?, _ data: Data?, _ error: NSError?) -> Void)
     {
         let toolbox = CXVideoToolbox()
-        if toolbox.isMP4(withURL: assetURL) {
+        if toolbox.isMP4(withURL: asset.url) {
             DispatchQueue.main.async {
-                let data = try? Data(contentsOf: assetURL)
-                completionHandler(assetURL, data, nil)
+                let data = try? Data(contentsOf: asset.url)
+                completionHandler(asset.url, data, nil)
             }
             return
         }
+        
         let formatter = DateFormatter()
         //formatter.locale = Locale(identifier: "zh_CN")
         formatter.dateFormat = "yyyyMMddHHmmss"
         let dateString = formatter.string(from: Date())
-        let fileName = CXFileToolbox.fileName(withURL: assetURL) + "_\(dateString).mp4"
+        let fileName = CXFileToolbox.fileName(withURL: asset.url) + "_\(dateString).mp4"
         CXLogger.log(level: .info, message: "fileName=\(fileName)")
         let (success, fileURL) = CXAVExportConfig().exportFileURL(with: CXVideoToolbox.exportDirectory, fileName: fileName)
         guard success else {
@@ -99,12 +95,12 @@ public class CXVideoToolbox: NSObject {
             completionHandler(nil, nil, error)
             return
         }
+        
         DispatchQueue.global(qos: .default).async {
-            let avAsset = AVURLAsset(url: assetURL, options: nil)
-            let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: avAsset)
-            let exportPreset = toolbox.getAVAssetExportPresetQuality(quality)
+            let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
+            let exportPreset = toolbox.getAVAssetCXExportPreset(quality)
             if compatiblePresets.contains(exportPreset) {
-                guard let exportSession = toolbox.makeAssetExportSession(avAsset, presetName: exportPreset) else {
+                guard let exportSession = toolbox.makeAssetExportSession(asset, presetName: exportPreset) else {
                     let error = NSError(domain: "cx.exportvideo.domain", code: 10002, userInfo: [NSLocalizedDescriptionKey: "AVAsset export session is null!"])
                     completionHandler(nil, nil, error)
                     return
@@ -153,6 +149,16 @@ public class CXVideoToolbox: NSObject {
         }
     }
     
+    /// Convert the original video to `mp4` format video.
+    @objc public static func toMP4(
+        withAssetURL assetURL: URL,
+        quality: CXExportPreset,
+        completionHandler: @escaping (_ fileURL: URL?, _ data: Data?, _ error: NSError?) -> Void)
+    {
+        let avAsset = AVURLAsset(url: assetURL, options: nil)
+        toMP4(withURLAsset: avAsset, quality: quality, completionHandler: completionHandler)
+    }
+    
     @objc public func isMP4(withURL url: URL) -> Bool {
         let ext = url.pathExtension
         CXLogger.log(level: .info, message: "Extension=\(ext)")
@@ -162,7 +168,7 @@ public class CXVideoToolbox: NSObject {
         return false
     }
     
-    @objc public func getAVAssetExportPresetQuality(_ exportPreset: ExportPresetQuality) -> String {
+    @objc public func getAVAssetCXExportPreset(_ exportPreset: CXExportPreset) -> String {
         switch exportPreset {
         case .low:
             return AVAssetExportPresetLowQuality // A preset to export a low-quality movie file.

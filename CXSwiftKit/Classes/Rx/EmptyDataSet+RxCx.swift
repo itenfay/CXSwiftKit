@@ -5,8 +5,8 @@
 //  Created by chenxing on 2022/8/17.
 //
 
-#if canImport(Foundation)
-import Foundation
+#if os(iOS) || os(tvOS)
+import UIKit
 #if canImport(RxSwift) && canImport(RxCocoa)
 import RxSwift
 import RxCocoa
@@ -47,5 +47,4 @@ extension Reactive where Base: CXEmptyDataSetMediator {
 }
 
 #endif
-
 #endif

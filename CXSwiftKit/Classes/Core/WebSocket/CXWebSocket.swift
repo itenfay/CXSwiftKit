@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/11/18.
 //
 
-#if canImport(Foundation) && canImport(Starscream)
+#if canImport(Starscream)
 import Foundation
 import Starscream
 

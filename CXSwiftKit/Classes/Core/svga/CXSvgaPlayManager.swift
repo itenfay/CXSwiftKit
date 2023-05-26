@@ -5,7 +5,9 @@
 //  Created by chenxing on 2022/5/14.
 //
 
-#if os(iOS) && canImport(SVGAPlayer)
+#if os(iOS)
+import UIKit
+#if canImport(SVGAPlayer)
 import SVGAPlayer
 
 @objc public protocol CXSVGAPlayPresentable: AnyObject {
@@ -158,4 +160,5 @@ extension SVGAPlayer {
     
 }
 
+#endif
 #endif

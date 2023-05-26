@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation) && canImport(PassKit) && !os(tvOS)
+#if canImport(PassKit) && !os(tvOS)
 import Foundation
 import PassKit
 

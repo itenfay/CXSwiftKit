@@ -5,8 +5,9 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(UIKit) && canImport(Photos)
+#if os(iOS) || os(tvOS)
 import UIKit
+#if canImport(Photos)
 import Photos
 
 public class CXTakeScreenshotDetector: NSObject {
@@ -56,4 +57,5 @@ public class CXTakeScreenshotDetector: NSObject {
     
 }
 
+#endif
 #endif

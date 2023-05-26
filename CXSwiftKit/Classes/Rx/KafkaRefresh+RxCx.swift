@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 #if canImport(RxCocoa) && canImport(RxSwift) && canImport(KafkaRefresh)
 import RxCocoa
@@ -27,5 +27,4 @@ extension Reactive where Base: KafkaRefreshControl {
 }
 
 #endif
-
 #endif

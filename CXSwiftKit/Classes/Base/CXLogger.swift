@@ -5,7 +5,6 @@
 //  Created by chenxing on 2022/11/10.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 /// The level of the log.
@@ -77,5 +76,3 @@ import Foundation
     }
     
 }
-
-#endif

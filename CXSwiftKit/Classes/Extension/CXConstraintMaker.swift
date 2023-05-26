@@ -5,7 +5,6 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 public class CXConstraintItem: NSObject {
@@ -65,5 +64,3 @@ public class CXConstraintMaker: NSObject {
     /// The center y item of the constraint maker.
     @objc public var centerY: CXConstraintItem { CXConstraintItem() }
 }
-
-#endif

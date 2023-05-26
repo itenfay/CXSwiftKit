@@ -5,7 +5,6 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 public class CXStreamReader: NSObject {
@@ -127,5 +126,3 @@ extension CXStreamReader: Sequence {
     }
     
 }
-
-#endif

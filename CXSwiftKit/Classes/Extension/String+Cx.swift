@@ -5,13 +5,15 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
 import Foundation
 #if canImport(CommonCrypto)
 import CommonCrypto
 #endif
 #if canImport(CoreImage)
 import CoreImage
+#endif
+#if canImport(UIKit)
+import UIKit
 #endif
 
 extension String: CXSwiftBaseCompatible {}
@@ -217,6 +219,7 @@ extension CXSwiftBase where T == String {
         return Notification.Name(self.base)
     }
     
+    #if os(iOS) || os(tvOS)
     #if canImport(CoreImage)
     /// Generates an image of QRCode.
     ///
@@ -315,6 +318,7 @@ extension CXSwiftBase where T == String {
         
         return newImage
     }
+    #endif
     #endif
     
     /// The string whether is a valid number.
@@ -431,5 +435,3 @@ extension CXSwiftBase where T == String {
     }
     
 }
-
-#endif

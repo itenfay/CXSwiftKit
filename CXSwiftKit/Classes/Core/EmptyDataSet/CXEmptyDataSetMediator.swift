@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/5/9.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 #if canImport(QuartzCore)
 import QuartzCore
@@ -208,5 +208,4 @@ extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource
 }
 
 #endif
-
 #endif

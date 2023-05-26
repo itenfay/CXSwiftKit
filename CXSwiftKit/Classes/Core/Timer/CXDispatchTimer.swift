@@ -5,7 +5,6 @@
 //  Created by chenxing on 2021/5/20.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 public class CXDispatchTimer {
@@ -175,5 +174,3 @@ extension CXDispatchTimer: Equatable {
     }
     
 }
-
-#endif

@@ -5,9 +5,9 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
 import Foundation
 
+#if os(iOS)
 @objc public enum AppConfiguration: UInt8, CustomStringConvertible {
     case debug
     case adHoc
@@ -25,11 +25,10 @@ import Foundation
         }
     }
 }
+#endif
 
 /// The config for this kit.
 public class CXConfig: NSObject {
     /// Whether to enable log, default is false.
     @objc public static var enableLog: Bool = false
 }
-
-#endif

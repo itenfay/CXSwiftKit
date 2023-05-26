@@ -5,8 +5,10 @@
 //  Created by chenxing on 2023/3/16.
 //
 
+#if !os(watchOS)
 #if canImport(ReplayKit)
 import ReplayKit
+#endif
 #if canImport(Photos)
 import Photos
 #endif
@@ -14,9 +16,9 @@ import Photos
 public class CXScreenRecorder: NSObject {
     
     private var title: String = ""
-    private weak var viewController: UIViewController?
+    private weak var viewController: CXViewController?
     
-    @objc public init(title: String, controller: UIViewController) {
+    @objc public init(title: String, controller: CXViewController) {
         self.title = title
         self.viewController = controller
         super.init()
@@ -37,6 +39,7 @@ public class CXScreenRecorder: NSObject {
     }
     
     /// Starts recording the app display.
+    @available(macOS 11.0, *)
     @objc public func startRecording() {
         let screenRecorder = RPScreenRecorder.shared()
         screenRecorder.delegate = self
@@ -50,13 +53,18 @@ public class CXScreenRecorder: NSObject {
             if error == nil {
                 vc?.previewControllerDelegate = self
                 vc?.title = self.title
+                #if os(macOS)
+                self.viewController?.presentAsSheet(vc!)
+                #else
                 self.viewController?.present(vc!, animated: true)
+                #endif
             } else {
                 CXLogger.log(level: .error, message: "error=\(error!)")
             }
         }
     }
     
+    #if os(iOS) || os(tvOS)
     /// Exports the current recording.
     func exportVideo() {
         #if canImport(Photos)
@@ -92,36 +100,64 @@ public class CXScreenRecorder: NSObject {
                 }
             }
         }
+        #else
+        CXLogger.log(level: .error, message: "Can't import photos library... stop exporting!")
         #endif
     }
+    #endif
+    
 }
 
 //MARK: - RPScreenRecorderDelegate, RPPreviewViewControllerDelegate
 
 extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDelegate {
     
+    @available(macOS 11.0, *)
     public func screenRecorderDidChangeAvailability(_ screenRecorder: RPScreenRecorder) {
         CXLogger.log(level: .info, message: "screenRecorder=\(screenRecorder)")
     }
     
+    @available(macOS 11.0, *)
+    public func screenRecorder(_ screenRecorder: RPScreenRecorder, didStopRecordingWith previewViewController: RPPreviewViewController?, error: Error?) {
+        if error != nil {
+            onError?(error!.localizedDescription)
+        }
+    }
+    
+    @available(macOS 11.0, *)
     public func previewController(_ previewController: RPPreviewViewController, didFinishWithActivityTypes activityTypes: Set<String>) {
         // Cancel.
         if activityTypes.count == 0 {
+            #if os(macOS)
+            viewController.dismiss(previewController)
+            #else
             previewController.dismiss(animated: true, completion: nil)
+            #endif
             onCancel?()
             return
         }
         // Save to camera roll.
         if activityTypes.contains("com.apple.UIKit.activity.SaveToCameraRoll") {
+            #if os(iOS) || os(tvOS)
             previewController.dismiss(animated: true, completion: nil)
+            #endif
             onFinish?()
+        } else {
+            #if os(macOS)
+            viewController.dismiss(previewController)
+            onFinish?()
+            #endif
         }
     }
     
-    public func screenRecorder(_ screenRecorder: RPScreenRecorder, didStopRecordingWith previewViewController: RPPreviewViewController?, error: Error?) {
-        if error != nil {
-            onError?(error!.localizedDescription)
-        }
+    @available(macOS 11.0, *)
+    public func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+        #if os(macOS)
+        viewController.dismiss(previewController)
+        #else
+        previewController.dismiss(animated: true, completion: nil)
+        #endif
+        onFinish?()
     }
     
 }

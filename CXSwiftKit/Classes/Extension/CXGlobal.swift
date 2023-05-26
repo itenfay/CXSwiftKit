@@ -5,7 +5,6 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
 #if canImport(UIKit)
 import UIKit
@@ -26,7 +25,6 @@ public func cxFitScale(by dimension: CGFloat) -> CGFloat
 }
 
 #if os(iOS)
-#if canImport(UIKit)
 
 /// Represents the device whether is x series of iPhone.
 ///
@@ -58,15 +56,6 @@ public let cxNavigationBarHeight: CGFloat = 44 + cxStatusBarHeight
 /// The height of the tab bar.
 public let cxTabBarHeight: CGFloat = 49 + cxSafeAreaBottom
 
-#else
-
-public let cxSafeAreaTop: CGFloat = 20
-public let cxSafeAreaBottom: CGFloat = 0
-public let cxStatusBarHeight: CGFloat = cxSafeAreaTop
-public let cxNavigationBarHeight: CGFloat = 44
-public let cxTabBarHeight: CGFloat = 49
-
-#endif
 #endif
 
 /// Allocates recursive pthread_mutex associated with ‘obj’ if needed.
@@ -362,7 +351,7 @@ public func cxClearSDWebImageExpiredFiles(completion: (() -> Void)? = nil) {
 
 #endif
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 
 /// A Boolean value that represents whether the idle timer is disabled for the app.
 public func cxIsIdleTimerDisabled() -> Bool
@@ -417,7 +406,5 @@ public func cxInstantiateSbViewController<C>(_ cls: C.Type?, bundle: Bundle? = n
     }
     return vc
 }
-
-#endif
 
 #endif

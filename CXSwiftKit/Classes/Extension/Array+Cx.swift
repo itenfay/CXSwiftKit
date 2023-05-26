@@ -5,11 +5,8 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
 import Foundation
-#endif
 
-#if canImport(Foundation)
 extension Array {
     
     public func cx_toJSONString() -> String?
@@ -37,7 +34,6 @@ extension Array {
     }
     
 }
-#endif
 
 extension Array where Element: Equatable {
     

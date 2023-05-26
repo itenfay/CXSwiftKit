@@ -5,9 +5,7 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
-#endif
 
 /// Error Enum
 ///

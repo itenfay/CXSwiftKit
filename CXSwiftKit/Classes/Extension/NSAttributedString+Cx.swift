@@ -5,7 +5,6 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 extension CXSwiftBase where T : NSAttributedString {
@@ -88,5 +87,3 @@ extension NSMutableAttributedString {
     }
     
 }
-
-#endif

@@ -5,7 +5,6 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 /// Read text file line by line in efficient way.
@@ -41,5 +40,3 @@ extension CXLineReader: Sequence {
     }
     
 }
-
-#endif

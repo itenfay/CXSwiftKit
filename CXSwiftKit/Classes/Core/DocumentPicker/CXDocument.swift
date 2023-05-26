@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/5/9.
 //
 
-#if canImport(UIKit)
+#if os(iOS)
 import UIKit
 
 public class CXDocument: UIDocument {

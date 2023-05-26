@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/5/14.
 //
 
-#if os(iOS) && canImport(Foundation)
+#if os(iOS)
 import Foundation
 
 public class CXSvgaPlayOperation: Operation {

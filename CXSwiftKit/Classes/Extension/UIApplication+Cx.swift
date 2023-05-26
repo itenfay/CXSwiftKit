@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 extension CXSwiftBase where T : UIApplication {

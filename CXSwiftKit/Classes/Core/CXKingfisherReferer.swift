@@ -5,9 +5,9 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Kingfisher) && canImport(Foundation)
-import Kingfisher
 import Foundation
+#if canImport(Kingfisher)
+import Kingfisher
 
 public class CXKingfisherReferer: ImageDownloadRequestModifier {
     

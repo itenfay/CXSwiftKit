@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/8/11.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 //MARK: - Begin of example

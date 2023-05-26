@@ -5,7 +5,6 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 public class CXLiveGiftModel: NSObject {
@@ -24,5 +23,3 @@ public class CXLiveGiftModel: NSObject {
     /// The description for the gift.
     @objc public var giftDescription: String = ""
 }
-
-#endif

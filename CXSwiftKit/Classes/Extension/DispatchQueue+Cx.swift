@@ -5,9 +5,9 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+import Foundation
 #if canImport(Dispatch)
 import Dispatch
-import Foundation
 
 // Declares an array of string to record the token.
 fileprivate var _cxOnceTracker = [String]()

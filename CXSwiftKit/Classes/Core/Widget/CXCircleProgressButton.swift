@@ -5,7 +5,7 @@
 //  Created by chenxing on 2021/5/19.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 
 public func cxDegreesToRadius(_ value: Double) -> CGFloat {

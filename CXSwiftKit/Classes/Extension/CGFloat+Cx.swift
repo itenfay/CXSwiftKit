@@ -7,7 +7,6 @@
 
 #if canImport(Foundation)
 import Foundation
-
 #if canImport(UIKit)
 import UIKit
 #endif
@@ -51,7 +50,7 @@ extension CGFloat {
     
     /// Returns the width of a rectangle of the screen.
     public static var cx_screenWidth: CGFloat {
-        #if canImport(UIKit)
+        #if os(iOS) || os(tvOS)
         return UIScreen.main.bounds.width
         #else
         return 0
@@ -60,7 +59,7 @@ extension CGFloat {
     
     /// Returns the height of a rectangle of the screen.
     public static var cx_screenHeight: CGFloat {
-        #if canImport(UIKit)
+        #if os(iOS) || os(tvOS)
         return UIScreen.main.bounds.height
         #else
         return 0

@@ -5,8 +5,9 @@
 //  Created by chenxing on 2022/5/9.
 //
 
-#if canImport(UIKit) && canImport(MobileCoreServices) && canImport(UniformTypeIdentifiers)
+#if os(iOS)
 import UIKit
+#if canImport(MobileCoreServices) && canImport(UniformTypeIdentifiers)
 import MobileCoreServices
 import UniformTypeIdentifiers
 
@@ -193,4 +194,5 @@ extension CXDocumentPicker: UIDocumentPickerDelegate {
     
 }
 
+#endif
 #endif
