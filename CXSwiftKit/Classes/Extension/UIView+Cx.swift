@@ -407,7 +407,7 @@ extension CXSwiftBase where T : CXView {
     }
     
     /// Draws a quad curve for a view with the radian, radian and fill color.
-    public func drawQuadCurve(withRadian radian: CGFloat, direction: CXViewRadianDirection = .bottom, fillColor: UIColor? = nil)
+    public func drawQuadCurve(withRadian radian: CGFloat, direction: CXViewRadianDirection = .bottom, fillColor: CXColor? = nil)
     {
         self.base.cx_drawQuadCurve(withRadian: radian, direction: direction, fillColor: fillColor)
     }
@@ -501,7 +501,7 @@ extension CXSwiftBase where T : CXView {
     }
     
     /// The insets that you use to determine the safe area for this view.
-    public var safeAreaInsets: UIEdgeInsets
+    public var safeAreaInsets: CXEdgeInsets
     {
         self.base.cx_safeAreaInsets // return
     }
@@ -690,14 +690,18 @@ extension CXView {
 
 extension CXView {
     
+    fileprivate var mLayer: CALayer? {
+        return layer
+    }
+    
     /// The corner radius of the view, also inspectable from Storyboard or Xib.
     @IBInspectable @objc public var cx_cornerRadius: CGFloat
     {
         get {
-            return layer.cornerRadius
+            return mLayer?.cornerRadius ?? 0
         }
         set {
-            layer.cornerRadius = abs(newValue)
+            mLayer?.cornerRadius = abs(newValue)
         }
     }
     
@@ -705,10 +709,10 @@ extension CXView {
     @IBInspectable @objc public var cx_masksToBounds: Bool
     {
         get {
-            return layer.masksToBounds
+            return mLayer?.masksToBounds ?? false
         }
         set {
-            layer.masksToBounds = newValue
+            mLayer?.masksToBounds = newValue
         }
     }
     
@@ -716,17 +720,17 @@ extension CXView {
     @IBInspectable @objc public var cx_borderColor: CXColor?
     {
         get {
-            guard let cgColor = layer.borderColor else { return nil }
-            return UIColor(cgColor: cgColor)
+            guard let cgColor = mLayer?.borderColor else { return nil }
+            return CXColor(cgColor: cgColor)
         }
         set {
             guard let color = newValue else {
-                layer.borderColor = nil
+                mLayer?.borderColor = nil
                 return
             }
             // Fix React-Native conflict issue
             guard String(describing: type(of: color)) != "__NSCFType" else { return }
-            layer.borderColor = color.cgColor
+            mLayer?.borderColor = color.cgColor
         }
     }
     
@@ -734,10 +738,10 @@ extension CXView {
     @IBInspectable @objc public var cx_borderWidth: CGFloat
     {
         get {
-            return layer.borderWidth
+            return mLayer?.borderWidth ?? 0
         }
         set {
-            layer.borderWidth = newValue
+            mLayer?.borderWidth = newValue
         }
     }
     
@@ -772,7 +776,7 @@ extension CXView {
         path.addLine(to: endPoint)
         //path.addLines(between: [startPoint, endPoint])
         shapeLayer.path = path
-        layer.addSublayer(shapeLayer)
+        mLayer?.addSublayer(shapeLayer)
     }
     
     /// Draws a color gradient over its background color, filling the shape of the layer (including rounded corners)
@@ -797,13 +801,12 @@ extension CXView {
             gradientLayer.cornerRadius = cornerRadius
         }
         
-        layer.insertSublayer(gradientLayer, at: 0)
+        mLayer?.insertSublayer(gradientLayer, at: 0)
     }
     
 }
 
 #if os(iOS) || os(tvOS)
-
 extension UIView {
     
     /// Adds the shadow for the view.
@@ -1172,7 +1175,6 @@ extension UIView {
     }
     
 }
-
 #endif
 
 /// Defines the enum of radian direction.
@@ -1183,7 +1185,7 @@ extension UIView {
 extension CXView {
     
     /// Draws a quad curve for a view with the radian, direction and fill color.
-    @objc public func cx_drawQuadCurve(withRadian radian: CGFloat, direction: CXViewRadianDirection = .bottom, fillColor: UIColor? = nil) {
+    @objc public func cx_drawQuadCurve(withRadian radian: CGFloat, direction: CXViewRadianDirection = .bottom, fillColor: CXColor? = nil) {
         // Don't deal with it if radian is 0.
         if radian == 0 { return }
         let tW = frame.width
@@ -1229,7 +1231,7 @@ extension CXView {
         
         /// Draws arc.
         let shapeLayer = CAShapeLayer()
-        shapeLayer.fillColor = fillColor?.cgColor ?? UIColor.white.cgColor
+        shapeLayer.fillColor = fillColor?.cgColor ?? CXColor.white.cgColor
         let path = CGMutablePath.init()
         switch direction {
         case .top:
@@ -1308,7 +1310,7 @@ extension CXView {
         
         path.closeSubpath()
         shapeLayer.path = path
-        layer.mask = shapeLayer
+        mLayer?.mask = shapeLayer
     }
     
 }
@@ -1351,9 +1353,9 @@ extension CXView {
 
 //MARK: - CXViewWrapable
 
+#if os(iOS) || os(tvOS)
 extension UIView: CXViewWrapable {
     
-    #if os(iOS) || os(tvOS)
     private var cx_overlayDirection: CXOverlayDirection? {
         get {
             return objc_getAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection) as? CXOverlayDirection
@@ -1425,15 +1427,15 @@ extension UIView: CXViewWrapable {
             completion?()
         }
     }
-    #endif
     
 }
+#endif
 
 //MARK: - CXSwiftViewWrapable
 
+#if os(iOS) && canImport(OverlayController)
 extension UIView: CXSwiftViewWrapable {
     
-    #if os(iOS) && canImport(OverlayController)
     private var cx_overlayController: OverlayController? {
         get {
             return objc_getAssociatedObject(self, &CXAssociatedKey.presentByOverlayController) as? OverlayController
@@ -1465,9 +1467,9 @@ extension UIView: CXSwiftViewWrapable {
             self?.cx_overlayController = nil
         })
     }
-    #endif
     
 }
+#endif
 
 //MARK: - Constraints
 
@@ -1618,7 +1620,7 @@ extension CXView {
     }
     
     /// The insets that you use to determine the safe area for this view.
-    @objc public var cx_safeAreaInsets: UIEdgeInsets
+    @objc public var cx_safeAreaInsets: CXEdgeInsets
     {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaInsets

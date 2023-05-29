@@ -59,6 +59,22 @@ extension AVAsset {
                     CXLogger.log(level: .info, message: "AVKeyValueStatus.cancelled")
                 default: break
                 }
+                #if os(watchOS)
+                if #available(watchOS 6.0, *) {
+                    if status == .loaded {
+                        let duration = CMTimeGetSeconds(self.duration)
+                        if duration.isNaN || duration.isInfinite {
+                            completion(0)
+                        } else {
+                            completion(duration)
+                        }
+                    } else {
+                        completion(0)
+                    }
+                } else {
+                    completion(0)
+                }
+                #else
                 if status == .loaded {
                     let duration = CMTimeGetSeconds(self.duration)
                     if duration.isNaN || duration.isInfinite {
@@ -69,6 +85,7 @@ extension AVAsset {
                 } else {
                     completion(0)
                 }
+                #endif
             }
         }
     }

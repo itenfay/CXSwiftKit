@@ -5,7 +5,7 @@
 //  Created by chenxing on 2021/9/26.
 //
 
-#if !os(tvOS) && canImport(AVFAudio)
+#if !os(macOS) && canImport(AVFAudio)
 import Foundation
 import AVFAudio
 
@@ -89,6 +89,10 @@ public class CXAudioRecorder: NSObject {
         self.category = category
         
         let session = AVAudioSession.sharedInstance()
+        #if os(watchOS)
+        try? session.setCategory(.record, options: [])
+        try? session.setActive(true, options: [])
+        #else
         if category == .quiet {
             try? session.setCategory(.record, options: [])
             try? session.setActive(true, options: [])
@@ -99,6 +103,7 @@ public class CXAudioRecorder: NSObject {
         } else if category == .movie {
             try? session.setCategory(.multiRoute, mode: .moviePlayback, options: [.mixWithOthers, .allowBluetoothA2DP, .allowBluetooth])
         }
+        #endif
         
         var settings: [String : Any]
         if configuration != nil {

@@ -31,6 +31,7 @@ public typealias CXFont           = UIFont
 public typealias CXRect           = CGRect
 public typealias CXPoint          = CGPoint
 public typealias CXSize           = CGSize
+public typealias CXEdgeInsets     = UIEdgeInsets
 #elseif os(macOS)
 import AppKit
 public typealias CXViewController = NSViewController
@@ -42,6 +43,7 @@ public typealias CXFont           = NSFont
 public typealias CXRect           = NSRect
 public typealias CXPoint          = NSPoint
 public typealias CXSize           = NSSize
+public typealias CXEdgeInsets     = NSEdgeInsets
 #else
 #endif
 

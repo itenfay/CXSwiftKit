@@ -11,13 +11,13 @@ import Foundation
 
 //MARK: - Photo Library
 
+#if canImport(Photos)
+import Photos
+
 /// The app's Info.plist must contain the `NSPhotoLibraryAddUsageDescription` and `NSPhotoLibraryUsageDescription` key.
 public class CXPhotosPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .photos }
 }
-
-#if canImport(Photos)
-import Photos
 
 extension CXPhotosPermission {
     
@@ -40,7 +40,7 @@ extension CXPhotosPermission {
     ///
     /// - Returns: Information about your app’s authorization to access the user’s photo library.
     #if swift(>=5.5)
-    @available(iOS 14, *)
+    @available(iOS 14, tvOS 14, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
@@ -54,7 +54,7 @@ extension CXPhotosPermission {
     /// - Parameter handler: The callback the app invokes when it’s made a determination of the app’s status.
     @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
-        if #available(iOS 14, *) {
+        if #available(iOS 14, tvOS 14, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 let pStatus = self.transform(for: status)
                 let pResult = CXPermissionResult(type: self.type, status: pStatus)
@@ -101,7 +101,7 @@ extension CXPhotosPermission {
             return
         }
         let imageManager = PHImageManager.default()
-        if #available(iOS 13, *) {
+        if #available(iOS 13, tvOS 13, *) {
             imageManager.requestImageDataAndOrientation(for: asset, options: nil) { imageData, dataUTI, orientation, info in
                 completion(imageData)
             }
@@ -117,15 +117,17 @@ extension CXPhotosPermission {
 #endif
 
 
+#if os(iOS)
+
 //MARK: - Camera
+
+#if canImport(AVFoundation)
+import AVFoundation
 
 /// The app's Info.plist must contain a `NSCameraUsageDescription` key.
 public class CXCameraPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .camera }
 }
-
-#if canImport(AVFoundation)
-import AVFoundation
 
 extension CXCameraPermission {
     
@@ -183,13 +185,13 @@ extension CXCameraPermission {
 
 //MARK: - Microphone
 
+#if canImport(AVFoundation)
+import AVFoundation
+
 /// The app's Info.plist must contain a `NSMicrophoneUsageDescription` key.
 public class CXMicrophonePermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .microphone }
 }
-
-#if canImport(AVFoundation)
-import AVFoundation
 
 extension CXMicrophonePermission {
     
@@ -232,6 +234,7 @@ extension CXMicrophonePermission {
     
 }
 
+#endif
 #endif
 
 
@@ -554,18 +557,16 @@ extension CXNotificationPermission {
 
 //MARK: - Bluetooth
 
+#if os(iOS) && canImport(CoreBluetooth)
+import CoreBluetooth
+
 /// The app's Info.plist must contain the `NSBluetoothAlwaysUsageDescription` and `NSBluetoothPeripheralUsageDescription` key.
 public class CXBluetoothPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .bluetooth }
     
-    #if canImport(CoreBluetooth)
     fileprivate var centralManager: CBCentralManager?
     fileprivate var authorizedHandler: ((CXPermissionResult) -> Void)?
-    #endif
 }
-
-#if canImport(CoreBluetooth) && os(iOS)
-import CoreBluetooth
 
 extension CXBluetoothPermission: CBCentralManagerDelegate {
     
@@ -624,11 +625,13 @@ extension CXBluetoothPermission: CBCentralManagerDelegate {
     }
     
 }
-
 #endif
 
 
 //MARK: - Device TouchID/FaceID、Passcode
+
+#if os(iOS) && canImport(LocalAuthentication)
+import LocalAuthentication
 
 public class CXDeviceSafetyContext: NSObject {
     @objc public private(set) var type: CXPermissionType = .deviceBiometrics
@@ -637,9 +640,6 @@ public class CXDeviceSafetyContext: NSObject {
         self.type = type
     }
 }
-
-#if canImport(LocalAuthentication)
-import LocalAuthentication
 
 extension CXDeviceSafetyContext {
     
@@ -726,15 +726,10 @@ extension CXDeviceSafetyContext {
     
 }
 
-#endif
-
-
 /// The app's Info.plist must contain a `NSFaceIDUsageDescription` key.
 public class CXDeviceBiometricsPermission: CXDeviceSafetyContext, CXPermission {
     @objc public override var type: CXPermissionType { return .deviceBiometrics }
 }
-
-#if canImport(LocalAuthentication)
 
 extension CXDeviceBiometricsPermission {
     
@@ -762,13 +757,9 @@ extension CXDeviceBiometricsPermission {
     
 }
 
-#endif
-
 public class CXDevicePasscodePermission: CXDeviceSafetyContext, CXPermission {
     @objc public override var type: CXPermissionType { return .devicePasscode }
 }
-
-#if canImport(LocalAuthentication)
 
 extension CXDevicePasscodePermission {
     
@@ -832,7 +823,7 @@ extension CXContactsPermission {
     }
     
     #if swift(>=5.5)
-    @available(iOS 13.0, *)
+    @available(iOS 13.0, tvOS 13.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let contactStore = CNContactStore()
@@ -1169,15 +1160,131 @@ extension CXSiriPermission {
 
 #endif
 
+//MARK: - Apple Music
+
+#if os(iOS) && canImport(MediaPlayer)
+import MediaPlayer
+
+/// The app's Info.plist must contain a `NSAppleMusicUsageDescription` key.
+public class CXMediaPermission: NSObject, CXPermission {
+    @objc public var type: CXPermissionType { return .media }
+}
+
+extension CXMediaPermission {
+    
+    @objc public var authorized: Bool
+    {
+        return status == .authorized
+    }
+    
+    @objc public var status: CXPermissionStatus
+    {
+        if #available(iOS 9.3, *) {
+            let status = MPMediaLibrary.authorizationStatus()
+            return transform(for: status)
+        } else {
+            return .disabled
+        }
+    }
+    
+    @available(iOS 9.3, *)
+    @objc public func transform(for status: MPMediaLibraryAuthorizationStatus) -> CXPermissionStatus {
+        switch status {
+        case .notDetermined: return .unknown
+        case .restricted, .denied: return .unauthorized
+        case .authorized: return .authorized
+        default: return .unauthorized
+        }
+    }
+    
+    #if swift(>=5.5)
+    @available(iOS 13.0, *)
+    public func requestAccess() async -> CXPermissionResult
+    {
+        let status = await MPMediaLibrary.requestAuthorization()
+        return CXPermissionResult(type: type, status: transform(for: status))
+    }
+    #endif
+    
+    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    {
+        if #available(iOS 9.3, *) {
+            MPMediaLibrary.requestAuthorization { status in
+                completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
+            }
+        } else {
+            return completion(CXPermissionResult(type: type, status: .disabled))
+        }
+    }
+    
+}
+
+#endif
+
+
+//MARK: - App Tracking
+
+#if os(iOS) && canImport(AppTrackingTransparency)
+import AppTrackingTransparency
+
+/// The app's Info.plist must contain a `NSUserTrackingUsageDescription` key.
+public class CXAppTrackingPermission: NSObject, CXPermission {
+    @objc public var type: CXPermissionType { return .appTracking }
+}
+
+extension CXAppTrackingPermission {
+    
+    @objc public var authorized: Bool
+    {
+        return status == .authorized
+    }
+    
+    @objc public var status: CXPermissionStatus
+    {
+        if #available(iOS 14, *) {
+            let status = ATTrackingManager.trackingAuthorizationStatus
+            return transform(for: status)
+        } else {
+            return .disabled
+        }
+    }
+    
+    @available(iOS 14, *)
+    @objc public func transform(for status: ATTrackingManager.AuthorizationStatus) -> CXPermissionStatus {
+        switch status {
+        case .notDetermined: return .unknown
+        case .restricted, .denied: return .unauthorized
+        case .authorized: return .authorized
+        default: return .unauthorized
+        }
+    }
+    
+    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    {
+        if #available(iOS 14, *) {
+            ATTrackingManager.requestTrackingAuthorization { status in
+                completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
+            }
+        } else {
+            completion(CXPermissionResult(type: type, status: .disabled))
+        }
+    }
+    
+}
+
+#endif
+
+#endif
+
 
 //MARK: - Health
+
+#if !os(tvOS) && canImport(HealthKit)
+import HealthKit
 
 public class CXHealthPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .health }
 }
-
-#if canImport(HealthKit)
-import HealthKit
 
 /// The app's Info.plist must contain the `NSHealthUpdateUsageDescription` and `NSHealthShareUsageDescription` key.
 extension CXHealthPermission {
@@ -1244,122 +1351,5 @@ extension CXHealthPermission {
     #endif
     
 }
-
-#endif
-
-
-//MARK: - Apple Music
-
-/// The app's Info.plist must contain a `NSAppleMusicUsageDescription` key.
-public class CXMediaPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .media }
-}
-
-#if canImport(MediaPlayer)
-import MediaPlayer
-
-extension CXMediaPermission {
-    
-    @objc public var authorized: Bool
-    {
-        return status == .authorized
-    }
-    
-    @objc public var status: CXPermissionStatus
-    {
-        if #available(iOS 9.3, *) {
-            let status = MPMediaLibrary.authorizationStatus()
-            return transform(for: status)
-        } else {
-            return .disabled
-        }
-    }
-    
-    @available(iOS 9.3, *)
-    @objc public func transform(for status: MPMediaLibraryAuthorizationStatus) -> CXPermissionStatus {
-        switch status {
-        case .notDetermined: return .unknown
-        case .restricted, .denied: return .unauthorized
-        case .authorized: return .authorized
-        default: return .unauthorized
-        }
-    }
-    
-    #if swift(>=5.5)
-    @available(iOS 13.0, *)
-    public func requestAccess() async -> CXPermissionResult
-    {
-        let status = await MPMediaLibrary.requestAuthorization()
-        return CXPermissionResult(type: type, status: transform(for: status))
-    }
-    #endif
-    
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
-    {
-        if #available(iOS 9.3, *) {
-            MPMediaLibrary.requestAuthorization { status in
-                completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
-            }
-        } else {
-            return completion(CXPermissionResult(type: type, status: .disabled))
-        }
-    }
-    
-}
-
-#endif
-
-
-//MARK: - App Tracking
-
-/// The app's Info.plist must contain a `NSUserTrackingUsageDescription` key.
-public class CXAppTrackingPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .appTracking }
-}
-
-#if canImport(AppTrackingTransparency)
-import AppTrackingTransparency
-
-extension CXAppTrackingPermission {
-    
-    @objc public var authorized: Bool
-    {
-        return status == .authorized
-    }
-    
-    @objc public var status: CXPermissionStatus
-    {
-        if #available(iOS 14, *) {
-            let status = ATTrackingManager.trackingAuthorizationStatus
-            return transform(for: status)
-        } else {
-            return .disabled
-        }
-    }
-    
-    @available(iOS 14, *)
-    @objc public func transform(for status: ATTrackingManager.AuthorizationStatus) -> CXPermissionStatus {
-        switch status {
-        case .notDetermined: return .unknown
-        case .restricted, .denied: return .unauthorized
-        case .authorized: return .authorized
-        default: return .unauthorized
-        }
-    }
-    
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
-    {
-        if #available(iOS 14, *) {
-            ATTrackingManager.requestTrackingAuthorization { status in
-                completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
-            }
-        } else {
-            completion(CXPermissionResult(type: type, status: .disabled))
-        }
-    }
-    
-}
-
-#endif
 
 #endif

@@ -198,7 +198,9 @@ extension UITextView {
     @objc public func cx_addLinkClickable(withTarget target: UITextViewDelegate)
     {
         isUserInteractionEnabled = true
+        #if os(iOS)
         isEditable = false
+        #endif
         isScrollEnabled = false
         showsHorizontalScrollIndicator = false
         showsVerticalScrollIndicator = false

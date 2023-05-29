@@ -12,7 +12,7 @@ import CommonCrypto
 #if canImport(CoreImage)
 import CoreImage
 #endif
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 #endif
 
@@ -183,14 +183,6 @@ extension CXSwiftBase where T == String {
         return attr as NSAttributedString
     }
     
-    /// Copy string to pasteboard.
-    public func copyToPasteboard() {
-        guard self.length > 0 else {
-            return
-        }
-        UIPasteboard.general.string = self.base
-    }
-    
     /// Intercept the specified range of string, indexes starting from 0 by default.
     ///
     /// - Parameters:
@@ -220,6 +212,15 @@ extension CXSwiftBase where T == String {
     }
     
     #if os(iOS) || os(tvOS)
+    
+    /// Copy string to pasteboard.
+    public func copyToPasteboard() {
+        guard self.length > 0 else {
+            return
+        }
+        UIPasteboard.general.string = self.base
+    }
+    
     #if canImport(CoreImage)
     /// Generates an image of QRCode.
     ///

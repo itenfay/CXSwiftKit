@@ -84,14 +84,6 @@ extension CXSwiftBase where T : CXColor {
         return self.base.cx_hexString
     }
     
-    /// Returns a new image with the specified parameters.
-    public func makeImageWithSize(
-        _ size: CGSize,
-        cornerRadius: CGFloat) -> UIImage
-    {
-        return base.cx_makeImageWithSize(size, cornerRadius: cornerRadius)
-    }
-    
     /// Returns the inverse color.
     public var inverseColor: CXColor
     {
@@ -106,6 +98,14 @@ extension CXSwiftBase where T : CXColor {
     public func drawImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
     {
         self.base.cx_drawImage(withSize: size)
+    }
+    
+    /// Returns a new image with the specified parameters.
+    public func makeImageWithSize(
+        _ size: CGSize,
+        cornerRadius: CGFloat) -> UIImage
+    {
+        return base.cx_makeImageWithSize(size, cornerRadius: cornerRadius)
     }
     
     /// Returns a new image with the specified parameters.

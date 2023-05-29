@@ -10,12 +10,12 @@ import Foundation
 extension CXSwiftBase where T : NSAttributedString {
     
     /// Add the underline with the specified parameters.
-    public func addUnderline(with color: UIColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
+    public func addUnderline(with color: CXColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
         return base.cx_addUnderline(with: color, offset: offset, style: style)
     }
     
     /// Add the strikethrough with the specified parameters.
-    public func addStrikethrough(with color: UIColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
+    public func addStrikethrough(with color: CXColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
         return base.cx_addStrikethrough(with: color, offset: offset, style: style)
     }
     
@@ -24,7 +24,7 @@ extension CXSwiftBase where T : NSAttributedString {
 extension NSAttributedString {
     
     /// Add the underline with the specified parameters.
-    public func cx_addUnderline(with color: UIColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
+    public func cx_addUnderline(with color: CXColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
         let attrs: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.underlineStyle : NSNumber(value: style.rawValue),
             NSAttributedString.Key.underlineColor : color,
@@ -36,7 +36,7 @@ extension NSAttributedString {
     }
     
     /// Add the strikethrough with the specified parameters.
-    public func cx_addStrikethrough(with color: UIColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
+    public func cx_addStrikethrough(with color: CXColor, offset: Float = 0, style: NSUnderlineStyle = [.single]) -> NSAttributedString {
         let attrs: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.strikethroughStyle : NSNumber(value: style.rawValue),
             NSAttributedString.Key.strikethroughColor : color,

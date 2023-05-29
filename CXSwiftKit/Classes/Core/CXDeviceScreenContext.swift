@@ -15,6 +15,7 @@ public class CXDeviceScreenContext: NSObject {
     private var onObserveProtectedDataWillBecomeUnavailable: ((Notification) -> Void)?
     private var onObserveProximityStateDidChange: ((Bool) -> Void)?
     
+    #if os(iOS)
     @objc public func subscribeBrightnessChange(handler: @escaping (CGFloat) -> Void) {
         onObserveScreenBrightness = handler
         NotificationCenter.default.addObserver(self, selector: #selector(brightnessDidChange(_:)), name: UIScreen.brightnessDidChangeNotification, object: nil)
@@ -33,6 +34,7 @@ public class CXDeviceScreenContext: NSObject {
                      (screen.brightness > 0 ? "Screen Light" : "Screen Extinction"))
         onObserveScreenBrightness?(screen.brightness)
     }
+    #endif
     
     @objc public func subscribeProtectedDataDidBecomeAvailable(handler: @escaping (Notification) -> Void) {
         onObserveProtectedDataDidBecomeAvailable = handler

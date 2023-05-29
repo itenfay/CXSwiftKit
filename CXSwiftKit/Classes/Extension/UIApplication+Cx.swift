@@ -76,7 +76,7 @@ extension UIApplication {
     
     /// Returns an array of windows which is active in the foreground.
     @objc public var cx_foregroundActiveWindows: [UIWindow]? {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
             return connectedScenes
                 .filter({ $0.activationState == .foregroundActive })
                 .map({ $0 as? UIWindowScene })
@@ -88,7 +88,7 @@ extension UIApplication {
     
     /// Returns an array of windows which is running in the background.
     @objc public var cx_backgroundWindows: [UIWindow]? {
-        if #available(iOS 13.0, *) {
+        if #available(iOS 13.0, tvOS 13.0, *) {
             return connectedScenes
                 .filter({ $0.activationState == .background })
                 .map({ $0 as? UIWindowScene })

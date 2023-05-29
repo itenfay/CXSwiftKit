@@ -29,7 +29,7 @@ public class CXScreenRecorder: NSObject {
     private var onError: ((String) -> Void)?
     
     /// Customizes replay video fileName.
-    @objc public var replayVideoFileName: String = "cx.replayvideo.sr0426.mp4"
+    @objc public var replayVideoFileName: String = "cx_replayvideo_sr0426.mp4"
     @objc public var exportVideoHandler: ((String, Error?) -> Void)?
     
     @objc public func onObserve(finish: @escaping () -> Void, cancel: @escaping () -> Void, error: @escaping (String) -> Void) {
@@ -129,7 +129,7 @@ extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDel
         // Cancel.
         if activityTypes.count == 0 {
             #if os(macOS)
-            viewController.dismiss(previewController)
+            viewController?.dismiss(previewController)
             #else
             previewController.dismiss(animated: true, completion: nil)
             #endif
@@ -144,7 +144,7 @@ extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDel
             onFinish?()
         } else {
             #if os(macOS)
-            viewController.dismiss(previewController)
+            viewController?.dismiss(previewController)
             onFinish?()
             #endif
         }
@@ -153,7 +153,7 @@ extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDel
     @available(macOS 11.0, *)
     public func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
         #if os(macOS)
-        viewController.dismiss(previewController)
+        viewController?.dismiss(previewController)
         #else
         previewController.dismiss(animated: true, completion: nil)
         #endif

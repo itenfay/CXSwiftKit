@@ -10,6 +10,7 @@ import UIKit
 
 extension CXSwiftBase where T : UIScrollView {
     
+    #if os(iOS)
     /// The refresh control associated with the scroll view.
     ///
     /// - Parameters:
@@ -20,11 +21,13 @@ extension CXSwiftBase where T : UIScrollView {
     public func setupRefreshControl(_ target: Any?, action: Selector, attributedTitle: NSAttributedString? = nil, tintColor: UIColor? = nil) {
         base.cx_setupRefreshControl(target, action: action, attributedTitle: attributedTitle, tintColor: tintColor)
     }
+    #endif
     
 }
 
 extension UIScrollView {
     
+    #if os(iOS)
     /// The refresh control associated with the scroll view.
     ///
     /// - Parameters:
@@ -41,6 +44,7 @@ extension UIScrollView {
         }
         self.refreshControl = refreshControl
     }
+    #endif
     
 }
 

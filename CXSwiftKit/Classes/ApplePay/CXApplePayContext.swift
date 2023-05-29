@@ -16,9 +16,9 @@ import PassKit
 /// The class for Apple payment.
 public class CXApplePayContext: NSObject {
     
-    @objc public weak var controller: UIViewController!
+    @objc public weak var controller: CXViewController!
     
-    @objc public init(controller: UIViewController) {
+    @objc public init(controller: CXViewController) {
         self.controller = controller
     }
     
@@ -134,7 +134,11 @@ public class CXApplePayContext: NSObject {
             return
         }
         paymentAuthViewController.delegate = self
+        #if os(macOS)
+        controller?.presentAsSheet(paymentAuthViewController)
+        #else
         controller?.present(paymentAuthViewController, animated: true)
+        #endif
     }
     
 }
@@ -201,7 +205,11 @@ extension CXApplePayContext: PKPaymentAuthorizationViewControllerDelegate {
     public func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         didFinishPayment?()
         currentPaymentRequest = nil
+        #if os(macOS)
+        self.controller.dismiss(controller)
+        #else
         controller.dismiss(animated: true)
+        #endif
     }
     
 }
