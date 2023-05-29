@@ -20,10 +20,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="He6-Qn-sd9" customClass="CXVerticalSlider" customModule="CXSwiftKit">
-                                <rect key="frame" x="44" y="161" width="99" height="205"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="He6-Qn-sd9" customClass="CXVerticalSlider" customModule="CXSwiftKit">
+                                <rect key="frame" x="40" y="160" width="100" height="200"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="BDK-pS-ZlB"/>
+                                    <constraint firstAttribute="height" constant="200" id="Q8g-4p-9d9"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="cx_masksToBounds" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cx_cornerRadius">
@@ -31,13 +34,22 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VuN-vb-fR9" customClass="CXCircleProgressButton" customModule="CXSwiftKit">
-                                <rect key="frame" x="202" y="213" width="120" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VuN-vb-fR9" customClass="CXCircleProgressButton" customModule="CXSwiftKit">
+                                <rect key="frame" x="202" y="200" width="120" height="120"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="120" id="CMC-z2-dZw"/>
+                                    <constraint firstAttribute="height" constant="120" id="hHP-E0-v5e"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
+                        <constraints>
+                            <constraint firstItem="He6-Qn-sd9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="40" id="EVV-M5-nUL"/>
+                            <constraint firstItem="He6-Qn-sd9" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="160" id="QkM-nU-Amx"/>
+                            <constraint firstItem="VuN-vb-fR9" firstAttribute="leading" secondItem="He6-Qn-sd9" secondAttribute="trailing" constant="62" id="nkb-2Z-JvO"/>
+                            <constraint firstItem="VuN-vb-fR9" firstAttribute="centerY" secondItem="He6-Qn-sd9" secondAttribute="centerY" id="z6V-On-gID"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="progressButton" destination="VuN-vb-fR9" id="Df5-c4-zAl"/>
