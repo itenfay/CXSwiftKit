@@ -5,9 +5,8 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(Foundation)
 import Foundation
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS)
 import UIKit
 #endif
 
@@ -25,7 +24,7 @@ extension CXSwiftBase where T == CGFloat {
         return CGFloat.cx_screenHeight
     }
     
-    #if os(iOS) && canImport(UIKit)
+    #if os(iOS)
     public static var safeAreaTop: CGFloat { CGFloat.cx_safeAreaTop }
     public static var safeAreaBottom: CGFloat { CGFloat.cx_safeAreaBottom }
     /// The height of the status bar.
@@ -66,7 +65,7 @@ extension CGFloat {
         #endif
     }
     
-    #if os(iOS) && canImport(UIKit)
+    #if os(iOS)
     public static var cx_safeAreaTop: CGFloat { cxSafeAreaTop }
     public static var cx_safeAreaBottom: CGFloat { cxSafeAreaBottom }
     /// The height of the status bar.
@@ -86,5 +85,3 @@ extension CGFloat {
     }
     
 }
-
-#endif

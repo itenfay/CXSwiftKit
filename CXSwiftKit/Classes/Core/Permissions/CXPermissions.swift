@@ -5,8 +5,9 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
+
+#if os(iOS) || os(tvOS)
 
 //MARK: - Photo Library
 

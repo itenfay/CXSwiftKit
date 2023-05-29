@@ -5,13 +5,17 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+#if os(iOS) || os(tvOS) || os(macOS)
 #if os(iOS) || os(tvOS)
 import UIKit
-#if canImport(OverlayController)
+#else
+import AppKit
+#endif
+#if os(iOS) && canImport(OverlayController)
 import OverlayController
 #endif
 
-extension CXSwiftBase where T : UIView {
+extension CXSwiftBase where T : CXView {
     
     /// The y-coordinate of the point that specifies the coordinates of the rectangle’s origin.
     public var top: CGFloat {
@@ -156,7 +160,7 @@ extension CXSwiftBase where T : UIView {
     }
     
     /// The border color of the view, also inspectable from Storyboard or Xib.
-    public var borderColor: UIColor?
+    public var borderColor: CXColor?
     {
         get {
             return self.base.cx_borderColor
@@ -188,9 +192,9 @@ extension CXSwiftBase where T : UIView {
     ///   - lineJoin: The line join style that specifies.
     ///   - lineDashPattern: The line dash pattern applied to draw line.
     public func drawLine(
-        startPoint: CGPoint,
-        endPoint: CGPoint,
-        color: UIColor,
+        startPoint: CXPoint,
+        endPoint: CXPoint,
+        color: CXColor,
         lineWidth: CGFloat,
         lineCap: CAShapeLayerLineCap = .butt,
         lineJoin: CAShapeLayerLineJoin = .miter,
@@ -207,14 +211,15 @@ extension CXSwiftBase where T : UIView {
     ///   - endPoint: The end point of the gradient when drawn in the layer’s coordinate space.
     ///   - cornerRadius: The radius to use when drawing rounded corners for the layer’s background.
     public func addGradientLayer(
-        withColors colors: [UIColor],
-        startPoint: CGPoint = .init(x: 0.5, y: 0.5),
-        endPoint: CGPoint = .init(x: 0.5, y: 1),
+        withColors colors: [CXColor],
+        startPoint: CXPoint = .init(x: 0.5, y: 0.5),
+        endPoint: CXPoint = .init(x: 0.5, y: 1),
         cornerRadius: CGFloat = 0)
     {
         self.base.cx_addGradientLayer(withColors: colors, startPoint: startPoint, endPoint: endPoint, cornerRadius: cornerRadius)
     }
     
+    #if os(iOS) || os(tvOS)
     /// Adds the shadow for the view.
     ///
     /// - Parameters:
@@ -272,12 +277,6 @@ extension CXSwiftBase where T : UIView {
     public func clipCorners(byRadius radius: CGFloat, roundedCorners: UIRectCorner)
     {
         self.base.cx_clipCorners(byRadius: radius, roundedCorners: roundedCorners)
-    }
-    
-    /// Returns the receiver’s immediate subviews.
-    public var children: [UIView]
-    {
-        return self.base.cx_children
     }
     
     /// Return an optional snapshot image by the specified rectangle.
@@ -395,22 +394,10 @@ extension CXSwiftBase where T : UIView {
         self.base.cx_flip(from: fromView, to: toView, duration: duration, repeatCount: repeatCount, completion: completion)
     }
     
-    /// Returns the receiver’s recursive subviews.
-    public var recursiveSubviews: [UIView]
-    {
-        return self.base.cx_recursiveSubviews
-    }
-    
     /// Finds the first responder recursively.
     public var firstResponder: UIView?
     {
         return self.base.cx_firstResponder
-    }
-    
-    /// The insets that you use to determine the safe area for this view.
-    public var safeAreaInsets: UIEdgeInsets
-    {
-        self.base.cx_safeAreaInsets // return
     }
     
     /// Checks if view is in RTL format.
@@ -442,22 +429,36 @@ extension CXSwiftBase where T : UIView {
     {
         return self.base.cx_layoutSizeFitting(size: targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
     }
+    #endif
+    
+    /// Returns the receiver’s immediate subviews.
+    public var children: [CXView]
+    {
+        return self.base.cx_children
+    }
+    
+    /// Returns the receiver’s recursive subviews.
+    public var recursiveSubviews: [CXView]
+    {
+        return self.base.cx_recursiveSubviews
+    }
     
     /// Adds the subviews.
-    public func add(subviews: UIView...) {
+    public func add(subviews: CXView...) {
         subviews.forEach(self.base.addSubview)
     }
     
     /// Adds the subviews.
-    public func addSubViews(_ views: [UIView]) {
+    public func addSubViews(_ views: [CXView]) {
         self.base.cx_addSubViews(views)
     }
     
     /// Constrains itself to view.
-    public func constrain(to view: UIView) {
+    public func constrain(to view: CXView) {
         self.base.cx_constrain(to: view)
     }
     
+    #if os(iOS) || os(tvOS)
     /// Present the view.
     public func present(_ view: UIView?, completion: (() -> Void)? = nil) {
         self.base.cx_present(view, completion: completion)
@@ -478,8 +479,9 @@ extension CXSwiftBase where T : UIView {
     {
         self.base.cx_dismiss(overlayView: overlayView, completion: completion)
     }
+    #endif
     
-    #if canImport(OverlayController)
+    #if os(iOS) && canImport(OverlayController)
     public func ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle = .black(opacity: 0.7), position: OverlayLayoutPosition = .bottom, positionOffset: CGFloat = 0, style: OverlaySlideStyle = .fromToBottom, windowLevel: OverlayWindowLevel = .low, isDismissOnMaskTouched: Bool = true, isPanGestureEnabled: Bool = true, panDismissPercent: CGFloat = 0.5, duration: TimeInterval = 0.3, completion: (() -> Void)? = nil)
     {
         self.base.cx_ovcPresent(view, maskStyle: maskStyle, position: position, positionOffset: positionOffset, style: style, windowLevel: windowLevel, isDismissOnMaskTouched: isDismissOnMaskTouched, isPanGestureEnabled: isPanGestureEnabled, panDismissPercent: panDismissPercent, duration: duration, completion: completion)
@@ -496,6 +498,12 @@ extension CXSwiftBase where T : UIView {
     
     public func makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         self.base.cx_makeSafeAreaConstraints(maker: maker)
+    }
+    
+    /// The insets that you use to determine the safe area for this view.
+    public var safeAreaInsets: UIEdgeInsets
+    {
+        self.base.cx_safeAreaInsets // return
     }
     
     public var safeTopAnchor: NSLayoutYAxisAnchor {
@@ -534,7 +542,7 @@ extension CXSwiftBase where T : UIView {
 
 //MARK: - Layout
 
-extension UIView {
+extension CXView {
     
     /// The y-coordinate of the point that specifies the coordinates of the rectangle’s origin.
     @objc public var cx_top: CGFloat {
@@ -680,7 +688,7 @@ extension UIView {
 
 //MARK: - Layer
 
-extension UIView {
+extension CXView {
     
     /// The corner radius of the view, also inspectable from Storyboard or Xib.
     @IBInspectable @objc public var cx_cornerRadius: CGFloat
@@ -705,7 +713,7 @@ extension UIView {
     }
     
     /// The border color of the view, also inspectable from Storyboard or Xib.
-    @IBInspectable @objc public var cx_borderColor: UIColor?
+    @IBInspectable @objc public var cx_borderColor: CXColor?
     {
         get {
             guard let cgColor = layer.borderColor else { return nil }
@@ -744,9 +752,9 @@ extension UIView {
     ///   - lineJoin: The line join style that specifies.
     ///   - lineDashPattern: The line dash pattern applied to draw line.
     @objc public func cx_drawLine(
-        startPoint: CGPoint,
-        endPoint: CGPoint,
-        color: UIColor,
+        startPoint: CXPoint,
+        endPoint: CXPoint,
+        color: CXColor,
         lineWidth: CGFloat,
         lineCap: CAShapeLayerLineCap = .butt,
         lineJoin: CAShapeLayerLineJoin = .miter,
@@ -775,14 +783,11 @@ extension UIView {
     ///   - endPoint: The end point of the gradient when drawn in the layer’s coordinate space.
     ///   - cornerRadius: The radius to use when drawing rounded corners for the layer’s background.
     @objc public func cx_addGradientLayer(
-        withColors colors: [UIColor],
-        startPoint: CGPoint = .init(x: 0.5, y: 0.5),
-        endPoint: CGPoint = .init(x: 0.5, y: 1),
+        withColors colors: [CXColor],
+        startPoint: CXPoint = .init(x: 0.5, y: 0.5),
+        endPoint: CXPoint = .init(x: 0.5, y: 1),
         cornerRadius: CGFloat = 0)
     {
-        setNeedsLayout()
-        layoutIfNeeded()
-        
         let gradientLayer = CAGradientLayer.init()
         gradientLayer.frame = bounds
         gradientLayer.colors = colors.map{ $0.cgColor }
@@ -794,6 +799,12 @@ extension UIView {
         
         layer.insertSublayer(gradientLayer, at: 0)
     }
+    
+}
+
+#if os(iOS) || os(tvOS)
+
+extension UIView {
     
     /// Adds the shadow for the view.
     ///
@@ -825,8 +836,6 @@ extension UIView {
         guard let aColor = color else {
             return
         }
-        setNeedsLayout()
-        layoutIfNeeded()
         let path = UIBezierPath(rect: self.bounds)
         cx_addShadow(withColor: aColor, opacity: opacity, offset: offset, path: path)
     }
@@ -849,9 +858,6 @@ extension UIView {
         guard let aColor = color else {
             return
         }
-        setNeedsLayout()
-        layoutIfNeeded()
-        
         let size = CGSize(width: cornerRadius, height: cornerRadius)
         let path = UIBezierPath.init(
             roundedRect: self.bounds,
@@ -876,9 +882,6 @@ extension UIView {
     ///   - rectCorner: A bitmask value that identifies the corners that you want rounded.
     @objc public func cx_clipCorners(byRadius radius: CGFloat, roundedCorners: UIRectCorner)
     {
-        setNeedsLayout()
-        layoutIfNeeded()
-        
         let path = UIBezierPath.init(
             roundedRect: bounds,
             byRoundingCorners: roundedCorners,
@@ -894,12 +897,6 @@ extension UIView {
 }
 
 extension UIView {
-    
-    /// Returns the receiver’s immediate subviews.
-    @objc public var cx_children: [UIView]
-    {
-        return subviews
-    }
     
     /// Return an optional screenshot image by the specified rectangle.
     @objc public var cx_screenshot: UIImage?
@@ -1128,12 +1125,6 @@ extension UIView {
         }
     }
     
-    /// Returns the receiver’s recursive subviews.
-    @objc public var cx_recursiveSubviews: [UIView]
-    {
-        return subviews.reduce(subviews) { $0 + $1.cx_recursiveSubviews }
-    }
-    
     /// Finds the first responder recursively.
     @objc public var cx_firstResponder: UIView?
     {
@@ -1148,16 +1139,6 @@ extension UIView {
             index += 1
         } while index < views.count
         return nil
-    }
-    
-    /// The insets that you use to determine the safe area for this view.
-    @objc public var cx_safeAreaInsets: UIEdgeInsets
-    {
-        if #available(iOS 11.0, *) {
-            return safeAreaInsets
-        } else {
-            return .zero
-        }
     }
     
     /// Checks if view is in RTL format.
@@ -1192,12 +1173,14 @@ extension UIView {
     
 }
 
+#endif
+
 /// Defines the enum of radian direction.
 @objc public enum CXViewRadianDirection: Int {
     case top, left, bottom, right
 }
 
-extension UIView {
+extension CXView {
     
     /// Draws a quad curve for a view with the radian, direction and fill color.
     @objc public func cx_drawQuadCurve(withRadian radian: CGFloat, direction: CXViewRadianDirection = .bottom, fillColor: UIColor? = nil) {
@@ -1330,20 +1313,32 @@ extension UIView {
     
 }
 
-extension UIView {
+extension CXView {
+    
+    /// Returns the receiver’s immediate subviews.
+    @objc public var cx_children: [CXView]
+    {
+        return subviews
+    }
+    
+    /// Returns the receiver’s recursive subviews.
+    @objc public var cx_recursiveSubviews: [CXView]
+    {
+        return subviews.reduce(subviews) { $0 + $1.cx_recursiveSubviews }
+    }
     
     /// Adds the subviews.
-    public func cx_add(subviews: UIView...) {
+    public func cx_add(subviews: CXView...) {
         subviews.forEach(addSubview)
     }
     
     /// Adds the subviews.
-    @objc public func cx_addSubViews(_ views: [UIView]) {
+    @objc public func cx_addSubViews(_ views: [CXView]) {
         views.forEach(addSubview)
     }
     
     /// Constrains itself to view.
-    @objc public func cx_constrain(to view: UIView) {
+    @objc public func cx_constrain(to view: CXView) {
         self.translatesAutoresizingMaskIntoConstraints = false
         view.cx_add(subviews: self)
         self.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -1358,6 +1353,7 @@ extension UIView {
 
 extension UIView: CXViewWrapable {
     
+    #if os(iOS) || os(tvOS)
     private var cx_overlayDirection: CXOverlayDirection? {
         get {
             return objc_getAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection) as? CXOverlayDirection
@@ -1429,6 +1425,7 @@ extension UIView: CXViewWrapable {
             completion?()
         }
     }
+    #endif
     
 }
 
@@ -1436,7 +1433,7 @@ extension UIView: CXViewWrapable {
 
 extension UIView: CXSwiftViewWrapable {
     
-    #if canImport(OverlayController)
+    #if os(iOS) && canImport(OverlayController)
     private var cx_overlayController: OverlayController? {
         get {
             return objc_getAssociatedObject(self, &CXAssociatedKey.presentByOverlayController) as? OverlayController
@@ -1474,7 +1471,7 @@ extension UIView: CXSwiftViewWrapable {
 
 //MARK: - Constraints
 
-extension UIView {
+extension CXView {
     
     @objc public func cx_makeConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         assert(superview != nil, "The receiver’s superview is nil.")
@@ -1620,57 +1617,67 @@ extension UIView {
         }
     }
     
+    /// The insets that you use to determine the safe area for this view.
+    @objc public var cx_safeAreaInsets: UIEdgeInsets
+    {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
+            return safeAreaInsets
+        } else {
+            return .zero
+        }
+    }
+    
     @objc public var cx_safeTopAnchor: NSLayoutYAxisAnchor {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.topAnchor
         }
         return topAnchor
     }
     
     @objc public var cx_safeLeadingAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.leftAnchor
         }
         return leftAnchor
     }
     
     @objc public var cx_safeBottomAnchor: NSLayoutYAxisAnchor {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.bottomAnchor
         }
         return bottomAnchor
     }
     
     @objc public var cx_safeTrailingAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.rightAnchor
         }
         return rightAnchor
     }
     
     @objc public var cx_safeCenterXAnchor: NSLayoutXAxisAnchor {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.centerXAnchor
         }
         return centerXAnchor
     }
     
     @objc public var cx_safeCenterYAnchor: NSLayoutYAxisAnchor {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.centerYAnchor
         }
         return centerYAnchor
     }
     
     @objc public var cx_safeWidthAnchor: NSLayoutDimension {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.widthAnchor
         }
         return widthAnchor
     }
     
     @objc public var cx_safeHeightAnchor: NSLayoutDimension {
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.heightAnchor
         }
         return heightAnchor

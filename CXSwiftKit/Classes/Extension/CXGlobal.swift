@@ -111,12 +111,20 @@ public func cxSwizzling(_ cls: AnyClass?, _ selector: Selector, withClass swizzl
     return true
 }
 
-#if canImport(AudioToolbox)
+#if canImport(AudioToolbox) && !os(watchOS)
 import AudioToolbox
 
 /// Makes the vibrate system sound.
 public func cxMakeVibrate(completion: (() -> Void)? = nil) {
+    #if os(macOS)
+    if #available(macOS 10.11, *) {
+        AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, completion)
+    } else {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+    }
+    #else
     AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, completion)
+    #endif
 }
 
 #endif

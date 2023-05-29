@@ -1,12 +1,16 @@
 //
-//  UIColor+Cx.swift
+//  CXColor+Cx.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(UIKit)
+#if os(iOS) || os(tvOS) || os(macOS)
+#if os(iOS) || os(tvOS)
 import UIKit
+#else
+import AppKit
+#endif
 
 //The color selector.
 //let color = #colorLiteral(
@@ -22,16 +26,16 @@ public class CXRGBComponents: NSObject {
     var alpha: CGFloat = 0
 }
 
-extension CXSwiftBase where T : UIColor {
+extension CXSwiftBase where T : CXColor {
     
     /// Creates Color from RGB values with optional alpha.
     ///
     /// - Parameters:
     ///   - hex: Hex Int (example: 0xDEA3B6).
     ///   - alpha: Optional alpha value (default is 1).
-    public static func color(withHex hex: Int, alpha: CGFloat = 1) -> UIColor?
+    public static func color(withHex hex: Int, alpha: CGFloat = 1) -> CXColor?
     {
-        return UIColor.cx_color(withHex: hex, alpha: alpha)
+        return CXColor.cx_color(withHex: hex, alpha: alpha)
     }
     
     /// Creates Color from hexadecimal string with optional alpha.
@@ -39,18 +43,9 @@ extension CXSwiftBase where T : UIColor {
     /// - Parameters:
     ///   - hexString: Hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
     ///   - alpha: Optional alpha value (default is 1).
-    public static func color(withHexString hexString: String, alpha: CGFloat = 1) -> UIColor?
+    public static func color(withHexString hexString: String, alpha: CGFloat = 1) -> CXColor?
     {
-        return UIColor.cx_color(withHexString: hexString, alpha: alpha)
-    }
-    
-    /// Draws an image of the color with the specified size.
-    ///
-    /// - Parameter size: The size of getting new image.
-    /// - Returns: An image of the color with the specified size.
-    public func drawImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
-    {
-        self.base.cx_drawImage(withSize: size)
+        return CXColor.cx_color(withHexString: hexString, alpha: alpha)
     }
     
     /// Returns the components that form the color in the RGB color space.
@@ -66,19 +61,19 @@ extension CXSwiftBase where T : UIColor {
     ///
     /// - Parameter color: Another color you specify.
     /// - Returns: The color difference of two colors.
-    public func diff(byColor color: UIColor) -> Double
+    public func diff(byColor color: CXColor) -> Double
     {
         return self.base.cx_diff(byColor: color)
     }
     
     /// Creates a color randomly.
-    public static var randomColor: UIColor
+    public static var randomColor: CXColor
     {
-        return UIColor.cx_randomColor()
+        return CXColor.cx_randomColor()
     }
     
     /// Returns the text color to adapt to the background color.
-    public var brightnessAdjustedColor: UIColor
+    public var brightnessAdjustedColor: CXColor
     {
         return self.base.cx_brightnessAdjustedColor()
     }
@@ -95,6 +90,22 @@ extension CXSwiftBase where T : UIColor {
         cornerRadius: CGFloat) -> UIImage
     {
         return base.cx_makeImageWithSize(size, cornerRadius: cornerRadius)
+    }
+    
+    /// Returns the inverse color.
+    public var inverseColor: CXColor
+    {
+        return base.cx_inverseColor
+    }
+    
+    #if os(iOS) || os(tvOS)
+    /// Draws an image of the color with the specified size.
+    ///
+    /// - Parameter size: The size of getting new image.
+    /// - Returns: An image of the color with the specified size.
+    public func drawImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
+    {
+        self.base.cx_drawImage(withSize: size)
     }
     
     /// Returns a new image with the specified parameters.
@@ -121,24 +132,18 @@ extension CXSwiftBase where T : UIColor {
         _ size: CGSize,
         byRoundingCorners corners: UIRectCorner,
         cornerRadius: CGFloat,
-        borderWidth: CGFloat,
-        borderColor: UIColor,
+        borderWidth: CGFloat, borderColor: UIColor,
         lineCap: CGLineCap,
         lineJoin: CGLineJoin,
         lineDashPhase: CGFloat, lineDashLengths: [CGFloat]) -> UIImage
     {
         return base.cx_makeImageWithSize(size, byRoundingCorners: corners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor, lineCap: lineCap, lineJoin: lineJoin, lineDashPhase: lineDashPhase, lineDashLengths: lineDashLengths)
     }
-    
-    /// Returns the inverse color.
-    public var inverseColor: UIColor
-    {
-        return base.cx_inverseColor
-    }
+    #endif
     
 }
 
-extension UIColor {
+extension CXColor {
     
     /// Creates a color object using the specified opacity and RGB component values.
     ///
@@ -148,7 +153,7 @@ extension UIColor {
     ///   - blue: The blue value of the color object.
     ///   - alpha: The opacity value of the color object.
     /// - Returns: The color object. The color information represented by this object is in an RGB colorspace.
-    @objc public static func cx_color(withRed red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1) -> UIColor?
+    @objc public static func cx_color(withRed red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat = 1) -> CXColor?
     {
         guard red >= 0 && red <= 255 else { return nil }
         guard green >= 0 && green <= 255 else { return nil }
@@ -158,7 +163,7 @@ extension UIColor {
         if _alpha < 0 { _alpha = 0 }
         if _alpha > 1 { _alpha = 1 }
         
-        return UIColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: _alpha)
+        return CXColor(red: red / 255.0, green: green / 255.0, blue: blue / 255.0, alpha: _alpha)
     }
     
     /// Creates Color from RGB values with optional alpha.
@@ -166,7 +171,7 @@ extension UIColor {
     /// - Parameters:
     ///   - hex: Hex Int (example: 0xDEA3B6).
     ///   - alpha: Optional alpha value (default is 1).
-    @objc public static func cx_color(withHex hex: Int, alpha: CGFloat = 1) -> UIColor?
+    @objc public static func cx_color(withHex hex: Int, alpha: CGFloat = 1) -> CXColor?
     {
         let red = (hex >> 16) & 0xff
         let green = (hex >> 8) & 0xff
@@ -179,7 +184,7 @@ extension UIColor {
     /// - Parameters:
     ///   - hexString: Hexadecimal string (examples: EDE7F6, 0xEDE7F6, #EDE7F6, #0ff, 0xF0F, ..).
     ///   - alpha: Optional alpha value (default is 1).
-    @objc public static func cx_color(withHexString hexString: String, alpha: CGFloat = 1) -> UIColor?
+    @objc public static func cx_color(withHexString hexString: String, alpha: CGFloat = 1) -> CXColor?
     {
         var string = ""
         if hexString.lowercased().hasPrefix("0x") {
@@ -198,25 +203,6 @@ extension UIColor {
         
         guard let hexValue = Int(string, radix: 16) else { return nil }
         return cx_color(withHex: hexValue, alpha: alpha)
-    }
-    
-    /// Draws an image of the color with the specified size.
-    ///
-    /// - Parameter size: The size of getting new image.
-    /// - Returns: An image of the color with the specified size.
-    @objc public func cx_drawImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
-    {
-        UIGraphicsBeginImageContext(size)
-        guard let context = UIGraphicsGetCurrentContext()
-        else {
-            UIGraphicsEndImageContext()
-            return nil
-        }
-        context.setFillColor(self.cgColor)
-        context.fill(CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image
     }
     
     /// Returns the components that form the color in the RGB color space.
@@ -248,7 +234,7 @@ extension UIColor {
     ///
     /// - Parameter color: Another color you specify.
     /// - Returns: The color difference of two colors.
-    @objc public func cx_diff(byColor color: UIColor) -> Double
+    @objc public func cx_diff(byColor color: CXColor) -> Double
     {
         let c1 = self.cx.getRGBA()
         let c2 = color.cx.getRGBA()
@@ -268,22 +254,22 @@ extension UIColor {
     
     /// Creates a color randomly.
     /// - Returns: A color that was created randomly.
-    @objc public static func cx_randomColor() -> UIColor
+    @objc public static func cx_randomColor() -> CXColor
     {
         return cx_color(withRed: CGFloat(arc4random_uniform(256)),
                         green: CGFloat(arc4random_uniform(256)),
                         blue: CGFloat(arc4random_uniform(256)))
-        ?? UIColor(white: 0.1, alpha: 0.8)
+        ?? CXColor(white: 0.1, alpha: 0.8)
     }
     
     /// Returns the text color to adapt to the background color.
-    @objc public func cx_brightnessAdjustedColor() -> UIColor
+    @objc public func cx_brightnessAdjustedColor() -> CXColor
     {
         var components = self.cgColor.components
         let alpha = components?.last
         components?.removeLast()
         let color = CGFloat(1-(components?.max())! >= 0.5 ? 1.0 : 0.0)
-        return UIColor(red: color, green: color, blue: color, alpha: alpha!)
+        return CXColor(red: color, green: color, blue: color, alpha: alpha!)
     }
     
     /// Returns a hexadecimal string.
@@ -296,6 +282,43 @@ extension UIColor {
         self.getRed(&r, green: &g, blue: &b, alpha: &a)
         let rgb: Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
         return String(format:"#%06x", rgb)
+    }
+    
+    /// Returns the inverse color.
+    @objc public var cx_inverseColor: CXColor
+    {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
+            return self
+        }
+        return CXColor(red: 1 - red, green: 1 - green, blue: 1 - blue, alpha: alpha)
+    }
+    
+}
+
+#if os(iOS) || os(tvOS)
+extension UIColor {
+    
+    /// Draws an image of the color with the specified size.
+    ///
+    /// - Parameter size: The size of getting new image.
+    /// - Returns: An image of the color with the specified size.
+    @objc public func cx_drawImage(withSize size: CGSize = CGSize(width: 1, height: 1)) -> UIImage?
+    {
+        UIGraphicsBeginImageContext(size)
+        guard let context = UIGraphicsGetCurrentContext()
+        else {
+            UIGraphicsEndImageContext()
+            return nil
+        }
+        context.setFillColor(self.cgColor)
+        context.fill(CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     /// Returns a new image with the specified parameters.
@@ -330,8 +353,7 @@ extension UIColor {
         _ size: CGSize,
         byRoundingCorners corners: UIRectCorner,
         cornerRadius: CGFloat,
-        borderWidth: CGFloat,
-        borderColor: UIColor,
+        borderWidth: CGFloat, borderColor: UIColor,
         lineCap: CGLineCap,
         lineJoin: CGLineJoin,
         lineDashPhase: CGFloat, lineDashLengths: [CGFloat]) -> UIImage
@@ -383,19 +405,7 @@ extension UIColor {
         }
     }
     
-    /// Returns the inverse color.
-    @objc public var cx_inverseColor: UIColor
-    {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
-            return self
-        }
-        return UIColor(red: 1 - red, green: 1 - green, blue: 1 - blue, alpha: alpha)
-    }
-    
 }
+#endif
 
 #endif

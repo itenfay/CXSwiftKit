@@ -26,14 +26,22 @@ public typealias CXViewController = UIViewController
 public typealias CXView           = UIView
 public typealias CXImageView      = UIImageView
 public typealias CXImage          = UIImage
+public typealias CXColor          = UIColor
 public typealias CXFont           = UIFont
+public typealias CXRect           = CGRect
+public typealias CXPoint          = CGPoint
+public typealias CXSize           = CGSize
 #elseif os(macOS)
 import AppKit
 public typealias CXViewController = NSViewController
 public typealias CXView           = NSView
 public typealias CXImageView      = NSImageView
 public typealias CXImage          = NSImage
+public typealias CXColor          = NSColor
 public typealias CXFont           = NSFont
+public typealias CXRect           = NSRect
+public typealias CXPoint          = NSPoint
+public typealias CXSize           = NSSize
 #else
 #endif
 

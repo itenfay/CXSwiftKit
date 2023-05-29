@@ -5,6 +5,8 @@
 //  Created by chenxing on 2022/11/14.
 //
 
+import Foundation
+
 extension Double: CXSwiftBaseCompatible {}
 
 extension CXSwiftBase where T == Double {

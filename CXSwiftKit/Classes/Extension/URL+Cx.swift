@@ -6,12 +6,26 @@
 //
 
 import Foundation
+#if os(macOS)
+import AppKit
+#endif
 
 extension URL: CXSwiftBaseCompatible {}
 
 extension CXSwiftBase where T == URL {
     
     #if !os(watchOS)
+    #if os(macOS)
+    /// Generate a thumbnail image from given url. Returns nil if no thumbnail could be created. This function may take some time to complete.
+    ///
+    /// - Parameters:
+    ///   - time: Seconds into the video where the image should be generated.
+    ///   - size: The size of the new image. Use zero to have the new image adopt the pixel dimensions of the source image.
+    ///   - completionHandler: The UIImage result of the AVAssetImageGenerator
+    public func cx_takeThumbnail(fromTime time: Float64, size: NSSize, completionHandler: @escaping (NSImage?) -> Void) {
+        base.cx_takeThumbnail(fromTime: time, size: size, completionHandler: completionHandler)
+    }
+    #else
     /// Generate a thumbnail image from given url. Returns nil if no thumbnail could be created. This function may take some time to complete.
     ///
     /// - Parameters:
@@ -20,6 +34,7 @@ extension CXSwiftBase where T == URL {
     public func takeThumbnail(fromTime time: Float64, completionHandler: @escaping (UIImage?) -> Void) {
         base.cx_takeThumbnail(fromTime: time, completionHandler: completionHandler)
     }
+    #endif
     #endif
     
     /// The dictionary of the URL's query parameters.
@@ -69,6 +84,36 @@ import AVFoundation
 extension URL {
     
     #if !os(watchOS)
+    #if os(macOS)
+    /// Generate a thumbnail image from given url. Returns nil if no thumbnail could be created. This function may take some time to complete.
+    ///
+    /// - Parameters:
+    ///   - time: Seconds into the video where the image should be generated.
+    ///   - size: The size of the new image. Use zero to have the new image adopt the pixel dimensions of the source image.
+    ///   - completionHandler: The UIImage result of the AVAssetImageGenerator
+    public func cx_takeThumbnail(fromTime time: Float64, size: NSSize, completionHandler: @escaping (NSImage?) -> Void) {
+        let avAsset = AVURLAsset(url: self)
+        let imageGenerator = AVAssetImageGenerator(asset: avAsset)
+        let requestedTime = CMTimeMakeWithSeconds(time, preferredTimescale: 1)
+        if #available(macOS 13.0, iOS 16.0, tvOS 16.0, *) {
+            imageGenerator.generateCGImageAsynchronously(for: requestedTime) { cgImage, actualTime, error in
+                if error != nil {
+                    CXLogger.log(level: .error, message: "error=\(error!)")
+                }
+                completionHandler(cgImage != nil ? NSImage(cgImage: cgImage!, size: size) : nil)
+            }
+        } else {
+            var actualTime = CMTimeMake(value: 0, timescale: 0)
+            do {
+                let cgImage = try imageGenerator.copyCGImage(at: requestedTime, actualTime: &actualTime)
+                completionHandler(NSImage(cgImage: cgImage, size: size))
+            } catch let error {
+                CXLogger.log(level: .error, message: "error=\(error)")
+                completionHandler(nil)
+            }
+        }
+    }
+    #else
     /// Generate a thumbnail image from given url. Returns nil if no thumbnail could be created. This function may take some time to complete.
     ///
     /// - Parameters:
@@ -96,6 +141,7 @@ extension URL {
             }
         }
     }
+    #endif
     #endif
     
 }
