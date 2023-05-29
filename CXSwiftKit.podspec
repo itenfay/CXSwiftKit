@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '1.2.0'
+  s.version          = '1.3.0'
   s.summary          = 'CXSwiftKit provides rich extensions of swift language, also supports Objective-C.'
 
 # This description is used to generate tags and improve search results.
@@ -31,9 +31,9 @@ Pod::Spec.new do |s|
   s.swift_versions = ['4.2', '5.0']
   
   s.ios.deployment_target = '10.0'
-  #s.osx.deployment_target = '10.10'
-  #s.tvos.deployment_target = '10.0'
-  #s.watchos.deployment_target = "3.0"
+  s.osx.deployment_target = '10.11'
+  s.tvos.deployment_target = '10.0'
+  s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
   
