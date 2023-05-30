@@ -130,25 +130,7 @@ extension NSObject: CXCommonWrapable {
     #endif
     
     #if canImport(Toaster)
-    //import Toast_Swift
-    //
-    //func setupToaster()
-    //{
-    //    ToastManager.shared.isTapToDismissEnabled = true
-    //    ToastManager.shared.position = .top
-    //    // 不启用队列
-    //    ToastCenter.default.isQueueEnabled = false
-    //    var style = ToastStyle()
-    //    style.backgroundColor = UIColor.Material.red
-    //    style.messageColor = UIColor.Material.white
-    //    style.imageSize = CGSize(width: 20, height: 20)
-    //    ToastManager.shared.style = style
-    //    ToastView.appearance().bottomOffsetPortrait = cxScreenHeight/2 - 10
-    //    let sizeScale: CGFloat = (CGFloat.cx.screenWidth < 375) ? 0.9 : 1.0
-    //    ToastView.appearance().font = UIFont.systemFont(ofSize: sizeScale * 16)
-    //}
-    
-    public func cx_resetToasterAppearance()
+    public func cx_restoreToasterAppearance()
     {
         cx_setupToasterAppearance(withBottomOffsetPortrait: 0, maxWidthRatio: 0)
     }
