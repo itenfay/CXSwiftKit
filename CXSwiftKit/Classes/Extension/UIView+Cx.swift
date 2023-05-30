@@ -97,6 +97,7 @@ extension CXSwiftBase where T : CXView {
         }
     }
     
+    #if !os(macOS)
     /// The x-coordinate of the center point of the view's frame rectangle.
     public var centerX: CGFloat {
         get {
@@ -116,6 +117,7 @@ extension CXSwiftBase where T : CXView {
             self.base.cx_centerY = newValue
         }
     }
+    #endif
     
     /// A point that specifies the coordinates of the rectangle’s origin.
     public var origin: CGPoint {
@@ -640,6 +642,7 @@ extension CXView {
         }
     }
     
+    #if !os(macOS)
     /// The x-coordinate of the center point of the view's frame rectangle.
     @objc public var cx_centerX: CGFloat {
         get {
@@ -659,6 +662,7 @@ extension CXView {
             self.center = CGPoint.init(x: self.center.x, y: newValue)
         }
     }
+    #endif
     
     /// A point that specifies the coordinates of the rectangle’s origin.
     @objc public var cx_origin: CGPoint {
@@ -1625,7 +1629,11 @@ extension CXView {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaInsets
         } else {
+            #if os(macOS)
+            return NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+            #else
             return .zero
+            #endif
         }
     }
     

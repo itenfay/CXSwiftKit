@@ -230,6 +230,13 @@ extension CXSwiftBase where T : UIImage {
         return base.cx_addClip(byRoundingCorners: corners, cornerRadius: cornerRadius, borderWidth: borderWidth, borderColor: borderColor)
     }
     
+    #if os(iOS)
+    /// The image would be saved to photos album.
+    public func saveToPhotosAlbum(completionHandler: @escaping (_ image: UIImage?, _ error: NSError?, _ contextInfo: AnyObject?) -> Void) {
+        base.cx_saveToPhotosAlbum(completionHandler: completionHandler)
+    }
+    #endif
+    
 }
 
 
@@ -583,6 +590,7 @@ extension UIImage {
 
 //MARK: - Save to photos album
 
+#if os(iOS)
 extension UIImage {
     
     fileprivate var cx_paImageContext: CXPhotosAlbumImageContext? {
@@ -595,7 +603,7 @@ extension UIImage {
     }
     
     /// The image would be saved to photos album.
-    @objc public func saveToPhotosAlbum(completionHandler: @escaping (_ image: UIImage?, _ error: NSError?, _ contextInfo: AnyObject?) -> Void) {
+    @objc public func cx_saveToPhotosAlbum(completionHandler: @escaping (_ image: UIImage?, _ error: NSError?, _ contextInfo: AnyObject?) -> Void) {
         cx_paImageContext = CXPhotosAlbumImageContext()
         cx_paImageContext?.onObserve(completionHandler: { [weak self] (image, error, contextInfo) in
             completionHandler(image, error, contextInfo)
@@ -609,5 +617,6 @@ extension UIImage {
     }
     
 }
+#endif
 
 #endif

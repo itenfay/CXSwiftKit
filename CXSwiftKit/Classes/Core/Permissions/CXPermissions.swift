@@ -28,7 +28,7 @@ extension CXPhotosPermission {
     
     @objc public var status: CXPermissionStatus {
         var status: PHAuthorizationStatus
-        if #available(iOS 14, *) {
+        if #available(iOS 14, tvOS 14, *) {
             status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         } else {
             status = PHPhotoLibrary.authorizationStatus()
@@ -113,7 +113,6 @@ extension CXPhotosPermission {
     }
     
 }
-
 #endif
 
 
@@ -179,7 +178,6 @@ extension CXCameraPermission {
     }
     
 }
-
 #endif
 
 
@@ -233,8 +231,6 @@ extension CXMicrophonePermission {
     }
     
 }
-
-#endif
 #endif
 
 
@@ -278,6 +274,7 @@ extension CXMicrophonePermission {
     }
     
 }
+#endif
 
 #endif
 
@@ -286,7 +283,6 @@ extension CXMicrophonePermission {
 
 #if canImport(CoreLocation)
 import CoreLocation
-#endif
 
 /// The app's Info.plist must contain the `NSLocationUsageDescription` and `NSLocationWhenInUseUsageDescription` key.
 public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
@@ -308,7 +304,7 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
     {
         #if canImport(CoreLocation)
         var status: CLAuthorizationStatus
-        if #available(iOS 14.0, *) {
+        if #available(iOS 14.0, tvOS 14.0, *) {
             status = CLLocationManager().authorizationStatus
         } else {
             status = CLLocationManager.authorizationStatus()
@@ -331,7 +327,11 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
+        #if os(iOS)
         case .authorized, .authorizedAlways, .authorizedWhenInUse: return .authorized
+        #else
+        case .authorizedAlways, .authorizedWhenInUse: return .authorized
+        #endif
         default: return .unauthorized
         }
     }
@@ -346,10 +346,16 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
     
     @objc public func startUpdatingLocation(_ type: CXPermissionType) {
         if locationManager == nil { return }
+        #if os(iOS)
         type == .locationAlways
         ? locationManager?.requestAlwaysAuthorization()
         : locationManager?.requestWhenInUseAuthorization()
         locationManager?.startUpdatingLocation()
+        #else
+        type == .locationAlways
+        ? locationManager?.requestLocation()
+        : locationManager?.requestWhenInUseAuthorization()
+        #endif
     }
     
     /// Stops the generation of location updates.
@@ -454,16 +460,17 @@ extension CXLocationInUsePermission {
     }
     
 }
+#endif
 
 
 //MARK: - Notification
 
+#if canImport(UserNotifications)
+import UserNotifications
+
 public class CXNotificationPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { .notification }
 }
-
-#if canImport(UserNotifications)
-import UserNotifications
 
 extension CXNotificationPermission {
     
@@ -532,6 +539,7 @@ extension CXNotificationPermission {
                 completion(result)
             }
         } else {
+            // Don't execute this codes, because of needing higher os.
             #if os(iOS)
             if #available(iOS 8.0, *) {
                 let settings = UIUserNotificationSettings(types: [.badge, .alert, .sound], categories: nil)
@@ -551,7 +559,6 @@ extension CXNotificationPermission {
     }
     
 }
-
 #endif
 
 
@@ -784,19 +791,18 @@ extension CXDevicePasscodePermission {
     #endif
     
 }
-
 #endif
 
 
 //MARK: - Contacts
 
+#if canImport(Contacts)
+import Contacts
+
 /// The app's Info.plist must contain a `NSContactsUsageDescription` key.
 public class CXContactsPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .contacts }
 }
-
-#if canImport(Contacts)
-import Contacts
 
 extension CXContactsPermission {
     
@@ -910,19 +916,18 @@ extension CXContactsPermission {
     }
     
 }
-
 #endif
 
 
 //MARK: - Reminder
 
+#if canImport(EventKit)
+import EventKit
+
 /// The app's Info.plist must contain a `NSRemindersUsageDescription` key.
 public class CXReminderPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .reminder }
 }
-
-#if canImport(EventKit)
-import EventKit
 
 extension CXReminderPermission {
     
@@ -961,19 +966,18 @@ extension CXReminderPermission {
     }
     
 }
-
 #endif
 
 
 //MARK: - Calendar
 
+#if canImport(EventKit)
+import EventKit
+
 /// The app's Info.plist must contain a `NSCalendarsUsageDescription` key.
 public class CXCalendarPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .event }
 }
-
-#if canImport(EventKit)
-import EventKit
 
 extension CXCalendarPermission {
     
@@ -1012,19 +1016,18 @@ extension CXCalendarPermission {
     }
     
 }
-
 #endif
 
 
 //MARK: - Motion
 
+#if canImport(CoreMotion)
+import CoreMotion
+
 /// The app's Info.plist must contain a `NSMotionUsageDescription` key.
 public class CXMotionPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .motion }
 }
-
-#if canImport(CoreMotion)
-import CoreMotion
 
 extension CXMotionPermission {
     
@@ -1069,19 +1072,18 @@ extension CXMotionPermission {
     }
     
 }
-
 #endif
 
 
 //MARK: - Speech
 
+#if canImport(Speech)
+import Speech
+
 /// The app's Info.plist must contain a `NSSpeechRecognitionUsageDescription` key.
 public class CXSpeechPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .speech }
 }
-
-#if canImport(Speech)
-import Speech
 
 extension CXSpeechPermission {
     
@@ -1113,19 +1115,18 @@ extension CXSpeechPermission {
     }
     
 }
-
 #endif
 
 
 //MARK: - Siri
 
+#if canImport(Intents)
+import Intents
+
 /// The app's Info.plist must contain a `NSSiriUsageDescription` key.
 public class CXSiriPermission: NSObject, CXPermission {
     @objc public var type: CXPermissionType { return .intents }
 }
-
-#if canImport(Intents)
-import Intents
 
 extension CXSiriPermission {
     
@@ -1136,10 +1137,15 @@ extension CXSiriPermission {
     
     @objc public var status: CXPermissionStatus
     {
-        let status = INPreferences.siriAuthorizationStatus()
-        return transform(for: status)
+        if #available(tvOS 14.0, *) {
+            let status = INPreferences.siriAuthorizationStatus()
+            return transform(for: status)
+        } else {
+            return .disabled
+        }
     }
     
+    @available(tvOS 14.0, *)
     @objc public func transform(for status: INSiriAuthorizationStatus) -> CXPermissionStatus {
         switch status {
         case .notDetermined: return .unknown
@@ -1151,13 +1157,16 @@ extension CXSiriPermission {
     
     @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
-        INPreferences.requestSiriAuthorization { status in
-            completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
+        if #available(tvOS 14.0, *) {
+            INPreferences.requestSiriAuthorization { status in
+                completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
+            }
+        } else {
+            completion(CXPermissionResult(type: type, status: .disabled))
         }
     }
     
 }
-
 #endif
 
 //MARK: - Apple Music
@@ -1218,7 +1227,6 @@ extension CXMediaPermission {
     }
     
 }
-
 #endif
 
 
@@ -1271,7 +1279,6 @@ extension CXAppTrackingPermission {
     }
     
 }
-
 #endif
 
 #endif
@@ -1303,17 +1310,20 @@ extension CXHealthPermission {
         CXLogger.log(level: .warning, message: "Do not support it.")
     }
     
+    @available(iOS 8.0, watchOS 8.0, macOS 13.0, *)
     @objc public func authorized(forType type: HKObjectType) -> Bool
     {
         return status(forType: type) == .authorized
     }
     
+    @available(iOS 8.0, watchOS 8.0, macOS 13.0, *)
     @objc public func status(forType type: HKObjectType) -> CXPermissionStatus
     {
         let status = HKHealthStore().authorizationStatus(for: type)
         return transform(for: status)
     }
     
+    @available(iOS 8.0, watchOS 8.0, macOS 13.0, *)
     @objc public func transform(for status: HKAuthorizationStatus) -> CXPermissionStatus {
         switch status {
         case .notDetermined: return .unknown
@@ -1324,6 +1334,7 @@ extension CXHealthPermission {
     }
     
     #if !os(tvOS)
+    @available(iOS 8.0, watchOS 8.0, macOS 13.0, *)
     @objc public func requestAccess(forReading readingTypes: Set<HKObjectType>, writing writingTypes: Set<HKSampleType>, completion: @escaping (CXPermissionResult) -> Void)
     {
         HKHealthStore().requestAuthorization(toShare: writingTypes, read: readingTypes) { success, error in
@@ -1351,5 +1362,4 @@ extension CXHealthPermission {
     #endif
     
 }
-
 #endif

@@ -5,7 +5,7 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if canImport(PassKit) && !os(tvOS)
+#if canImport(PassKit) && !os(tvOS) && !os(watchOS)
 import Foundation
 import PassKit
 
@@ -34,28 +34,30 @@ public class CXApplePayContext: NSObject {
     @objc public var didSelectShippingContact: ((PKContact) -> Void)?
     @objc public var didSelectShippingMethod: ((PKShippingMethod) -> Void)?
     
-    @objc public func makeOSPaymentButton(frame: CGRect) -> PKPaymentButton {
+    #if os(iOS) || os(tvOS)
+    @objc public func makeOSPaymentButton(frame: CXRect) -> PKPaymentButton {
         return makeOSPaymentButton(frame: frame, type: .buy, style: .black)
     }
     
-    @objc public func makeOSPaymentButton(frame: CGRect, type: PKPaymentButtonType, style: PKPaymentButtonStyle) -> PKPaymentButton {
+    @objc public func makeOSPaymentButton(frame: CXRect, type: PKPaymentButtonType, style: PKPaymentButtonStyle) -> PKPaymentButton {
         let paymentButton = PKPaymentButton(paymentButtonType: type, paymentButtonStyle: style)
         paymentButton.frame = frame
         paymentButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
         return paymentButton
     }
     
-    @objc public func makePaymentButton(frame: CGRect) -> PKPaymentButton {
+    @objc public func makePaymentButton(frame: CXRect) -> PKPaymentButton {
         return makePaymentButton(frame: frame, image: nil)
     }
     
-    @objc public func makePaymentButton(frame: CGRect, image: UIImage?) -> PKPaymentButton {
-        let bgImage = image ?? UIImage(named: "ApplePay_Payment_Mark")
+    @objc public func makePaymentButton(frame: CXRect, image: CXImage?) -> PKPaymentButton {
+        let bgImage = image ?? CXImage(named: "ApplePay_Payment_Mark")
         let paymentButton = PKPaymentButton(frame: frame)
         paymentButton.setBackgroundImage(bgImage, for: .normal)
         paymentButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
         return paymentButton
     }
+    #endif
     
     @objc private func paymentAction(_ sender: PKPaymentButton) {
         onPaymentAction?()

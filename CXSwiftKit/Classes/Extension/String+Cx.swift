@@ -14,6 +14,9 @@ import CoreImage
 #endif
 #if os(iOS) || os(tvOS)
 import UIKit
+#elseif os(macOS)
+import AppKit
+#else
 #endif
 
 extension String: CXSwiftBaseCompatible {}
@@ -36,7 +39,7 @@ extension CXSwiftBase where T == String {
     }
     
     #if canImport(CommonCrypto)
-    /// Get a MD5 encoded string.
+    /// Return a `MD5` encoded string.
     public var md5: String? {
         let cStr = self.base.cString(using: String.Encoding.utf8)
         if cStr != nil {
@@ -54,6 +57,65 @@ extension CXSwiftBase where T == String {
             return result as String
         }
         return nil
+    }
+    
+    public func md5Encoded() -> String? {
+        guard self.base.count > 0 else {
+            CXLogger.log(level: .error, message: "The count of string is zero.")
+            return nil
+        }
+        let utf8 = self.base.cString(using: .utf8)
+        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+        CC_MD5(utf8, CC_LONG(utf8!.count - 1), &digest)
+        return digest.reduce("") { $0 + String(format:"%02x", $1) }
+    }
+    
+    /// Return a `SHA2` encoded string.
+    /// SHA: Secure Hash Algorithm, SHA256 <=> SHA2, SHA1 --> SHA2
+    public var sha256: String? {
+        guard self.base.count > 0 else {
+            CXLogger.log(level: .error, message: "The count of string is zero.")
+            return nil
+        }
+        let utf8 = self.base.cString(using: .utf8)
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
+        return digest.reduce("") { $0 + String(format:"%02x", $1) }
+    }
+    
+    /// Return a `SHA2 HMAC` signature.
+    public func sha1HmacSign(with key: String) -> String? {
+        return cHmacSign(with: key, algorithm: CCHmacAlgorithm(kCCHmacAlgSHA1))
+    }
+    
+    /// Return a `SHA2 HMAC` signature.
+    public func sha2HmacSign(with key: String) -> String? {
+        cHmacSign(with: key, algorithm: CCHmacAlgorithm(kCCHmacAlgSHA256))
+    }
+    
+    /// Return a `HMAC` signature.
+    /// - Parameters:
+    ///   - key: Raw key.
+    ///   - algorithm: HMAC algorithm to perform. kCCHmacAlgSHA1 or kCCHmacAlgSHA256.
+    /// - Returns: A `HMAC` signature.
+    private func cHmacSign(with key: String, algorithm: CCHmacAlgorithm) -> String? {
+        if algorithm != kCCHmacAlgSHA1 && algorithm != kCCHmacAlgSHA256 {
+            CXLogger.log(level: .error, message: "Unsupport algorithm.")
+            return nil
+        }
+        guard let keyData = key.data(using: .utf8) as? NSData else {
+            CXLogger.log(level: .error, message: "** The key to data. **")
+            return nil
+        }
+        guard let strData = self.base.data(using: .utf8) as? NSData else {
+            CXLogger.log(level: .error, message: "** The text to data. **")
+            return nil
+        }
+        let len = algorithm == CCHmacAlgorithm(kCCHmacAlgSHA1) ? CC_SHA1_DIGEST_LENGTH : CC_SHA256_DIGEST_LENGTH
+        var cHMAC = [UInt8](repeating: 0, count: Int(len))
+        CCHmac(algorithm, keyData.bytes, keyData.count, strData.bytes, strData.count, &cHMAC)
+        //let data = Data(bytes: &cHMAC, count: Int(len))
+        return cHMAC.reduce("") { $0 + String(format:"%02x", $1) }
     }
     #endif
     
@@ -169,8 +231,9 @@ extension CXSwiftBase where T == String {
         return self.base.removingPercentEncoding ?? self.base
     }
     
+    #if os(iOS) || os(tvOS) || os(macOS)
     /// Convert a string to an attributed string.
-    public func asAttributedString(with foregroundColor: UIColor, font: UIFont) -> NSAttributedString {
+    public func asAttributedString(with foregroundColor: CXColor, font: CXFont) -> NSAttributedString {
         let attr = NSMutableAttributedString.init(string: self.base)
         attr.addAttribute(
             NSAttributedString.Key.foregroundColor, value: foregroundColor,
@@ -182,6 +245,7 @@ extension CXSwiftBase where T == String {
         )
         return attr as NSAttributedString
     }
+    #endif
     
     /// Intercept the specified range of string, indexes starting from 0 by default.
     ///
@@ -211,8 +275,7 @@ extension CXSwiftBase where T == String {
         return Notification.Name(self.base)
     }
     
-    #if os(iOS) || os(tvOS)
-    
+    #if os(iOS)
     /// Copy string to pasteboard.
     public func copyToPasteboard() {
         guard self.length > 0 else {
@@ -220,7 +283,9 @@ extension CXSwiftBase where T == String {
         }
         UIPasteboard.general.string = self.base
     }
+    #endif
     
+    #if os(iOS) || os(tvOS)
     #if canImport(CoreImage)
     /// Generates an image of QRCode.
     ///

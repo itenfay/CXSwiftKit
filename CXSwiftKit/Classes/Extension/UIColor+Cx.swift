@@ -216,10 +216,7 @@ extension CXColor {
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
         
-        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        else {
-            return components
-        }
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         
         let multiplier: CGFloat = 255.0
         components.red = red * multiplier
@@ -291,9 +288,7 @@ extension CXColor {
         var green: CGFloat = 0
         var blue: CGFloat = 0
         var alpha: CGFloat = 0
-        guard self.getRed(&red, green: &green, blue: &blue, alpha: &alpha) else {
-            return self
-        }
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
         return CXColor(red: 1 - red, green: 1 - green, blue: 1 - blue, alpha: alpha)
     }
     

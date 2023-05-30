@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(CommonCrypto)
+import CommonCrypto
+#endif
 
 public class CXSwiftUtils: NSObject {
     
@@ -50,6 +53,33 @@ public class CXSwiftUtils: NSObject {
     @objc public static func timeStringByComparingCurrentTime(_ string: String) -> String {
         return string.cx.timeStringByComparingCurrentTime()
     }
+    
+    #if canImport(CommonCrypto)
+    /// Return a `MD5` encoded string.
+    @objc public static func md5Encode(_ s: String) -> String? {
+        return s.cx.md5Encoded()
+    }
+    
+    /// Return a `SHA2` encoded string.
+    @objc public static func sha2Encode(_ s: String) -> String? {
+        return sha256Encode(s)
+    }
+    
+    /// Return a `SHA2` encoded string.
+    @objc public static func sha256Encode(_ s: String) -> String? {
+        return s.cx.sha256
+    }
+    
+    /// Return a `SHA1 HMAC` signature.
+    @objc public static func sha1HmacSign(_ s: String, withKey key: String) -> String? {
+        return s.cx.sha1HmacSign(with: key)
+    }
+    
+    /// Return a `SHA256 HMAC` signature.
+    @objc public static func sha2HmacSign(_ s: String, withKey key: String) -> String? {
+        return s.cx.sha2HmacSign(with: key)
+    }
+    #endif
     
 }
 

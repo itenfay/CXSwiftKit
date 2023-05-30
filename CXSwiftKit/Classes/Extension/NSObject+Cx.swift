@@ -16,6 +16,8 @@ import SwiftMessages
 import Toaster
 #endif
 
+#if os(iOS) || os(tvOS)
+
 //MARK: - CXCommonWrapable
 
 extension NSObject: CXCommonWrapable {
@@ -201,6 +203,8 @@ extension NSObject: CXCommonWrapable {
     #endif
     
 }
+
+#endif
 
 extension NSObject: CXSwiftBaseCompatible {}
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if !os(watchOS)
 
 extension CXSwiftBase where T : NSAttributedString {
     
@@ -52,7 +53,7 @@ extension NSAttributedString {
 extension CXSwiftBase where T : NSMutableAttributedString {
     
     /// Insert the image to the mutable attributed string.
-    public func insertTextAttachment(withImage image: UIImage?, rect: CGRect, atIndex index: Int) {
+    public func insertTextAttachment(withImage image: CXImage?, rect: CGRect, atIndex index: Int) {
         base.cx_insertTextAttachment(withImage: image, rect: rect, atIndex: index)
     }
     
@@ -66,7 +67,7 @@ extension CXSwiftBase where T : NSMutableAttributedString {
 extension NSMutableAttributedString {
     
     /// Insert the image to the mutable attributed string.
-    public func cx_insertTextAttachment(withImage image: UIImage?, rect: CGRect, atIndex index: Int) {
+    public func cx_insertTextAttachment(withImage image: CXImage?, rect: CGRect, atIndex index: Int) {
         if index < 0 || index >= self.string.cx.length {
             return
         }
@@ -87,3 +88,5 @@ extension NSMutableAttributedString {
     }
     
 }
+
+#endif

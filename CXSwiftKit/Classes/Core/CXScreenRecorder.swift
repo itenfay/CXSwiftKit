@@ -117,13 +117,14 @@ extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDel
         CXLogger.log(level: .info, message: "screenRecorder=\(screenRecorder)")
     }
     
-    @available(macOS 11.0, *)
+    @available(iOS 11.0, tvOS 11.0, macOS 11.0, *)
     public func screenRecorder(_ screenRecorder: RPScreenRecorder, didStopRecordingWith previewViewController: RPPreviewViewController?, error: Error?) {
         if error != nil {
             onError?(error!.localizedDescription)
         }
     }
     
+    #if !os(tvOS)
     @available(macOS 11.0, *)
     public func previewController(_ previewController: RPPreviewViewController, didFinishWithActivityTypes activityTypes: Set<String>) {
         // Cancel.
@@ -138,7 +139,7 @@ extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDel
         }
         // Save to camera roll.
         if activityTypes.contains("com.apple.UIKit.activity.SaveToCameraRoll") {
-            #if os(iOS) || os(tvOS)
+            #if os(iOS)
             previewController.dismiss(animated: true, completion: nil)
             #endif
             onFinish?()
@@ -149,6 +150,7 @@ extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDel
             #endif
         }
     }
+    #endif
     
     @available(macOS 11.0, *)
     public func previewControllerDidFinish(_ previewController: RPPreviewViewController) {

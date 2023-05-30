@@ -10,11 +10,11 @@ import UIKit
 #if canImport(SVGAPlayer)
 import SVGAPlayer
 
-@objc public protocol CXSVGAPlayPresentable: AnyObject {
+@objc public protocol CXSvgaPlayPresentable: AnyObject {
     @objc var svgaPlayer: SVGAPlayer? { get set }
 }
 
-public class CXSvgaPlayManager: NSObject, CXSVGAPlayPresentable {
+public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {
     
     @objc public static let shared = CXSvgaPlayManager()
     
@@ -48,7 +48,7 @@ public class CXSvgaPlayManager: NSObject, CXSVGAPlayPresentable {
         svgaPlayer?.clearsAfterStop = clearsAfterStop
         let operation = CXSvgaPlayOperation.create(withUrl: url) { [unowned self] op in
             self.currentOp = op
-            self.play(withOperation: op)
+            self.play(with: op)
         }
         queue.addOperation(operation)
     }
@@ -58,12 +58,12 @@ public class CXSvgaPlayManager: NSObject, CXSVGAPlayPresentable {
         svgaPlayer?.clearsAfterStop = clearsAfterStop
         let operation = CXSvgaPlayOperation.create(withName: name, inBundle: bundle) { [unowned self] op in
             self.currentOp = op
-            self.play(withOperation: op)
+            self.play(with: op)
         }
         queue.addOperation(operation)
     }
     
-    private func play(withOperation op: CXSvgaPlayOperation) {
+    private func play(with op: CXSvgaPlayOperation) {
         if let url = op.svgaUrl, !url.isEmpty {
             svgaParser.parse(with: URL.init(string: url)!) { [unowned self] videoItem in
                 self.displaySvga(withHidden: false)
@@ -73,7 +73,7 @@ public class CXSvgaPlayManager: NSObject, CXSVGAPlayPresentable {
                 if error != nil {
                     CXLogger.log(level: .error, message: "error=\(error!)")
                 }
-                self.retryToPlay(withOperation: op)
+                self.retryToplay(with: op)
             }
         } else if let name = op.svgaName, !name.isEmpty {
             svgaParser.parse(withNamed: name, in: op.inBundle) { [unowned self] videoItem in
@@ -88,19 +88,19 @@ public class CXSvgaPlayManager: NSObject, CXSVGAPlayPresentable {
                 if error != nil {
                     CXLogger.log(level: .error, message: "error=\(error!)")
                 }
-                self.retryToPlay(withOperation: op)
+                self.retryToplay(with: op)
             }
         } else {
             finishAnimating()
         }
     }
     
-    private func retryToPlay(withOperation op: CXSvgaPlayOperation) {
+    private func retryToplay(with op: CXSvgaPlayOperation) {
         if retryCount == 0 {
             finishAnimating()
         } else {
             retryCount -= 1
-            play(withOperation: op)
+            play(with: op)
         }
     }
     
