@@ -15,7 +15,7 @@ import AVFAudio
     public var description: String {
         switch self {
         case .quiet:      return "Quiet"
-        case .speaker:    return "Qpeaker"
+        case .speaker:    return "Speaker"
         case .multiRoute: return "MultiRoute" //earphone
         case .movie:      return "movie"
         }
