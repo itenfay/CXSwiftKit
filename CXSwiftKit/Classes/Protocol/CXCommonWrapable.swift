@@ -41,6 +41,7 @@ import Toaster
 }
 
 @objc public protocol CXCommonWrapable {
+    // iOS || tvOS
     #if canImport(SVProgressHUD)
     @objc func cx_showProgressHUD(withStatus status: String?)
     @objc func cx_showProgressHUD(withStatus status: String?, delay: TimeInterval)
@@ -48,6 +49,7 @@ import Toaster
     @objc func cx_dismissProgressHUD(withDelay delay: TimeInterval)
     #endif
     
+    // iOS
     #if canImport(SwiftMessages)
     @objc func cx_showMessages(withStyle style: CXMessagesBoxStyle, body: String?)
     @objc func cx_showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?)
@@ -56,8 +58,16 @@ import Toaster
     @objc func cx_hideMessages()
     #endif
     
+    // iOS, e.g.:
+    // func setupToaster()
+    // {
+    //    ToastCenter.default.isQueueEnabled = false
+    //    ToastView.appearance().bottomOffsetPortrait = cxScreenHeight/2 - 10
+    //    let sizeScale: CGFloat = (CGFloat.cx.screenWidth < 375) ? 0.9 : 1.0
+    //    ToastView.appearance().font = UIFont.systemFont(ofSize: sizeScale * 16)
+    // }
     #if canImport(Toaster)
-    @objc func cx_resetToasterAppearance()
+    @objc func cx_restoreToasterAppearance()
     @objc func cx_setupToasterAppearance(withBottomOffsetPortrait bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
     @objc func cx_toasterDuration(_ type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
     @objc func cx_makeToast(text: String)
@@ -65,6 +75,7 @@ import Toaster
     @objc func cx_makeToast(attributedString: NSAttributedString)
     @objc func cx_makeToast(attributedString: NSAttributedString, delay: TimeInterval, duration: TimeInterval)
     #endif
+    
 }
 
 #endif
