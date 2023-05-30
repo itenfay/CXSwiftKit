@@ -70,6 +70,23 @@ extension CXSwiftBase where T : UIImageView {
     }
     #endif
     
+    /// Makes image view blurry.
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
+    public func blur(withStyle style: UIBlurEffect.Style = .light)
+    {
+        base.cx_blur(withStyle: style)
+    }
+    
+    /// Blurred version of an image view.
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
+    /// - Returns: blurred version of self.
+    public func blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView
+    {
+        return base.cx_blurred(withStyle: style)
+    }
+    
 }
 
 //MARK: - Kingfisher
@@ -173,6 +190,30 @@ extension UIImageView {
         self.image = value.cx.generateQRCode(withBackgroudColor: backgroudColor, foregroudColor: foregroudColor, centerImage: centerImage, centerSize: centerSize)
     }
     #endif
+    
+    /// Makes image view blurry.
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
+    @objc public func cx_blur(withStyle style: UIBlurEffect.Style = .light)
+    {
+        let blurEffect = UIBlurEffect(style: style)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight] // for supporting device rotation
+        addSubview(blurEffectView)
+        clipsToBounds = true
+    }
+    
+    /// Blurred version of an image view.
+    ///
+    /// - Parameter style: UIBlurEffectStyle (default is .light).
+    /// - Returns: blurred version of self.
+    @objc public func cx_blurred(withStyle style: UIBlurEffect.Style = .light) -> UIImageView
+    {
+        let imgView = self
+        imgView.cx_blur(withStyle: style)
+        return imgView
+    }
     
 }
 
