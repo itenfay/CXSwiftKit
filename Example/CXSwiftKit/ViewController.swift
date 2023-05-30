@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     
     func saveImageToPhotosAlbum() {
         let image = UIImage(named: "avatar")
-        image!.saveToPhotosAlbum { image, error, context in
+        image!.cx.saveToPhotosAlbum { image, error, context in
             if error == nil {
                 CXLogger.log(level: .info, message: "saved complelely!")
             } else {
