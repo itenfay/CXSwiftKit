@@ -480,7 +480,7 @@
 			baseConfigurationReference = 0E5E5D228A2BD536134332C6 /* Pods-CXSwiftKit_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 0529;
+				CURRENT_PROJECT_VERSION = 0530;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -498,7 +498,7 @@
 			baseConfigurationReference = 74CDDAC5C9E81B7F844AC099 /* Pods-CXSwiftKit_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 0529;
+				CURRENT_PROJECT_VERSION = 0530;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
