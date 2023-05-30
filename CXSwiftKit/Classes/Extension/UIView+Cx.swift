@@ -460,6 +460,11 @@ extension CXSwiftBase where T : CXView {
         self.base.cx_constrain(to: view)
     }
     
+    /// Returns view's parent view controller.
+    public var parentViewController: CXViewController? {
+        return self.base.cx_parentViewController
+    }
+    
     #if os(iOS) || os(tvOS)
     /// Present the view.
     public func present(_ view: UIView?, completion: (() -> Void)? = nil) {
@@ -1351,6 +1356,22 @@ extension CXView {
         self.leadingAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         self.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         self.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    /// Returns view's parent view controller.
+    @objc public var cx_parentViewController: CXViewController? {
+        weak var responder: CXResponder? = self
+        while responder != nil {
+            #if os(macOS)
+            responder = responder!.nextResponder
+            #else
+            responder = responder!.next
+            #endif
+            if let viewController = responder as? CXViewController {
+                return viewController
+            }
+        }
+        return nil
     }
     
 }
