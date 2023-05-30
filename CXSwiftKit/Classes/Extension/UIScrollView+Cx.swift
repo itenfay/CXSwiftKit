@@ -23,6 +23,11 @@ extension CXSwiftBase where T : UIScrollView {
     }
     #endif
     
+    /// Takes a snapshot of an entire ScrollView
+    public var entireSnapshot: UIImage? {
+        return base.cx_entireSnapshot
+    }
+    
 }
 
 extension UIScrollView {
@@ -45,6 +50,20 @@ extension UIScrollView {
         self.refreshControl = refreshControl
     }
     #endif
+    
+    /// Takes a snapshot of an entire ScrollView
+    @objc public var cx_entireSnapshot: UIImage? {
+        UIGraphicsBeginImageContextWithOptions(contentSize, false, 0)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        let previousFrame = frame
+        frame = CGRect(origin: frame.origin, size: contentSize)
+        layer.render(in: context)
+        frame = previousFrame
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
     
 }
 
