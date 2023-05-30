@@ -1716,4 +1716,52 @@ extension CXView {
     
 }
 
+#if os(iOS) && canImport(Toast_Swift)
+import Toast_Swift
+
+extension UIView {
+    
+    public func cx_showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        cx_showToast(message, image: nil, completion: completion)
+    }
+    
+    public func cx_showToast(_ message: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        cx_showToast(message, title: nil, image: image, style: ToastManager.shared.style, completion: completion)
+    }
+    
+    public func cx_showToast(_ message: String?, title: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        cx_showToast(message, title: title, image: image, style: ToastManager.shared.style, completion: completion)
+    }
+    
+    public func cx_showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, position: ToastPosition = ToastManager.shared.position, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        self.makeToast(message, duration: duration, position: position, title: title, image: image, style: style, completion: completion)
+    }
+    
+    public func cx_showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, point: CGPoint, title: String? = nil, image: UIImage? = nil, style: ToastStyle = ToastManager.shared.style, completion: ((_ didTap: Bool) -> Void)? = nil)
+    {
+        self.makeToast(message, duration: durationl, point: point, title: title, image: image, style: style, completion: completion)
+    }
+    
+    public func cx_hideAllToasts()
+    {
+        self.hideAllToasts()
+    }
+    
+    public func cx_showToastActivity(_ position: ToastPosition)
+    {
+        self.makeToastActivity(position)
+    }
+    
+    public func cx_hideToastActivity()
+    {
+        self.hideToastActivity()
+    }
+    
+}
+#endif
+
 #endif
