@@ -387,8 +387,10 @@ extension CXSwiftBase where T == String {
     #endif
     #endif
     
+    //MARK: - Begin(Regular Expression)
+    
     /// The string whether is a valid number.
-    public func validNumber() -> Bool{
+    public func validNumber() -> Bool {
         do {
             let pattern = "^[0-9]*$"
             let regex = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
@@ -399,26 +401,57 @@ extension CXSwiftBase where T == String {
         }
     }
     
-    /// The string whether is a telephone number.
+    /// Represents the string whether is a telephone number.
     public func evaluateTelephone() -> Bool {
+        // let regex = "^0?(13|14|15|16|17|18|19)[0-9]{9}$"
         let regex = "^1[3456789]\\d{9}$"
         let pred = NSPredicate(format: "SELF MATCHES %@", regex)
         return pred.evaluate(with: self.base)
     }
     
-    /// The string whether is a decimal number.
+    /// Represents the string whether is a decimal number.
     public func evaluateDecimal() -> Bool {
         let regex = "^[0-9]+(\\.[0-9]{1,2})?$"
         let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
         return pred.evaluate(with: self.base)
     }
     
-    /// The string whether is safe password.
+    /// Represents the string whether is safe password.
     public func evaluateSafePassword() -> Bool {
         let regex = "^[a-zA-Z0-9]{6,16}+$"
         let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
         return pred.evaluate(with: self.base)
     }
+    
+    /// Represents the string whether is ID card.
+    public var isIdentityCard: Bool {
+        let regex = "^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9]|[X|x])"
+        let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
+        return pred.evaluate(with: self.base)
+    }
+    
+    /// Represents the string whether is ID card of HongKong.
+    public var isIdentityHKCard: Bool {
+        let regex = "^[A-Z]{1,2}[0-9]{6}\\(?[0-9A]\\)?$"
+        let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
+        return pred.evaluate(with: self.base)
+    }
+    
+    /// Represents the string whether is passport.
+    public var isPassport: Bool {
+        let regex = "^1[45][0-9]{7}|([P|p|S|s]\\d{7})|([S|s|G|g]\\d{8})|([Gg|Tt|Ss|Ll|Qq|Dd|Aa|Ff]\\d{8})|([H|h|M|m]\\d{8，10})$"
+        let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
+        return pred.evaluate(with: self.base)
+    }
+    
+    /// Represents the string whether is safe password(including uppercased, lowercased, number).
+    public var isSXPassword: Bool {
+        let regex = "(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])[a-zA-Z0-9]{6,20}"
+        let pred = NSPredicate.init(format: "SELF MATCHES %@", regex)
+        return pred.evaluate(with: self.base)
+    }
+    
+    //MARK: - End(Regular Expression)
     
     /// Returns the time string by comparing current time.
     public func timeStringByComparingCurrentTime() -> String {

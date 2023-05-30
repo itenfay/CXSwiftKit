@@ -81,6 +81,46 @@ public class CXSwiftUtils: NSObject {
     }
     #endif
     
+    /// Represents the string whether is a telephone number.
+    @objc public static func isTelephone(_ s: String) -> Bool {
+        return s.cx.evaluateTelephone()
+    }
+    
+    /// Represents the string whether is a decimal number.
+    @objc public static func isDecimal(_ s: String) -> Bool {
+        return s.cx.evaluateDecimal()
+    }
+    
+    /// Represents the string whether is ID card.
+    @objc public static func isIdentityCard(_ s: String) -> Bool {
+        return s.cx.isIdentityCard
+    }
+    
+    /// Represents the string whether is ID card of HongKong.
+    @objc public static func isIdentityHKCard(_ s: String) -> Bool {
+        return s.cx.isIdentityHKCard
+    }
+    
+    /// Represents the string whether is passport.
+    @objc public static func isPassport(_ s: String) -> Bool {
+        return s.cx.isPassport
+    }
+    
+    /// Represents the string whether is safe password(including uppercased, lowercased, number).
+    @objc public static func isSXPassword(_ s: String) -> Bool {
+        return s.cx.isSXPassword
+    }
+    
+    /// Represents the string whether is safe password.
+    @objc public static func isSafePassword(_ s: String) -> Bool {
+        return s.cx.evaluateSafePassword()
+    }
+    
+    /// Returns a new string made by adding to the receiver a given string.
+    @objc public static func addPathComponent(_ s: String, path: String) -> String {
+        return s.cx.addPathComponent(path)
+    }
+    
 }
 
 #if canImport(HandyJSON)
