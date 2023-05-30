@@ -22,6 +22,7 @@ public protocol CXBaseModel {}
 
 #if os(iOS) || os(tvOS)
 import UIKit
+public typealias CXResponder      = UIResponder
 public typealias CXViewController = UIViewController
 public typealias CXView           = UIView
 public typealias CXImageView      = UIImageView
@@ -34,6 +35,7 @@ public typealias CXSize           = CGSize
 public typealias CXEdgeInsets     = UIEdgeInsets
 #elseif os(macOS)
 import AppKit
+public typealias CXResponder      = NSResponder
 public typealias CXViewController = NSViewController
 public typealias CXView           = NSView
 public typealias CXImageView      = NSImageView
