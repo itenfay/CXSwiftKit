@@ -71,6 +71,7 @@ extension CXSwiftBase where T == String {
     }
     
     /// Return a `SHA2` encoded string.
+    ///
     /// SHA: Secure Hash Algorithm, SHA256 <=> SHA2, SHA1 --> SHA2
     public var sha256: String? {
         guard self.base.count > 0 else {
@@ -94,6 +95,7 @@ extension CXSwiftBase where T == String {
     }
     
     /// Return a `HMAC` signature.
+    /// 
     /// - Parameters:
     ///   - key: Raw key.
     ///   - algorithm: HMAC algorithm to perform. kCCHmacAlgSHA1 or kCCHmacAlgSHA256.
@@ -114,8 +116,8 @@ extension CXSwiftBase where T == String {
         let len = algorithm == CCHmacAlgorithm(kCCHmacAlgSHA1) ? CC_SHA1_DIGEST_LENGTH : CC_SHA256_DIGEST_LENGTH
         var cHMAC = [UInt8](repeating: 0, count: Int(len))
         CCHmac(algorithm, keyData.bytes, keyData.count, strData.bytes, strData.count, &cHMAC)
-        //let data = Data(bytes: &cHMAC, count: Int(len))
-        return cHMAC.reduce("") { $0 + String(format:"%02x", $1) }
+        let hmacData = Data(bytes: &cHMAC, count: Int(len))
+        return hmacData.base64EncodedString()
     }
     #endif
     
