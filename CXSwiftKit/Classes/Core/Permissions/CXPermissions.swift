@@ -7,7 +7,7 @@
 
 import Foundation
 
-#if os(iOS) || os(tvOS)
+#if os(iOS) || os(tvOS) || os(macOS)
 
 //MARK: - Photo Library
 
@@ -28,7 +28,7 @@ extension CXPhotosPermission {
     
     @objc public var status: CXPermissionStatus {
         var status: PHAuthorizationStatus
-        if #available(iOS 14, tvOS 14, *) {
+        if #available(iOS 14, tvOS 14, macOS 11.0, *) {
             status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
         } else {
             status = PHPhotoLibrary.authorizationStatus()
@@ -40,7 +40,7 @@ extension CXPhotosPermission {
     ///
     /// - Returns: Information about your app’s authorization to access the user’s photo library.
     #if swift(>=5.5)
-    @available(iOS 14, tvOS 14, *)
+    @available(iOS 14, tvOS 14, macOS 11.0, *)
     public func requestAccess() async -> CXPermissionResult
     {
         let status = await PHPhotoLibrary.requestAuthorization(for: .readWrite)
@@ -54,7 +54,7 @@ extension CXPhotosPermission {
     /// - Parameter handler: The callback the app invokes when it’s made a determination of the app’s status.
     @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
-        if #available(iOS 14, tvOS 14, *) {
+        if #available(iOS 14, tvOS 14, macOS 11.0, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
                 let pStatus = self.transform(for: status)
                 let pResult = CXPermissionResult(type: self.type, status: pStatus)
@@ -101,7 +101,7 @@ extension CXPhotosPermission {
             return
         }
         let imageManager = PHImageManager.default()
-        if #available(iOS 13, tvOS 13, *) {
+        if #available(iOS 13, tvOS 13, macOS 10.15, *) {
             imageManager.requestImageDataAndOrientation(for: asset, options: nil) { imageData, dataUTI, orientation, info in
                 completion(imageData)
             }
@@ -115,6 +115,10 @@ extension CXPhotosPermission {
 }
 #endif
 
+#endif
+
+
+#if os(iOS) || os(tvOS)
 
 #if os(iOS)
 
