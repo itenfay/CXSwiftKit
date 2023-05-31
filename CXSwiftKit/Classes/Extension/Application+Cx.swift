@@ -1,5 +1,5 @@
 //
-//  UIApplication+Cx.swift
+//  Application+Cx.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/11/14.

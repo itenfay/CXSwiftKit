@@ -1,5 +1,5 @@
 //
-//  UILabel+Cx.swift
+//  Label+Cx.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/11/14.
