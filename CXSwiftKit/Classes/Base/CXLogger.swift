@@ -24,26 +24,26 @@ import Foundation
 
 @objcMembers public class CXLogger: NSObject {
     
-    @nonobjc
-    private static var currentDateString: String {
+    public static var currentDateString: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.string(from: Date())
+    }
+    
+    public static var currentZDateString: String {
         let dateFormatter = DateFormatter.init()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSSZ"
         return dateFormatter.string(from: Date.init())
     }
     
     @nonobjc
-    private static func log(_ level: CXLogLevel, message: String, locationInfo: (file: String, function: String, lineNumber: Int)? = nil) {
-        var desc = ""
-        if let li = locationInfo {
-            let fileName = (li.file as NSString).lastPathComponent
-            desc = "[F: \(fileName) M: \(li.function) L: \(li.lineNumber)]"
-        }
-        desc = (desc.isEmpty ? "" : desc + " ") + message
+    private static func log(_ level: CXLogLevel, prefix: String, message: String) {
+        let _prefix = prefix.isEmpty ? " " : (" " + prefix + " ")
         if CXConfig.enableLog {
-            print("\(currentDateString) [\(level.description)] [CX] \(desc)")
+            print("\(currentZDateString)\(_prefix)[CX] [\(level.description)] \(message)")
         } else {
             if level == .debug || level == .verbose {
-                print("\(currentDateString) [\(level.description)] [CX] \(desc)")
+                print("\(currentZDateString)\(_prefix)[CX] [\(level.description)] \(message)")
             }
         }
     }
@@ -51,28 +51,32 @@ import Foundation
     /// Outputs logs to the console (Swift).
     @nonobjc
     public static func log(level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
-        log(level, message: message, locationInfo: (file, function, lineNumber))
+        let fileName = (file as NSString).lastPathComponent
+        let prefix = "[F: \(fileName) M: \(function) L: \(lineNumber)]"
+        log(level, prefix: prefix, message: message)
     }
     
     /// Outputs logs to the console (Swift).
     @nonobjc
     public static func log(_ obj: Any, level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
-        log(level, message: "[\(type(of: obj))] \(message)", locationInfo: (file, function, lineNumber))
+        let fileName = (file as NSString).lastPathComponent
+        let prefix = "[F: \(fileName) M: \(function) L: \(lineNumber)]"
+        log(level, prefix: "\(prefix) [\(type(of: obj))]", message: message)
     }
     
     /// Outputs logs to the console (Objective-C).
     /// e.g.:
-    ///   [CXLogger outputLogWithLevel:CXLogLevelError message:CXLogMessageFormat(@"123")];
+    ///   [CXLogger outputLogWithLevel:CXLogLevelError message:CXLogMessage(@"123")];
     public static func outputLog(level: CXLogLevel, message: String) {
-        log(level, message: message, locationInfo: nil)
+        log(level, prefix: "", message: message)
     }
     
     /// Outputs logs to the console (Objective-C).
     /// e.g.:
-    ///   #define CXLogMessageFormat(m) ([NSString stringWithFormat:@"[F: %s, M: %s, L: %d] %@",  __FILE__, __PRETTY_FUNCTION__, __LINE__, (m)])
+    ///   #define CXLogMessage(m) ([NSString stringWithFormat:@"[F: %s, M: %s, L: %d] %@",  __FILE__, __PRETTY_FUNCTION__, __LINE__, (m)])
     ///   [CXLogger outputLog:self level:CXLogLevelError message:CXLogMessageFormat(@"===")];
     public static func outputLog(_ obj: Any, level: CXLogLevel, message: String) {
-        log(level, message: "[\(type(of: obj))] \(message)", locationInfo: nil)
+        log(level, prefix: "[\(type(of: obj))]", message: message)
     }
     
 }
