@@ -431,6 +431,11 @@ extension CXSwiftBase where T : CXView {
     {
         return self.base.cx_layoutSizeFitting(size: targetSize, withHorizontalFittingPriority: horizontalFittingPriority, verticalFittingPriority: verticalFittingPriority)
     }
+    
+    /// Sets background image for view.
+    public func setBackgroundImage(_ image: UIImage) {
+        self.base.cx_setBackgroundImage(image)
+    }
     #endif
     
     /// Returns the receiver’s immediate subviews.
@@ -815,6 +820,15 @@ extension CXView {
     
 }
 
+extension CXView {
+    
+    @objc public convenience init(parent: CXView) {
+        self.init(frame: parent.bounds)
+        parent.addSubview(self)
+    }
+    
+}
+
 #if os(iOS) || os(tvOS)
 extension UIView {
     
@@ -1181,6 +1195,18 @@ extension UIView {
             targetSize,
             withHorizontalFittingPriority: horizontalFittingPriority,
             verticalFittingPriority: verticalFittingPriority)
+    }
+    
+    /// Sets background image for view.
+    @objc public func cx_setBackgroundImage(_ image: UIImage) {
+        UIGraphicsBeginImageContext(frame.size)
+        image.draw(in: bounds)
+        guard let bgImage = UIGraphicsGetImageFromCurrentImageContext() else {
+            UIGraphicsEndImageContext()
+            return
+        }
+        UIGraphicsEndImageContext()
+        backgroundColor = bgImage.cx.patternColor
     }
     
 }
