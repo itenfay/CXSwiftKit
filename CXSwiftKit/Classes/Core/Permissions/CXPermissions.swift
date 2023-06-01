@@ -84,34 +84,6 @@ extension CXPhotosPermission {
         }
     }
     
-    @objc public func fetchLatestPHAsset() -> PHAsset?
-    {
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        let fetchResult = PHAsset.fetchAssets(with: fetchOptions)
-        return fetchResult.firstObject
-    }
-    
-    /// Fetches a latest image from the photo library.
-    ///
-    /// - Parameter completion: A block called, exactly once, when image loading is complete.
-    @objc public func fetchLatestImage(completion: @escaping (_ imageData: Data?) -> Void)
-    {
-        guard let asset = fetchLatestPHAsset() else {
-            return
-        }
-        let imageManager = PHImageManager.default()
-        if #available(iOS 13, tvOS 13, macOS 10.15, *) {
-            imageManager.requestImageDataAndOrientation(for: asset, options: nil) { imageData, dataUTI, orientation, info in
-                completion(imageData)
-            }
-        } else {
-            imageManager.requestImageData(for: asset, options: nil) { imageData, dataUTI, orientation, info in
-                completion(imageData)
-            }
-        }
-    }
-    
 }
 #endif
 
