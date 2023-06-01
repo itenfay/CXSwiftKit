@@ -1,5 +1,5 @@
 //
-//  CXPhotoLibraryHandler.swift
+//  CXPhotoLibraryAccessor.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/8/12.
@@ -8,6 +8,9 @@
 import Foundation
 #if os(iOS) || os(tvOS) || os(macOS)
 import Photos
+#if canImport(AVFoundation)
+import AVFoundation
+#endif
 
 public class CXAlbumModel: NSObject {
     @objc public let name: String
@@ -31,7 +34,7 @@ public enum CXAssetCreationType: UInt8 {
 
 public let CXPHLErrorDomain = "cx.errordomain.photolibraryhandle"
 
-public class CXPhotoLibraryHandler: NSObject {
+public class CXPhotoLibraryAccessor: NSObject {
     
     private lazy var photosPermission = CXPhotosPermission()
     
@@ -286,7 +289,7 @@ public class CXPhotoLibraryHandler: NSObject {
             if success {
                 completionHandler(true, nil)
             } else {
-                completionHandler(false, NSError(domain: CXPHLErrorDomain, code: -9, userInfo: [NSLocalizedDescriptionKey : error?.localizedDescription ?? ""]))
+                completionHandler(false, NSError(domain: CXPHLErrorDomain, code: -10, userInfo: [NSLocalizedDescriptionKey : error?.localizedDescription ?? ""]))
             }
         }
     }
@@ -402,7 +405,7 @@ public class CXPhotoLibraryHandler: NSObject {
     ///
     /// Gets the content from the asset:
     /// PHImageManager.default().requestImageDataAndOrientation(for: asset, options: nil) { data, dataUTI, orientation, info in } //@available(iOS 13, tvOS 13, macOS 10.15, *)
-    /// PHImageManager.default().requestImageData(for: asset, options: nil) { imageData, dataUTI, orientation, info in }
+    /// PHImageManager.default().requestImageData(for: asset, options: nil) { imageData, dataUTI, orientation, info in } // This is available in swift.
     /// PHImageManager.default().requestLivePhoto(for: asset, targetSize: CGSize.zero, contentMode: .aspectFit, options: nil) { livePhoto, info in }
     /// PHImageManager.default().requestAVAsset(forVideo: asset, options: nil) { asset, audioMix, userInfo in }
     /// let videoReqOptions = PHVideoRequestOptions()
@@ -434,46 +437,122 @@ public class CXPhotoLibraryHandler: NSObject {
     /// - Parameter asset: The asset for which to load image data.
     /// - Parameter options: Options specifying how Photos should handle the request, format the requested image, and notify your app of progress or errors.
     /// - Parameter completion: A block called, exactly once, when image loading is complete.
-    @objc public func fetchImageData(fromAsset asset: PHAsset?, options: PHImageRequestOptions? = nil, completion: @escaping (_ imageData: Data?) -> Void)
+    @objc public func fetchImageData(
+        fromAsset asset: PHAsset?,
+        options: PHImageRequestOptions? = nil,
+        completion: @escaping (Data?, String?, [AnyHashable : Any]?) -> Void)
     {
         guard let _asset = asset else {
-            completion(nil)
+            completion(nil, nil, nil)
             return
         }
         let imageManager = PHImageManager.default()
         #if os(iOS) || os(tvOS)
         if #available(iOS 13, tvOS 13, *) {
             imageManager.requestImageDataAndOrientation(for: _asset, options: options) { imageData, dataUTI, orientation, info in
-                completion(imageData)
+                completion(imageData, dataUTI, info)
             }
         } else {
             imageManager.requestImageData(for: _asset, options: options) { imageData, dataUTI, orientation, info in
-                completion(imageData)
+                completion(imageData, dataUTI, info)
             }
         }
         #else
         imageManager.requestImageDataAndOrientation(for: _asset, options: options) { imageData, dataUTI, orientation, info in
-            completion(imageData)
+            completion(imageData, dataUTI, info)
         }
         #endif
     }
     
+    /// Requests an image representation for the specified asset.
+    ///
+    /// - Parameters:
+    ///   - asset: The asset whose image data is to be loaded.
+    ///   - targetSize: The target size of image to be returned.
+    ///   - contentMode: An option for how to fit the image to the aspect ratio of the requested size.
+    ///   - options: Options specifying how Photos should handle the request, format the requested image, and notify your app of progress or errors.
+    ///   - completion: A block to be called when image loading is complete, providing the requested image or information about the status of the request.
     @objc public func fetchImage(
         fromAsset asset: PHAsset?,
         targetSize: CGSize,
         contentMode: PHImageContentMode,
         options: PHImageRequestOptions? = nil,
-        completion: @escaping (_ image: UIImage?) -> Void)
+        completion: @escaping (CXImage?, [AnyHashable : Any]?) -> Void)
+    {
+        guard let _asset = asset else {
+            completion(nil, nil)
+            return
+        }
+        PHImageManager.default().requestImage(for: _asset, targetSize: targetSize, contentMode: contentMode, options: options) { image, info in
+            completion(image, info)
+        }
+    }
+    
+    /// Requests a Live Photo representation for the specified asset.
+    ///
+    /// - Parameters:
+    ///   - asset: The asset whose Live Photo data is to be loaded.
+    ///   - targetSize: The target size of Live Photo to be returned.
+    ///   - contentMode: An option for how to fit the image to the aspect ratio of the requested size.
+    ///   - options: Options specifying how Photos should handle the request, format the requested image, and notify your app of progress or errors.
+    ///   - completion: A block to be called when image loading is complete, providing the requested image or information about the status of the request.
+    @objc public func fetchLivePhoto(
+        fromAsset asset: PHAsset?,
+        targetSize: CGSize,
+        contentMode: PHImageContentMode,
+        options: PHLivePhotoRequestOptions? = nil,
+        completion: @escaping (_ livePhoto: PHLivePhoto?) -> Void)
     {
         guard let _asset = asset else {
             completion(nil)
             return
         }
-        PHImageManager.default().requestImage(for: _asset, targetSize: targetSize, contentMode: contentMode, options: options) { image, info in
-            completion(image)
+        PHImageManager.default().requestLivePhoto(for: _asset, targetSize: targetSize, contentMode: contentMode, options: options) { livePhoto, info in
+            completion(livePhoto)
         }
     }
     
+    /// Requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
+    ///
+    /// - Parameters:
+    ///   - asset: The video asset for which video objects are to be loaded.
+    ///   - options: Options specifying how Photos should handle the request and notify your app of progress or errors.
+    ///   - completion: A block that Photos calls after loading the asset’s data.
+    @objc public func fetchVideoAsset(
+        fromAsset asset: PHAsset?,
+        options: PHVideoRequestOptions? = nil,
+        completion: @escaping (AVAsset?, AVAudioMix?, [AnyHashable : Any]?) -> Void)
+    {
+        guard let _asset = asset else {
+            completion(nil, nil, nil)
+            return
+        }
+        PHImageManager.default().requestAVAsset(forVideo: _asset, options: options) { avAsset, audioMix, info in
+            completion(avAsset, audioMix, info)
+        }
+    }
+    
+    #if canImport(AVFoundation)
+    /// Requests a representation of the video asset for playback, to be loaded asynchronously.
+    ///
+    /// - Parameters:
+    ///   - asset: The video asset to be played back.
+    ///   - options: Options specifying how Photos should handle the request and notify your app of progress or errors.
+    ///   - completion: A block Photos calls after loading the asset’s data and preparing the player item.
+    @objc public func fetchVideoPlayerItem(
+        fromAsset asset: PHAsset?,
+        options: PHVideoRequestOptions? = nil,
+        completion: @escaping (AVPlayerItem?, [AnyHashable : Any]?) -> Void)
+    {
+        guard let _asset = asset else {
+            completion(nil, nil)
+            return
+        }
+        PHImageManager.default().requestPlayerItem(forVideo: _asset, options: options) { playerItem, info in
+            completion(playerItem, info)
+        }
+    }
+    #endif
 }
 
 #endif
