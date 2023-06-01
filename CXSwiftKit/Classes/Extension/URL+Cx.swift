@@ -22,7 +22,7 @@ extension CXSwiftBase where T == URL {
     ///   - time: Seconds into the video where the image should be generated.
     ///   - size: The size of the new image. Use zero to have the new image adopt the pixel dimensions of the source image.
     ///   - completionHandler: The UIImage result of the AVAssetImageGenerator
-    public func cx_takeThumbnail(fromTime time: Float64, size: NSSize, completionHandler: @escaping (NSImage?) -> Void) {
+    public func takeThumbnail(fromTime time: Float64, size: NSSize, completionHandler: @escaping (NSImage?) -> Void) {
         base.cx_takeThumbnail(fromTime: time, size: size, completionHandler: completionHandler)
     }
     #else
