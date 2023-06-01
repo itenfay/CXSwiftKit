@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var vSlider: CXVerticalSlider!
     @IBOutlet weak var progressButton: CXCircleProgressButton!
     
-    lazy var photoLibHandle = CXPhotoLibraryHandler()
+    lazy var photoLibHandle = CXPhotoLibraryAccessor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
                     print("sample_320x240.mp4 保存成功!")
                 }
             })
-        } catch CXPhotoLibraryHandler.PHLError.failed(let description) {
+        } catch CXPhotoLibraryAccessor.PHLError.failed(let description) {
             print("\(description)")
         } catch {
             print("\(error.localizedDescription)")
