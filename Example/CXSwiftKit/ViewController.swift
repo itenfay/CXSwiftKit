@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var vSlider: CXVerticalSlider!
     @IBOutlet weak var progressButton: CXCircleProgressButton!
     
+    lazy var photoLibHandle = CXPhotoLibraryHandler()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .brown
@@ -42,6 +44,34 @@ class ViewController: UIViewController {
         progressButton.startAnimation()
         
         //saveImageToPhotosAlbum()
+        //saveToAssetCollection()
+    }
+    
+    func saveToAssetCollection() {
+        do {
+            try photoLibHandle.addPhoto(CXImage(named: "avatar")!, toAlbum: "CXTest") { success, error in
+                if success {
+                    print("avatar 保存成功!")
+                }
+            }
+            try photoLibHandle.addVideo(URL(localFilePath: Bundle.main.path(forResource: "sample_320x240", ofType: "mp4")!), toAlbum: "CXTestVideo", completionHandler: { success, error in
+                if success {
+                    print("sample_320x240.mp4 保存成功!")
+                }
+            })
+        } catch CXPhotoLibraryHandler.PHLError.failed(let description) {
+            print("\(description)")
+        } catch {
+            print("\(error.localizedDescription)")
+        }
+        
+        if let path = Bundle.main.path(forResource: "panorama_0", ofType: "jpg") {
+            photoLibHandle.addPhoto(URL(localFilePath: path), completionHandler: { success, error in
+                if success {
+                    print("panorama_0.jpg 保存成功!")
+                }
+            })
+        }
     }
     
     func saveImageToPhotosAlbum() {
