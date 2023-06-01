@@ -44,6 +44,10 @@ public class CXPhotoLibraryHandler: NSObject {
         case failed(String)
     }
     
+    @objc public func getPhotosPermission() -> CXPhotosPermission {
+        return photosPermission
+    }
+    
     /// Adds a photo to album.
     public func addPhoto(_ image: CXImage, toAlbum name: String, completionHandler: @escaping (Bool, PHLError?) -> Void) throws {
         try addAsset(image, type: .image, title: name, completionHandler: completionHandler)
@@ -370,10 +374,11 @@ public class CXPhotoLibraryHandler: NSObject {
     }
     
     /// Retrieves all assets matching the specified options.
+    ///
     /// let fetchOptions = PHFetchOptions()
     /// fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
     /// fetchOptions.predicate = NSPredicate(format:"mediaType = %d", PHAssetMediaType.image.rawValue)
-    @objc public func fetchAssets(withOptions options: PHFetchOptions?) -> [PHAsset] {
+    @objc public func fetchAssets(withOptions options: PHFetchOptions? = nil) -> [PHAsset] {
         var assets: [PHAsset] = []
         let fetchResult = PHAsset.fetchAssets(with: options)
         fetchResult.enumerateObjects { asset, index, stop in
@@ -413,6 +418,60 @@ public class CXPhotoLibraryHandler: NSObject {
             assets.append(asset)
         }
         return assets
+    }
+    
+    /// Retrieves the latest asset.
+    @objc public func fetchLatestAsset() -> PHAsset?
+    {
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let fetchResult = PHAsset.fetchAssets(with: fetchOptions)
+        return fetchResult.firstObject
+    }
+    
+    /// Fetches a latest image from the photo library.
+    ///
+    /// - Parameter asset: The asset for which to load image data.
+    /// - Parameter options: Options specifying how Photos should handle the request, format the requested image, and notify your app of progress or errors.
+    /// - Parameter completion: A block called, exactly once, when image loading is complete.
+    @objc public func fetchImageData(fromAsset asset: PHAsset?, options: PHImageRequestOptions? = nil, completion: @escaping (_ imageData: Data?) -> Void)
+    {
+        guard let _asset = asset else {
+            completion(nil)
+            return
+        }
+        let imageManager = PHImageManager.default()
+        #if os(iOS) || os(tvOS)
+        if #available(iOS 13, tvOS 13, *) {
+            imageManager.requestImageDataAndOrientation(for: _asset, options: options) { imageData, dataUTI, orientation, info in
+                completion(imageData)
+            }
+        } else {
+            imageManager.requestImageData(for: _asset, options: options) { imageData, dataUTI, orientation, info in
+                completion(imageData)
+            }
+        }
+        #else
+        imageManager.requestImageDataAndOrientation(for: _asset, options: options) { imageData, dataUTI, orientation, info in
+            completion(imageData)
+        }
+        #endif
+    }
+    
+    @objc public func fetchImage(
+        fromAsset asset: PHAsset?,
+        targetSize: CGSize,
+        contentMode: PHImageContentMode,
+        options: PHImageRequestOptions? = nil,
+        completion: @escaping (_ image: UIImage?) -> Void)
+    {
+        guard let _asset = asset else {
+            completion(nil)
+            return
+        }
+        PHImageManager.default().requestImage(for: _asset, targetSize: targetSize, contentMode: contentMode, options: options) { image, info in
+            completion(image)
+        }
     }
     
 }

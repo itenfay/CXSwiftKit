@@ -17,6 +17,7 @@ public class CXTakeScreenshotDetector: NSObject {
         self.setup()
     }
     
+    private var takeScreenshotAction: (() -> Void)?
     private var takeScreenshotHandler: ((Bool, UIImage?) -> Void)?
     
     private lazy var photosPermission: CXPhotosPermission = {
@@ -24,12 +25,15 @@ public class CXTakeScreenshotDetector: NSObject {
         return photosPermission
     }()
     
+    private lazy var photoLibraryAccessor: CXPhotoLibraryAccessor = CXPhotoLibraryAccessor()
+    
     private func setup() {
         self.cx.addObserver(self, selector: #selector(userDidTakeScreenshot(_:)), name: UIApplication.userDidTakeScreenshotNotification)
     }
     
     @objc private func userDidTakeScreenshot(_ notification: Notification) {
         CXLogger.log(level: .info, message: "The user takes screenshot.")
+        takeScreenshotAction?()
         if photosPermission.authorized {
             DispatchQueue.cx.mainAsyncAfter(3.0) {
                 self.fetchImage()
@@ -41,10 +45,16 @@ public class CXTakeScreenshotDetector: NSObject {
     }
     
     private func fetchImage() {
-        photosPermission.fetchLatestImage { [weak self] imageData in
-            let image = imageData != nil ? UIImage(data: imageData!) : nil
+        let latestAsset = photoLibraryAccessor.fetchLatestAsset()
+        photoLibraryAccessor.fetchImageData(fromAsset: latestAsset) { [weak self] (data, dataUTI, info) in
+            let image = data != nil ? UIImage(data: data!) : nil
             self?.takeScreenshotHandler?(true, image)
         }
+    }
+    
+    /// Gets a screenshot of view directly by this method.
+    @objc public func trigger(action: @escaping () -> Void) {
+        takeScreenshotAction = action
     }
     
     @objc public func detect(handler: @escaping (_ authorized: Bool, _ image: UIImage?) -> Void) {
