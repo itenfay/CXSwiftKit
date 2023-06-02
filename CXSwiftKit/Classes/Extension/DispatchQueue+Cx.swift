@@ -9,8 +9,28 @@ import Foundation
 #if canImport(Dispatch)
 import Dispatch
 
-// Declares an array of string to record the token.
-fileprivate var _cxOnceTracker = [String]()
+extension DispatchQueue {
+    fileprivate static let __spin = CXSpin()
+    // Declares a set of string to record the token.
+    fileprivate static var __tracker: Set<String> = []
+    
+    /// Executes a block of code associated with a given token, only once.
+    /// The code is thread safe and will only execute the code once even in the presence of multi-thread calls.
+    ///
+    /// - Parameters:
+    ///   - token: A unique idetifier.
+    ///   - block: A block to execute once.
+    public static func cx_once(token: String, block: () -> Void)
+    {
+        __spin.lock()
+        defer { __spin.unlock() }
+        guard !__tracker.contains(token) else {
+            return
+        }
+        block()
+        __tracker.insert(token)
+    }
+}
 
 extension CXSwiftBase where T : DispatchQueue {
     
@@ -58,15 +78,7 @@ extension CXSwiftBase where T : DispatchQueue {
     ///   - block: A block to execute once.
     public static func once(token: String, block: () -> Void)
     {
-        objc_sync_enter(self)
-        defer {
-            objc_sync_exit(self)
-        }
-        if _cxOnceTracker.contains(token) {
-            return
-        }
-        _cxOnceTracker.append(token)
-        block()
+        DispatchQueue.cx_once(token: token, block: block)
     }
     
 }
