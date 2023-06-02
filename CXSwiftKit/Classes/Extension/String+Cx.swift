@@ -38,9 +38,9 @@ extension CXSwiftBase where T == String {
         return Double(self.base)
     }
     
-    #if canImport(CommonCrypto)
     /// Return a `MD5` encoded string.
     public var md5: String? {
+        #if canImport(CommonCrypto)
         let cStr = self.base.cString(using: String.Encoding.utf8)
         if cStr != nil {
             let digestLen = Int(CC_MD5_DIGEST_LENGTH)
@@ -57,9 +57,13 @@ extension CXSwiftBase where T == String {
             return result as String
         }
         return nil
+        #else
+        return nil
+        #endif
     }
     
     public func md5Encoded() -> String? {
+        #if canImport(CommonCrypto)
         guard self.base.count > 0 else {
             CXLogger.log(level: .error, message: "The count of string is zero.")
             return nil
@@ -68,12 +72,34 @@ extension CXSwiftBase where T == String {
         var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
         CC_MD5(utf8, CC_LONG(utf8!.count - 1), &digest)
         return digest.reduce("") { $0 + String(format:"%02x", $1) }
+        #else
+        return nil
+        #endif
+    }
+    
+    /// Return a `SHA1` encoded string.
+    ///
+    /// SHA: Secure Hash Algorithm, SHA1
+    public var sha1: String? {
+        #if canImport(CommonCrypto)
+        guard self.base.count > 0 else {
+            CXLogger.log(level: .error, message: "The count of string is zero.")
+            return nil
+        }
+        let utf8 = self.base.cString(using: .utf8)
+        var digest = [UInt8](repeating: 0, count: Int(CC_SHA1_DIGEST_LENGTH))
+        CC_SHA1(utf8, CC_LONG(utf8!.count - 1), &digest)
+        return digest.reduce("") { $0 + String(format:"%02x", $1) }
+        #else
+        return nil
+        #endif
     }
     
     /// Return a `SHA2` encoded string.
     ///
     /// SHA: Secure Hash Algorithm, SHA256 <=> SHA2, SHA1 --> SHA2
     public var sha256: String? {
+        #if canImport(CommonCrypto)
         guard self.base.count > 0 else {
             CXLogger.log(level: .error, message: "The count of string is zero.")
             return nil
@@ -82,35 +108,47 @@ extension CXSwiftBase where T == String {
         var digest = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
         CC_SHA256(utf8, CC_LONG(utf8!.count - 1), &digest)
         return digest.reduce("") { $0 + String(format:"%02x", $1) }
+        #else
+        return nil
+        #endif
     }
     
-    /// Return a `SHA2 HMAC` signature.
+    /// Return a `SHA1 HMAC` signature.
     public func sha1HmacSign(with key: String) -> String? {
-        return cHmacSign(with: key, algorithm: CCHmacAlgorithm(kCCHmacAlgSHA1))
+        #if canImport(CommonCrypto)
+        return hmacSign(with: key, algorithm: CCHmacAlgorithm(kCCHmacAlgSHA1))
+        #else
+        return nil
+        #endif
     }
     
     /// Return a `SHA2 HMAC` signature.
     public func sha2HmacSign(with key: String) -> String? {
-        cHmacSign(with: key, algorithm: CCHmacAlgorithm(kCCHmacAlgSHA256))
+        #if canImport(CommonCrypto)
+        return hmacSign(with: key, algorithm: CCHmacAlgorithm(kCCHmacAlgSHA256))
+        #else
+        return nil
+        #endif
     }
     
     /// Return a `HMAC` signature.
-    /// 
+    ///
     /// - Parameters:
     ///   - key: Raw key.
     ///   - algorithm: HMAC algorithm to perform. kCCHmacAlgSHA1 or kCCHmacAlgSHA256.
     /// - Returns: A `HMAC` signature.
-    private func cHmacSign(with key: String, algorithm: CCHmacAlgorithm) -> String? {
+    private func hmacSign(with key: String, algorithm: CCHmacAlgorithm) -> String? {
+        #if canImport(CommonCrypto)
         if algorithm != kCCHmacAlgSHA1 && algorithm != kCCHmacAlgSHA256 {
             CXLogger.log(level: .error, message: "Unsupport algorithm.")
             return nil
         }
         guard let keyData = key.data(using: .utf8) as? NSData else {
-            CXLogger.log(level: .error, message: "** The key to data. **")
+            CXLogger.log(level: .error, message: "** The key to data failed. **")
             return nil
         }
         guard let strData = self.base.data(using: .utf8) as? NSData else {
-            CXLogger.log(level: .error, message: "** The text to data. **")
+            CXLogger.log(level: .error, message: "** The text to data failed. **")
             return nil
         }
         let len = algorithm == CCHmacAlgorithm(kCCHmacAlgSHA1) ? CC_SHA1_DIGEST_LENGTH : CC_SHA256_DIGEST_LENGTH
@@ -118,8 +156,10 @@ extension CXSwiftBase where T == String {
         CCHmac(algorithm, keyData.bytes, keyData.count, strData.bytes, strData.count, &cHMAC)
         let hmacData = Data(bytes: &cHMAC, count: Int(len))
         return hmacData.base64EncodedString()
+        #else
+        return nil
+        #endif
     }
-    #endif
     
     /// Convert a date string to a timestamp，dateFormat: "yyyy-MM-dd HH:mm:ss".
     ///

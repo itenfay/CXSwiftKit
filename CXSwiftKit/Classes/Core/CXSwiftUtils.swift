@@ -54,10 +54,14 @@ public class CXSwiftUtils: NSObject {
         return string.cx.timeStringByComparingCurrentTime()
     }
     
-    #if canImport(CommonCrypto)
     /// Return a `MD5` encoded string.
     @objc public static func md5Encode(_ s: String) -> String? {
         return s.cx.md5Encoded()
+    }
+    
+    /// Return a `SHA1` encoded string.
+    @objc public static func sha1Encode(_ s: String) -> String? {
+        return s.cx.sha1
     }
     
     /// Return a `SHA2` encoded string.
@@ -79,7 +83,6 @@ public class CXSwiftUtils: NSObject {
     @objc public static func sha2HmacSign(_ s: String, withKey key: String) -> String? {
         return s.cx.sha2HmacSign(with: key)
     }
-    #endif
     
     /// Represents the string whether is a telephone number.
     @objc public static func isTelephone(_ s: String) -> Bool {
