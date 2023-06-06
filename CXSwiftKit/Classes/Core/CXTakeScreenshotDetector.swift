@@ -25,7 +25,7 @@ public class CXTakeScreenshotDetector: NSObject {
         return photosPermission
     }()
     
-    private lazy var photoLibraryAccessor: CXPhotoLibraryAccessor = CXPhotoLibraryAccessor()
+    private lazy var photoLibraryAccessor: CXPhotoLibraryOperator = CXPhotoLibraryOperator()
     
     private func setup() {
         self.cx.addObserver(self, selector: #selector(userDidTakeScreenshot(_:)), name: UIApplication.userDidTakeScreenshotNotification)
