@@ -1,5 +1,5 @@
 //
-//  CXPhotoLibraryAccessor.swift
+//  CXPhotoLibraryOperator.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/8/12.
@@ -32,9 +32,9 @@ public enum CXAssetCreationType: UInt8 {
     case videoByFileURL
 }
 
-public let CXPHLErrorDomain = "cx.errordomain.photolibraryhandle"
+public let CXPHLErrorDomain = "cx.errordomain.photolibrary.operation"
 
-public class CXPhotoLibraryAccessor: NSObject {
+public class CXPhotoLibraryOperator: NSObject {
     
     private lazy var photosPermission = CXPhotosPermission()
     
