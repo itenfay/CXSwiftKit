@@ -204,20 +204,19 @@ public class CXPhotoLibraryAccessor: NSObject {
                         return
                     }
                 } else {
-                    if let fileURL = target as? URL {
-                        createAssetRequest = PHAssetCreationRequest.forAsset()
-                        if type == .imageByFileURL {
-                            //createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: fileURL)
-                            createAssetRequest.addResource(with: .photo, fileURL: fileURL, options: nil)
-                        } else if type == .videoByFileURL {
-                            //createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
-                            createAssetRequest.addResource(with: .video, fileURL: fileURL, options: nil)
-                        } else {
-                            completionHandler(false, PHLError.failed("Unsupport asset creation type"))
-                            return
-                        }
-                    } else {
+                    guard let fileURL = target as? URL else {
                         completionHandler(false, PHLError.failed("The target type is wrong"))
+                        return
+                    }
+                    createAssetRequest = PHAssetCreationRequest.forAsset()
+                    if type == .imageByFileURL {
+                        //createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: fileURL)
+                        createAssetRequest.addResource(with: .photo, fileURL: fileURL, options: nil)
+                    } else if type == .videoByFileURL {
+                        //createAssetRequest = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+                        createAssetRequest.addResource(with: .video, fileURL: fileURL, options: nil)
+                    } else {
+                        completionHandler(false, PHLError.failed("Unsupport asset creation type"))
                         return
                     }
                 }
@@ -309,37 +308,35 @@ public class CXPhotoLibraryAccessor: NSObject {
             if #available(iOS 9, tvOS 10, macOS 10.15, *) {
                 var request: PHAssetCreationRequest!
                 if type == .image {
-                    if let image = target as? CXImage {
-                        //var imgData: Data?
-                        //#if os(macOS)
-                        //imgData = image.tiffRepresentation
-                        //#else
-                        //imgData = image.pngData()
-                        //#endif
-                        //if let data = imgData {
-                        //    request.addResource(with: .photo, data: data, options: nil)
-                        //} else {
-                        //    completionHandler(false, PHLError.failed("The image to data failed"))
-                        //    return
-                        //}
-                        request = PHAssetCreationRequest.creationRequestForAsset(from: image)
-                    } else {
+                    guard let image = target as? CXImage else {
                         completionHandler(false, PHLError.failed("The target type is wrong"))
                         return
                     }
+                    //var imgData: Data?
+                    //#if os(macOS)
+                    //imgData = image.tiffRepresentation
+                    //#else
+                    //imgData = image.pngData()
+                    //#endif
+                    //if let data = imgData {
+                    //    request.addResource(with: .photo, data: data, options: nil)
+                    //} else {
+                    //    completionHandler(false, PHLError.failed("The image to data failed"))
+                    //    return
+                    //}
+                    request = PHAssetCreationRequest.creationRequestForAsset(from: image)
                 } else {
-                    if let fileURL = target as? URL {
-                        request = PHAssetCreationRequest.forAsset()
-                        if type == .imageByFileURL {
-                            request.addResource(with: .photo, fileURL: fileURL, options: nil)
-                        } else if type == .videoByFileURL {
-                            request.addResource(with: .video, fileURL: fileURL, options: nil)
-                        } else {
-                            completionHandler(false, PHLError.failed("Unsupport type"))
-                            return
-                        }
-                    } else {
+                    guard let fileURL = target as? URL else {
                         completionHandler(false, PHLError.failed("The target type is wrong"))
+                        return
+                    }
+                    request = PHAssetCreationRequest.forAsset()
+                    if type == .imageByFileURL {
+                        request.addResource(with: .photo, fileURL: fileURL, options: nil)
+                    } else if type == .videoByFileURL {
+                        request.addResource(with: .video, fileURL: fileURL, options: nil)
+                    } else {
+                        completionHandler(false, PHLError.failed("Unsupport type"))
                         return
                     }
                 }
@@ -376,7 +373,7 @@ public class CXPhotoLibraryAccessor: NSObject {
         return albums
     }
     
-    /// Retrieves all assets matching the specified options.
+    /// Fethes all assets matching the specified options.
     ///
     /// let fetchOptions = PHFetchOptions()
     /// fetchOptions.sortDescriptors = [NSSortDescriptor(key:"creationDate", ascending: false)]
@@ -390,7 +387,7 @@ public class CXPhotoLibraryAccessor: NSObject {
         return assets
     }
     
-    /// Retrieves assets from the specified asset collection.
+    /// Fethes assets from the specified asset collection.
     @objc public func fetchAssets(inAssetCollection assetCollection: PHAssetCollection, options: PHFetchOptions? = nil) -> [PHAsset] {
         var assets: [PHAsset] = []
         //options?.fetchLimit = 1
@@ -401,7 +398,7 @@ public class CXPhotoLibraryAccessor: NSObject {
         return assets
     }
     
-    /// Retrieves assets with the specified media type.
+    /// Fethes assets with the specified media type.
     ///
     /// Gets the content from the asset:
     /// PHImageManager.default().requestImageDataAndOrientation(for: asset, options: nil) { data, dataUTI, orientation, info in } //@available(iOS 13, tvOS 13, macOS 10.15, *)
@@ -423,9 +420,8 @@ public class CXPhotoLibraryAccessor: NSObject {
         return assets
     }
     
-    /// Retrieves the latest asset.
-    @objc public func fetchLatestAsset() -> PHAsset?
-    {
+    /// Fethes the latest asset.
+    @objc public func fetchLatestAsset() -> PHAsset? {
         let fetchOptions = PHFetchOptions()
         fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
         let fetchResult = PHAsset.fetchAssets(with: fetchOptions)
@@ -488,7 +484,7 @@ public class CXPhotoLibraryAccessor: NSObject {
         }
     }
     
-    /// Requests a Live Photo representation for the specified asset.
+    /// Fethes a Live Photo representation for the specified asset.
     ///
     /// - Parameters:
     ///   - asset: The asset whose Live Photo data is to be loaded.
@@ -512,7 +508,7 @@ public class CXPhotoLibraryAccessor: NSObject {
         }
     }
     
-    /// Requests AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
+    /// Fethes AVFoundation objects representing the video asset’s content and state, to be loaded asynchronously.
     ///
     /// - Parameters:
     ///   - asset: The video asset for which video objects are to be loaded.
@@ -533,7 +529,7 @@ public class CXPhotoLibraryAccessor: NSObject {
     }
     
     #if canImport(AVFoundation)
-    /// Requests a representation of the video asset for playback, to be loaded asynchronously.
+    /// Fethes a representation of the video asset for playback, to be loaded asynchronously.
     ///
     /// - Parameters:
     ///   - asset: The video asset to be played back.
@@ -553,6 +549,7 @@ public class CXPhotoLibraryAccessor: NSObject {
         }
     }
     #endif
+    
 }
 
 #endif
