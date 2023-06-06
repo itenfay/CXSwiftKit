@@ -99,6 +99,12 @@ extension CXSwiftBase where T : CXFont {
         return CXFont.cx_semiboldPingFang(ofSize: size)
     }
     
+    /// Returns a font that matches the specified font descriptor.
+    public func withTraits(traits: CXFontDescriptor.SymbolicTraits) -> CXFont
+    {
+        return base.cx_withTraits(traits: traits)
+    }
+    
 }
 
 extension CXFont {
@@ -185,6 +191,17 @@ extension CXFont {
     @objc public static func cx_semiboldPingFang(ofSize size: CGFloat) -> CXFont
     {
         return CXFont(name: "PingFangSC-Semibold", size: size) ?? CXFont.systemFont(ofSize:size, weight: .semibold)
+    }
+    
+    /// Returns a font that matches the specified font descriptor.
+    @objc public func cx_withTraits(traits: CXFontDescriptor.SymbolicTraits) -> CXFont
+    {
+        let descriptor = fontDescriptor.withSymbolicTraits(traits)
+        #if os(macOS)
+        return CXFont(descriptor: descriptor, size: 0) ?? CXFont.systemFont(ofSize: 16)
+        #else
+        return CXFont(descriptor: descriptor!, size: 0)
+        #endif
     }
     
 }

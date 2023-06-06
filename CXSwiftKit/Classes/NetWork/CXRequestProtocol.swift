@@ -108,7 +108,7 @@ public struct TestAPI: APIType {
         self.path = path
         self.method = method
         self.sampleData = sampleData
-        self.taskType = CXTaskType.request(parameters: ["test" : "1"], encoding: URLEncoding.default)
+        self.taskType = CXTaskType.request(parameters: [:], encoding: URLEncoding.default)
         self.headers = headers
     }
     
