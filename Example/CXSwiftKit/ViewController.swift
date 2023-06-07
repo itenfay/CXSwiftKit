@@ -26,7 +26,7 @@ class ViewController: UIViewController {
         vSlider.minimumImage = UIColor.lightGray.cx.drawImage()
         vSlider.thumbImage = UIColor.black.cx.makeImageWithSize(CGSize(width: vSlider.cx.width, height: 20), cornerRadius: 10)
         vSlider.onValueChanged = { (value, ended) in
-            print("value=\(value), ended=\(ended)")
+            CXLogger.log(level: .info, message:"value=\(value), ended=\(ended)")
         }
         vSlider.setValue(50, animated: true)
         
@@ -39,36 +39,38 @@ class ViewController: UIViewController {
         progressButton.trackMargin = 5
         progressButton.reverse = true
         progressButton.onFinish = {
-            print("The progress is finished.")
+            CXLogger.log(level: .info, message:"The progress is finished.")
         }
         progressButton.startAnimation()
         
         //saveImageToPhotosAlbum()
         //saveToAssetCollection()
+        
+        CXLogger.log(level: .info, message: "The args is %i, %0.2f, %@".cx.format(1, 1.928, "hello!"))
     }
     
     func saveToAssetCollection() {
         do {
             try photoLibHandle.addPhoto(CXImage(named: "avatar")!, toAlbum: "CXTest") { success, error in
                 if success {
-                    print("avatar 保存成功!")
+                    CXLogger.log(level: .info, message: "avatar 保存成功!")
                 }
             }
             try photoLibHandle.addVideo(URL(localFilePath: Bundle.main.path(forResource: "sample_320x240", ofType: "mp4")!), toAlbum: "CXTestVideo", completionHandler: { success, error in
                 if success {
-                    print("sample_320x240.mp4 保存成功!")
+                    CXLogger.log(level: .info, message: "sample_320x240.mp4 保存成功!")
                 }
             })
         } catch CXPhotoLibraryOperator.PHLError.failed(let description) {
-            print("\(description)")
+            CXLogger.log(level: .info, message:"\(description)")
         } catch {
-            print("\(error.localizedDescription)")
+            CXLogger.log(level: .info, message:"\(error.localizedDescription)")
         }
         
         if let path = Bundle.main.path(forResource: "panorama_0", ofType: "jpg") {
             photoLibHandle.addPhoto(URL(localFilePath: path), completionHandler: { success, error in
                 if success {
-                    print("panorama_0.jpg 保存成功!")
+                    CXLogger.log(level: .info, message: "panorama_0.jpg 保存成功!")
                 }
             })
         }
