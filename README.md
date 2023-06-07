@@ -47,7 +47,9 @@ pod 'CXSwiftKit'
 |   |- CXAppContext.swift
 |   |- CXDevice.swift                 // Used to provide some device informations.
 |   |- CXDeviceScreenContext.swift    // Used to observe some changes of device screen.
+|   |- CXHaptics.swift                // Some haptic feedback that works on iPhone 6 and up.
 |   |- CXKingfisherReferer.swift      // Used to set the referer of image.
+|   |- CXMetalVideoRecorder.swift     
 |   |- CXPhotoLibraryOperator.swift   // Used to operate the photo library.
 |   |- CXScreenRecorder.swift         // The recorder that provides the ability to record audio and video of your app.
 |   |- CXSwiftUtils.swift
@@ -68,7 +70,7 @@ pod 'CXSwiftKit'
 |       // deviceBiometrics, devicePasscode, contacts, reminder, event, motion, siri, health, media, appTracking.
 |       |- CXPermissionStatus.swift
 |       |- CXPermissionType.swift
-|   |- svga // Used to show the animation of svga file in iOS.
+|   |- svga // Used to show animation of the svga file in iOS.
 |       |- CXSvgaPlayManager.swift
 |       |- CXSvgaPlayOperation.swift
 |   |- Timer
@@ -79,7 +81,7 @@ pod 'CXSwiftKit'
 |       |- CXScalePresentAnimation.swift
 |       |- CXSwipeLeftInteractiveTransition.swift
 |   |- WebSocket
-|       |- CXWebSocket.swift                            // Uses `Starscream` to wraps this web socket.
+|       |- CXWebSocket.swift                            // Uses `Starscream` to wraps the web socket.
 |   |- Widget
 |       |- CXCircleProgressButton.swift                 // The circle progress button for iOS or tvOS.
 |       |- CXVerticalSlider.swift                       // The vertical slider for iOS or tvOS.
@@ -145,7 +147,6 @@ pod 'CXSwiftKit'
 |   |- KafkaRefresh+RxCx.swift  // Used to set refresh control for list view.
 |   |- Kingfisher+RxCx.swift    // Used to set remote image for image view.
 |   |- MJRefresh+RxCx.swift     // Used to set refresh control for list view.
-|
 ```
 
 ## 作者
