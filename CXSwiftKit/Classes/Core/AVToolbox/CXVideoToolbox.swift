@@ -5,6 +5,7 @@
 //  Created by chenxing on 2021/9/26.
 //
 
+import Foundation
 #if !os(watchOS) && canImport(AVFoundation)
 import AVFoundation
 #if canImport(Photos)

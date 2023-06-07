@@ -5,9 +5,9 @@
 //  Created by chenxing on 2021/9/2.
 //
 
+import Foundation
 #if !os(watchOS) && canImport(AVFoundation)
 import AVFoundation
-import Foundation
 
 public class CXAudioToolbox: NSObject {
     

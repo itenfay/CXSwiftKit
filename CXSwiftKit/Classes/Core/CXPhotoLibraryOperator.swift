@@ -550,6 +550,50 @@ public class CXPhotoLibraryOperator: NSObject {
     }
     #endif
     
+    /// Imports the current recorded video.
+    func importRecordedVideo(replayFileName: String, completionHandler: @escaping (_ path: String, _ errorDescription: String?) -> Void) {
+        #if canImport(Photos)
+        let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
+        for i in 0..<smartAlbums.count {
+            let assetCollection = smartAlbums[i]
+            //if assetCollection.localizedTitle == "视频" || assetCollection.localizedTitle?.lowercased() == "videos" {
+            if assetCollection.assetCollectionSubtype == .smartAlbumVideos {
+                let assetsFetchResult: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: assetCollection, options: nil)
+                guard assetsFetchResult.count > 0 else {
+                    completionHandler("", "no video assets in the album!")
+                    return
+                }
+                let phAsset: PHAsset = assetsFetchResult.lastObject!
+                _ = PHVideoRequestOptions()
+                
+                let assetResources = PHAssetResource.assetResources(for: phAsset)
+                var resource: PHAssetResource?
+                
+                for assetRes in assetResources {
+                    resource = assetRes
+                }
+                if resource == nil {
+                    completionHandler("", "Asset resource is nil")
+                    return
+                }
+                let videoPath = NSTemporaryDirectory().appending(replayFileName)
+                try? FileManager.default.removeItem(atPath: videoPath)
+                PHAssetResourceManager.default().writeData(for: resource!, toFile: URL(localFilePath: videoPath), options: nil, completionHandler: { error in
+                    if error != nil {
+                        CXLogger.log(level: .error, message: "error=\(error!)")
+                        completionHandler("", error!.localizedDescription)
+                    } else {
+                        completionHandler(videoPath, nil)
+                    }
+                })
+            }
+        }
+        #else
+        CXLogger.log(level: .error, message: "Can't import photos library... stop importing!")
+        exportVideoHandler?("", "Can't import photos library... stop importing!")
+        #endif
+    }
+    
 }
 
 #endif

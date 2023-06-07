@@ -30,9 +30,12 @@ public class CXScreenRecorder: NSObject {
     
     /// Customizes replay video fileName.
     @objc public var replayVideoFileName: String = "cx_replayvideo_sr0426.mp4"
-    @objc public var exportVideoHandler: ((String, Error?) -> Void)?
     
-    @objc public func onObserve(finish: @escaping () -> Void, cancel: @escaping () -> Void, error: @escaping (String) -> Void) {
+    @objc public func onObserve(
+        finish: @escaping () -> Void,
+        cancel: @escaping () -> Void,
+        error: @escaping (String) -> Void)
+    {
         onFinish = finish
         onCancel = cancel
         onError = error
@@ -63,48 +66,6 @@ public class CXScreenRecorder: NSObject {
             }
         }
     }
-    
-    #if os(iOS) || os(tvOS)
-    /// Exports the current recording.
-    func exportVideo() {
-        #if canImport(Photos)
-        let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .albumRegular, options: nil)
-        for i in 0..<smartAlbums.count {
-            let assetCollection = smartAlbums[i]
-            let assetsFetchResult: PHFetchResult<PHAsset> = PHAsset.fetchAssets(in: assetCollection, options: nil)
-            if assetCollection.localizedTitle == "视频" || assetCollection.localizedTitle?.lowercased().contains("video") == true {
-                if assetsFetchResult.count > 0 {
-                    let phAsset: PHAsset = assetsFetchResult.lastObject!
-                    _ = PHVideoRequestOptions()
-                    
-                    let assetResources = PHAssetResource.assetResources(for: phAsset)
-                    var resource: PHAssetResource?
-                    
-                    for assetRes in assetResources {
-                        resource = assetRes
-                    }
-                    if resource == nil {
-                        self.exportVideoHandler?("", nil)
-                        return
-                    }
-                    let videoPath = NSTemporaryDirectory().appending(replayVideoFileName)
-                    try? FileManager.default.removeItem(atPath: videoPath)
-                    PHAssetResourceManager.default().writeData(for: resource!, toFile: URL(fileURLWithPath: videoPath), options: nil, completionHandler: { (error) in
-                        if error != nil {
-                            CXLogger.log(level: .error, message: "error=\(error!)")
-                            self.exportVideoHandler?("", error)
-                        } else {
-                            self.exportVideoHandler?(videoPath, nil)
-                        }
-                    })
-                }
-            }
-        }
-        #else
-        CXLogger.log(level: .error, message: "Can't import photos library... stop exporting!")
-        #endif
-    }
-    #endif
     
 }
 
@@ -142,25 +103,21 @@ extension CXScreenRecorder: RPScreenRecorderDelegate, RPPreviewViewControllerDel
             #if os(iOS)
             previewController.dismiss(animated: true, completion: nil)
             #endif
-            onFinish?()
         } else {
             #if os(macOS)
             viewController?.dismiss(previewController)
-            onFinish?()
             #endif
         }
+        onFinish?()
     }
     #endif
     
-    @available(macOS 11.0, *)
+    #if os(tvOS)
     public func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
-        #if os(macOS)
-        viewController?.dismiss(previewController)
-        #else
         previewController.dismiss(animated: true, completion: nil)
-        #endif
         onFinish?()
     }
+    #endif
     
 }
 
