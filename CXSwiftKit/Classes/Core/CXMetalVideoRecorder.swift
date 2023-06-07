@@ -6,7 +6,7 @@
 //
 
 import Foundation
-#if !os(watchOS) || canImport(AVFoundation)
+#if !os(watchOS) && canImport(AVFoundation)
 import AVFoundation
 #if canImport(Metal)
 import Metal
