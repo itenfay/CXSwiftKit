@@ -575,4 +575,10 @@ extension CXSwiftBase where T == String {
         return self.base.lowercased() == string.lowercased()
     }
     
+    /// Python-y formatting:  "blah %i".format(4)
+    public func format(_ args: CVarArg...) -> String {
+        // NSString(format: self, arguments: getVaList(args)) as String
+        return String(format: self.base, args)
+    }
+    
 }
