@@ -13,7 +13,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-* Xcode 14.0+
+* Xcode 13.0+
 * iOS 10.0, tvOS 10.0, macOS 11.0, watchOS 5.0
 
 ## Installation
@@ -142,7 +142,7 @@ CXSwiftKit
   ┃   ┣ CXViewControllerWrapable.swift // Used to present or dismiss view.
   ┃   ┗ CXViewWrapable.swift           // Used to present or dismiss view, abstracts common calls for `Toast_Swift`
   ┃
-  ┗ Rx Extension
+  ┗ Rx
       ┣ Button+RxCx.swift        // Used to show indicator
       ┣ EmptyDataSet+RxCx.swift  // Used to bind empty data set for list view.
       ┣ KafkaRefresh+RxCx.swift  // Used to set refresh control for list view.
