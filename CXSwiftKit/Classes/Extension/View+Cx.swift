@@ -436,6 +436,13 @@ extension CXSwiftBase where T : CXView {
     public func setBackgroundImage(_ image: UIImage) {
         self.base.cx_setBackgroundImage(image)
     }
+    
+    /// Animates for updating constraints.
+    ///
+    /// - Parameter duration: The total duration of the animations, measured in seconds.
+    public func animateForUpdatingConstraints(_ duration: TimeInterval = 0.3) {
+        self.base.cx_animateForUpdatingConstraints(duration)
+    }
     #endif
     
     /// Returns the receiver’s immediate subviews.
@@ -1207,6 +1214,20 @@ extension UIView {
         }
         UIGraphicsEndImageContext()
         backgroundColor = bgImage.cx.patternColor
+    }
+    
+    /// Animates for updating constraints.
+    ///
+    /// - Parameter duration: The total duration of the animations, measured in seconds.
+    @objc public func cx_animateForUpdatingConstraints(_ duration: TimeInterval = 0.3) {
+        // Controls whether the view’s constraints need updating.
+        setNeedsUpdateConstraints()
+        // Updates the constraints for the receiving view and its subviews.
+        updateConstraintsIfNeeded()
+        // Animate changes to one or more views using the specified duration.
+        UIView.animate(withDuration: duration) {
+            self.layoutIfNeeded()
+        }
     }
     
 }

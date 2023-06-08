@@ -71,6 +71,7 @@ extension CXSwiftBase where T : UIViewController {
         self.base.cx_dismiss(overlayView: overlayView, completion: completion)
     }
     
+    #if !os(tvOS)
     /// Add the keyboard observer.
     public func addKeyboardObserver() {
         self.base.cx_addKeyboardObserver()
@@ -80,6 +81,7 @@ extension CXSwiftBase where T : UIViewController {
     public func removeKeyboardObserver() {
         self.base.cx_removeKeyboardObserver()
     }
+    #endif
     
 }
 
@@ -264,6 +266,7 @@ extension UIViewController: CXViewControllerWrapable {
 
 //MARK: - Keyboard
 
+#if !os(tvOS)
 extension UIViewController {
     
     /// Add the keyboard observer.
@@ -281,11 +284,11 @@ extension UIViewController {
     /// The keyboard will be shown.
     @objc private func keyboardWillShow(_ noti: Notification) {
         guard let userInfo = noti.userInfo else { return }
-        guard let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
-              let keyboardBounds = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        guard let keyboardBounds = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
         else {
             return
         }
+        let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
         let transform = CGAffineTransformIdentity
         UIView.animate(withDuration: animationDuration) {
             self.view.transform = CGAffineTransformTranslate(transform, 0, keyboardBounds.origin.y - self.view.frame.height)
@@ -295,15 +298,13 @@ extension UIViewController {
     /// The keyboard will be hidden.
     @objc private func keyboardWillHide(_ noti: Notification) {
         guard let userInfo = noti.userInfo else { return }
-        guard let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
-        else {
-            return
-        }
+        let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval ?? 0.25
         UIView.animate(withDuration: animationDuration) {
             self.view.transform = CGAffineTransformIdentity
         }
     }
     
 }
+#endif
 
 #endif
