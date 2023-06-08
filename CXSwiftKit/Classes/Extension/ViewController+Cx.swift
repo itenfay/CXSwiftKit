@@ -71,6 +71,16 @@ extension CXSwiftBase where T : UIViewController {
         self.base.cx_dismiss(overlayView: overlayView, completion: completion)
     }
     
+    /// Add the keyboard observer.
+    public func addKeyboardObserver() {
+        self.base.cx_addKeyboardObserver()
+    }
+    
+    /// Remove the keyboard observer.
+    public func removeKeyboardObserver() {
+        self.base.cx_removeKeyboardObserver()
+    }
+    
 }
 
 //MARK: -  UIViewController
@@ -246,7 +256,51 @@ extension UIViewController: CXViewControllerWrapable {
         } completion: { _ in
             self.view.removeFromSuperview()
             self.removeFromParent()
-                completion?()
+            completion?()
+        }
+    }
+    
+}
+
+//MARK: - Keyboard
+
+extension UIViewController {
+    
+    /// Add the keyboard observer.
+    @objc public func cx_addKeyboardObserver() {
+        cx.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIApplication.keyboardWillShowNotification)
+        cx.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIApplication.keyboardWillHideNotification)
+    }
+    
+    /// Remove the keyboard observer.
+    @objc public func cx_removeKeyboardObserver() {
+        cx.removeObserver(self, name: UIApplication.keyboardWillShowNotification)
+        cx.removeObserver(self, name: UIApplication.keyboardWillHideNotification)
+    }
+    
+    /// The keyboard will be shown.
+    @objc private func keyboardWillShow(_ noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        guard let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval,
+              let keyboardBounds = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect
+        else {
+            return
+        }
+        let transform = CGAffineTransformIdentity
+        UIView.animate(withDuration: animationDuration) {
+            self.view.transform = CGAffineTransformTranslate(transform, 0, keyboardBounds.origin.y - self.view.frame.height)
+        }
+    }
+    
+    /// The keyboard will be hidden.
+    @objc private func keyboardWillHide(_ noti: Notification) {
+        guard let userInfo = noti.userInfo else { return }
+        guard let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval
+        else {
+            return
+        }
+        UIView.animate(withDuration: animationDuration) {
+            self.view.transform = CGAffineTransformIdentity
         }
     }
     
