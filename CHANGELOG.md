@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-### **1.4.2 (06/07/2023)**
+### **1.4.3 (06/08/2023)**
 
 - Supports some haptic feedback that works on iPhone 6 and up.
 - Adds the metal video recorder.
+- Adds keyboard processing for view controller.
 
 ### **1.4.0 (06/06/2023)**
 
