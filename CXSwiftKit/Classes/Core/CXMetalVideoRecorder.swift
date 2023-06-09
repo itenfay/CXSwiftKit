@@ -17,13 +17,16 @@ import Photos
 
 public class CXMetalVideoRecorder: NSObject {
     
-    @objc public let outputURL: URL
-    @objc public var isRecording = false
-    @objc public var recordingStartTime = TimeInterval(0)
-    
     private var assetWriter: AVAssetWriter
     private var assetWriterVideoInput: AVAssetWriterInput
     private var assetWriterPixelBufferInput: AVAssetWriterInputPixelBufferAdaptor
+    
+    @objc public let outputURL: URL
+    @objc public var isRecording = false
+    @objc public var cvPixelBuffer: CVPixelBuffer?
+    
+    @objc public var recordingStartTime = TimeInterval(0)
+    @objc public var recordingElapsedTime = TimeInterval(0)
     
     @available(iOS 11.0, tvOS 11.0, *)
     @objc public init?(outputURL url: URL, size: CGSize) {
@@ -34,9 +37,6 @@ public class CXMetalVideoRecorder: NSObject {
             CXLogger.log(level: .error, message: "\(error.localizedDescription)")
             return nil
         }
-        
-        // TODO: set bitrate sensibly
-        // https://blog.testfairy.com/fine-tuned-video-compression-in-ios-swift-4-no-dependencies/
         
         // AVVideoCodecType.h264 larger file size
         let outputSettings: [String: Any] = [AVVideoCodecKey : AVVideoCodecType.hevc,
@@ -60,12 +60,13 @@ public class CXMetalVideoRecorder: NSObject {
         assetWriterPixelBufferInput = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: assetWriterVideoInput,
                                                                            sourcePixelBufferAttributes: sourcePixelBufferAttributes)
         
-        //CXLogger.log(level: .error, message: "Pixel input: \(assetWriterPixelBufferInput)")
+        //CXLogger.log(level: .info, message: "PixelBuffer input: \(assetWriterPixelBufferInput)")
         
         assetWriter.add(assetWriterVideoInput)
     }
     
-    @objc public func startRecording() {
+    @objc public func start() {
+        CXLogger.log(level: .info, message: "Start recording")
         if FileManager.default.fileExists(atPath: outputURL.cx.path) {
             try? FileManager.default.removeItem(at: outputURL)
         }
@@ -77,21 +78,41 @@ public class CXMetalVideoRecorder: NSObject {
         isRecording = true
     }
     
-    @objc public func endRecording(_ completionHandler: @escaping () -> ()) {
+    @objc public func finish(_ completionHandler: @escaping () -> ()) {
         isRecording = false
         
         assetWriterVideoInput.markAsFinished()
-        assetWriter.finishWriting(completionHandler: completionHandler)
+        assetWriter.finishWriting { [weak self] in
+            guard let `self` = self else {
+                completionHandler()
+                return
+            }
+            self.recordingElapsedTime = CACurrentMediaTime() - self.recordingStartTime
+            CXLogger.log(level: .info, message: "Finish recording: elapsedTime=\(self.recordingElapsedTime)")
+            completionHandler()
+        }
+    }
+    
+    @objc public func cancel() {
+        CXLogger.log(level: .info, message: "Cancel recording")
+        assetWriterVideoInput.markAsFinished()
+        assetWriter.cancelWriting()
     }
     
     #if canImport(Metal)
     @objc public func writeFrame(forTexture texture: MTLTexture) {
+        let frameTime = CACurrentMediaTime() - recordingStartTime
+        let presentationTime = CMTimeMakeWithSeconds(frameTime, preferredTimescale: 240)
+        writeFrame(forTexture: texture, atPresentationTime: presentationTime)
+    }
+    
+    @objc public func writeFrame(forTexture texture: MTLTexture, atPresentationTime presentationTime: CMTime) {
         if !isRecording {
             return
         }
         
         while !assetWriterVideoInput.isReadyForMoreMediaData {
-            CXLogger.log(level: .error, message: "not ready")
+            CXLogger.log(level: .error, message: "Not ready for more media data")
             Thread.sleep(forTimeInterval: 0.0001)
         }
         
@@ -109,8 +130,10 @@ public class CXMetalVideoRecorder: NSObject {
         }
         
         guard let pixelBuffer = maybePixelBuffer else {
+            CXLogger.log(level: .error, message: "NO pixelBuffer")
             return
         }
+        cvPixelBuffer = pixelBuffer
         
         CVPixelBufferLockBaseAddress(pixelBuffer, [])
         let pixelBufferBytes = CVPixelBufferGetBaseAddress(pixelBuffer)!
@@ -121,8 +144,6 @@ public class CXMetalVideoRecorder: NSObject {
         
         texture.getBytes(pixelBufferBytes, bytesPerRow: bytesPerRow, from: region, mipmapLevel: 0)
         
-        let frameTime = CACurrentMediaTime() - recordingStartTime
-        let presentationTime = CMTimeMakeWithSeconds(frameTime, preferredTimescale: 240)
         assetWriterPixelBufferInput.append(pixelBuffer, withPresentationTime: presentationTime)
         
         CVPixelBufferUnlockBaseAddress(pixelBuffer, [])
