@@ -100,9 +100,9 @@ extension CXSwiftBase where T : CXFont {
     }
     
     /// Returns a font that matches the specified font descriptor.
-    public func withTraits(traits: CXFontDescriptor.SymbolicTraits) -> CXFont
+    public func withTraits(_ traits: CXFontDescriptor.SymbolicTraits) -> CXFont
     {
-        return base.cx_withTraits(traits: traits)
+        return base.cx_withTraits(traits)
     }
     
 }
@@ -194,7 +194,7 @@ extension CXFont {
     }
     
     /// Returns a font that matches the specified font descriptor.
-    @objc public func cx_withTraits(traits: CXFontDescriptor.SymbolicTraits) -> CXFont
+    @objc public func cx_withTraits(_ traits: CXFontDescriptor.SymbolicTraits) -> CXFont
     {
         let descriptor = fontDescriptor.withSymbolicTraits(traits)
         #if os(macOS)

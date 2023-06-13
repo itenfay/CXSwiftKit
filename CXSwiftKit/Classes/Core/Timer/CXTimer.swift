@@ -25,7 +25,7 @@ public class CXTimer: NSObject {
     /// The receiver's userInfo object.
     @objc public var userInfo: Any? { return timer?.userInfo }
     
-    public override init() {
+    @objc public override init() {
         super.init()
     }
     

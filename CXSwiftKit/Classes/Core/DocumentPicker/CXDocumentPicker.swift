@@ -28,13 +28,13 @@ open class CXDocumentPicker: NSObject {
     @objc public var actionSheetCancelTitle: String = "Cancel"
     @objc public var fullScreenEnabled: Bool = false
     
-    @objc public convenience init(controller: UIViewController) {
-        self.init(controller: controller, delegate: nil)
-    }
-    
     @objc public init(controller: UIViewController, delegate: CXDocumentDelegate?) {
         self.controller = controller
         self.delegate = delegate
+    }
+    
+    @objc public convenience init(controller: UIViewController) {
+        self.init(controller: controller, delegate: nil)
     }
     
     private func presentDocumentPicker() {
@@ -71,20 +71,19 @@ open class CXDocumentPicker: NSObject {
                 picker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
             }
         }
-        if picker != nil {
-            picker?.delegate = self
-            if #available(iOS 13.0, *) {
-                picker?.shouldShowFileExtensions = true
-            }
-            if #available(iOS 11.0, *) {
-                UIScrollView.appearance().contentInsetAdjustmentBehavior = .automatic
-                picker?.allowsMultipleSelection = true
-            }
-            if fullScreenEnabled {
-                picker?.modalPresentationStyle = .fullScreen
-            }
-            controller.present(picker!, animated: true)
+        if picker == nil { return }
+        picker?.delegate = self
+        if #available(iOS 13.0, *) {
+            picker?.shouldShowFileExtensions = true
         }
+        if #available(iOS 11.0, *) {
+            UIScrollView.appearance().contentInsetAdjustmentBehavior = .automatic
+            picker?.allowsMultipleSelection = true
+        }
+        if fullScreenEnabled {
+            picker?.modalPresentationStyle = .fullScreen
+        }
+        controller.present(picker!, animated: true)
     }
     
     private func folderAction(title: String) -> UIAlertAction {
@@ -105,25 +104,25 @@ open class CXDocumentPicker: NSObject {
         self.documentTypes = documentTypes
         
         // Select
-        let alertController = UIAlertController(title: actionSheetTitle, message: nil, preferredStyle: .actionSheet)
+        let sheetController = UIAlertController(title: actionSheetTitle, message: nil, preferredStyle: .actionSheet)
         
         // Files
         let fileAction = fileAction(title: actionSheetFileTitle)
-        alertController.addAction(fileAction)
+        sheetController.addAction(fileAction)
         // Folder
         let folderAction = folderAction(title: actionSheetFolderTitle)
-        alertController.addAction(folderAction)
+        sheetController.addAction(folderAction)
         // Cancel
         let cancelAction = UIAlertAction(title: actionSheetCancelTitle, style: .cancel, handler: nil)
-        alertController.addAction(cancelAction)
+        sheetController.addAction(cancelAction)
         
         if UIDevice.current.userInterfaceIdiom == .pad {
-            alertController.popoverPresentationController?.sourceView = controller.view
-            alertController.popoverPresentationController?.sourceRect = controller.view.bounds
-            alertController.popoverPresentationController?.permittedArrowDirections = [.down, .up]
+            sheetController.popoverPresentationController?.sourceView = controller.view
+            sheetController.popoverPresentationController?.sourceRect = controller.view.bounds
+            sheetController.popoverPresentationController?.permittedArrowDirections = [.down, .up]
         }
         
-        controller.present(alertController, animated: true)
+        controller.present(sheetController, animated: true)
     }
     
 }

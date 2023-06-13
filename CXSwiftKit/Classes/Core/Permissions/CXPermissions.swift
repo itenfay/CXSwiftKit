@@ -948,7 +948,6 @@ extension CXReminderPermission {
 //MARK: - Calendar
 
 #if canImport(EventKit)
-import EventKit
 
 /// The app's Info.plist must contain a `NSCalendarsUsageDescription` key.
 public class CXCalendarPermission: NSObject, CXPermission {
