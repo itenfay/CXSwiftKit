@@ -11,7 +11,7 @@ import UIKit
 import SVGAPlayer
 
 @objc public protocol CXSvgaPlayPresentable: AnyObject {
-    @objc var svgaPlayer: SVGAPlayer? { get set }
+    var svgaPlayer: SVGAPlayer? { get set }
 }
 
 public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {

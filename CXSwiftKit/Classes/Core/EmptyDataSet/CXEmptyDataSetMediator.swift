@@ -14,7 +14,7 @@ import QuartzCore
 import DZNEmptyDataSet
 
 @objc public protocol CXEmptyDataSetPresentable: AnyObject {
-    @objc var listView: UIScrollView? { get set }
+    var listView: UIScrollView? { get set }
 }
 
 public class CXEmptyDataSetMediator: NSObject, CXEmptyDataSetPresentable {

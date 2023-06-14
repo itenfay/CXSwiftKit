@@ -6,8 +6,8 @@
 //
 
 @objc public protocol CXPermission {
-    @objc var type: CXPermissionType { get }
-    @objc var authorized: Bool { get }
-    @objc var status: CXPermissionStatus { get }
-    @objc func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    var type: CXPermissionType { get }
+    var authorized: Bool { get }
+    var status: CXPermissionStatus { get }
+    func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
 }

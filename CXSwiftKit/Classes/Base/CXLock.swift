@@ -9,8 +9,8 @@ import Foundation
 
 /// Declare a `CXLockable` protocol.
 @objc public protocol CXLockable: AnyObject {
-    @objc func lock()
-    @objc func unlock()
+    func lock()
+    func unlock()
 }
 
 /// The unfair lock for multi-threading

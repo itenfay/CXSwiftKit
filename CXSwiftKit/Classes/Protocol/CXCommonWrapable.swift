@@ -43,19 +43,19 @@ import Toaster
 @objc public protocol CXCommonWrapable {
     // iOS || tvOS
     #if canImport(SVProgressHUD)
-    @objc func cx_showProgressHUD(withStatus status: String?)
-    @objc func cx_showProgressHUD(withStatus status: String?, delay: TimeInterval)
-    @objc func cx_dismissProgressHUD()
-    @objc func cx_dismissProgressHUD(withDelay delay: TimeInterval)
+    func cx_showProgressHUD(withStatus status: String?)
+    func cx_showProgressHUD(withStatus status: String?, delay: TimeInterval)
+    func cx_dismissProgressHUD()
+    func cx_dismissProgressHUD(withDelay delay: TimeInterval)
     #endif
     
     // iOS
     #if canImport(SwiftMessages)
-    @objc func cx_showMessages(withStyle style: CXMessagesBoxStyle, body: String?)
-    @objc func cx_showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?)
-    @objc func cx_showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?, textAlignment: NSTextAlignment)
-    @objc func cx_showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?, textAlignment: NSTextAlignment, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((_ button: UIButton) -> Void)?)
-    @objc func cx_hideMessages()
+    func cx_showMessages(withStyle style: CXMessagesBoxStyle, body: String?)
+    func cx_showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?)
+    func cx_showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?, textAlignment: NSTextAlignment)
+    func cx_showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?, textAlignment: NSTextAlignment, iconImage: UIImage?, iconText: String?, buttonImage: UIImage?, buttonTitle: String?, buttonTapHandler: ((_ button: UIButton) -> Void)?)
+    func cx_hideMessages()
     #endif
     
     // iOS, e.g.:
@@ -67,13 +67,13 @@ import Toaster
     //    ToastView.appearance().font = UIFont.systemFont(ofSize: sizeScale * 16)
     // }
     #if canImport(Toaster)
-    @objc func cx_restoreToasterAppearance()
-    @objc func cx_setupToasterAppearance(withBottomOffsetPortrait bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
-    @objc func cx_toasterDuration(_ type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
-    @objc func cx_makeToast(text: String)
-    @objc func cx_makeToast(text: String, delay: TimeInterval, duration: TimeInterval)
-    @objc func cx_makeToast(attributedString: NSAttributedString)
-    @objc func cx_makeToast(attributedString: NSAttributedString, delay: TimeInterval, duration: TimeInterval)
+    func cx_restoreToasterAppearance()
+    func cx_setupToasterAppearance(withBottomOffsetPortrait bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
+    func cx_toasterDuration(_ type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
+    func cx_makeToast(text: String)
+    func cx_makeToast(text: String, delay: TimeInterval, duration: TimeInterval)
+    func cx_makeToast(attributedString: NSAttributedString)
+    func cx_makeToast(attributedString: NSAttributedString, delay: TimeInterval, duration: TimeInterval)
     #endif
     
 }

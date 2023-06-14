@@ -10,10 +10,10 @@ import Foundation
 import Starscream
 
 @objc public protocol CXWebSocketDelegate: AnyObject {
-    @objc func cxWebSocketDidReceiveMessage(_ message: String)
-    @objc func cxWebSocketDidReceiveData(_ data: Data)
-    @objc func cxWebSocketDidFailWithError(_ error: Error?)
-    @objc func cxWebSocketDidDisconnect(_ code: UInt16, reason: String)
+    func cxWebSocketDidReceiveMessage(_ message: String)
+    func cxWebSocketDidReceiveData(_ data: Data)
+    func cxWebSocketDidFailWithError(_ error: Error?)
+    func cxWebSocketDidDisconnect(_ code: UInt16, reason: String)
 }
 
 public class CXWebSocket: NSObject {

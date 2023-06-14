@@ -25,7 +25,7 @@ public class CXTakeScreenshotDetector: NSObject {
         return photosPermission
     }()
     
-    private lazy var photoLibraryAccessor: CXPhotoLibraryOperator = CXPhotoLibraryOperator()
+    private lazy var photoLibraryOperator: CXPhotoLibraryOperator = CXPhotoLibraryOperator()
     
     private func setup() {
         self.cx.addObserver(self, selector: #selector(userDidTakeScreenshot(_:)), name: UIApplication.userDidTakeScreenshotNotification)
@@ -45,8 +45,8 @@ public class CXTakeScreenshotDetector: NSObject {
     }
     
     private func fetchImage() {
-        let latestAsset = photoLibraryAccessor.fetchLatestAsset()
-        photoLibraryAccessor.fetchImageData(fromAsset: latestAsset) { [weak self] (data, dataUTI, info) in
+        let latestAsset = photoLibraryOperator.fetchLatestAsset()
+        photoLibraryOperator.fetchImageData(fromAsset: latestAsset) { [weak self] (data, dataUTI, info) in
             let image = data != nil ? UIImage(data: data!) : nil
             self?.takeScreenshotHandler?(true, image)
         }

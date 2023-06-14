@@ -12,10 +12,10 @@ import Toast_Swift
 #endif
 
 @objc public protocol CXViewWrapable: AnyObject {
-    @objc func cx_present(_ view: UIView?, completion: (() -> Void)?)
-    @objc func cx_present(_ view: UIView?, overlayView: UIView?, overlayRatio: CGFloat, overlayDirection: CXOverlayDirection, completion: (() -> Void)?)
-    @objc func cx_dismiss(completion: (() -> Void)?)
-    @objc func cx_dismiss(overlayView: UIView?, completion: (() -> Void)?)
+    func cx_present(_ view: UIView?, completion: (() -> Void)?)
+    func cx_present(_ view: UIView?, overlayView: UIView?, overlayRatio: CGFloat, overlayDirection: CXOverlayDirection, completion: (() -> Void)?)
+    func cx_dismiss(completion: (() -> Void)?)
+    func cx_dismiss(overlayView: UIView?, completion: (() -> Void)?)
     
     // iOS, e.g.:
     // func setupToast()
@@ -32,14 +32,14 @@ import Toast_Swift
     //    ToastManager.shared.style = style
     // }
     #if canImport(Toast_Swift)
-    @objc func cx_showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)?)
-    @objc func cx_showToast(_ message: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)?)
-    @objc func cx_showToast(_ message: String?, title: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)?)
-    @objc func cx_showToast(_ message: String?, duration: TimeInterval, position: ToastPosition, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)?)
-    @objc func cx_showToast(_ message: String?, duration: TimeInterval, point: CGPoint, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)?)
-    @objc func cx_hideAllToasts()
-    @objc func cx_showToastActivity(_ position: ToastPosition)
-    @objc func cx_hideToastActivity()
+    func cx_showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)?)
+    func cx_showToast(_ message: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)?)
+    func cx_showToast(_ message: String?, title: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)?)
+    func cx_showToast(_ message: String?, duration: TimeInterval, position: ToastPosition, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)?)
+    func cx_showToast(_ message: String?, duration: TimeInterval, point: CGPoint, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)?)
+    func cx_hideAllToasts()
+    func cx_showToastActivity(_ position: ToastPosition)
+    func cx_hideToastActivity()
     #endif
 }
 

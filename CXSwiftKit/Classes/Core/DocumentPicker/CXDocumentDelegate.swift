@@ -9,7 +9,7 @@
 import UIKit
 
 @objc public protocol CXDocumentDelegate {
-    @objc func cxDidPickDocuments(_ documents: [CXDocument]?)
+    func cxDidPickDocuments(_ documents: [CXDocument]?)
 }
 
 #endif
