@@ -42,7 +42,7 @@ public class SCNTextPainter: NSObject {
         }
     }
     
-    private func createBubbleParentNode(_ text: String) -> SCNNode {
+    private func createBubbleParentNode(_ s: String) -> SCNNode {
         // Warning: Creating 3D Text is susceptible to crashing.
         // To reduce chances of crashing; reduce number of polygons, letters, smoothness, etc.
         
@@ -51,7 +51,7 @@ public class SCNTextPainter: NSObject {
         billboardConstraint.freeAxes = SCNBillboardAxis.Y
         
         // BUBBLE-TEXT
-        let bubble = SCNText(string: text, extrusionDepth: CGFloat(depth))
+        let bubble = SCNText(string: s, extrusionDepth: CGFloat(depth))
         bubble.font = font?.cx.withTraits(.traitBold)
         bubble.alignmentMode = CATextLayerAlignmentMode.center.rawValue
         bubble.firstMaterial?.diffuse.contents = textColor
@@ -66,7 +66,7 @@ public class SCNTextPainter: NSObject {
         // Centre Node - to Centre-Bottom point
         bubbleNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x)/2, minBound.y, depth/2)
         // Reduce default text size
-        bubbleNode.scale = SCNVector3Make(0.2, 0.2, 0.2)
+        bubbleNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
         
         // CENTRE POINT NODE
         let sphere = SCNSphere(radius: 0.005)
@@ -80,6 +80,35 @@ public class SCNTextPainter: NSObject {
         bubbleNodeParent.constraints = [billboardConstraint]
         
         return bubbleNodeParent
+    }
+    
+    @objc public func createTextNode(_ s: String) -> SCNNode {
+        // TEXT
+        let text = SCNText(string: s, extrusionDepth: CGFloat(depth))
+        text.font = font
+        text.firstMaterial?.diffuse.wrapT = .clamp
+        text.firstMaterial?.diffuse.contents = textColor
+        text.chamferRadius = CGFloat(depth)
+        
+        // TEXT NODE
+        let (minBound, maxBound) = text.boundingBox
+        let textNode = SCNNode(geometry: text)
+        // Centre Node - to Centre-Bottom point
+        textNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x)/2, minBound.y, depth/2)
+        // Reduce default text size
+        textNode.scale = SCNVector3Make(0.1, 0.1, 0.1)
+        
+        // CENTRE POINT NODE
+        let sphere = SCNSphere(radius: 0.005)
+        sphere.firstMaterial?.diffuse.contents = materialColor
+        let sphereNode = SCNNode(geometry: sphere)
+        
+        // TEXT PARENT NODE
+        let textParentNode = SCNNode()
+        textParentNode.addChildNode(textNode)
+        textParentNode.addChildNode(sphereNode)
+        
+        return textParentNode
     }
     
 }
