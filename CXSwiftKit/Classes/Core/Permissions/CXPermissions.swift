@@ -316,7 +316,7 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
         if locationManager != nil { return }
         locationManager = CLLocationManager()
         locationManager?.delegate = self
-        locationManager?.distanceFilter = 10
+        locationManager?.distanceFilter = 1 //kCLDistanceFilterNone
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
     }
     
