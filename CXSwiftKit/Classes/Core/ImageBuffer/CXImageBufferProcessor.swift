@@ -82,6 +82,8 @@ public class CXImageBufferProcessor: NSObject {
     
     /// ARKit中提取到的CVPixelBuffer为YUV420格式，很多时候需要把它转换为RGB格式
     @objc public func transformToImage(forPixelBuffer pixelBuffer: CVPixelBuffer) -> UIImage? {
+        // 获取 CVPixelBuffer 类型
+        //let osType = CVPixelBufferGetPixelFormatType(pixelBuffer)
         // 在访问buffer内部裸数据的地址時（读或写都一样），需要先将其锁上，用完了再放开
         CVPixelBufferLockBaseAddress(pixelBuffer, .readOnly)
         // defer block里的代码会在函数 return 之前执行
