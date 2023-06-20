@@ -40,6 +40,16 @@ CXSwiftKit
   ┃   ┗ CXApplePayContext.swift // The implementation for Apple payment.
   ┃
   ┣ Core
+  ┃   ┣ AR
+  ┃   ┃   ┣ ARSCNView+Cx.swift          // Used to supply extensions of ARSCNView.
+  ┃   ┃   ┣ CXMetalVideoRecorder.swift  // Used to handle metal video recording.
+  ┃   ┃   ┣ CXSCNLinePainter.swift      // Draws line in augmented reality scene.
+  ┃   ┃   ┣ CXSCNTextPainter.swift      // Draws text in augmented reality scene.
+  ┃   ┃   ┣ float4x4+Cx.swift           // Used to supply extensions of float4x4.
+  ┃   ┃   ┣ SCNSceneRenderer+Cx.swift   // Used to supply extensions of SCNSceneRenderer.
+  ┃   ┃   ┗ SCNVector3+Cx.swift         // Used to supply extensions of SCNVector3.
+  ┃   ┣ Atomic
+  ┃   ┃   ┗ AtomicWrapper.swift       // Used to wrap atomic property.
   ┃   ┣ AVToolbox
   ┃   ┃   ┣ CXAudioRecorder.swift     // The audio recorder that records audio data to a file.
   ┃   ┃   ┣ CXAudioToolbox.swift      // Used to handle audio format.
@@ -65,6 +75,8 @@ CXSwiftKit
   ┃   ┣ EmptyDataSet // Used to set empty data for list view.
   ┃   ┃   ┣ CXEmptyDataSetMediator.swift 
   ┃   ┃   ┗ CXEmptyDataSetStyle.swift
+  ┃   ┣ ImageBuffer // Used to process image buffer.
+  ┃   ┃   ┗ CXImageBufferProcessor.swift  
   ┃   ┣ Permissions 
   ┃   ┃   ┣ CXPermission.swift
   ┃   ┃   ┣ CXPermissionResult.swift
