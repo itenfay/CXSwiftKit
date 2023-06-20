@@ -6,6 +6,7 @@
 //
 
 import Foundation
+#if os(iOS)
 import UIKit
 
 public class CXScanResult: NSObject {
@@ -25,3 +26,5 @@ public class CXScanResult: NSObject {
         self.codeCorners = codeCorners
     }
 }
+
+#endif
