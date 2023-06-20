@@ -104,7 +104,7 @@ Pod::Spec.new do |s|
     core.subspec "Camera" do |cam|
       cam.source_files = 'CXSwiftKit/Classes/Core/Camera/*.{swift}'
       cam.dependency 'CXSwiftKit/Base'
-      cam.dependency 'CXSwiftKit/Atomic'
+      cam.dependency 'CXSwiftKit/Core/Atomic'
     end
     
     core.subspec "DocumentPicker" do |dp|
