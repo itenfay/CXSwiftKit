@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+### **1.5.2 (06/20/2023)**
+
+- Add the processor for image buffer.
+- Adds the codes of Augmented Reality.
+- Removes keywords(@objc) and updates distance filter.
+- Adds new func to create text node.
+- Adds the atomic property wrapper.
+- Adds live camera and code scan wrapper.
+
 ### **1.4.3 (06/08/2023)**
 
 - Supports some haptic feedback that works on iPhone 6 and up.

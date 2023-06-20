@@ -7,7 +7,7 @@
 [![License](https://img.shields.io/cocoapods/l/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 [![Platform](https://img.shields.io/cocoapods/p/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 
-`CXSwiftKit`提供了swift语言的丰富扩展，也支持Objective-C。
+`CXSwiftKit`提供了Swift语言实用工具和丰富的扩展，并大多数支持了Objective-C。
 
 ## 示例
 

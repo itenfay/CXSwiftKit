@@ -5,8 +5,8 @@
 [![License](https://img.shields.io/cocoapods/l/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 [![Platform](https://img.shields.io/cocoapods/p/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 
-CXSwiftKit provides rich extensions of swift language, also supports Objective-C.
-  
+`CXSwiftKit` provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
