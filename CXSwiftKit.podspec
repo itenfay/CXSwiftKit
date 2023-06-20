@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '1.4.4'
+  s.version          = '1.5.2'
   s.summary          = 'CXSwiftKit provides rich extensions of swift language, also supports Objective-C.'
 
 # This description is used to generate tags and improve search results.
@@ -88,9 +88,23 @@ Pod::Spec.new do |s|
     core.dependency 'CXSwiftKit/Extension'
     core.dependency 'CXSwiftKit/FileOperation'
     
+    core.subspec "AR" do |ar|
+      ar.source_files = 'CXSwiftKit/Classes/Core/AR/*.{swift}'
+    end
+    
+    core.subspec "Atomic" do |atom|
+      atom.source_files = 'CXSwiftKit/Classes/Core/Atomic/*.{swift}'
+    end
+    
     core.subspec "AVToolbox" do |avtb|
       avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
       avtb.dependency 'CXSwiftKit/FileOperation'
+    end
+    
+    core.subspec "Camera" do |cam|
+      cam.source_files = 'CXSwiftKit/Classes/Core/Camera/*.{swift}'
+      cam.dependency 'CXSwiftKit/Base'
+      cam.dependency 'CXSwiftKit/Atomic'
     end
     
     core.subspec "DocumentPicker" do |dp|
@@ -100,6 +114,10 @@ Pod::Spec.new do |s|
     core.subspec "EmptyDataSet" do |eds|
       eds.source_files = 'CXSwiftKit/Classes/Core/EmptyDataSet/*.{swift}'
       eds.dependency 'CXSwiftKit/Extension'
+    end
+    
+    core.subspec "ImageBuffer" do |imgbuffer|
+      imgbuffer.source_files = 'CXSwiftKit/Classes/Core/ImageBuffer/*.{swift}'
     end
     
     core.subspec "Permissions" do |pm|
