@@ -8,7 +8,7 @@
 #if canImport(SceneKit)
 import SceneKit
 
-// macOS uses CGFloats for describing SCNvector3.
+// macOS uses CGFloats for describing SCNVector3.
 // In order to shae the same code, this typealias allows for conversion between Floats and CGFloats when needed
 #if os(macOS)
 public typealias SCNFloat = CGFloat
@@ -44,12 +44,14 @@ public extension SCNVector3 {
      * Returns the length (magnitude) of the vector described by the SCNVector3
      */
     var cx_length: SCNFloat {
-        return sqrtf(self.cx_lenSq)
+        let sqr = sqrtf(Float(self.cx_lenSq))
+        return SCNFloat(sqr)
     }
     
     func cx_angleChange(to: SCNVector3) -> SCNFloat {
         let dot = self.cx_normalized().cx_dot(vector: to.cx_normalized())
-        return acos(dot / sqrt(self.cx_lenSq * to.cx_lenSq))
+        let acos = acos(dot / sqrt(self.cx_lenSq * to.cx_lenSq))
+        return SCNFloat(acos)
     }
     
     /**
