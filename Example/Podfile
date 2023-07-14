@@ -13,7 +13,7 @@ target 'CXSwiftKit_Example' do
   # Kingfisher
   pod 'Kingfisher'
   # SDWebImage
-  pod 'SDWebImage'
+  #pod 'SDWebImage'
   
   # RxSwift
   pod 'RxSwift'
@@ -45,7 +45,7 @@ target 'CXSwiftKit_Example' do
   pod 'DZNEmptyDataSet'
   
   # SVGA
-  #pod 'SVGAPlayer'
+  pod 'SVGAPlayer'
   
   # OverlayController
   pod 'OverlayController'
