@@ -20,7 +20,7 @@ public class CXAVToolbox: NSObject {
             formatter.dateFormat = "yyyyMMddHHmmss"
             prefixName = formatter.string(from: Date())
         }
-        let (success, fileURL) = CXAVExportConfig().exportFileURL(with: "cx.avresource.export", fileName: prefixName + "." + fileType)
+        let (success, fileURL) = cxAVExportedFileURL(with: "cx.avresource.export", fileName: prefixName + "." + fileType)
         return success ? fileURL.cx.path : ""
     }
     

@@ -90,7 +90,7 @@ public class CXVideoToolbox: NSObject {
         let dateString = formatter.string(from: Date())
         let fileName = CXFileToolbox.fileName(withURL: asset.url) + "_\(dateString).mp4"
         CXLogger.log(level: .info, message: "fileName=\(fileName)")
-        let (success, fileURL) = CXAVExportConfig().exportFileURL(with: CXVideoToolbox.exportDirectory, fileName: fileName)
+        let (success, fileURL) = cxAVExportedFileURL(with: CXVideoToolbox.exportDirectory, fileName: fileName)
         guard success else {
             let error = NSError(domain: "cx.exportvideo.domain", code: 10001, userInfo: [NSLocalizedDescriptionKey: "The output directory can't be created... die!"])
             completionHandler(nil, nil, error)

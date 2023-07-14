@@ -55,7 +55,7 @@ public class CXAudioToolbox: NSObject {
     @objc public static func toM4A(_ originalURL: URL, completion: @escaping (_ success: Bool, _ outputURL: URL) -> Void) {
         DispatchQueue.global(qos: .default).async {
             let fileName = CXFileToolbox.fileName(withURL: originalURL) + ".m4a"
-            let (success, outputURL) = CXAVExportConfig().exportFileURL(with: CXAudioToolbox.exportDirectory, fileName: fileName)
+            let (success, outputURL) = cxAVExportedFileURL(with: CXAudioToolbox.exportDirectory, fileName: fileName)
             guard success else {
                 completion(false, outputURL)
                 return
@@ -115,7 +115,7 @@ public class CXAudioToolbox: NSObject {
         assetReader.add(assetReaderOutput)
         
         let fileName = CXFileToolbox.fileName(withURL: originalURL) + ".wav"
-        let (success, outputURL) = CXAVExportConfig().exportFileURL(with: CXAudioToolbox.exportDirectory, fileName: fileName)
+        let (success, outputURL) = cxAVExportedFileURL(with: CXAudioToolbox.exportDirectory, fileName: fileName)
         guard success else {
             completion(nil)
             return
