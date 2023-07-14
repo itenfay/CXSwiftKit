@@ -11,15 +11,47 @@ target 'CXSwiftKit_Example' do
   
   # -- TEST --
   # Kingfisher
-  #pod 'Kingfisher'
+  pod 'Kingfisher'
   # SDWebImage
-  #pod 'SDWebImage'
+  pod 'SDWebImage'
+  
+  # RxSwift
+  pod 'RxSwift'
+  # RxCocoa
+  pod 'RxCocoa'
+  # Moya
+  pod 'Moya'
+  # HandyJSON
+  pod 'HandyJSON'
+  
+  # KafkaRefresh
+  pod 'KafkaRefresh'
+  # MJRefresh
+  pod 'MJRefresh'
+  
+  # SVProgressHUD
+  pod 'SVProgressHUD'
+  # SwiftMessages
+  pod 'SwiftMessages'
+  # Toaster
+  pod 'Toaster'
+  # Toast_Swift
+  pod 'Toast-Swift', '~> 5.0.1'
+  
+  # Starscream
+  pod 'Starscream'
+  
+  # DZNEmptyDataSet
+  pod 'DZNEmptyDataSet'
+  
   # SVGA
   #pod 'SVGAPlayer'
+  
   # OverlayController
-  #pod 'OverlayController'
+  pod 'OverlayController'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths
   end
+  
 end

@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressButton: CXCircleProgressButton!
     
     lazy var photoLibHandle = CXPhotoLibraryOperator()
+    var imageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +48,21 @@ class ViewController: UIViewController {
         //saveToAssetCollection()
         
         CXLogger.log(level: .info, message: "The args is %i, %0.2f, %@".cx.format(1, 1.928, "hello!"))
+        addSubviews()
+    }
+    
+    func addSubviews() {
+        imageView = UIImageView(image: CXImage(named: "panorama_10"))
+        imageView.clipsToBounds = true
+        imageView.contentMode = .scaleAspectFill
+        view.addSubview(imageView)
+        imageView.cx.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalTo(150)
+            maker.width.equalTo(300)
+            maker.height.equalTo(300)
+            //maker.bottom.lessThanOrEqualTo(0)
+        }
     }
     
     func saveToAssetCollection() {
@@ -67,7 +83,7 @@ class ViewController: UIViewController {
             CXLogger.log(level: .info, message:"\(error.localizedDescription)")
         }
         
-        if let path = Bundle.main.path(forResource: "panorama_0", ofType: "jpg") {
+        if let path = Bundle.main.path(forResource: "panorama_10", ofType: "jpg") {
             photoLibHandle.addPhoto(URL(localFilePath: path), completionHandler: { success, error in
                 if success {
                     CXLogger.log(level: .info, message: "panorama_0.jpg 保存成功!")
