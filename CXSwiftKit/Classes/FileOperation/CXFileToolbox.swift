@@ -44,6 +44,11 @@ public class CXFileToolbox: NSObject {
         return NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     }
     
+    /// Returns the path of the caches directory for the current user.
+    @objc public class var cachesDirectory: String {
+        return NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+    }
+    
     /// Creates a directory at the specified path.
     @objc public class func createDirectory(atPath path: String) -> Bool {
         do {
