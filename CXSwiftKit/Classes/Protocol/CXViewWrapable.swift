@@ -12,12 +12,14 @@ import Toast_Swift
 #endif
 
 @objc public protocol CXViewWrapable: AnyObject {
-    func cx_present(_ view: UIView?, completion: (() -> Void)?)
-    func cx_present(_ view: UIView?, overlayView: UIView?, overlayRatio: CGFloat, overlayDirection: CXOverlayDirection, completion: (() -> Void)?)
-    func cx_dismiss(completion: (() -> Void)?)
-    func cx_dismiss(overlayView: UIView?, completion: (() -> Void)?)
-    
-    // iOS, e.g.:
+    @objc func cx_present(_ view: UIView?, completion: (() -> Void)?)
+    @objc func cx_present(_ view: UIView?, overlayView: UIView?, overlayRatio: CGFloat, overlayDirection: CXOverlayDirection, completion: (() -> Void)?)
+    @objc func cx_dismiss(completion: (() -> Void)?)
+    @objc func cx_dismiss(overlayView: UIView?, completion: (() -> Void)?)
+}
+
+public protocol CXToastViewWrapable: AnyObject {
+    // For iOS, e.g.:
     // func setupToast()
     // {
     //    // toggle "tap to dismiss" functionality
@@ -49,8 +51,8 @@ import OverlayController
 
 public protocol CXSwiftViewWrapable: AnyObject {
     #if os(iOS) && canImport(OverlayController)
-    func cx_present(_ view: UIView?, maskStyle: OverlayMaskStyle, position: OverlayLayoutPosition, positionOffset: CGFloat, style: OverlaySlideStyle, windowLevel: OverlayWindowLevel, isDismissOnMaskTouched: Bool, isPanGestureEnabled: Bool, panDismissPercent: CGFloat, duration: TimeInterval, completion: (() -> Void)?)
-    func cx_dismiss(duration: TimeInterval, completion: (() -> Void)?)
+    func cx_ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle, position: OverlayLayoutPosition, positionOffset: CGFloat, style: OverlaySlideStyle, windowLevel: OverlayWindowLevel, isDismissOnMaskTouched: Bool, isPanGestureEnabled: Bool, panDismissPercent: CGFloat, duration: TimeInterval, completion: (() -> Void)?)
+    func cx_ovcDismiss(duration: TimeInterval, completion: (() -> Void)?)
     #endif
 }
 
