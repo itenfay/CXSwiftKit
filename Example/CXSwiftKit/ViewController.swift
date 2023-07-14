@@ -19,11 +19,11 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .brown
+        view.backgroundColor = .white
         vSlider.cx.cornerRadius = vSlider.cx.width/2
         vSlider.maximumValue = 100
         vSlider.minimumValue = 0
-        vSlider.maximumImage = UIColor.white.cx_drawImage()
+        vSlider.maximumImage = UIColor.green.cx_drawImage()
         vSlider.minimumImage = UIColor.lightGray.cx.drawImage()
         vSlider.thumbImage = UIColor.black.cx.makeImageWithSize(CGSize(width: vSlider.cx.width, height: 20), cornerRadius: 10)
         vSlider.onValueChanged = { (value, ended) in
@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         }
         vSlider.setValue(50, animated: true)
         
-        progressButton.backgroundColor = .white
+        progressButton.backgroundColor = .blue
         progressButton.cx.cornerRadius = progressButton.cx.width/2
         progressButton.trackColor = UIColor.gray
         progressButton.progressColor = UIColor.orange
