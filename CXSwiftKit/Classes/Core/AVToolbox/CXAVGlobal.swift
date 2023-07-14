@@ -27,37 +27,31 @@ public func cxAVGetFileName(withURL url: URL) -> String {
 }
 
 /// Export the file url with the directory and file name.
-public func cxAVExportFileURL(withDirName dirName: String, fileName: String) -> URL? {
-    let t = exportFileURL(with: dirName, fileName: fileName)
-    return t.0 ? t.1 : nil
-}
-
-/// Export the file url with the directory and file name.
-public func cxAVExportFileURL(with dirName: String, fileName: String) -> (Bool, URL) {
-    let (success, directory) = makeDirectory(with: dirName)
+public func cxAVExportedFileURL(with dirName: String, fileName: String) -> (Bool, URL) {
+    let (success, directory) = cxAVMakeDirectory(with: dirName)
     let fileURL = URL(localFilePath: directory).cx.appendingPathComponent(fileName)
     CXLogger.log(level: .info, message: "fileURL=\(fileURL)")
     if success {
-        removeItem(atPath: fileURL.cx_path)
+        cxAVRemoveItem(atPath: fileURL.cx_path)
         return (true, fileURL)
     }
     return (false, fileURL)
 }
 
 /// The caches directory(Library/Caches).
-public func cxAvGetcachesDirectory() -> String {
+public func cxAVGetCachesDirectory() -> String {
     return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).map(\.path)[0]
 }
 
-/// Make a directory with the specified name in caches directory.
-public func cxAvMakeDirectory(withName name: String) -> String? {
-    let t = makeDirectory(with: name)
+/// Make the path of a directory with the specified name in caches directory.
+public func cxAVMakeDirectoryPath(with name: String) -> String? {
+    let t = cxAVMakeDirectory(with: name)
     return t.0 ? t.1 : nil
 }
 
 /// Make a directory with the specified name in caches directory.
-public func cxAvMakeDirectory(with name: String) -> (Bool, String) {
-    let dirPath = URL(localFilePath: cachesDirectory()).cx_appendingPathComponent(name).cx.path
+public func cxAVMakeDirectory(with name: String) -> (Bool, String) {
+    let dirPath = URL(localFilePath: cxAVGetCachesDirectory()).cx_appendingPathComponent(name).cx.path
     CXLogger.log(level: .info, message: "dirPath=\(dirPath)")
     do {
         try FileManager.default.createDirectory(atPath: dirPath, withIntermediateDirectories: true, attributes: nil)
