@@ -9,12 +9,11 @@ import Foundation
 
 /// The level of the log.
 @objc public enum CXLogLevel: UInt8, CustomStringConvertible {
-    case debug, verbose, info, warning, error
+    case debug, info, warning, error
     
     public var description: String {
         switch self {
         case .debug: return "Debug"
-        case .verbose: return "Verbose"
         case .info: return "Info"
         case .warning: return "Warning"
         case .error: return "Error"
@@ -42,7 +41,7 @@ import Foundation
         if CXConfig.enableLog {
             print("\(currentZDateString)\(_prefix)[CX] [\(level.description)] \(message)")
         } else {
-            if level == .debug || level == .verbose {
+            if level == .error {
                 print("\(currentZDateString)\(_prefix)[CX] [\(level.description)] \(message)")
             }
         }
@@ -65,6 +64,7 @@ import Foundation
     }
     
     /// Outputs logs to the console (Objective-C).
+    ///
     /// e.g.:
     ///   [CXLogger outputLogWithLevel:CXLogLevelError message:CXLogMessage(@"123")];
     public static func outputLog(level: CXLogLevel, message: String) {
@@ -72,11 +72,36 @@ import Foundation
     }
     
     /// Outputs logs to the console (Objective-C).
+    ///
     /// e.g.:
     ///   #define CXLogMessage(m) ([NSString stringWithFormat:@"[F: %s, M: %s, L: %d] %@",  __FILE__, __PRETTY_FUNCTION__, __LINE__, (m)])
     ///   [CXLogger outputLog:self level:CXLogLevelError message:CXLogMessageFormat(@"===")];
     public static func outputLog(_ obj: Any, level: CXLogLevel, message: String) {
         log(level, prefix: "[\(type(of: obj))]", message: message)
+    }
+    
+}
+
+public struct CXLog {
+    
+    /// Outputs the logs of `Debug` level to the console.
+    public static func debug(_ message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
+        CXLogger.log(level: .debug, message: message, file: file, function: function, lineNumber: lineNumber)
+    }
+    
+    /// Outputs the logs of `Info` level to the console.
+    public static func info(_ message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
+        CXLogger.log(level: .info, message: message, file: file, function: function, lineNumber: lineNumber)
+    }
+    
+    /// Outputs the logs of `Warning` level to the console.
+    public static func warn(_ message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
+        CXLogger.log(level: .warning, message: message, file: file, function: function, lineNumber: lineNumber)
+    }
+    
+    /// Outputs the logs of `Error` level to the console.
+    public static func error(_ message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
+        CXLogger.log(level: .error, message: message, file: file, function: function, lineNumber: lineNumber)
     }
     
 }
