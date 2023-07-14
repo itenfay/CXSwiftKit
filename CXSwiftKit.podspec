@@ -49,6 +49,7 @@ Pod::Spec.new do |s|
   
   s.subspec "Base" do |base|
     base.source_files = 'CXSwiftKit/Classes/Base/*.{swift}'
+    base.dependency 'HandyJSON'
   end
   
   s.subspec "ApplePay" do |applepay|
@@ -59,12 +60,18 @@ Pod::Spec.new do |s|
   
   s.subspec "Protocol" do |pt|
     pt.source_files = 'CXSwiftKit/Classes/Protocol/*.{swift}'
+    pt.dependency 'Toaster'
+    pt.dependency 'Toast_Swift'
+    pt.dependency 'SwiftMessages'
+    pt.dependency 'SVProgressHUD'
+    pt.dependency 'OverlayController'
   end
   
   s.subspec "Extension" do |ext|
     ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
     ext.dependency 'CXSwiftKit/Base'
     ext.dependency 'CXSwiftKit/Protocol'
+    ext.dependency 'Kingfisher'
   end
   
   s.subspec "FileOperation" do |fo|
@@ -80,13 +87,19 @@ Pod::Spec.new do |s|
   s.subspec "NetWork" do |network|
     network.source_files = 'CXSwiftKit/Classes/NetWork/*.{swift}'
     network.dependency 'CXSwiftKit/Base'
+    network.dependency 'Moya'
+    network.dependency 'HandyJSON'
+    # Ignored
+    #network.vendored_frameworks = 'Framwork1.xcframwork', 'Framwork2.xcframwork'
   end
   
   s.subspec "Core" do |core|
     core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
-    #core.dependency 'DYFSwiftKeychain'
     core.dependency 'CXSwiftKit/Extension'
     core.dependency 'CXSwiftKit/FileOperation'
+    core.dependency 'DYFSwiftKeychain'
+    core.dependency 'HandyJSON'
+    core.dependency 'Kingfisher'
     
     core.subspec "AR" do |ar|
       ar.source_files = 'CXSwiftKit/Classes/Core/AR/*.{swift}'
@@ -114,6 +127,7 @@ Pod::Spec.new do |s|
     core.subspec "EmptyDataSet" do |eds|
       eds.source_files = 'CXSwiftKit/Classes/Core/EmptyDataSet/*.{swift}'
       eds.dependency 'CXSwiftKit/Extension'
+      eds.dependency 'DZNEmptyDataSet'
     end
     
     core.subspec "ImageBuffer" do |imgbuffer|
@@ -128,6 +142,7 @@ Pod::Spec.new do |s|
     core.subspec "svga" do |svga|
       svga.source_files = 'CXSwiftKit/Classes/Core/svga/*.{swift}'
       svga.dependency 'CXSwiftKit/Base'
+      svga.dependency 'SVGAPlayer'
     end
     
     core.subspec "Timer" do |timer|
@@ -142,6 +157,7 @@ Pod::Spec.new do |s|
     core.subspec "WebSocket" do |ws|
       ws.source_files = 'CXSwiftKit/Classes/Core/WebSocket/*.{swift}'
       ws.dependency 'CXSwiftKit/Base'
+      ws.dependency 'Starscream'
     end
     
     core.subspec "Widget" do |wd|
@@ -154,6 +170,11 @@ Pod::Spec.new do |s|
   s.subspec "Rx" do |rx|
     rx.source_files = 'CXSwiftKit/Classes/Rx/*.{swift}'
     rx.dependency 'CXSwiftKit/Core/EmptyDataSet'
+    rx.dependency 'RxCocoa'
+    rx.dependency 'RxSwift'
+    rx.dependency 'Kingfisher'
+    rx.dependency 'MJRefresh'
+    rx.dependency 'KafkaRefresh'
   end
   
 end
