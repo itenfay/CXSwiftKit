@@ -52,7 +52,7 @@ CXSwiftKit
   ┃   ┣ AVToolbox
   ┃   ┃   ┣ CXAudioRecorder.swift     // The audio recorder that records audio data to a file.
   ┃   ┃   ┣ CXAudioToolbox.swift      // Used to handle audio format.
-  ┃   ┃   ┣ CXAVExportConfig.swift    // The configuration for exporting avasset.
+  ┃   ┃   ┣ CXAVGlobal.swift          // The global methods for the exported position.
   ┃   ┃   ┣ CXAVToolbox.swift         // Used to handle audio and video mix.
   ┃   ┃   ┗ CXVideoToolbox.swift      // Used to convert mp4 video format.
   ┃   ┣ CXAppContext.swift
