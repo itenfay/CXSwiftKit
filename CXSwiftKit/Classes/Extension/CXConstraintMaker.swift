@@ -15,6 +15,15 @@ public class CXConstraintItem: NSObject {
     @objc public private(set) var value: CGFloat = 0
     
     @discardableResult
+    @objc public func equalToSuperview() -> CXConstraintItem {
+        value = 0
+        isEqual = true
+        isGreaterThanOrEqual = false
+        isLessThanOrEqual = false
+        return self
+    }
+    
+    @discardableResult
     @objc public func equalTo(_ constant: CGFloat) -> CXConstraintItem {
         value = constant
         isEqual = true
@@ -48,19 +57,38 @@ public class CXConstraintItem: NSObject {
 
 public class CXConstraintMaker: NSObject {
     /// The top item of the constraint maker.
-    @objc public var top: CXConstraintItem { CXConstraintItem() }
+    @objc public var top: CXConstraintItem!
     /// The leading item of the constraint maker.
-    @objc public var leading: CXConstraintItem { CXConstraintItem() }
+    @objc public var leading: CXConstraintItem!
     /// The bottom item of the constraint maker.
-    @objc public var bottom: CXConstraintItem { CXConstraintItem() }
+    @objc public var bottom: CXConstraintItem!
     /// The trailing item of the constraint maker.
-    @objc public var trailing: CXConstraintItem { CXConstraintItem() }
+    @objc public var trailing: CXConstraintItem!
     /// The width item of the constraint maker.
-    @objc public var width: CXConstraintItem { CXConstraintItem() }
+    @objc public var width: CXConstraintItem!
     /// The height item of the constraint maker.
-    @objc public var height: CXConstraintItem { CXConstraintItem() }
+    @objc public var height: CXConstraintItem!
     /// The center x item of the constraint maker.
-    @objc public var centerX: CXConstraintItem { CXConstraintItem() }
+    @objc public var centerX: CXConstraintItem!
     /// The center y item of the constraint maker.
-    @objc public var centerY: CXConstraintItem { CXConstraintItem() }
+    @objc public var centerY: CXConstraintItem!
+    
+    init(top: CXConstraintItem,
+         leading: CXConstraintItem,
+         bottom: CXConstraintItem,
+         trailing: CXConstraintItem,
+         width: CXConstraintItem,
+         height: CXConstraintItem,
+         centerX: CXConstraintItem,
+         centerY: CXConstraintItem)
+    {
+        self.top = top
+        self.leading = leading
+        self.bottom = bottom
+        self.trailing = trailing
+        self.width = width
+        self.height = height
+        self.centerX = centerX
+        self.centerY = centerY
+    }
 }
