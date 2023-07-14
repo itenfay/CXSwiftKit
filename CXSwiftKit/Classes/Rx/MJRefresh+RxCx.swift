@@ -19,9 +19,9 @@ extension Reactive where Base: MJRefreshComponent {
             if let control = control {
                 control.refreshingBlock = {
                     // Delay to execute the refresh animation.
-                    DispatchQueue.main.asyncAfter(delay: .now() + 0.5, block: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                         observer.on(.next(()))
-                    })
+                    }
                 }
             }
             return Disposables.create()
