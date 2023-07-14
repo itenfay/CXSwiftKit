@@ -1524,7 +1524,7 @@ extension UIView: CXSwiftViewWrapable {
         aView.cx_overlayController?.maskStyle = maskStyle
         aView.cx_overlayController?.layoutPosition = position
         aView.cx_overlayController?.offsetSpacing = positionOffset
-        aView.cx_overlayController?.presentationStyle = presentationStyle
+        aView.cx_overlayController?.presentationStyle = style
         aView.cx_overlayController?.windowLevel = windowLevel
         aView.cx_overlayController?.isDismissOnMaskTouched = isDismissOnMaskTouched
         aView.cx_overlayController?.isPanGestureEnabled = isPanGestureEnabled
@@ -1552,7 +1552,14 @@ extension CXView {
         guard let spView = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         
-        let cMaker = CXConstraintMaker()
+        let cMaker = CXConstraintMaker(top: CXConstraintItem(),
+                                       leading: CXConstraintItem(),
+                                       bottom: CXConstraintItem(),
+                                       trailing: CXConstraintItem(),
+                                       width: CXConstraintItem(),
+                                       height: CXConstraintItem(),
+                                       centerX: CXConstraintItem(),
+                                       centerY: CXConstraintItem())
         maker(cMaker)
         
         if cMaker.top.isEqual {
@@ -1599,22 +1606,22 @@ extension CXView {
             centerYAnchor.constraint(lessThanOrEqualTo: spView.centerYAnchor, constant: cMaker.centerY.value).isActive = true
         }
         
-        if cMaker.width.value != 0 {
+        if cMaker.width.value > 0 {
             if cMaker.width.isEqual {
-                widthAnchor.constraint(equalTo: spView.widthAnchor, constant: cMaker.width.value).isActive = true
+                widthAnchor.constraint(equalToConstant: cMaker.width.value).isActive = true
             } else if cMaker.width.isGreaterThanOrEqual {
-                widthAnchor.constraint(greaterThanOrEqualTo: spView.widthAnchor, constant: cMaker.width.value).isActive = true
+                widthAnchor.constraint(greaterThanOrEqualToConstant: cMaker.width.value).isActive = true
             } else if cMaker.width.isLessThanOrEqual {
-                widthAnchor.constraint(lessThanOrEqualTo: spView.widthAnchor, constant: cMaker.width.value).isActive = true
+                widthAnchor.constraint(lessThanOrEqualToConstant: cMaker.width.value).isActive = true
             }
         }
-        if cMaker.height.value != 0 {
+        if cMaker.height.value > 0 {
             if cMaker.height.isEqual {
-                heightAnchor.constraint(equalTo: spView.heightAnchor, constant: cMaker.height.value).isActive = true
+                heightAnchor.constraint(equalToConstant: cMaker.height.value).isActive = true
             } else if cMaker.height.isGreaterThanOrEqual {
-                heightAnchor.constraint(greaterThanOrEqualTo: spView.heightAnchor, constant: cMaker.height.value).isActive = true
+                heightAnchor.constraint(greaterThanOrEqualToConstant: cMaker.height.value).isActive = true
             } else if cMaker.height.isLessThanOrEqual {
-                heightAnchor.constraint(lessThanOrEqualTo: spView.heightAnchor, constant: cMaker.height.value).isActive = true
+                heightAnchor.constraint(lessThanOrEqualToConstant: cMaker.height.value).isActive = true
             }
         }
     }
@@ -1624,7 +1631,14 @@ extension CXView {
         guard let spView = superview else { return }
         translatesAutoresizingMaskIntoConstraints = false
         
-        let cMaker = CXConstraintMaker()
+        let cMaker = CXConstraintMaker(top: CXConstraintItem(),
+                                       leading: CXConstraintItem(),
+                                       bottom: CXConstraintItem(),
+                                       trailing: CXConstraintItem(),
+                                       width: CXConstraintItem(),
+                                       height: CXConstraintItem(),
+                                       centerX: CXConstraintItem(),
+                                       centerY: CXConstraintItem())
         maker(cMaker)
         
         if cMaker.top.isEqual {
@@ -1671,22 +1685,22 @@ extension CXView {
             centerYAnchor.constraint(lessThanOrEqualTo: spView.cx_safeCenterYAnchor, constant: cMaker.centerY.value).isActive = true
         }
         
-        if cMaker.width.value != 0 {
+        if cMaker.width.value > 0 {
             if cMaker.width.isEqual {
-                widthAnchor.constraint(equalTo: spView.cx_safeWidthAnchor, constant: cMaker.width.value).isActive = true
+                widthAnchor.constraint(equalToConstant: cMaker.width.value).isActive = true
             } else if cMaker.width.isGreaterThanOrEqual {
-                widthAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeWidthAnchor, constant: cMaker.width.value).isActive = true
+                widthAnchor.constraint(greaterThanOrEqualToConstant: cMaker.width.value).isActive = true
             } else if cMaker.width.isLessThanOrEqual {
-                widthAnchor.constraint(lessThanOrEqualTo: spView.cx_safeWidthAnchor, constant: cMaker.width.value).isActive = true
+                widthAnchor.constraint(lessThanOrEqualToConstant: cMaker.width.value).isActive = true
             }
         }
-        if cMaker.height.value != 0 {
+        if cMaker.height.value > 0 {
             if cMaker.height.isEqual {
-                heightAnchor.constraint(equalTo: spView.cx_safeHeightAnchor, constant: cMaker.height.value).isActive = true
+                heightAnchor.constraint(equalToConstant: cMaker.height.value).isActive = true
             } else if cMaker.height.isGreaterThanOrEqual {
-                heightAnchor.constraint(greaterThanOrEqualTo: spView.cx_safeHeightAnchor, constant: cMaker.height.value).isActive = true
+                heightAnchor.constraint(greaterThanOrEqualToConstant: cMaker.height.value).isActive = true
             } else if cMaker.height.isLessThanOrEqual {
-                heightAnchor.constraint(lessThanOrEqualTo: spView.cx_safeHeightAnchor, constant: cMaker.height.value).isActive = true
+                heightAnchor.constraint(lessThanOrEqualToConstant: cMaker.height.value).isActive = true
             }
         }
     }
@@ -1766,7 +1780,7 @@ extension CXView {
 #if os(iOS) && canImport(Toast_Swift)
 import Toast_Swift
 
-extension UIView {
+extension UIView: CXToastViewWrapable {
     
     public func cx_showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)? = nil)
     {
@@ -1790,7 +1804,7 @@ extension UIView {
     
     public func cx_showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, point: CGPoint, title: String? = nil, image: UIImage? = nil, style: ToastStyle = ToastManager.shared.style, completion: ((_ didTap: Bool) -> Void)? = nil)
     {
-        self.makeToast(message, duration: durationl, point: point, title: title, image: image, style: style, completion: completion)
+        self.makeToast(message, duration: duration, point: point, title: title, image: image, style: style, completion: completion)
     }
     
     public func cx_hideAllToasts()
