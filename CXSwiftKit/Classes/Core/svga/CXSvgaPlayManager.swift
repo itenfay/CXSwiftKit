@@ -39,7 +39,7 @@ public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {
     
     private lazy var queue: OperationQueue = {
         let queue = OperationQueue.init()
-        queue.maxConcurrentOpCount = 1
+        queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
@@ -77,17 +77,11 @@ public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {
             }
         } else if let name = op.svgaName, !name.isEmpty {
             svgaParser.parse(withNamed: name, in: op.inBundle) { [unowned self] videoItem in
-                if videoItem != nil {
-                    self.displaySvga(withHidden: false)
-                    self.svgaPlayer?.videoItem = videoItem
-                    self.svgaPlayer?.startAnimation()
-                } else {
-                    self.finishAnimating()
-                }
+                self.displaySvga(withHidden: false)
+                self.svgaPlayer?.videoItem = videoItem
+                self.svgaPlayer?.startAnimation()
             } failureBlock: { [unowned self] error in
-                if error != nil {
-                    CXLogger.log(level: .error, message: "error=\(error!)")
-                }
+                CXLogger.log(level: .error, message: "error=\(error)")
                 self.retryToplay(with: op)
             }
         } else {
@@ -137,12 +131,12 @@ public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {
 
 extension CXSvgaPlayManager: SVGAPlayerDelegate {
     
-    func svgaPlayerDidFinishedAnimation(_ player: SVGAPlayer!) {
+    public func svgaPlayerDidFinishedAnimation(_ player: SVGAPlayer!) {
         animationFinished = true
-        finish()
+        finishAnimating()
     }
     
-    func svgaPlayer(_ player: SVGAPlayer!, didAnimatedToPercentage percentage: CGFloat) {
+    public func svgaPlayer(_ player: SVGAPlayer!, didAnimatedToPercentage percentage: CGFloat) {
         svgaAnimatedToPercentageHandler?(percentage)
     }
     
