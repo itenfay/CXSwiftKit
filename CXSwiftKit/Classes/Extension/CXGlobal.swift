@@ -116,15 +116,15 @@ import AudioToolbox
 
 /// Makes the vibrate system sound.
 public func cxMakeVibrate(completion: (() -> Void)? = nil) {
-    #if os(macOS)
+#if os(macOS)
     if #available(macOS 10.11, *) {
         AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, completion)
     } else {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
-    #else
+#else
     AudioServicesPlaySystemSoundWithCompletion(kSystemSoundID_Vibrate, completion)
-    #endif
+#endif
 }
 
 #endif
@@ -244,25 +244,21 @@ import Kingfisher
 public func cxDownloadImage(withUrl url: String,
                             options: KingfisherOptionsInfo? = nil,
                             progressBlock: DownloadProgressBlock? = nil,
-                            completionHandler: (UIImage?) -> Void)
+                            completionHandler: @escaping (UIImage?, Error?) -> Void)
 {
     guard let aURL = URL.init(string: url) else {
-        DispatchQueue.cx.mainAsync {
-            completionHandler?(nil)
-        }
+        DispatchQueue.cx.mainAsync { completionHandler(nil, nil) }
         return
     }
     KingfisherManager.shared.retrieveImage(with: aURL, options: options, progressBlock: progressBlock) { (result) in
         switch result {
         case .success(let imageResult):
             DispatchQueue.cx.mainAsync {
-                completionHandler?(imageResult.image)
+                completionHandler(imageResult.image, nil)
             }
         case .failure(let error):
             CXLogger.log(level: .error, message: "error: \(error)")
-            DispatchQueue.cx.mainAsync {
-                completionHandler?(nil)
-            }
+            DispatchQueue.cx.mainAsync { completionHandler(nil, error) }
         }
     }
 }

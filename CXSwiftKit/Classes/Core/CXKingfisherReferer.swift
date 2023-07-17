@@ -17,7 +17,7 @@ public class CXKingfisherReferer: ImageDownloadRequestModifier {
         self.headers = headers
     }
     
-    func modified(for request: URLRequest) -> URLRequest? {
+    public func modified(for request: URLRequest) -> URLRequest? {
         var request = request
         for key in headers.keys {
             if let value = headers[key], !value.isEmpty {

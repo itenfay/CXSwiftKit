@@ -222,7 +222,7 @@ extension UIButton {
         progressBlock: ((_ receivedSize: Int64, _ totalSize: Int64) -> Void)? = nil)
     {
         guard let _url = url, !_url.isEmpty else {
-            CXLogger.log(level: .info, message: "Invalid url string.")
+            CXLogger.log(level: .info, message: "The url is invalid.")
             return
         }
         #if canImport(Kingfisher)
@@ -242,7 +242,7 @@ extension UIButton {
         
         if let _modifier = modifier {
             self.kf.setImage(
-                with: URL.init(string: imageUrl),
+                with: URL.init(string: _url),
                 for: state,
                 placeholder: placeholder,
                 options: [.requestModifier(_modifier)],
@@ -250,7 +250,7 @@ extension UIButton {
             )
         } else {
             self.kf.setImage(
-                with: URL.init(string: imageUrl),
+                with: URL.init(string: _url),
                 for: state,
                 placeholder: placeholder,
                 progressBlock: progressBlock
