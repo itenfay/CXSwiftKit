@@ -175,8 +175,8 @@ public class CXNetWorkManager {
             case .success(let response):
                 self.onRequestCompletion?(response)
                 completion(.success(response.data))
-            case .failure:
-                completion(.failure(result.error!))
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
     }
