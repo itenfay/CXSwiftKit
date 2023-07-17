@@ -162,6 +162,25 @@ CXSwiftKit
       ┗ MJRefresh+RxCx.swift     // Used to set refresh control for list view.
 ```
 
+## Handling Error
+
+if `SVGAPlayer` library occurs this error：
+
+```
+Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
+Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid in C99
+```
+
+> if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
+>    [worker release];
+> }
+
+Add the header in `Svga.pbobjc.m` or `Svga.pbobjc.h`.
+
+```
+#import <libkern/OSAtomic.h>
+```
+
 ## Author
 
 chenxing, chenxing640@foxmail.com
