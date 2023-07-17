@@ -1517,7 +1517,18 @@ extension UIView: CXSwiftViewWrapable {
         }
     }
     
-    public func cx_ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle = .black(opacity: 0.7), position: OverlayLayoutPosition = .bottom, positionOffset: CGFloat = 0, style: OverlaySlideStyle = .fromToBottom, windowLevel: OverlayWindowLevel = .low, isDismissOnMaskTouched: Bool = true, isPanGestureEnabled: Bool = true, panDismissPercent: CGFloat = 0.5, duration: TimeInterval = 0.3, completion: (() -> Void)? = nil)
+    public func cx_ovcPresent(
+        _ view: UIView?,
+        maskStyle: OverlayMaskStyle = .black(opacity: 0.7),
+        position: OverlayLayoutPosition = .bottom,
+        positionOffset: CGFloat = 0,
+        style: OverlaySlideStyle = .fromToBottom,
+        windowLevel: OverlayWindowLevel = .low,
+        isDismissOnMaskTouched: Bool = true,
+        isPanGestureEnabled: Bool = true,
+        panDismissPercent: CGFloat = 0.5,
+        duration: TimeInterval = 0.3,
+        completion: (() -> Void)? = nil)
     {
         guard let aView = view else { return }
         aView.cx_overlayController = OverlayController(view: aView)
@@ -1719,56 +1730,64 @@ extension CXView {
         }
     }
     
-    @objc public var cx_safeTopAnchor: NSLayoutYAxisAnchor {
+    @objc public var cx_safeTopAnchor: NSLayoutYAxisAnchor
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.topAnchor
         }
         return topAnchor
     }
     
-    @objc public var cx_safeLeadingAnchor: NSLayoutXAxisAnchor {
+    @objc public var cx_safeLeadingAnchor: NSLayoutXAxisAnchor
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.leftAnchor
         }
         return leftAnchor
     }
     
-    @objc public var cx_safeBottomAnchor: NSLayoutYAxisAnchor {
+    @objc public var cx_safeBottomAnchor: NSLayoutYAxisAnchor
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.bottomAnchor
         }
         return bottomAnchor
     }
     
-    @objc public var cx_safeTrailingAnchor: NSLayoutXAxisAnchor {
+    @objc public var cx_safeTrailingAnchor: NSLayoutXAxisAnchor
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.rightAnchor
         }
         return rightAnchor
     }
     
-    @objc public var cx_safeCenterXAnchor: NSLayoutXAxisAnchor {
+    @objc public var cx_safeCenterXAnchor: NSLayoutXAxisAnchor
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.centerXAnchor
         }
         return centerXAnchor
     }
     
-    @objc public var cx_safeCenterYAnchor: NSLayoutYAxisAnchor {
+    @objc public var cx_safeCenterYAnchor: NSLayoutYAxisAnchor
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.centerYAnchor
         }
         return centerYAnchor
     }
     
-    @objc public var cx_safeWidthAnchor: NSLayoutDimension {
+    @objc public var cx_safeWidthAnchor: NSLayoutDimension
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.widthAnchor
         }
         return widthAnchor
     }
     
-    @objc public var cx_safeHeightAnchor: NSLayoutDimension {
+    @objc public var cx_safeHeightAnchor: NSLayoutDimension
+    {
         if #available(iOS 11.0, tvOS 11.0, macOS 11.0, *) {
             return safeAreaLayoutGuide.heightAnchor
         }
