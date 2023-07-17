@@ -100,6 +100,7 @@ Pod::Spec.new do |s|
     core.dependency 'DYFSwiftKeychain'
     core.dependency 'HandyJSON'
     core.dependency 'Kingfisher'
+    #core.dependency 'SDWebImage'
     
     core.subspec "AR" do |ar|
       ar.source_files = 'CXSwiftKit/Classes/Core/AR/*.{swift}'
@@ -174,7 +175,7 @@ Pod::Spec.new do |s|
     rx.dependency 'RxSwift'
     rx.dependency 'Kingfisher'
     rx.dependency 'MJRefresh'
-    rx.dependency 'KafkaRefresh'
+    #rx.dependency 'KafkaRefresh'
   end
   
 end
