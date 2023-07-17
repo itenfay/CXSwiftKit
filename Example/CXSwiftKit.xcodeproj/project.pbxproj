@@ -55,6 +55,7 @@
 		795D68552A285F580052B7C4 /* panorama_3.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panorama_3.jpg; sourceTree = "<group>"; };
 		795D68562A285F580052B7C4 /* panorama_0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panorama_0.jpg; sourceTree = "<group>"; };
 		795D68572A285F580052B7C4 /* panorama_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = panorama_1.jpg; sourceTree = "<group>"; };
+		79B0314A2A64E56200FC85C8 /* CXSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CXSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		A5B7B73DF2AABE01658810DF /* Pods-CXSwiftKit_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CXSwiftKit_Tests.release.xcconfig"; path = "Target Support Files/Pods-CXSwiftKit_Tests/Pods-CXSwiftKit_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		ADAA609F59616F7C42E66DEC /* Pods_CXSwiftKit_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CXSwiftKit_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8197D471E76EAF5A5BA8FB1 /* CXSwiftKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = CXSwiftKit.podspec; path = ../CXSwiftKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -121,6 +122,7 @@
 				795D684E2A284E840052B7C4 /* Resources */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
+				79B0314A2A64E56200FC85C8 /* CXSwiftKit_Example-Bridging-Header.h */,
 			);
 			name = "Example for CXSwiftKit";
 			path = CXSwiftKit;
@@ -238,7 +240,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = "";
+						LastSwiftMigration = 1420;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -551,6 +553,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 0713;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
@@ -560,6 +563,8 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CXSwiftKit/CXSwiftKit_Example-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 			};
@@ -571,6 +576,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 0713;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
@@ -580,6 +586,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "CXSwiftKit/CXSwiftKit_Example-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 			};
