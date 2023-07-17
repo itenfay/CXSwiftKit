@@ -2,9 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+### **2.0.0 (07/17/2023)**
+
+- fixes some erros.
+- Adds the dependencies for the submodules.
+- Updates some contents.
+
 ### **1.5.2 (06/20/2023)**
 
-- Add the processor for image buffer.
+- Adds the processor for image buffer.
 - Adds the codes of Augmented Reality.
 - Removes keywords(@objc) and updates distance filter.
 - Adds new func to create text node.
