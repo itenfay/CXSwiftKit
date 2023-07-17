@@ -61,7 +61,7 @@ Pod::Spec.new do |s|
   s.subspec "Protocol" do |pt|
     pt.source_files = 'CXSwiftKit/Classes/Protocol/*.{swift}'
     pt.dependency 'Toaster'
-    pt.dependency 'Toast_Swift'
+    pt.dependency 'Toast-Swift', '~> 5.0.1'
     pt.dependency 'SwiftMessages'
     pt.dependency 'SVProgressHUD'
     pt.dependency 'OverlayController'
