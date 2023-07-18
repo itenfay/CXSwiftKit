@@ -13,15 +13,15 @@ import Photos
 #endif
 
 /// Describes the export preset quality.
-@objc public enum CXExportPreset: UInt8 {
+@objc public enum CXExportPresetQuality: UInt8 {
     case low
     case medium
     case highest
-    case EP640x480
-    case EP960x540
-    case EP1280x720  // 720pHD
-    case EP1920x1080 // 1080pHD
-    case EP3840x2160
+    case _640x480
+    case _960x540
+    case _1280x720  // 720p HD
+    case _1920x1080 // 1080p HD
+    case _3840x2160
 }
 
 public class CXVideoToolbox: NSObject {
@@ -43,7 +43,7 @@ public class CXVideoToolbox: NSObject {
     /// Convert the original video to `mp4` format video.
     @objc public static func toMP4(
         withAsset resourceAsset: PHAsset,
-        quality: CXExportPreset,
+        quality: CXExportPresetQuality,
         completionHandler: @escaping (_ fileURL: URL?, _ data: Data?, _ error: NSError?) -> Void)
     {
         let toolbox = CXVideoToolbox()
@@ -72,7 +72,7 @@ public class CXVideoToolbox: NSObject {
     /// Convert the original video to `mp4` format video.
     @objc public static func toMP4(
         withURLAsset asset: AVURLAsset,
-        quality: CXExportPreset,
+        quality: CXExportPresetQuality,
         completionHandler: @escaping (_ fileURL: URL?, _ data: Data?, _ error: NSError?) -> Void)
     {
         let toolbox = CXVideoToolbox()
@@ -99,7 +99,7 @@ public class CXVideoToolbox: NSObject {
         
         DispatchQueue.global(qos: .default).async {
             let compatiblePresets = AVAssetExportSession.exportPresets(compatibleWith: asset)
-            let exportPreset = toolbox.getAVAssetCXExportPreset(quality)
+            let exportPreset = toolbox.getAVAssetCXExportPresetQuality(quality)
             if compatiblePresets.contains(exportPreset) {
                 guard let exportSession = toolbox.makeAssetExportSession(asset, presetName: exportPreset) else {
                     let error = NSError(domain: "cx.exportvideo.domain", code: 10002, userInfo: [NSLocalizedDescriptionKey: "AVAsset export session is null!"])
@@ -153,7 +153,7 @@ public class CXVideoToolbox: NSObject {
     /// Convert the original video to `mp4` format video.
     @objc public static func toMP4(
         withAssetURL assetURL: URL,
-        quality: CXExportPreset,
+        quality: CXExportPresetQuality,
         completionHandler: @escaping (_ fileURL: URL?, _ data: Data?, _ error: NSError?) -> Void)
     {
         let avAsset = AVURLAsset(url: assetURL, options: nil)
@@ -169,7 +169,7 @@ public class CXVideoToolbox: NSObject {
         return false
     }
     
-    @objc public func getAVAssetCXExportPreset(_ exportPreset: CXExportPreset) -> String {
+    @objc public func getAVAssetCXExportPresetQuality(_ exportPreset: CXExportPresetQuality) -> String {
         switch exportPreset {
         case .low:
             return AVAssetExportPresetLowQuality // A preset to export a low-quality movie file.
@@ -177,15 +177,15 @@ public class CXVideoToolbox: NSObject {
             return AVAssetExportPresetMediumQuality // A preset to export a medium-quality movie file.
         case .highest:
             return AVAssetExportPresetHighestQuality // A preset to export a high-quality movie file.
-        case .EP640x480:
+        case ._640x480:
             return AVAssetExportPreset640x480
-        case .EP960x540:
+        case ._960x540:
             return AVAssetExportPreset960x540
-        case .EP1280x720:
+        case ._1280x720:
             return AVAssetExportPreset1280x720
-        case .EP1920x1080:
+        case ._1920x1080:
             return AVAssetExportPreset1920x1080
-        case .EP3840x2160:
+        case ._3840x2160:
             return AVAssetExportPreset3840x2160
         }
     }
