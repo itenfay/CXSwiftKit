@@ -31,13 +31,13 @@ public func cxAdapt(_ value: CGFloat) -> CGFloat
 /// Adapt dimension to width.
 public func cxAdaptW(_ value: CGFloat) -> CGFloat
 {
-    return ceil(value) * cxWidthRatio
+    return value * cxWidthRatio
 }
 
 /// Adapt dimension to height.
 public func cxAdaptH(_ value: CGFloat) -> CGFloat
 {
-    return value * cxHeightRatio
+    return value * cxHeightRatio // ceil(value) * cxHeightRatio
 }
 
 /// Fit scale by the specified demension.
