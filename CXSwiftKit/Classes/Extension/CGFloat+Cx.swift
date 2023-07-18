@@ -69,11 +69,11 @@ extension CGFloat {
     public static var cx_safeAreaTop: CGFloat { cxSafeAreaTop }
     public static var cx_safeAreaBottom: CGFloat { cxSafeAreaBottom }
     /// The height of the status bar.
-    public static var cx_statusBarHeight: CGFloat { cxStatusBarHeight }
+    public static var cx_statusBarHeight: CGFloat { cxStatusBarH }
     /// The height of the navigation bar.
-    public static var cx_navigationBarHeight: CGFloat { cxNavigationBarHeight }
+    public static var cx_navigationBarHeight: CGFloat { cxNavBarH }
     /// The height of the tab bar.
-    public static var cx_tabBarHeight: CGFloat { cxTabBarHeight }
+    public static var cx_tabBarHeight: CGFloat { cxTabBarH }
     #endif
     
     public var cx_degreesToRadians: Self {
