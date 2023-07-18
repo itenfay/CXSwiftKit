@@ -47,8 +47,14 @@ class ViewController: UIViewController {
         //saveImageToPhotosAlbum()
         //saveToAssetCollection()
         
-        CXLogger.log(level: .info, message: "The args is %i, %0.2f, %@".cx.format(1, 1.928, "hello!"))
         addSubviews()
+        
+        CXLogger.log(level: .info, message: "The args is %i, %0.2f, %@".cx.format(1, 1.928, "hello!"))
+        CXLogger.log(level: .info, message: "WidthRatio=\(cxWidthRatio), HeightRatio=\(cxHeightRatio), width=\(cxAdapt(300)), SafeAreaInsets=\(cxSafeAreaInsets()), navBarH=\(cxNavBarH), statusBarH=\(CGFloat.cx.statusBarHeight), tabBarH=\(cxTabBarH)")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     func addSubviews() {
