@@ -15,16 +15,39 @@ public let cxScreenWidth: CGFloat = CGFloat.cx.screenWidth
 /// The height of a rectangle of the screen.
 public let cxScreenHeight: CGFloat = CGFloat.cx.screenHeight
 
+#if os(iOS)
+
+/// The width ratio.
+public let cxWidthRatio: CGFloat = cxScreenWidth / 375.0
+/// The height ratio.
+public let cxHeightRatio: CGFloat = cxScreenHeight / 667.0
+
+/// Adapt dimension to scale.
+public func cxAdapt(_ value: CGFloat) -> CGFloat
+{
+    return cxAdaptW(value)
+}
+
+/// Adapt dimension to width.
+public func cxAdaptW(_ value: CGFloat) -> CGFloat
+{
+    return ceil(value) * cxWidthRatio
+}
+
+/// Adapt dimension to height.
+public func cxAdaptH(_ value: CGFloat) -> CGFloat
+{
+    return value * cxHeightRatio
+}
+
 /// Fit scale by the specified demension.
 ///
 /// - Parameter dimension: The dimension to scale.
 /// - Returns: A new fit dimension.
-public func cxFitScale(by dimension: CGFloat) -> CGFloat
+public func cxFitScaleBy(dimension: CGFloat) -> CGFloat
 {
     return (cxScreenWidth / 375) * dimension
 }
-
-#if os(iOS)
 
 /// Represents the device whether is x series of iPhone.
 ///
@@ -33,28 +56,42 @@ public func cxIsIphoneXSeries() -> Bool
 {
     var isX = false
     if #available(iOS 11.0, *) {
-        isX = (UIApplication.shared.cx.keyWindow?.safeAreaInsets.bottom ?? 0) > 0
+        let app = UIApplication.shared
+        let window = app.delegate?.window ?? app.cx.keyWindow
+        isX = (window?.safeAreaInsets.bottom ?? 0) > 0
     }
     return isX
 }
 
-public func cxWindowSafeAreaInset() -> UIEdgeInsets
+public func cxSafeAreaInsets() -> UIEdgeInsets
 {
     var insets = UIEdgeInsets(top: 20, left: 0, bottom: 0, right: 0)
     if #available(iOS 11.0, *) {
-        insets = UIApplication.shared.cx.keyWindow?.safeAreaInsets ?? insets
+        let app = UIApplication.shared
+        let window = app.delegate?.window ?? app.cx.keyWindow
+        insets = window?.safeAreaInsets ?? insets
     }
     return insets
 }
 
-public let cxSafeAreaTop: CGFloat = cxWindowSafeAreaInset().top == 0 ? 20 : cxWindowSafeAreaInset().top
-public let cxSafeAreaBottom: CGFloat = cxWindowSafeAreaInset().bottom
+public let cxSafeAreaTop: CGFloat = cxSafeAreaInsets().top == 0 ? 20 : cxSafeAreaInsets().top
+public let cxSafeAreaBottom: CGFloat = cxSafeAreaInsets().bottom
 /// The height of the status bar.
-public let cxStatusBarHeight: CGFloat = cxSafeAreaTop
+public let cxStatusBarH: CGFloat = cxSafeAreaTop
 /// The height of the navigation bar.
-public let cxNavigationBarHeight: CGFloat = 44 + cxStatusBarHeight
+public let cxNavBarH: CGFloat = 44 + cxStatusBarH
 /// The height of the tab bar.
-public let cxTabBarHeight: CGFloat = 49 + cxSafeAreaBottom
+public let cxTabBarH: CGFloat = 49 + cxSafeAreaBottom
+
+#endif
+
+#if os(iOS) || os(tvOS)
+
+/// Load image named xxx.
+public func cxLoadImage(named: String) -> UIImage
+{
+    return UIImage(named: named) ?? UIImage()
+}
 
 #endif
 
@@ -129,7 +166,7 @@ public func cxMakeVibrate(completion: (() -> Void)? = nil) {
 
 #endif
 
-// MARK: - OSS Image Handle
+// MARK: - OSS Image Handling
 
 /// Resize image by the height. e.g.: height=100, px：resize,h_100, scale mode(lfit): m_lfit.
 ///
