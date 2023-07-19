@@ -590,7 +590,7 @@ public class CXPhotoLibraryOperator: NSObject {
         }
         #else
         CXLogger.log(level: .error, message: "Can't import photos library... stop importing!")
-        exportVideoHandler?("", "Can't import photos library... stop importing!")
+        completionHandler?("", "Can't import photos library... stop importing!")
         #endif
     }
     
