@@ -8,7 +8,7 @@
 #if os(iOS) || os(tvOS)
 import UIKit
 
-public class CXDeviceScreenContext: NSObject {
+public class CXDeviceScreenMonitor: NSObject {
     
     private var onObserveScreenBrightness: ((CGFloat) -> Void)?
     private var onObserveProtectedDataDidBecomeAvailable: ((Notification) -> Void)?

@@ -86,9 +86,9 @@ import AdSupport
         return deviceId
         #else
         #if os(iOS) || os(tvOS)
-        return idfv
+            return idfv
         #else
-        return uuid()
+            return uuid()
         #endif
         #endif
     }
@@ -203,7 +203,7 @@ import AdSupport
     }
     #endif
     
-    /// Return an ip address.
+    /// Returns an ip address.
     public func ipAddress() -> String? {
         var addresses = [String]()
         
