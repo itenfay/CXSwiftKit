@@ -39,7 +39,11 @@ public class CXApplePayContext: NSObject {
         return makeOSPaymentButton(frame: frame, type: .buy, style: .black)
     }
     
-    @objc public func makeOSPaymentButton(frame: CXRect, type: PKPaymentButtonType, style: PKPaymentButtonStyle) -> PKPaymentButton {
+    @objc public func makeOSPaymentButton(
+        frame: CXRect,
+        type: PKPaymentButtonType,
+        style: PKPaymentButtonStyle) -> PKPaymentButton
+    {
         let paymentButton = PKPaymentButton(paymentButtonType: type, paymentButtonStyle: style)
         paymentButton.frame = frame
         paymentButton.addTarget(self, action: #selector(paymentAction(_:)), for: .touchUpInside)
@@ -143,6 +147,10 @@ public class CXApplePayContext: NSObject {
         #endif
     }
     
+    @objc public func resetCurrentPaymentRequest() {
+        currentPaymentRequest = nil
+    }
+    
 }
 
 //MARK: - PKPaymentAuthorizationViewControllerDelegate
@@ -206,7 +214,6 @@ extension CXApplePayContext: PKPaymentAuthorizationViewControllerDelegate {
     /// The payment authorization is finished.
     public func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
         didFinishPayment?()
-        currentPaymentRequest = nil
         #if os(macOS)
         self.controller.dismiss(controller)
         #else

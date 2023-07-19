@@ -8,7 +8,7 @@
 import Foundation
 
 @propertyWrapper
-public struct atomic<Value> {
+public struct Atomic<Value> {
     
     private var value: Value
     private var lock: NSLock = NSLock()
