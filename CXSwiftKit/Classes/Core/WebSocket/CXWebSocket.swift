@@ -5,8 +5,8 @@
 //  Created by chenxing on 2022/11/18.
 //
 
-#if canImport(Starscream)
 import Foundation
+#if canImport(Starscream)
 import Starscream
 
 @objc public protocol CXWebSocketDelegate: AnyObject {
@@ -19,6 +19,8 @@ import Starscream
 public class CXWebSocket: NSObject {
     
     private var socket: WebSocket?
+    private var customRequest: URLRequest?
+    
     private var autoReconnect: Bool = false
     private var reconnectTime: TimeInterval = 0
     private var heartbeatTimer: Timer?
@@ -59,9 +61,10 @@ public class CXWebSocket: NSObject {
         }
     }
     
+    /// Connect the web socket.
     private func connect() {
         if isConnected { return }
-        if let request = customURLRequest() {
+        if let request = customRequest {
             socket = WebSocket(request: request)
         } else {
             guard let url = URL(string: urlString) else {
@@ -77,11 +80,12 @@ public class CXWebSocket: NSObject {
         socket?.connect()
     }
     
-    /// Override
-    @objc public func customURLRequest() -> URLRequest? {
-        return nil
+    /// Configure the custom request.
+    @objc public func configureRequest(_ handler: (() -> URLRequest)?) {
+        customRequest = handler?()
     }
     
+    /// Disconnect the web socket.
     private func disconnect() {
         destroyHeartbeat()
         socket?.disconnect()
@@ -172,25 +176,21 @@ extension CXWebSocket: WebSocketDelegate {
         case .disconnected(let reason, let code):
             CXLogger.log(level: .info, message: "[WS] Websocket is disconnected: \(reason) with code: \(code)")
             isConnected = false
-            self.delegate?.cxWebSocketDidDisconnect(code, reason: reason)
+            delegate?.cxWebSocketDidDisconnect(code, reason: reason)
         case .text(let text):
             CXLogger.log(level: .info, message: "[WS] Received text: \(text)")
-            self.delegate?.cxWebSocketDidReceiveMessage(text)
+            delegate?.cxWebSocketDidReceiveMessage(text)
         case .binary(let data):
             CXLogger.log(level: .info, message: "[WS] Received data: \(data.count)")
-            self.delegate?.cxWebSocketDidReceiveData(data)
+            delegate?.cxWebSocketDidReceiveData(data)
         case .ping(_):
             CXLogger.log(level: .info, message: "[WS] Ping")
-            break
         case .pong(_):
             CXLogger.log(level: .info, message: "[WS] Pong")
-            break
         case .viabilityChanged(_):
             CXLogger.log(level: .info, message: "[WS] ViabilityChanged")
-            break
         case .reconnectSuggested(_):
             CXLogger.log(level: .info, message: "[WS] ReconnectSuggested")
-            break
         case .cancelled:
             isConnected = false
             CXLogger.log(level: .info, message: "[WS] ReconnectSuggested")
@@ -208,7 +208,7 @@ extension CXWebSocket: WebSocketDelegate {
         } else {
             CXLogger.log(level: .error, message: "[WS] websocket encountered an error")
         }
-        self.delegate?.cxWebSocketDidFailWithError(error)
+        delegate?.cxWebSocketDidFailWithError(error)
     }
     
 }
