@@ -11,8 +11,8 @@ import UIKit
 extension CXSwiftBase where T : UITableView {
     
     /// Finds the table view cell by touched point.
-    public func queryCell(withPoint point: CGPoint) -> UITableViewCell? {
-        return base.cx_queryCell(withPoint: point)
+    public func findCell(with point: CGPoint) -> UITableViewCell? {
+        return base.cx_findCell(with: point)
     }
     
 }
@@ -20,7 +20,7 @@ extension CXSwiftBase where T : UITableView {
 extension UITableView {
     
     /// Finds the table view cell by touched point.
-    @objc public func cx_queryCell(withPoint point: CGPoint) -> UITableViewCell? {
+    @objc public func cx_findCell(with point: CGPoint) -> UITableViewCell? {
         var cell: UITableViewCell?
         for view in subviews {
             let classPtr = object_getClassName(view)
