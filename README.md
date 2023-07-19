@@ -58,14 +58,14 @@ CXSwiftKit
   ┃   ┃   ┗ CXVideoToolbox.swift      // Used to convert mp4 video format.
   ┃   ┣ CXAppContext.swift
   ┃   ┣ CXDevice.swift                 // Used to provide some device informations.
-  ┃   ┣ CXDeviceScreenContext.swift    // Used to observe some changes of device screen.
+  ┃   ┣ CXDeviceScreenMonitor.swift    // Used to observe some changes of device screen.
   ┃   ┣ CXHaptics.swift                // Some haptic feedback that works on iPhone 6 and up.
   ┃   ┣ CXKingfisherReferer.swift      // Used to set the referer of image.
   ┃   ┣ CXMetalVideoRecorder.swift     
   ┃   ┣ CXPhotoLibraryOperator.swift   // Used to operate the photo library.
   ┃   ┣ CXScreenRecorder.swift         // The recorder that provides the ability to record audio and video of your app.
   ┃   ┣ CXSwiftUtils.swift
-  ┃   ┣ CXSwipeContext.swift           // Add swipe gesture for the view, and observe its action.
+  ┃   ┣ CXSwipeInteractor.swift        // Add swipe gesture for the view, and observe its action.
   ┃   ┣ CXTakeScreenshotDetector.swift // The detector for taking screenshot.
   ┃   ┣ DocumentPicker // The document picker for iOS.
   ┃   ┃   ┣ CXDocument.swift
