@@ -1,5 +1,5 @@
 //
-//  CXSwipeContext.swift
+//  CXSwipeInteractor.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/8/12.
@@ -8,7 +8,7 @@
 #if os(iOS) || os(tvOS)
 import UIKit
 
-public class CXSwipeContext: NSObject {
+public class CXSwipeInteractor: NSObject {
     
     private var beginPoint: CGPoint = .zero
     private var onCompletionHandler: ((UISwipeGestureRecognizer.Direction, Bool) -> Void)?
