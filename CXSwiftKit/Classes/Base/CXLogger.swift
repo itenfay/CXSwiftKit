@@ -47,7 +47,7 @@ import Foundation
         }
     }
     
-    /// Outputs logs to the console (Swift).
+    /// Outputs the logs to the console(Swift).
     @nonobjc
     public static func log(level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
         let fileName = (file as NSString).lastPathComponent
@@ -55,7 +55,7 @@ import Foundation
         log(level, prefix: prefix, message: message)
     }
     
-    /// Outputs logs to the console (Swift).
+    /// Outputs the logs to the console(Swift).
     @nonobjc
     public static func log(_ obj: Any, level: CXLogLevel, message: String, file: String = #file, function: String = #function, lineNumber: Int = #line) {
         let fileName = (file as NSString).lastPathComponent
@@ -63,7 +63,7 @@ import Foundation
         log(level, prefix: "\(prefix) [\(type(of: obj))]", message: message)
     }
     
-    /// Outputs logs to the console (Objective-C).
+    /// Outputs the logs to the console(Objective-C).
     ///
     /// e.g.:
     ///   [CXLogger outputLogWithLevel:CXLogLevelError message:CXLogMessage(@"123")];
@@ -71,7 +71,7 @@ import Foundation
         log(level, prefix: "", message: message)
     }
     
-    /// Outputs logs to the console (Objective-C).
+    /// Outputs the logs to the console(Objective-C).
     ///
     /// e.g.:
     ///   #define CXLogMessage(m) ([NSString stringWithFormat:@"[F: %s, M: %s, L: %d] %@",  __FILE__, __PRETTY_FUNCTION__, __LINE__, (m)])
