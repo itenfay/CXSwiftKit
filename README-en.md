@@ -1,6 +1,7 @@
+[中文版](README.md) | **English Version**
+
 # CXSwiftKit
 
-[![CI Status](https://img.shields.io/travis/chenxing640/CXSwiftKit.svg?style=flat)](https://travis-ci.org/chenxing640/CXSwiftKit)
 [![Version](https://img.shields.io/cocoapods/v/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 [![License](https://img.shields.io/cocoapods/l/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 [![Platform](https://img.shields.io/cocoapods/p/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
