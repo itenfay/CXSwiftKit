@@ -8,19 +8,42 @@
 
 import UIKit
 import CXSwiftKit
+import SVProgressHUD
+import Toaster
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        presentInWindow(window!)
+        
+        setupLibs()
         CXConfig.enableLog = CXAppContext().isDebug
+        
         return true
     }
-
+    
+    func presentInWindow(_ window: UIWindow) {
+        let tabBarController = TabBarController()
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
+    }
+    
+    private func setupLibs() {
+        SVProgressHUD.setDefaultStyle(.dark)
+        SVProgressHUD.setDefaultMaskType(.custom)
+        SVProgressHUD.setDefaultAnimationType(.flat)
+        
+        ToastCenter.default.isQueueEnabled = false
+        ToastView.appearance().bottomOffsetPortrait = cxScreenHeight/2 - 10
+        let sizeScale: CGFloat = (CGFloat.cx.screenWidth < 375) ? 0.9 : 1.0
+        ToastView.appearance().font = UIFont.systemFont(ofSize: sizeScale * 16)
+    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
