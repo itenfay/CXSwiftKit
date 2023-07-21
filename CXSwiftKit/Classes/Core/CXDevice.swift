@@ -285,7 +285,7 @@ import AdSupport
     #if os(iOS)
     /// Returns the ssid for the current network.
     public func ssid() -> String? {
-        let interfaces: NSArray = CNCopySupportedInterfaces()!
+        let interfaces: NSArray = CNCopySupportedInterfaces() ?? []
         var ssid: String? = nil
         for sub in interfaces {
             if let dict = CFBridgingRetain(CNCopyCurrentNetworkInfo(sub as! CFString)) {
@@ -297,7 +297,7 @@ import AdSupport
     
     /// Returns the WiFi mac for the current network.
     public func wifiMac() -> String? {
-        let interfaces: NSArray = CNCopySupportedInterfaces()!
+        let interfaces: NSArray = CNCopySupportedInterfaces() ?? []
         var mac: String? = nil
         for sub in interfaces {
             if let dict = CFBridgingRetain(CNCopyCurrentNetworkInfo(sub as! CFString)) {
