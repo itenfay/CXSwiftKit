@@ -116,7 +116,7 @@ extension NSObject: CXCommonWrapable {
                                            ? UIColor.cx.color(withHexString: "#FFFFFF", alpha: 0.9)
                                            : UIColor.cx.color(withHexString: "0x333333"), for: .normal)
         } else {
-            infoView.button?.isHidden = true
+            infoView.button?.isHidden = buttonImage != nil ? false : true
         }
         var infoConfig = SwiftMessages.defaultConfig
         infoConfig.presentationContext = .window(windowLevel: UIWindow.Level.statusBar)
@@ -130,12 +130,12 @@ extension NSObject: CXCommonWrapable {
     #endif
     
     #if canImport(Toaster)
-    public func cx_restoreToasterAppearance()
+    public func cx_restoreToastAppearance()
     {
-        cx_setupToasterAppearance(withBottomOffsetPortrait: 0, maxWidthRatio: 0)
+        cx_updateToastAppearance(with: 0, maxWidthRatio: 0)
     }
     
-    public func cx_setupToasterAppearance(withBottomOffsetPortrait bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
+    public func cx_updateToastAppearance(with bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
     {
         let appearance = ToastView.appearance()
         appearance.backgroundColor = UIColor.init(white: 0, alpha: 0.7)
@@ -148,13 +148,14 @@ extension NSObject: CXCommonWrapable {
         } else {
             appearance.bottomOffsetPortrait = CGFloat.cx.screenHeight/2 - 10
         }
-        //appearance.cornerRadius = 10 // TODU: Ambiguous use of 'cornerRadius'
+        // TODU: Ambiguous use of 'cornerRadius'
+        //appearance.cornerRadius = 10
         if maxWidthRatio > 0 {
             appearance.maxWidthRatio = maxWidthRatio
         }
     }
     
-    public func cx_toasterDuration(_ type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
+    public func cx_getToastDuration(type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
     {
         switch type {
         case .short: return Delay.short
@@ -261,19 +262,19 @@ extension CXSwiftBase where T : NSObject {
     #endif
 
     #if canImport(Toaster)
-    public func resetToasterAppearance()
+    public func restoreToastAppearance()
     {
-        setupToasterAppearance()
+        self.base.cx_restoreToastAppearance()
     }
     
-    public func setupToasterAppearance(withBottomOffsetPortrait bottomOffsetPortrait: CGFloat = 0, maxWidthRatio: CGFloat = 0)
+    public func updateToastAppearance(with bottomOffsetPortrait: CGFloat = 0, maxWidthRatio: CGFloat = 0)
     {
-        self.base.cx_setupToasterAppearance(withBottomOffsetPortrait: bottomOffsetPortrait, maxWidthRatio: maxWidthRatio)
+        self.base.cx_updateToastAppearance(with: bottomOffsetPortrait, maxWidthRatio: maxWidthRatio)
     }
     
-    public func toasterDuration(_ type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
+    public func getToastDuration(type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
     {
-        return self.base.cx_toasterDuration(type, block: block)
+        return self.base.cx_getToastDuration(type: type, block: block)
     }
     
     public func makeToast(text: String, delay: TimeInterval = 0, duration: TimeInterval = Delay.short)

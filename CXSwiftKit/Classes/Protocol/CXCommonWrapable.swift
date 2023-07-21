@@ -67,9 +67,9 @@ import Toaster
     //    ToastView.appearance().font = UIFont.systemFont(ofSize: sizeScale * 16)
     // }
     #if canImport(Toaster)
-    func cx_restoreToasterAppearance()
-    func cx_setupToasterAppearance(withBottomOffsetPortrait bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
-    func cx_toasterDuration(_ type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
+    func cx_restoreToastAppearance()
+    func cx_updateToastAppearance(with bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
+    func cx_getToastDuration(type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
     func cx_makeToast(text: String)
     func cx_makeToast(text: String, delay: TimeInterval, duration: TimeInterval)
     func cx_makeToast(attributedString: NSAttributedString)
