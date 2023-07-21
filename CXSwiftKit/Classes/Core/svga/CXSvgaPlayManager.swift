@@ -43,7 +43,7 @@ public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {
         return queue
     }()
     
-    @objc public func playWithUrl(_ url: String?, loops: Int = 1, clearsAfterStop: Bool = true) {
+    @objc public func play(url: String?, loops: Int = 1, clearsAfterStop: Bool = true) {
         svgaPlayer?.loops = Int32(loops)
         svgaPlayer?.clearsAfterStop = clearsAfterStop
         let operation = CXSvgaPlayOperation.create(withUrl: url) { [unowned self] op in
@@ -53,10 +53,10 @@ public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {
         queue.addOperation(operation)
     }
     
-    @objc public func playWithName(_ name: String?, inBundle bundle: Bundle? = nil, loops: Int = 1, clearsAfterStop: Bool = true) {
+    @objc public func play(named: String?, inBundle bundle: Bundle? = nil, loops: Int = 1, clearsAfterStop: Bool = true) {
         svgaPlayer?.loops = Int32(loops)
         svgaPlayer?.clearsAfterStop = clearsAfterStop
-        let operation = CXSvgaPlayOperation.create(withName: name, inBundle: bundle) { [unowned self] op in
+        let operation = CXSvgaPlayOperation.create(withName: named, inBundle: bundle) { [unowned self] op in
             self.currentOp = op
             self.play(with: op)
         }
@@ -96,6 +96,18 @@ public class CXSvgaPlayManager: NSObject, CXSvgaPlayPresentable {
             retryCount -= 1
             play(with: op)
         }
+    }
+    
+    @objc public func pause() {
+        svgaPlayer?.pauseAnimation()
+    }
+    
+    @objc public func step(toFrame frame: Int, andPlay play: Bool) {
+        svgaPlayer?.step(toFrame: frame, andPlay: play)
+    }
+    
+    @objc public func step(toPercentage percentage: CGFloat, andPlay play: Bool) {
+        svgaPlayer?.step(toPercentage: percentage, andPlay: play)
     }
     
     @objc public func finishAnimating() {
