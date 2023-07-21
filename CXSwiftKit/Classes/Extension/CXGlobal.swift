@@ -93,6 +93,41 @@ public func cxLoadImage(named: String) -> UIImage
     return UIImage(named: named) ?? UIImage()
 }
 
+public func cxShowAlert(in controller: UIViewController,
+                        title: String?,
+                        message: String?,
+                        style: UIAlertController.Style = .alert,
+                        sureTitle: String? = nil,
+                        cancelTitle: String? = nil,
+                        warningTitle: String? = nil,
+                        sureHandler: ((UIAlertAction) -> Void)? = nil,
+                        cancelHandler: ((UIAlertAction) -> Void)? = nil,
+                        warningHandler: ((UIAlertAction) -> Void)? = nil)
+{
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: style)
+    
+    if sureTitle != nil {
+        let sureAction = UIAlertAction(title: sureTitle, style: .default) { action in
+            sureHandler?(action)
+        }
+        alertController.addAction(sureAction)
+    }
+    if cancelTitle != nil {
+        let cancelAction = UIAlertAction(title: cancelTitle!, style: .cancel) { action in
+            cancelHandler?(action)
+        }
+        alertController.addAction(cancelAction)
+    }
+    if warningTitle != nil {
+        let warningAction = UIAlertAction(title: sureTitle, style: .destructive) { action in
+            warningHandler?(action)
+        }
+        alertController.addAction(warningAction)
+    }
+    
+    controller.present(alertController, animated: true)
+}
+
 #endif
 
 /// Allocates recursive pthread_mutex associated with ‘obj’ if needed.
