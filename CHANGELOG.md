@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-### **2.0.0 (07/17/2023)**
+### **1.6.0 (07/24/2023)**
 
 - fixes some erros.
 - Adds the dependencies for the submodules.
