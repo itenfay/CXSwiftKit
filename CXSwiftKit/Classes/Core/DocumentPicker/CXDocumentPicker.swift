@@ -11,6 +11,18 @@ import UIKit
 import MobileCoreServices
 import UniformTypeIdentifiers
 
+@objc public protocol ISKDocumentPicker: AnyObject {
+    var actionSheetTitle: String { get set }
+    var actionSheetFileTitle: String { get set }
+    var actionSheetFolderTitle: String { get set }
+    var actionSheetCancelTitle: String { get set }
+    var fullScreenEnabled: Bool { get set }
+    init(controller: UIViewController, delegate: CXDocumentDelegate?)
+    func present()
+    /// The document type must be `public.folder`, `public.item`, `public.data`, etc.
+    func present(documentTypes: [String])
+}
+
 open class CXDocumentPicker: NSObject {
     
     private var picker: UIDocumentPickerViewController?
@@ -18,31 +30,33 @@ open class CXDocumentPicker: NSObject {
     @objc public weak var delegate: CXDocumentDelegate?
     
     private var folderURL: URL?
-    private var sourceType: CXDocumentSourceType!
+    private var sourceType: CXDocumentSourceType = .none
     private var documents = [CXDocument]()
     private var documentTypes: [String] = []
     
-    @objc public var actionSheetTitle: String = "Select"
-    @objc public var actionSheetFileTitle: String = "File"
-    @objc public var actionSheetFolderTitle: String = "Folder"
-    @objc public var actionSheetCancelTitle: String = "Cancel"
-    @objc public var fullScreenEnabled: Bool = false
+    public var actionSheetTitle: String = "Select"
+    public var actionSheetFileTitle: String = "File"
+    public var actionSheetFolderTitle: String = "Folder"
+    public var actionSheetCancelTitle: String = "Cancel"
+    public var fullScreenEnabled: Bool = false
     
-    @objc public init(controller: UIViewController, delegate: CXDocumentDelegate?) {
+    required public init(
+        controller: UIViewController,
+        delegate: CXDocumentDelegate?)
+    {
         self.controller = controller
         self.delegate = delegate
     }
     
-    @objc public convenience init(controller: UIViewController) {
+    @objc public convenience init(
+        controller: UIViewController)
+    {
         self.init(controller: controller, delegate: nil)
     }
     
     private func presentDocumentPicker() {
         if sourceType == .folder {
             if #available(iOS 14.0, *) {
-                if documentTypes.isEmpty {
-                    documentTypes.append(UTType.item.identifier)
-                }
                 let folderType = UTType.folder
                 if !documentTypes.contains(folderType.identifier) {
                     documentTypes.append(folderType.identifier)
@@ -50,9 +64,6 @@ open class CXDocumentPicker: NSObject {
                 let types = documentTypes.compactMap { UTType($0) }
                 picker = UIDocumentPickerViewController.init(forOpeningContentTypes: types)
             } else {
-                if documentTypes.isEmpty {
-                    documentTypes.append(kUTTypeItem as String)
-                }
                 let folderType = kUTTypeFolder as String
                 if !documentTypes.contains(folderType) { documentTypes.append(folderType) }
                 picker = UIDocumentPickerViewController.init(documentTypes: documentTypes, in: .open)
@@ -68,6 +79,13 @@ open class CXDocumentPicker: NSObject {
                 if documentTypes.isEmpty {
                     documentTypes.append(kUTTypeData as String)
                 }
+                picker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
+            }
+        } else {
+            if #available(iOS 14.0, *) {
+                let types = documentTypes.compactMap { UTType($0) }
+                picker = UIDocumentPickerViewController.init(forOpeningContentTypes: types)
+            } else {
                 picker = UIDocumentPickerViewController(documentTypes: documentTypes, in: .open)
             }
         }
@@ -100,9 +118,7 @@ open class CXDocumentPicker: NSObject {
         }
     }
     
-    @objc public func present(documentTypes: [String]) {
-        self.documentTypes = documentTypes
-        
+    public func present() {
         // Select
         let sheetController = UIAlertController(title: actionSheetTitle, message: nil, preferredStyle: .actionSheet)
         
@@ -123,6 +139,15 @@ open class CXDocumentPicker: NSObject {
         }
         
         controller.present(sheetController, animated: true)
+    }
+    
+    public func present(documentTypes: [String]) {
+        self.documentTypes = documentTypes
+        if documentTypes.isEmpty {
+            present()
+        } else {
+            presentDocumentPicker()
+        }
     }
     
 }
