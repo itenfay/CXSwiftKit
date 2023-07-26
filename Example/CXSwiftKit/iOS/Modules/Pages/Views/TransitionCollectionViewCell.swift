@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import CXSwiftKit
 
-class TransitionCollectionViewCell: UICollectionViewCell {
-
+class TransitionCollectionViewCell: BaseCollectionViewCell {
+    
+    @IBOutlet weak var stackView: UIView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
+    
+    override func setup() {
+        stackView.cx.cornerRadius = 10
+    }
+    
 }

@@ -26,7 +26,7 @@ class HomePresenter: BasePresenter {
     }
     
     override func loadData() {
-        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition"]
+        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition", "Document Picker", "Overlay Controller"]
         for name in names {
             let model = DataModel(name: name)
             dataSource.append(model)
@@ -76,11 +76,19 @@ extension HomePresenter: UITableViewDelegate, UITableViewDataSource {
         case "Device Info":
             let deviceInfoController = DeviceInfoViewController()
             controller = deviceInfoController
+        case "Photo Library":
+            controller = PhotoLibraryViewController()
         case "EmptyData Set":
             let edsController = EmptyDataViewController()
             controller = edsController
         case "SVGA Animation":
             controller = SvgaViewController()
+        case "Transition":
+            controller = TransitionViewController()
+        case "Document Picker":
+            controller = DocumentPickerController()
+        case "Overlay Controller":
+            controller = OverlayViewController()
         default: break
         }
         guard let toController = controller else {

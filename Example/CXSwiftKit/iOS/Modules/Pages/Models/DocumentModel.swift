@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+class DocumentModel: BaseCellModel {
+    var fileURL: URL
+    var name: String
+    
+    init(fileURL: URL, name: String) {
+        self.fileURL = fileURL
+        self.name = name
+    }
+}

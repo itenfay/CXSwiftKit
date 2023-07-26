@@ -56,12 +56,12 @@ class SvgaViewController: BaseViewController {
         btnA.showsTouchWhenHighlighted = true
         view.addSubview(btnA)
         btnA.cx.makeConstraints { maker in
-            maker.top.equalTo(cxNavBarH + 2*paddingY)
+            maker.top.equalToAnchor(self.view.cx.safeTopAnchor).offset(paddingY)
             maker.leading.equalTo(paddingX)
             maker.width.equalTo(btnW)
             maker.height.equalTo(btnH)
         }
-        btnA.rx.tap.asDriver().drive(onNext: {[weak self] in
+        btnA.rx.tap.asDriver().drive(onNext: { [weak self] in
             self?.play(with: 1)
         }).disposed(by: disposeBag)
         
@@ -73,10 +73,10 @@ class SvgaViewController: BaseViewController {
         btnB.showsTouchWhenHighlighted = true
         view.addSubview(btnB)
         btnB.cx.makeConstraints { maker in
-            maker.top.equalTo(cxNavBarH + 2*paddingY)
-            maker.leading.equalTo(btnW + 2*paddingX)
-            maker.width.equalTo(btnW)
-            maker.height.equalTo(btnH)
+            maker.top.equalToAnchor(btnA.topAnchor).offset(0)
+            maker.leading.equalToAnchor(btnA.trailingAnchor).offset(paddingX)
+            maker.width.equalToDimension(btnA.widthAnchor)
+            maker.height.equalToDimension(btnA.heightAnchor)
         }
         btnB.rx.tap.asDriver().drive(onNext: { [weak self] in
             self?.play(with: 2)
@@ -90,10 +90,10 @@ class SvgaViewController: BaseViewController {
         btnC.showsTouchWhenHighlighted = true
         view.addSubview(btnC)
         btnC.cx.makeConstraints { maker in
-            maker.top.equalTo(cxNavBarH + 2*paddingY)
-            maker.leading.equalTo(2*btnW + 3*paddingX)
-            maker.width.equalTo(btnW)
-            maker.height.equalTo(btnH)
+            maker.top.equalToAnchor(btnB.topAnchor)
+            maker.leading.equalToAnchor(btnB.trailingAnchor).offset(paddingX)
+            maker.width.equalToDimension(btnB.widthAnchor).offset(0)
+            maker.height.equalToDimension(btnB.heightAnchor).offset(0)
         }
         btnC.rx.tap.asDriver().drive(onNext: { [weak self] in
             self?.play(with: 3)
@@ -107,8 +107,8 @@ class SvgaViewController: BaseViewController {
         btnD.showsTouchWhenHighlighted = true
         view.addSubview(btnD)
         btnD.cx.makeConstraints { maker in
-            maker.top.equalTo(cxNavBarH + 2*paddingY)
-            maker.leading.equalTo(3*btnW + 4*paddingX)
+            maker.top.equalToAnchor(btnC.topAnchor)
+            maker.leading.equalToAnchor(btnC.trailingAnchor).offset(paddingX)
             maker.width.equalTo(btnW)
             maker.height.equalTo(btnH)
         }
@@ -120,7 +120,7 @@ class SvgaViewController: BaseViewController {
         svgaPlayer.contentMode = .bottom
         view.addSubview(svgaPlayer)
         svgaPlayer.cx.makeConstraints { make in
-            make.top.equalTo(cxNavBarH + btnH + 2*paddingY)
+            make.top.equalToAnchor(btnD.bottomAnchor).offset(2*paddingY)
             make.leading.equalTo(paddingX)
             make.trailing.equalTo(-paddingX)
             make.bottom.equalTo(-cxSafeAreaBottom)
@@ -128,20 +128,27 @@ class SvgaViewController: BaseViewController {
     }
     
     private func bindSvgaPlayer() {
-        CXSvgaPlayManager.shared.svgaPlayer = svgaPlayer
+        CXSKSvgaPlayManager.shared.svgaPlayer = svgaPlayer
     }
     
     func play(with tag: Int) {
+        /// 震动反馈调用
+        UIDevice.current.cx.makeImpactFeedback(style: .heavy)
+        //UIDevice.current.cx.makeSelectionFeedback()
+        //UIDevice.current.cx.makeNotificationFeedback(type: .success)
+        //CXHaptics.strongBoom()
+        //CXHaptics.weakBoom()
+        //CXHaptics.threeWeakBooms()
         if tag == 1 {
-            CXSvgaPlayManager.shared.play(named: "Rocket")
+            CXSKSvgaPlayManager.shared.play(named: "Rocket")
         } else if tag == 2 {
-            CXSvgaPlayManager.shared.play(named: "heartbeat")
+            CXSKSvgaPlayManager.shared.play(named: "heartbeat")
         } else if tag == 3 {
-            CXSvgaPlayManager.shared.play(named: "rose_2.0.0")
+            CXSKSvgaPlayManager.shared.play(named: "rose_2.0.0")
         } else if tag == 4 {
             let i = Int(arc4random_uniform(UInt32(items.count)))
             let url = items[i < items.count ? i : 0]
-            CXSvgaPlayManager.shared.play(url: url)
+            CXSKSvgaPlayManager.shared.play(url: url)
         }
     }
     

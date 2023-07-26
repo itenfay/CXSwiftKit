@@ -20,6 +20,12 @@ class EmptyDataViewController: BaseViewController {
     private let disposeBag = DisposeBag()
     private var dataArray: [String] = []
     
+    let scalePresentAnimation = CXScalePresentAnimation()
+    let scaleDismissAnimation = CXScaleDismissAnimation()
+    let swipeLeftInteractiveTransition = CXSwipeLeftInteractiveTransition()
+    
+    var ovcPresented: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navTitle = "空数据设置"
@@ -37,15 +43,40 @@ class EmptyDataViewController: BaseViewController {
     }
     
     override func makeUI() {
-        tableView = UITableView(frame: CGRect(origin: CGPoint(x: 0, y: cxNavBarH),
-                                              size: CGSize(width: view.cx.width, height: view.cx.height - cxNavBarH - cxSafeAreaBottom)))
+        if navigationController == nil {
+            let closeBtn = UIButton(type: .custom)
+            closeBtn.setTitle("关闭", for: .normal)
+            closeBtn.setTitleColor(UIColor.cx.color(withHexString: "0x333333"), for: .normal)
+            closeBtn.setTitleColor(UIColor.cx.color(withHexString: "0x999999"), for: .highlighted)
+            closeBtn.titleLabel?.font = UIFont.cx.semiboldPingFang(ofSize: 16)
+            view.cx.add(subviews: closeBtn)
+            closeBtn.cx.makeSafeAreaConstraints { [self] maker in
+                maker.top.equalTo(10)
+                maker.leading.equalToAnchor(view.leadingAnchor).offset(15)
+                maker.width.equalTo(40)
+                maker.height.equalTo(40)
+            }
+            closeBtn.rx.tap.asDriver().drive(onNext: { [weak self] in
+                self?.dismissController()
+            }).disposed(by: disposeBag)
+        }
+        
+        tableView = UITableView(frame: .zero)
         tableView.backgroundColor = .clear
         tableView.separatorStyle = .none
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 50
         tableView.showsVerticalScrollIndicator = false
         tableView.contentInsetAdjustmentBehavior = .never
+        tableView.delegate = self
+        tableView.dataSource = self
         view.addSubview(tableView)
+        tableView.cx.makeConstraints { maker in
+            maker.top.equalTo(cxNavBarH)
+            maker.leading.equalToSuperview()
+            maker.trailing.equalToSuperview()
+            maker.bottom.equalToSuperview().offset(-cxSafeAreaBottom)
+        }
         
         eds.bindTarget(tableView)
     }
@@ -55,6 +86,14 @@ class EmptyDataViewController: BaseViewController {
         cxDelayToDispatch(1.0) {
             self.cx_dismissProgressHUD()
             self.subject.onNext(.emptyData(desc: ""))
+        }
+    }
+    
+    private func dismissController() {
+        if ovcPresented {
+            view.cx.ovcDismiss()
+        } else {
+            self.dismiss(animated: true)
         }
     }
     
@@ -71,15 +110,31 @@ extension EmptyDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "EmptyDataCell")
         if cell == nil {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "EmptyDataCell")
+            cell = BaseTableViewCell(style: .subtitle, reuseIdentifier: "EmptyDataCell")
         }
         cell?.selectionStyle = .none
-        
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+}
+
+extension EmptyDataViewController: UIViewControllerTransitioningDelegate {
+    
+    public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return scalePresentAnimation
+    }
+    
+    public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        scaleDismissAnimation.updateFinalRect(scalePresentAnimation.touchRect)
+        return scaleDismissAnimation
+    }
+    
+    public func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        return swipeLeftInteractiveTransition.interacting ? swipeLeftInteractiveTransition : nil
     }
     
 }

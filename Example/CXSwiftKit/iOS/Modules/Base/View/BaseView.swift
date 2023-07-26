@@ -32,7 +32,6 @@ class BaseView: UIView, IBaseView {
     func layoutUI() {}
     
     func addActions() {}
-    
 }
 
 class BaseNibView: UIView {
@@ -76,7 +75,6 @@ class BaseTableViewCell: UITableViewCell, IBaseView {
     func layoutUI() {}
     
     func addActions() {}
-    
 }
 
 class BaseCollectionViewCell: UICollectionViewCell, IBaseView {
@@ -104,5 +102,22 @@ class BaseCollectionViewCell: UICollectionViewCell, IBaseView {
     func layoutUI() {}
     
     func addActions() {}
+}
+
+import RxCocoa
+import RxSwift
+
+class BaseReusableView: UICollectionReusableView {
+    
+    var disposeBag: DisposeBag = DisposeBag()
+    
+    func updateDisposeBag() {
+        disposeBag = DisposeBag()
+    }
+    
+    /// Override
+    func bind(to viewModel: BaseHeaderFooterModel) {
+        updateDisposeBag()
+    }
     
 }
