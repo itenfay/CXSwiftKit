@@ -19,6 +19,8 @@ target 'CXSwiftKit_Example' do
   pod 'RxSwift'
   # RxCocoa
   pod 'RxCocoa'
+  # RxDataSources
+  pod 'RxDataSources'
   # Moya
   pod 'Moya'
   # HandyJSON
@@ -44,8 +46,10 @@ target 'CXSwiftKit_Example' do
   # DZNEmptyDataSet
   pod 'DZNEmptyDataSet'
   
-  # SVGA
+  # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
   pod 'SVGAPlayer'
+  #pod 'SSZipArchive', '~> 2.1.4'
+  #pod 'Protobuf', '~> 3.4'
   
   # OverlayController
   pod 'OverlayController'

@@ -73,7 +73,7 @@ class ViewController: UIViewController {
     
     func saveToAssetCollection() {
         do {
-            try photoLibHandle.addPhoto(CXImage(named: "avatar")!, toAlbum: "CXTest") { success, error in
+            try photoLibHandle.addPhoto(CXImage(named: "avatar")!, toAlbum: "CXAlbum") { success, error in
                 if success {
                     CXLogger.log(level: .info, message: "avatar 保存成功!")
                 }

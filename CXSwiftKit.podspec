@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
   s.version          = '1.6.0'
-  s.summary          = 'CXSwiftKit provides rich extensions of swift language, also supports Objective-C.'
+  s.summary          = 'CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-  CXSwiftKit provides rich extensions of swift language, also supports Objective-C.
+                       CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
                        DESC
 
   s.homepage         = 'https://github.com/chenxing640/CXSwiftKit'
@@ -143,7 +143,8 @@ Pod::Spec.new do |s|
     core.subspec "svga" do |svga|
       svga.source_files = 'CXSwiftKit/Classes/Core/svga/*.{swift}'
       svga.dependency 'CXSwiftKit/Base'
-      svga.dependency 'SVGAPlayer'
+      # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
+      #svga.dependency 'SVGAPlayer'
     end
     
     core.subspec "Timer" do |timer|
@@ -170,6 +171,8 @@ Pod::Spec.new do |s|
   
   s.subspec "Rx" do |rx|
     rx.source_files = 'CXSwiftKit/Classes/Rx/*.{swift}'
+    rx.ios.deployment_target = '10.0'
+    rx.tvos.deployment_target = '10.0'
     rx.dependency 'CXSwiftKit/Core/EmptyDataSet'
     rx.dependency 'RxCocoa'
     rx.dependency 'RxSwift'

@@ -16,7 +16,27 @@ import Starscream
     func cxWebSocketDidDisconnect(_ code: UInt16, reason: String)
 }
 
-public class CXWebSocket: NSObject {
+@objc public protocol ISKWebSocket: AnyObject {
+    static var networkStatusDidChangeNotification: Notification.Name { get }
+    init(urlString: String)
+    var urlString: String { get }
+    var timeoutInterval: TimeInterval { get set }
+    var reconnectMaxTime: TimeInterval { get set }
+    var heartbeatDuration: TimeInterval { get set }
+    var isConnected: Bool { get }
+    var networkReachable: Bool { get }
+    var heartbeatWork: (() -> Void)? { get set }
+    func configureRequest(handler: @escaping () -> URLRequest)
+    func open()
+    func close()
+    func reconnect()
+    func startHeartbeat()
+    func destroyHeartbeat()
+    func sendMessage(_ message: String)
+    func sendData(_ data: Data)
+}
+
+public class CXWebSocket: NSObject, ISKWebSocket {
     
     private var socket: WebSocket?
     private var customRequest: URLRequest?
@@ -25,39 +45,63 @@ public class CXWebSocket: NSObject {
     private var reconnectTime: TimeInterval = 0
     private var heartbeatTimer: Timer?
     
-    @objc public private(set) var isConnected = false
-    @objc public private(set) var urlString: String
+    public private(set) var isConnected = false
+    public private(set) var urlString: String
     
-    @objc public var timeoutInterval: TimeInterval = 10
-    @objc public var reconnectMaxTime: TimeInterval = 30
-    @objc public var heartbeatDuration: TimeInterval = 10
-    @objc public var heartbeatWork: (() -> Void)?
+    public var timeoutInterval: TimeInterval = 10
+    public var reconnectMaxTime: TimeInterval = 30
+    public var heartbeatDuration: TimeInterval = 10
+    public var heartbeatWork: (() -> Void)?
     
-    @objc public private(set) var networkReachable: Bool = true
-    @objc public weak var delegate: CXWebSocketDelegate?
+    public private(set) var networkReachable: Bool = true
+    public weak var delegate: CXWebSocketDelegate?
     
-    @objc public init(urlString: String) {
-        self.urlString = urlString
-        super.init()
+    public static var networkStatusDidChangeNotification: Notification.Name {
+        return "CXNetworkStatusDidChangeNotification"
+            .cx
+            .asNotificationName()!
     }
     
-    @objc public func open() {
+    required public init(urlString: String) {
+        self.urlString = urlString
+        super.init()
+        self.addNotification()
+    }
+    
+    public func open() {
         autoReconnect = true
         connect()
     }
     
-    @objc public func close() {
+    public func close() {
         autoReconnect = false
         disconnect()
     }
     
+    private func addNotification() {
+        self.cx.addObserver(
+            self,
+            selector: #selector(notifyNetworkStatusChanged(_:)),
+            name: Self.networkStatusDidChangeNotification)
+    }
+    
     /// The exterior notifies network status has changed.
-    @objc public func notifyNetworkStatusChanged(_ reachable: Bool) {
-        networkReachable = reachable
-        if !reachable {
+    @objc private func notifyNetworkStatusChanged(_ noti: Notification) {
+        let notiObject = noti.object
+        if let nsNumber = notiObject as? NSNumber {
+            networkReachable = nsNumber.boolValue
+            executeChange()
+        } else if let bValue = notiObject as? Bool {
+            networkReachable = bValue
+            executeChange()
+        }
+    }
+    
+    private func executeChange() {
+        if !networkReachable {
             disconnect()
         } else {
-            connect()
+            reconnect()
         }
     }
     
@@ -68,7 +112,8 @@ public class CXWebSocket: NSObject {
             socket = WebSocket(request: request)
         } else {
             guard let url = URL(string: urlString) else {
-                CXLogger.log(level: .error, message: "[WS] Occurs an error: the url is null.")
+                CXLogger.log(level: .error, message: "[WS] WS occurs an error: the url is null.")
+                delegate?.cxWebSocketDidFailWithError(nil)
                 return
             }
             var request = URLRequest(url: url)
@@ -81,8 +126,8 @@ public class CXWebSocket: NSObject {
     }
     
     /// Configure the custom request.
-    @objc public func configureRequest(_ handler: (() -> URLRequest)?) {
-        customRequest = handler?()
+    public func configureRequest(handler: @escaping () -> URLRequest) {
+        customRequest = handler()
     }
     
     /// Disconnect the web socket.
@@ -93,28 +138,32 @@ public class CXWebSocket: NSObject {
         isConnected = false
     }
     
-    @objc public func sendMessage(_ message: String) {
+    public func sendMessage(_ message: String) {
         // Disconnected, unable to send message.
         if !isConnected {
-            CXLogger.log(level: .warning, message: "WS is disconnected, unable to send message.")
+            CXLogger.log(level: .warning, message: "[WS] WS is disconnected, unable to send message.")
             return
         }
         socket?.write(string: message)
     }
     
-    @objc public func sendData(_ data: Data) {
+    public func sendData(_ data: Data) {
         // Disconnected, unable to send data.
         if !isConnected {
-            CXLogger.log(level: .warning, message: "WS is disconnected, unable to send data.")
+            CXLogger.log(level: .warning, message: "[WS] WS is disconnected, unable to send data.")
             return
         }
         socket?.write(data: data)
     }
     
     /// Start the heartbeat packets.
-    @objc public func startHeartbeat() {
-        if heartbeatDuration <= 0 { return }
-        if heartbeatTimer != nil { return }
+    public func startHeartbeat() {
+        if heartbeatDuration <= 0 {
+            return
+        }
+        if heartbeatTimer != nil {
+            return
+        }
         heartbeatTimer = Timer(timeInterval: heartbeatDuration,
                                target: self,
                                selector: #selector(sendHeartbeatAction),
@@ -130,12 +179,16 @@ public class CXWebSocket: NSObject {
     }
     
     /// Destroy the heartbeat when disconnected.
-    private func destroyHeartbeat() {
+    public func destroyHeartbeat() {
+        if heartbeatTimer == nil {
+            return
+        }
         heartbeatTimer?.invalidate()
         heartbeatTimer = nil
     }
     
-    @objc public func reconnect() {
+    /// Reconnect the web socket.
+    public func reconnect() {
         if !autoReconnect { return }
         // The reconnection interval can be adjusted according to the business.
         if reconnectTime > reconnectMaxTime {
@@ -159,6 +212,7 @@ public class CXWebSocket: NSObject {
     }
     
     deinit {
+        self.cx.removeObserver(self)
         CXLogger.log(level: .info, message: "[WS] \(type(of: self)) deinit.")
     }
     

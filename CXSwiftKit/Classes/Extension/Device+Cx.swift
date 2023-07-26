@@ -19,9 +19,9 @@ extension CXSwiftBase where T : UIDevice {
     
     /// Triggers impact feedback with feedback style.
     @discardableResult
-    public func makeImpactFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
+    public func makeImpactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
     {
-        return base.cx_makeImpactFeedback(style)
+        return base.cx_makeImpactFeedback(style: style)
     }
     
     /// Triggers selection feedback.
@@ -33,9 +33,9 @@ extension CXSwiftBase where T : UIDevice {
     
     /// Triggers notification feedback with notification type.
     @discardableResult
-    public func makeNotificationFeedback(_ notificationType: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
+    public func makeNotificationFeedback(type: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
     {
-        return base.cx_makeNotificationFeedback(notificationType)
+        return base.cx_makeNotificationFeedback(type: type)
     }
     
 }
@@ -48,12 +48,12 @@ extension UIDevice {
     @discardableResult
     @objc public func cx_makeImpactFeedback() -> UIImpactFeedbackGenerator
     {
-        return cx_makeImpactFeedback(.medium)
+        return cx_makeImpactFeedback(style: .medium)
     }
     
     /// Triggers impact feedback with feedback style.
     @discardableResult
-    @objc public func cx_makeImpactFeedback(_ style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
+    @objc public func cx_makeImpactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
     {
         let impactFeedbackGenerator = UIImpactFeedbackGenerator(style: style)
         impactFeedbackGenerator.prepare()
@@ -73,11 +73,11 @@ extension UIDevice {
     
     /// Triggers notification feedback with notification type.
     @discardableResult
-    @objc public func cx_makeNotificationFeedback(_ notificationType: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
+    @objc public func cx_makeNotificationFeedback(type: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
     {
         let notificationFeedbackGenerator = UINotificationFeedbackGenerator()
         notificationFeedbackGenerator.prepare()
-        notificationFeedbackGenerator.notificationOccurred(notificationType)
+        notificationFeedbackGenerator.notificationOccurred(type)
         return notificationFeedbackGenerator
     }
     
