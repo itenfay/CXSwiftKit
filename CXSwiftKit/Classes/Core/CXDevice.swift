@@ -402,7 +402,8 @@ import AdSupport
     
     public var isSimulator: Bool {
         var isSim = false
-        #if arch(i386) || arch(x86_64)
+        //#if arch(i386) || arch(x86_64)
+        #if TARGET_OS_SIMULATOR
         isSim = true
         #endif
         return isSim
