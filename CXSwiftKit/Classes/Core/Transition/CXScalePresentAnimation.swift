@@ -63,13 +63,14 @@ import UIKit
 //    }
 //
 //    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        _ = scalePresentAnimation.updateRect(with: tableView, indexPath: indexPath, inView: view)
 //        let vc = CXVideosController()
+//        vc.transitioningDelegate = vc
+//        vc.swipeLeftInteractiveTransition..wireTo(viewController: vc)
+//        vc.scalePresentAnimation.updateRect(with: tableView, indexPath: indexPath, inView: view)
 //        vc.modalPresentationStyle = .overCurrentContext
 //        self.modalPresentationStyle = .currentContext
 //        self.present(vc, animated: true, completion: nil)
 //    }
-//
 //}
 
 //MARK: - End of example
@@ -91,10 +92,12 @@ public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransiti
         touchRect = rect
     }
     
+    @discardableResult
     @objc public func updateRect(with listView: UIScrollView, indexPath: IndexPath) -> Bool {
         return updateRect(with: listView, indexPath: indexPath, inView: UIApplication.shared.cx_currentController?.view)
     }
     
+    @discardableResult
     @objc public func updateRect(with listView: UIScrollView, indexPath: IndexPath, inView view: UIView?) -> Bool {
         if let tv = listView as? UITableView {
             if let cell = tv.cellForRow(at: indexPath) {
