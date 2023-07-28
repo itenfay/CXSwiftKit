@@ -61,7 +61,7 @@ public class CXApplePayContext: NSObject, ISKApplePayContext {
     
     private weak var controller: CXViewController!
     
-    required public init(controller: CXViewController) {
+    public required init(controller: CXViewController) {
         self.controller = controller
     }
     
