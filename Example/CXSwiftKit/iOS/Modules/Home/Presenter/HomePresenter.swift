@@ -26,7 +26,7 @@ class HomePresenter: BasePresenter {
     }
     
     override func loadData() {
-        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition", "Document Picker", "Overlay Controller"]
+        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition", "Document Picker", "Overlay View", "Live Gift", "Network Request", "Permissions"]
         for name in names {
             let model = DataModel(name: name)
             dataSource.append(model)
@@ -87,13 +87,20 @@ extension HomePresenter: UITableViewDelegate, UITableViewDataSource {
             controller = TransitionViewController()
         case "Document Picker":
             controller = DocumentPickerController()
-        case "Overlay Controller":
+        case "Overlay View":
             controller = OverlayViewController()
+        case "Live Gift":
+            controller = LiveGiftViewController()
+        case "Network Request":
+            controller = NetworkViewController()
+        case "Permissions":
+            controller = PermissionsViewController()
         default: break
         }
         guard let toController = controller else {
             return
         }
+        toController.navTitle = model.name
         toController.hidesBottomBarWhenPushed = true
         homeController.navigationController?.pushViewController(toController, animated: true)
     }

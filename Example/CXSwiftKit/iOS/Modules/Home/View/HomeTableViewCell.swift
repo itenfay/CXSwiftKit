@@ -21,7 +21,8 @@ class HomeTableViewCell: BaseTableViewCell {
     }
     
     override func setup() {
-        
+        nameLabel.font = UIFont.cx.semiboldPingFang(ofSize: 18)
+        nameLabel.textColor = UIColor.cx.color(withHexString: "#333333")
     }
     
     override func layoutUI() {
