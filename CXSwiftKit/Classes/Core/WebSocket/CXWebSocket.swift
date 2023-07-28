@@ -62,7 +62,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
             .asNotificationName()!
     }
     
-    required public init(urlString: String) {
+    public required init(urlString: String) {
         self.urlString = urlString
         super.init()
         self.addNotification()
