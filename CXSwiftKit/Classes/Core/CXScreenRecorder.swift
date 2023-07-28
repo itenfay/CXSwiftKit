@@ -13,12 +13,21 @@ import ReplayKit
 import Photos
 #endif
 
-public class CXScreenRecorder: NSObject {
+@objc public protocol ISKScreenRecorder: AnyObject {
+    var replayVideoFileName: String { get set }
+    init(title: String, controller: CXViewController)
+    func onObserve(finish: @escaping () -> Void, cancel: @escaping () -> Void, error: @escaping (String) -> Void)
+    @available(macOS 11.0, *)
+    func startRecording()
+    func stopRecording()
+}
+
+public class CXScreenRecorder: NSObject, ISKScreenRecorder {
     
     private var title: String = ""
     private weak var viewController: CXViewController?
     
-    @objc public init(title: String, controller: CXViewController) {
+    public required init(title: String, controller: CXViewController) {
         self.title = title
         self.viewController = controller
         super.init()
@@ -29,9 +38,9 @@ public class CXScreenRecorder: NSObject {
     private var onError: ((String) -> Void)?
     
     /// Customizes replay video fileName.
-    @objc public var replayVideoFileName: String = "cx_replayvideo_sr0426.mp4"
+    public var replayVideoFileName: String = "cx_replayvideo_sr0426.mp4"
     
-    @objc public func onObserve(
+    public func onObserve(
         finish: @escaping () -> Void,
         cancel: @escaping () -> Void,
         error: @escaping (String) -> Void)
@@ -43,14 +52,14 @@ public class CXScreenRecorder: NSObject {
     
     /// Starts recording the app display.
     @available(macOS 11.0, *)
-    @objc public func startRecording() {
+    public func startRecording() {
         let screenRecorder = RPScreenRecorder.shared()
         screenRecorder.delegate = self
         screenRecorder.startRecording()
     }
     
     /// Stops the current recording.
-    @objc public func stopRecording() {
+    public func stopRecording() {
         let screenRecorder = RPScreenRecorder.shared()
         screenRecorder.stopRecording { vc, error in
             if error == nil {
