@@ -26,6 +26,13 @@
 		79AA18862A6FCF53003FC0F3 /* TransitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA18842A6FCF53003FC0F3 /* TransitionCollectionViewCell.swift */; };
 		79AA18872A6FCF53003FC0F3 /* TransitionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 79AA18852A6FCF53003FC0F3 /* TransitionCollectionViewCell.xib */; };
 		79AA18892A6FD374003FC0F3 /* CXSKListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AA18882A6FD374003FC0F3 /* CXSKListViewController.swift */; };
+		79AE5BD52A721A8300A6126F /* AlbumModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE5BD42A721A8300A6126F /* AlbumModel.swift */; };
+		79AE5BD72A721E4900A6126F /* LiveGiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE5BD62A721E4900A6126F /* LiveGiftViewController.swift */; };
+		79AE5BD92A72362800A6126F /* NetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE5BD82A72362800A6126F /* NetworkViewController.swift */; };
+		79AE5BDC2A723E8800A6126F /* MemberModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE5BDA2A723E8800A6126F /* MemberModel.swift */; };
+		79AE5BDD2A723E8800A6126F /* MemberRequestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE5BDB2A723E8800A6126F /* MemberRequestEntity.swift */; };
+		79AE5BDF2A72449B00A6126F /* PermissionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE5BDE2A72449B00A6126F /* PermissionsViewController.swift */; };
+		79AE5BE12A725B9E00A6126F /* PermissionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79AE5BE02A725B9E00A6126F /* PermissionModel.swift */; };
 		79C8A74A2A70AB0500DCE8DA /* BaseCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79C8A7492A70AB0500DCE8DA /* BaseCellModel.swift */; };
 		79EBFDE92A6A4F7400242993 /* SettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EBFDB02A6A4F7300242993 /* SettingsPresenter.swift */; };
 		79EBFDEA2A6A4F7400242993 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79EBFDB22A6A4F7300242993 /* SettingsViewController.swift */; };
@@ -110,6 +117,13 @@
 		79AA18842A6FCF53003FC0F3 /* TransitionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionCollectionViewCell.swift; sourceTree = "<group>"; };
 		79AA18852A6FCF53003FC0F3 /* TransitionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransitionCollectionViewCell.xib; sourceTree = "<group>"; };
 		79AA18882A6FD374003FC0F3 /* CXSKListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXSKListViewController.swift; sourceTree = "<group>"; };
+		79AE5BD42A721A8300A6126F /* AlbumModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumModel.swift; sourceTree = "<group>"; };
+		79AE5BD62A721E4900A6126F /* LiveGiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveGiftViewController.swift; sourceTree = "<group>"; };
+		79AE5BD82A72362800A6126F /* NetworkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkViewController.swift; sourceTree = "<group>"; };
+		79AE5BDA2A723E8800A6126F /* MemberModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberModel.swift; sourceTree = "<group>"; };
+		79AE5BDB2A723E8800A6126F /* MemberRequestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRequestEntity.swift; sourceTree = "<group>"; };
+		79AE5BDE2A72449B00A6126F /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
+		79AE5BE02A725B9E00A6126F /* PermissionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionModel.swift; sourceTree = "<group>"; };
 		79B0314A2A64E56200FC85C8 /* CXSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CXSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
 		79C8A7492A70AB0500DCE8DA /* BaseCellModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCellModel.swift; sourceTree = "<group>"; };
 		79EBFDB02A6A4F7300242993 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
@@ -532,8 +546,11 @@
 				79EBFE0B2A6A6E7500242993 /* DeviceInfoViewController.swift */,
 				79F08FF42A70F38700E1E46C /* DocumentPickerController.swift */,
 				79EBFE0A2A6A6E7500242993 /* EmptyDataViewController.swift */,
+				79AE5BD62A721E4900A6126F /* LiveGiftViewController.swift */,
 				79F090052A71091700E1E46C /* Models */,
+				79AE5BD82A72362800A6126F /* NetworkViewController.swift */,
 				79F0900B2A711D8500E1E46C /* OverlayViewController.swift */,
+				79AE5BDE2A72449B00A6126F /* PermissionsViewController.swift */,
 				79AA187E2A6F9923003FC0F3 /* PhotoLibraryViewController.swift */,
 				79EBFE0E2A6A802E00242993 /* SvgaViewController.swift */,
 				79AA187F2A6F9923003FC0F3 /* TransitionViewController.swift */,
@@ -555,7 +572,11 @@
 		79F090052A71091700E1E46C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				79AE5BD42A721A8300A6126F /* AlbumModel.swift */,
 				79F090062A71093600E1E46C /* DocumentModel.swift */,
+				79AE5BDA2A723E8800A6126F /* MemberModel.swift */,
+				79AE5BDB2A723E8800A6126F /* MemberRequestEntity.swift */,
+				79AE5BE02A725B9E00A6126F /* PermissionModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -624,10 +645,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = ZV3MMP87F8;
 						LastSwiftMigration = 1420;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = ZV3MMP87F8;
 						LastSwiftMigration = "";
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -803,6 +826,7 @@
 				79F08FF32A70EB2600E1E46C /* NetworkReachability.swift in Sources */,
 				79EBFE0C2A6A6E7500242993 /* EmptyDataViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				79AE5BD72A721E4900A6126F /* LiveGiftViewController.swift in Sources */,
 				79AA18812A6F9923003FC0F3 /* PhotoLibraryViewController.swift in Sources */,
 				79EBFE082A6A4F7400242993 /* Configurator.swift in Sources */,
 				79EBFDEB2A6A4F7400242993 /* SettingsModel.swift in Sources */,
@@ -813,6 +837,7 @@
 				79EBFE012A6A4F7400242993 /* MineModel.swift in Sources */,
 				79EBFE0F2A6A802E00242993 /* SvgaViewController.swift in Sources */,
 				79F090072A71093600E1E46C /* DocumentModel.swift in Sources */,
+				79AE5BDF2A72449B00A6126F /* PermissionsViewController.swift in Sources */,
 				79EBFE052A6A4F7400242993 /* BaseViewController.swift in Sources */,
 				79AA18892A6FD374003FC0F3 /* CXSKListViewController.swift in Sources */,
 				79AA187B2A6F9790003FC0F3 /* CXSKSvgaPlayManager.swift in Sources */,
@@ -830,17 +855,22 @@
 				79EBFDF22A6A4F7400242993 /* HomeTableViewCell.swift in Sources */,
 				79EBFDFA2A6A4F7400242993 /* ApiResponse.swift in Sources */,
 				79EBFDF02A6A4F7400242993 /* HomeViewController.swift in Sources */,
+				79AE5BD52A721A8300A6126F /* AlbumModel.swift in Sources */,
 				79EBFDF62A6A4F7400242993 /* DefaultURLSession.swift in Sources */,
 				79EBFDEE2A6A4F7400242993 /* HomeConfigurator.swift in Sources */,
 				79EBFDEF2A6A4F7400242993 /* HomePresenter.swift in Sources */,
 				79EBFDF52A6A4F7400242993 /* TabBarController.swift in Sources */,
+				79AE5BDC2A723E8800A6126F /* MemberModel.swift in Sources */,
+				79AE5BD92A72362800A6126F /* NetworkViewController.swift in Sources */,
 				79EBFDFE2A6A4F7400242993 /* MineConfigurator.swift in Sources */,
 				79EBFDFB2A6A4F7400242993 /* URLSessionStub.swift in Sources */,
 				79EBFDF82A6A4F7400242993 /* Result.swift in Sources */,
 				79EBFDE92A6A4F7400242993 /* SettingsPresenter.swift in Sources */,
+				79AE5BE12A725B9E00A6126F /* PermissionModel.swift in Sources */,
 				79EBFE062A6A4F7400242993 /* BaseModel.swift in Sources */,
 				79EBFE032A6A4F7400242993 /* VPlayerController.swift in Sources */,
 				79EBFDEA2A6A4F7400242993 /* SettingsViewController.swift in Sources */,
+				79AE5BDD2A723E8800A6126F /* MemberRequestEntity.swift in Sources */,
 				79EBFDFF2A6A4F7400242993 /* MinePresenter.swift in Sources */,
 				79EBFE072A6A4F7400242993 /* BaseView.swift in Sources */,
 			);
@@ -990,9 +1020,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 0724;
+				CURRENT_PROJECT_VERSION = 0728;
+				DEVELOPMENT_TEAM = ZV3MMP87F8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CXSwiftKit;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.6.0;
@@ -1013,9 +1045,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 0724;
+				CURRENT_PROJECT_VERSION = 0728;
+				DEVELOPMENT_TEAM = ZV3MMP87F8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CXSwiftKit;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.6.0;
@@ -1032,6 +1066,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6545D8A63F03BE22F910D553 /* Pods-CXSwiftKit_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = ZV3MMP87F8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -1055,6 +1090,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A5B7B73DF2AABE01658810DF /* Pods-CXSwiftKit_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = ZV3MMP87F8;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 					"$(inherited)",
