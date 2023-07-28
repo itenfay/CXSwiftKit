@@ -26,6 +26,12 @@ it, simply add the following line to your Podfile:
 pod 'CXSwiftKit'
 ```
 
+## Preview
+
+<div align=left>
+&emsp; <img src="https://github.com/chenxing640/CXSwiftKit/raw/master/IMG_0716.gif" width="50%" />
+</div>
+
 ## Tree Structure Description
 
 ```

@@ -25,6 +25,12 @@ CXSwiftKit可通过[CocoaPods](https://cocoapods.org)获得。安装只需将下
 pod 'CXSwiftKit'
 ```
 
+## 预览
+
+<div align=left>
+&emsp; <img src="https://github.com/chenxing640/CXSwiftKit/raw/master/IMG_0716.gif" width="50%" />
+</div>
+
 ## 树结构说明
 
 ```
