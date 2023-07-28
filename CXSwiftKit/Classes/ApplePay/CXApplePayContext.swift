@@ -9,37 +9,80 @@
 import Foundation
 import PassKit
 
+@objc public protocol ISKApplePayContext {
+    var canMakePayments: Bool { get }
+    var currentPaymentRequest: PKPaymentRequest? { get }
+    var onPaymentAction: (() -> Void)? { get set }
+    var shouldMakePayments: ((Bool) -> Void)? { get set }
+    var shouldSupportPaymentNetworks: ((Bool) -> Void)? { get set }
+    var willAuthorizePayment: (() -> Void)? { get set }
+    var didAuthorizePayment: ((PKPayment) -> Void)? { get set }
+    var didFinishPayment: (() -> Void)? { get set }
+    var didSelectPaymentMethod: ((PKPaymentMethod) -> Void)? { get set }
+    var didSelectShippingContact: ((PKContact) -> Void)? { get set }
+    var didSelectShippingMethod: ((PKShippingMethod) -> Void)? { get set }
+    
+    init(controller: CXViewController)
+    
+    #if os(iOS) || os(tvOS)
+    func makeOSPaymentButton(frame: CXRect) -> PKPaymentButton
+    func makeOSPaymentButton(frame: CXRect, type: PKPaymentButtonType, style: PKPaymentButtonStyle) -> PKPaymentButton
+    func makePaymentButton(frame: CXRect) -> PKPaymentButton
+    func makePaymentButton(frame: CXRect, image: CXImage?) -> PKPaymentButton
+    #endif
+    
+    func resetCurrentPaymentRequest()
+    
+    func makeRequest(countryCode: String,
+                     currencyCode: String,
+                     merchantIdentifier: String,
+                     paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
+    func makeRequest(countryCode: String,
+                     currencyCode: String,
+                     paymentNetworks: [PKPaymentNetwork],
+                     merchantIdentifier: String,
+                     paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
+    func makeRequest(countryCode: String,
+                     currencyCode: String,
+                     paymentNetworks: [PKPaymentNetwork],
+                     merchantIdentifier: String,
+                     merchantCapabilities: PKMerchantCapability,
+                     paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
+    
+    func makePayment(_ paymentRequest: PKPaymentRequest?)
+}
+
 /// For In-App-Purchase, please see:
 /// - [ObjC](https://github.com/chenxing640/DYFStoreKit)
 /// - [Swift](https://github.com/chenxing640/DYFStore)
 
 /// The class for Apple payment.
-public class CXApplePayContext: NSObject {
+public class CXApplePayContext: NSObject, ISKApplePayContext {
     
-    @objc public weak var controller: CXViewController!
+    private weak var controller: CXViewController!
     
-    @objc public init(controller: CXViewController) {
+    required public init(controller: CXViewController) {
         self.controller = controller
     }
     
-    @objc public private(set) var currentPaymentRequest: PKPaymentRequest?
+    public private(set) var currentPaymentRequest: PKPaymentRequest?
     
-    @objc public var onPaymentAction: (() -> Void)?
-    @objc public var shouldMakePayments: ((Bool) -> Void)?
-    @objc public var shouldSupportPaymentNetworks: ((Bool) -> Void)?
-    @objc public var willAuthorizePayment: (() -> Void)?
-    @objc public var didAuthorizePayment: ((PKPayment) -> Void)?
-    @objc public var didFinishPayment: (() -> Void)?
-    @objc public var didSelectPaymentMethod: ((PKPaymentMethod) -> Void)?
-    @objc public var didSelectShippingContact: ((PKContact) -> Void)?
-    @objc public var didSelectShippingMethod: ((PKShippingMethod) -> Void)?
+    public var onPaymentAction: (() -> Void)?
+    public var shouldMakePayments: ((Bool) -> Void)?
+    public var shouldSupportPaymentNetworks: ((Bool) -> Void)?
+    public var willAuthorizePayment: (() -> Void)?
+    public var didAuthorizePayment: ((PKPayment) -> Void)?
+    public var didFinishPayment: (() -> Void)?
+    public var didSelectPaymentMethod: ((PKPaymentMethod) -> Void)?
+    public var didSelectShippingContact: ((PKContact) -> Void)?
+    public var didSelectShippingMethod: ((PKShippingMethod) -> Void)?
     
     #if os(iOS) || os(tvOS)
-    @objc public func makeOSPaymentButton(frame: CXRect) -> PKPaymentButton {
+    public func makeOSPaymentButton(frame: CXRect) -> PKPaymentButton {
         return makeOSPaymentButton(frame: frame, type: .buy, style: .black)
     }
     
-    @objc public func makeOSPaymentButton(
+    public func makeOSPaymentButton(
         frame: CXRect,
         type: PKPaymentButtonType,
         style: PKPaymentButtonStyle) -> PKPaymentButton
@@ -50,11 +93,11 @@ public class CXApplePayContext: NSObject {
         return paymentButton
     }
     
-    @objc public func makePaymentButton(frame: CXRect) -> PKPaymentButton {
+    public func makePaymentButton(frame: CXRect) -> PKPaymentButton {
         return makePaymentButton(frame: frame, image: nil)
     }
     
-    @objc public func makePaymentButton(frame: CXRect, image: CXImage?) -> PKPaymentButton {
+    public func makePaymentButton(frame: CXRect, image: CXImage?) -> PKPaymentButton {
         let bgImage = image ?? CXImage(named: "ApplePay_Payment_Mark")
         let paymentButton = PKPaymentButton(frame: frame)
         paymentButton.setBackgroundImage(bgImage, for: .normal)
@@ -68,14 +111,14 @@ public class CXApplePayContext: NSObject {
     }
     
     /// Returns whether the user can make payments.
-    @objc public var canMakePayments: Bool {
+    public var canMakePayments: Bool {
         return PKPaymentAuthorizationViewController.canMakePayments()
     }
     
-    @objc public func makeRequest(countryCode: String,
-                                  currencyCode: String,
-                                  merchantIdentifier: String,
-                                  paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
+    public func makeRequest(countryCode: String,
+                            currencyCode: String,
+                            merchantIdentifier: String,
+                            paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
     {
         var paymentNetworks: [PKPaymentNetwork]!
         if #available(iOS 9.2, *) {
@@ -91,21 +134,21 @@ public class CXApplePayContext: NSObject {
         return makeRequest(countryCode: countryCode, currencyCode: currencyCode, paymentNetworks: paymentNetworks, merchantIdentifier: merchantIdentifier, paymentItems: paymentItems)
     }
     
-    @objc public func makeRequest(countryCode: String,
-                                  currencyCode: String,
-                                  paymentNetworks: [PKPaymentNetwork],
-                                  merchantIdentifier: String,
-                                  paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
+    public func makeRequest(countryCode: String,
+                            currencyCode: String,
+                            paymentNetworks: [PKPaymentNetwork],
+                            merchantIdentifier: String,
+                            paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
     {
         return makeRequest(countryCode: countryCode, currencyCode: currencyCode, paymentNetworks: paymentNetworks, merchantIdentifier: merchantIdentifier, merchantCapabilities: [.capability3DS, .capabilityEMV, .capabilityCredit, .capabilityDebit], paymentItems: paymentItems)
     }
     
-    @objc public func makeRequest(countryCode: String,
-                                  currencyCode: String,
-                                  paymentNetworks: [PKPaymentNetwork],
-                                  merchantIdentifier: String,
-                                  merchantCapabilities: PKMerchantCapability,
-                                  paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
+    public func makeRequest(countryCode: String,
+                            currencyCode: String,
+                            paymentNetworks: [PKPaymentNetwork],
+                            merchantIdentifier: String,
+                            merchantCapabilities: PKMerchantCapability,
+                            paymentItems: [PKPaymentSummaryItem]) -> PKPaymentRequest?
     {
         if !canMakePayments {
             CXLogger.log(level: .error, message: "The device does not support making apple payments.")
@@ -133,7 +176,7 @@ public class CXApplePayContext: NSObject {
         return request
     }
     
-    @objc public func makePayment(_ paymentRequest: PKPaymentRequest?) {
+    public func makePayment(_ paymentRequest: PKPaymentRequest?) {
         guard let paymentRequest_ = paymentRequest,
               let paymentAuthViewController = PKPaymentAuthorizationViewController(paymentRequest: paymentRequest_)
         else {
@@ -147,7 +190,7 @@ public class CXApplePayContext: NSObject {
         #endif
     }
     
-    @objc public func resetCurrentPaymentRequest() {
+    public func resetCurrentPaymentRequest() {
         currentPaymentRequest = nil
     }
     
@@ -213,12 +256,12 @@ extension CXApplePayContext: PKPaymentAuthorizationViewControllerDelegate {
     
     /// The payment authorization is finished.
     public func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
-        didFinishPayment?()
         #if os(macOS)
         self.controller.dismiss(controller)
         #else
         controller.dismiss(animated: true)
         #endif
+        didFinishPayment?()
     }
     
 }
