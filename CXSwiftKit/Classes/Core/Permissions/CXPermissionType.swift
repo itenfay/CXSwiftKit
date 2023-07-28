@@ -7,10 +7,11 @@
 
 /// The type for the permissions.
 @objc public enum CXPermissionType: Int8, CustomStringConvertible {
-    case photos, camera, microphone, locationAlways, locationInUse, notification, bluetooth, deviceBiometrics, devicePasscode, contacts, reminder, event, motion, speech, intents, health, media, appTracking
+    case none, photos, camera, microphone, locationAlways, locationInUse, notification, bluetooth, deviceBiometrics, devicePasscode, contacts, reminder, event, motion, speech, intents, health, media, appTracking
     
     public var description: String {
         switch self {
+        case .none:             return "None"
         case .photos:           return "Photos"
         case .camera:           return "Camera"
         case .microphone:       return "Microphone"
