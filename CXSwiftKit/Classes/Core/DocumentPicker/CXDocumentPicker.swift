@@ -23,7 +23,7 @@ import UniformTypeIdentifiers
     func present(documentTypes: [String])
 }
 
-open class CXDocumentPicker: NSObject {
+open class CXDocumentPicker: NSObject, ISKDocumentPicker {
     
     private var picker: UIDocumentPickerViewController?
     private weak var controller: UIViewController!
@@ -40,7 +40,7 @@ open class CXDocumentPicker: NSObject {
     public var actionSheetCancelTitle: String = "Cancel"
     public var fullScreenEnabled: Bool = false
     
-    required public init(
+    public required init(
         controller: UIViewController,
         delegate: CXDocumentDelegate?)
     {
