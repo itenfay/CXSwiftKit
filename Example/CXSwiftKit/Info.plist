@@ -56,6 +56,8 @@
 	<string>请允许app访问Siri，在您同意后，您才可以使用Siri功能</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>请允许app使用语音识别功能，在您同意后，您才可以进行语言识别进行语音转文字搜索功能</string>
+	<key>NSContactsUsageDescription</key>
+	<string>请允许app访问通讯录，在您同意后，您才可以使用通讯录功能</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
