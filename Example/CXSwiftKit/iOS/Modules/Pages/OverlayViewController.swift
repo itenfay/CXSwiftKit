@@ -14,11 +14,10 @@ import RxCocoa
 class OverlayViewController: BaseViewController {
     
     private let disposeBag = DisposeBag()
-    private lazy var emptyDataVC = EmptyDataViewController()
+    private var emptyDataVC: EmptyDataViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navTitle = "Overlay View"
     }
     
     override func configure() {
@@ -50,9 +49,12 @@ class OverlayViewController: BaseViewController {
     }
     
     private func present() {
-        emptyDataVC.ovcPresented = true
+        emptyDataVC = EmptyDataViewController()
         emptyDataVC.view.frame = CGRect(x: 0, y: 0, width: cxScreenWidth, height: cxScreenHeight/1.5)
-        view.cx.ovcPresent(emptyDataVC.view)
+        emptyDataVC.ovcPresented = true
+        view.cx.ovcPresent(emptyDataVC.view) { [weak self] in
+            self?.emptyDataVC = nil
+        }
     }
     
 }

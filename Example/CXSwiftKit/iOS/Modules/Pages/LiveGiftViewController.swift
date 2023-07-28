@@ -1,5 +1,5 @@
 //
-//  SvgaViewController.swift
+//  LiveGiftViewController.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2023/7/7.
@@ -12,29 +12,13 @@ import RxSwift
 import RxCocoa
 import SVGAPlayer
 
-class SvgaViewController: BaseViewController {
-    
-    private var svgaPlayer: SVGAPlayer!
+class LiveGiftViewController: BaseViewController {
     
     private let disposeBag = DisposeBag()
-    
-    private let items = [
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/EmptyState.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/HamburgerArrow.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/PinJump.svga?raw=true",
-        "https://github.com/svga/SVGA-Samples/raw/master/Rocket.svga",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/TwitterHeart.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/Walkthrough.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/angel.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/halloween.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/kingset.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/posche.svga?raw=true",
-        "https://cdn.jsdelivr.net/gh/svga/SVGA-Samples@master/rose.svga?raw=true",
-    ]
+    private let items = ["8", "12", "18", "20"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bindSvgaPlayer()
     }
     
     override func configure() {
@@ -49,7 +33,7 @@ class SvgaViewController: BaseViewController {
         
         let btnA = UIButton(type: .custom)
         btnA.backgroundColor = .gray
-        btnA.setTitle("火箭", for: .normal)
+        btnA.setTitle("🎁1", for: .normal)
         btnA.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
         btnA.layer.cornerRadius = 10
         btnA.showsTouchWhenHighlighted = true
@@ -66,7 +50,7 @@ class SvgaViewController: BaseViewController {
         
         let btnB = UIButton(type: .custom)
         btnB.backgroundColor = .gray
-        btnB.setTitle("心跳", for: .normal)
+        btnB.setTitle("🎁2", for: .normal)
         btnB.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
         btnB.layer.cornerRadius = 10
         btnB.showsTouchWhenHighlighted = true
@@ -83,7 +67,7 @@ class SvgaViewController: BaseViewController {
         
         let btnC = UIButton(type: .custom)
         btnC.backgroundColor = .gray
-        btnC.setTitle("Rose", for: .normal)
+        btnC.setTitle("🎁3", for: .normal)
         btnC.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
         btnC.layer.cornerRadius = 10
         btnC.showsTouchWhenHighlighted = true
@@ -100,7 +84,7 @@ class SvgaViewController: BaseViewController {
         
         let btnD = UIButton(type: .custom)
         btnD.backgroundColor = .gray
-        btnD.setTitle("随机", for: .normal)
+        btnD.setTitle("🎁4", for: .normal)
         btnD.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
         btnD.layer.cornerRadius = 10
         btnD.showsTouchWhenHighlighted = true
@@ -114,41 +98,58 @@ class SvgaViewController: BaseViewController {
         btnD.rx.tap.asDriver().drive(onNext: { [weak self] in
             self?.play(with: 4)
         }).disposed(by: disposeBag)
-        
-        svgaPlayer = SVGAPlayer()
-        svgaPlayer.contentMode = .bottom
-        view.addSubview(svgaPlayer)
-        svgaPlayer.cx.makeConstraints { make in
-            make.top.equalToAnchor(btnD.bottomAnchor).offset(2*paddingY)
-            make.leading.equalTo(paddingX)
-            make.trailing.equalTo(-paddingX)
-            make.bottom.equalTo(-cxSafeAreaBottom)
-        }
-    }
-    
-    private func bindSvgaPlayer() {
-        CXSKSvgaPlayManager.shared.svgaPlayer = svgaPlayer
     }
     
     func play(with tag: Int) {
-        // 震动反馈调用
         UIDevice.current.cx.makeImpactFeedback(style: .heavy)
-        //UIDevice.current.cx.makeSelectionFeedback()
-        //UIDevice.current.cx.makeNotificationFeedback(type: .success)
-        //CXHaptics.strongBoom()
-        //CXHaptics.weakBoom()
-        //CXHaptics.threeWeakBooms()
+        let model = CXLiveGiftModel()
         if tag == 1 {
-            CXSKSvgaPlayManager.shared.play(named: "Rocket")
+            model.giftName = items[0]
+            model.giftId = model.giftName.cx.md5 ?? "id_\(model.giftName)"
+            model.giftKey = "gift_key_\(model.giftName)"
+            model.giftDescription = "@大G送了\(model.giftName) "
         } else if tag == 2 {
-            CXSKSvgaPlayManager.shared.play(named: "heartbeat")
+            model.giftName = items[1]
+            model.giftId = model.giftName.cx.md5 ?? "id_\(model.giftName)"
+            model.giftKey = "gift_key_\(model.giftName)"
+            model.sendCount = 99
+            model.giftDescription = "@123送了\(model.giftName) "
         } else if tag == 3 {
-            CXSKSvgaPlayManager.shared.play(named: "rose_2.0.0")
+            model.giftName = items[2]
+            model.giftId = model.giftName.cx.md5 ?? "id_\(model.giftName)"
+            model.giftKey = "gift_key_\(model.giftName)"
+            model.sendCount = 520
+            model.giftDescription = "@青松送了\(model.giftName) "
         } else if tag == 4 {
-            let i = Int(arc4random_uniform(UInt32(items.count)))
-            let url = items[i < items.count ? i : 0]
-            CXSKSvgaPlayManager.shared.play(url: url)
+            model.giftName = items[3]
+            model.giftId = model.giftName.cx.md5 ?? "id_\(model.giftName)"
+            model.giftKey = "gift_key_\(model.giftName)"
+            model.sendCount = 10
+            model.giftDescription = "@流年送了\(model.giftName) "
         }
+        CXLiveGiftManager.shared.showGiftView(atView: view, info: model) { _ in
+            
+        }
+        
+        CXLiveGiftManager.shared.topAnimationView.modify(backgroundModifier: { backgroundView in
+            backgroundView.backgroundColor = UIColor.cx.randomColor
+        }, giftImageModifier: { imageView, model in
+            //imageView.cx.setImage(withUrl: model.giftAssetUrl)
+        }, contentModifier: { label, content in
+            
+        }, countModifier: { giftLabel, count in
+            
+        })
+        
+        CXLiveGiftManager.shared.bottomAnimationView.modify(backgroundModifier: { backgroundView in
+            backgroundView.backgroundColor = UIColor.cx.randomColor
+        }, giftImageModifier: { imageView, model in
+            //imageView.cx.setImage(withUrl: model.giftAssetUrl)
+        }, contentModifier: { label, content in
+            
+        }, countModifier: { giftLabel, count in
+            
+        })
     }
     
 }

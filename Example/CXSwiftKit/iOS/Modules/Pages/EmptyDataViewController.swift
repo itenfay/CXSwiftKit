@@ -28,7 +28,6 @@ class EmptyDataViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navTitle = "空数据设置"
         loadData()
     }
     
@@ -83,7 +82,7 @@ class EmptyDataViewController: BaseViewController {
     
     func loadData() {
         cx_showProgressHUD(withStatus: "正在加载数据...")
-        cxDelayToDispatch(1.0) {
+        cxDelayToDispatch(0.3) {
             self.cx_dismissProgressHUD()
             self.subject.onNext(.emptyData(desc: ""))
         }

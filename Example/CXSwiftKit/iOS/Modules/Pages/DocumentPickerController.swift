@@ -21,7 +21,6 @@ class DocumentPickerController: CXSKTableViewController<BaseSectionModel, Docume
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navTitle = "Document Picker"
         bind()
     }
     

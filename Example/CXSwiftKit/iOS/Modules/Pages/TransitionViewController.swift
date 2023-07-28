@@ -21,7 +21,6 @@ class TransitionViewController: CXSKCollectionViewController<BaseSectionModel, B
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navTitle = "过渡动画"
         bind()
         loadData()
     }

@@ -17,7 +17,6 @@ class DeviceInfoViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navTitle = "设备信息"
         loadData()
     }
     
@@ -84,8 +83,9 @@ extension DeviceInfoViewController: UITableViewDelegate, UITableViewDataSource {
             cell = UITableViewCell(style: .subtitle, reuseIdentifier: "DeviceInfoCell")
         }
         cell?.selectionStyle = .none
-        cell?.accessoryType = .disclosureIndicator
-        
+        //cell?.accessoryType = .disclosureIndicator
+        cell?.accessoryType = .none
+
         let contents = dataArray[indexPath.item].components(separatedBy: ":")
         cell?.textLabel?.text = contents[0] + ":"
         cell?.textLabel?.font = UIFont.cx.semiboldPingFang(ofSize: 16)

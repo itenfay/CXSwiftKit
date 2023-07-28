@@ -10,15 +10,17 @@ import UIKit
 import CXSwiftKit
 import RxSwift
 import RxCocoa
+import RxDataSources
 
-class PhotoLibraryViewController: BaseViewController {
+class PhotoLibraryViewController:  CXSKTableViewController<BaseSectionModel, AlbumModel> {
     
+    private var tableView: UITableView!
     private let disposeBag = DisposeBag()
     private lazy var photoLibHandle = CXPhotoLibraryOperator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navTitle = "相簿"
+        onSubcribe()
     }
     
     override func configure() {
@@ -34,7 +36,7 @@ class PhotoLibraryViewController: BaseViewController {
         let btnA = UIButton(type: .custom)
         btnA.backgroundColor = .gray
         btnA.setTitle("保存Avatar", for: .normal)
-        btnA.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
+        btnA.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 14)
         btnA.layer.cornerRadius = 10
         btnA.showsTouchWhenHighlighted = true
         view.addSubview(btnA)
@@ -51,7 +53,7 @@ class PhotoLibraryViewController: BaseViewController {
         let btnB = UIButton(type: .custom)
         btnB.backgroundColor = .gray
         btnB.setTitle("保存Image", for: .normal)
-        btnB.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
+        btnB.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 14)
         btnB.layer.cornerRadius = 10
         btnB.showsTouchWhenHighlighted = true
         view.addSubview(btnB)
@@ -68,7 +70,7 @@ class PhotoLibraryViewController: BaseViewController {
         let btnC = UIButton(type: .custom)
         btnC.backgroundColor = .gray
         btnC.setTitle("保存Video", for: .normal)
-        btnC.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
+        btnC.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 14)
         btnC.layer.cornerRadius = 10
         btnC.showsTouchWhenHighlighted = true
         view.addSubview(btnC)
@@ -85,7 +87,7 @@ class PhotoLibraryViewController: BaseViewController {
         let btnD = UIButton(type: .custom)
         btnD.backgroundColor = .gray
         btnD.setTitle("获取Albums", for: .normal)
-        btnD.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
+        btnD.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 14)
         btnD.layer.cornerRadius = 10
         btnD.showsTouchWhenHighlighted = true
         view.addSubview(btnD)
@@ -98,6 +100,53 @@ class PhotoLibraryViewController: BaseViewController {
         btnD.rx.tap.asDriver().drive(onNext: { [weak self] in
             self?.saveToAssetCollection(with: 4)
         }).disposed(by: disposeBag)
+        
+        tableView = UITableView(frame: .zero)
+        tableView.backgroundColor = UIColor.cx.color(withHexString: "0x333333", alpha: 0.5)
+        tableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
+        tableView.showsVerticalScrollIndicator = false
+        tableView.contentInsetAdjustmentBehavior = .never
+        tableView.cx.cornerRadius = 10
+        tableView.cx.masksToBounds = true
+        view.addSubview(tableView)
+        tableView.cx.makeConstraints { maker in
+            maker.top.equalToAnchor(btnA.bottomAnchor).offset(10)
+            maker.leading.equalToSuperview()
+            maker.trailing.equalToSuperview()
+            maker.bottom.equalToSuperview().offset(-cxSafeAreaBottom)
+        }
+    }
+    
+    private func onSubcribe() {
+        tableView.rx.itemSelected.asDriver().drive(onNext: { [weak self] indexPath in
+            self?.itemDidSelect(at: indexPath)
+        }).disposed(by: disposeBag)
+    }
+    
+    override func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: AlbumModel) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell")
+        if cell == nil {
+            cell = BaseTableViewCell(style: .subtitle, reuseIdentifier: "AlbumCell")
+        }
+        cell?.selectionStyle = .none
+        cell?.accessoryType = .disclosureIndicator
+        
+        cell?.textLabel?.text = item.name + "-" + "count: \(item.count)"
+        cell?.textLabel?.font = UIFont.cx.semiboldPingFang(ofSize: 16)
+        cell?.textLabel?.textColor = UIColor.cx.color(withHexString: "0x333333")
+        
+        cell?.detailTextLabel?.text = item.id
+        cell?.detailTextLabel?.font = UIFont.cx.regularPingFang(ofSize: 15)
+        cell?.detailTextLabel?.textColor = UIColor.cx.color(withHexString: "0x666666")
+        
+        return cell!
+    }
+    
+    func itemDidSelect(at indexPath: IndexPath) {
+        CXLog.info("row-\(indexPath.row): did click!")
+        cx.makeToast(text: "Row-\(indexPath.row): did click!")
     }
     
     private func saveToAssetCollection(with type: Int) {
@@ -107,9 +156,13 @@ class PhotoLibraryViewController: BaseViewController {
             return
         } else if type == 4 {
             let scale = UIScreen.main.scale
-            let albumModels = photoLibHandle.listAlbums()
+            let albumModels = photoLibHandle.fetchAlbums()
+            let sectionModel = BaseSectionModel()
+            var items = [AlbumModel]()
             for model in albumModels {
                 CXLogger.log(level: .info, message: "name=\(model.name), identifier=\(model.identifier), count=\(model.count)")
+                let albumModel = AlbumModel(id: model.identifier, name: model.name, count: model.count)
+                items.append(albumModel)
                 let assets = photoLibHandle.fetchAssets(inAssetCollection: model.assetCollection)
                 for asset in assets {
                     if asset.mediaType == .image {
@@ -129,27 +182,34 @@ class PhotoLibraryViewController: BaseViewController {
                     }
                 }
             }
+            
             cx.dismissProgressHUD()
+            
+            let list = makeAnimatedListProvider {
+                Observable.just([AnimatableSectionModel(model: sectionModel, items: items)])
+            }
+            list.bind(to: tableView.rx.items(dataSource: makeAnimatedDataSource())).disposed(by: disposeBag)
             return
         }
         do {
             switch type {
             case 2:
-                guard let path = Bundle.main.path(forResource: "panorama_10", ofType: "jpg") else {
+                guard let path = Bundle.main.path(forResource: "panorama_3", ofType: "jpg") else {
+                    cx.showMessages(withStyle: .light, body: "图片资源不存在！")
                     return
                 }
                 try photoLibHandle.addPhoto(URL(localFilePath: path), toAlbum: "CXAlbum", completionHandler: { [weak self] success, error in
-                    DispatchQueue.cx.mainSync {
+                    DispatchQueue.cx.mainAsync {
                         if success {
-                            CXLogger.log(level: .info, message: "panorama_0.jpg 保存成功!")
-                            self?.cx_showMessages(withStyle: .light, body: "panorama_0.jpg 保存成功!")
+                            CXLogger.log(level: .info, message: "panorama_3.jpg 保存成功!")
+                            self?.cx_showMessages(withStyle: .light, body: "panorama_3.jpg 保存成功!")
                         }
                         self?.cx.dismissProgressHUD()
                     }
                 })
             case 3:
-                try photoLibHandle.addVideo(URL(localFilePath: Bundle.main.path(forResource: "sample_320x240", ofType: "mp4")!), toAlbum: "CXTestVideo", completionHandler: { [weak self] success, error in
-                    DispatchQueue.cx.mainSync {
+                try photoLibHandle.addVideo(URL(localFilePath: Bundle.main.path(forResource: "sample_320x240", ofType: "mp4")!), toAlbum: "CXVideos", completionHandler: { [weak self] success, error in
+                    DispatchQueue.cx.mainAsync {
                         if success {
                             CXLogger.log(level: .info, message: "sample_320x240.mp4 保存成功!")
                             self?.cx_showMessages(withStyle: .dark, body: "sample_320x240.mp4 保存成功!")
@@ -171,7 +231,7 @@ class PhotoLibraryViewController: BaseViewController {
     private func saveAvatarToPhotosAlbum() {
         let image = UIImage(named: "avatar")
         image!.cx.saveToPhotosAlbum { [weak self] image, error, context in
-            DispatchQueue.cx.mainSync {
+            DispatchQueue.cx.mainAsync {
                 if error == nil {
                     CXLogger.log(level: .info, message: "save complelely!")
                     self?.cx_showMessages(withStyle: .light, body: "Avatar 保存成功!")
