@@ -95,7 +95,7 @@ extension NSObject: CXCommonWrapable {
         infoView.configureDropShadow()
         infoView.configureContent(title: title, body: body, iconImage: iconImage, iconText: iconText, buttonImage: buttonImage, buttonTitle: buttonTitle, buttonTapHandler: buttonTapHandler)
         infoView.backgroundView.backgroundColor = style == .dark
-        ? UIColor.cx.color(withHexString: "#000000", alpha: 0.8)
+        ? UIColor.cx.color(withHexString: "#000000", alpha: 0.7)
         : UIColor.cx.color(withHexString: "#FFFFFF")
         if title != nil {
             infoView.titleLabel?.textColor = style == .dark
