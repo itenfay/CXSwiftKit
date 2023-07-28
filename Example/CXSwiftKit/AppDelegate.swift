@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CXConfig.enableLog = CXAppContext().isDebug
         
         ReachabilityManager.shared.startListening()
+        checkApp()
         
         return true
     }
@@ -44,6 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ToastView.appearance().bottomOffsetPortrait = cxScreenHeight/2 - 10
         let sizeScale: CGFloat = (CGFloat.cx.screenWidth < 375) ? 0.9 : 1.0
         ToastView.appearance().font = UIFont.systemFont(ofSize: sizeScale * 16)
+    }
+    
+    private func checkApp() {
+        let appCtx = CXAppContext()
+        if appCtx.checkResign("ZH09RJOI") {
+            cx.showMessages(withStyle: .dark, body: "App被重签了！")
+        }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {
