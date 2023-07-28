@@ -360,7 +360,7 @@ public class CXPhotoLibraryOperator: NSObject {
     }
     
     /// Returns the list of `CXAlbumModel` model.
-    @objc public func listAlbums() -> [CXAlbumModel] {
+    @objc public func fetchAlbums() -> [CXAlbumModel] {
         var albums: [CXAlbumModel] = [CXAlbumModel]()
         let fetchResult = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: nil)
         fetchResult.enumerateObjects { assetCollection, index, stop in
