@@ -13,6 +13,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		790571052A73A909008D25D9 /* QuadCurveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 790571042A73A909008D25D9 /* QuadCurveViewController.swift */; };
 		795D68522A284E840052B7C4 /* 岁月神偷.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 795D684F2A284E840052B7C4 /* 岁月神偷.mp3 */; };
 		795D68532A284E840052B7C4 /* sample_320x240.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 795D68502A284E840052B7C4 /* sample_320x240.mp4 */; };
 		795D68542A284E840052B7C4 /* BeautifulInWhite.aac in Resources */ = {isa = PBXBuildFile; fileRef = 795D68512A284E840052B7C4 /* BeautifulInWhite.aac */; };
@@ -104,6 +105,7 @@
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		6545D8A63F03BE22F910D553 /* Pods-CXSwiftKit_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CXSwiftKit_Tests.debug.xcconfig"; path = "Target Support Files/Pods-CXSwiftKit_Tests/Pods-CXSwiftKit_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		74CDDAC5C9E81B7F844AC099 /* Pods-CXSwiftKit_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CXSwiftKit_Example.release.xcconfig"; path = "Target Support Files/Pods-CXSwiftKit_Example/Pods-CXSwiftKit_Example.release.xcconfig"; sourceTree = "<group>"; };
+		790571042A73A909008D25D9 /* QuadCurveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuadCurveViewController.swift; sourceTree = "<group>"; };
 		795D684F2A284E840052B7C4 /* 岁月神偷.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "岁月神偷.mp3"; sourceTree = "<group>"; };
 		795D68502A284E840052B7C4 /* sample_320x240.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample_320x240.mp4; sourceTree = "<group>"; };
 		795D68512A284E840052B7C4 /* BeautifulInWhite.aac */ = {isa = PBXFileReference; lastKnownFileType = file; path = BeautifulInWhite.aac; sourceTree = "<group>"; };
@@ -552,6 +554,7 @@
 				79F0900B2A711D8500E1E46C /* OverlayViewController.swift */,
 				79AE5BDE2A72449B00A6126F /* PermissionsViewController.swift */,
 				79AA187E2A6F9923003FC0F3 /* PhotoLibraryViewController.swift */,
+				790571042A73A909008D25D9 /* QuadCurveViewController.swift */,
 				79EBFE0E2A6A802E00242993 /* SvgaViewController.swift */,
 				79AA187F2A6F9923003FC0F3 /* TransitionViewController.swift */,
 				79AA187C2A6F9923003FC0F3 /* Views */,
@@ -829,6 +832,7 @@
 				79AE5BD72A721E4900A6126F /* LiveGiftViewController.swift in Sources */,
 				79AA18812A6F9923003FC0F3 /* PhotoLibraryViewController.swift in Sources */,
 				79EBFE082A6A4F7400242993 /* Configurator.swift in Sources */,
+				790571052A73A909008D25D9 /* QuadCurveViewController.swift in Sources */,
 				79EBFDEB2A6A4F7400242993 /* SettingsModel.swift in Sources */,
 				79F0900C2A711D8500E1E46C /* OverlayViewController.swift in Sources */,
 				79EBFDF32A6A4F7400242993 /* HomeView.swift in Sources */,

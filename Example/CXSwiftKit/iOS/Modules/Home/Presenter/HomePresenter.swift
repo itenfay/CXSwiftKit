@@ -26,7 +26,7 @@ class HomePresenter: BasePresenter {
     }
     
     override func loadData() {
-        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition", "Document Picker", "Overlay View", "Live Gift", "Network Request", "Permissions"]
+        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition", "Document Picker", "Overlay View", "Live Gift", "Network Request", "Permissions", "Draw QuadCurve"]
         for name in names {
             let model = DataModel(name: name)
             dataSource.append(model)
@@ -95,6 +95,8 @@ extension HomePresenter: UITableViewDelegate, UITableViewDataSource {
             controller = NetworkViewController()
         case "Permissions":
             controller = PermissionsViewController()
+        case "Draw QuadCurve":
+            controller = QuadCurveViewController()
         default: break
         }
         guard let toController = controller else {
