@@ -16,17 +16,17 @@ import Photos
 
 /// The app's Info.plist must contain the `NSPhotoLibraryAddUsageDescription` and `NSPhotoLibraryUsageDescription` key.
 public class CXPhotosPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .photos }
+    public var type: CXPermissionType { return .photos }
 }
 
 extension CXPhotosPermission {
     
     /// Represents the user explicitly granted this app access to the photo library.
-    @objc public var authorized: Bool {
+    public var authorized: Bool {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus {
+    public var status: CXPermissionStatus {
         var status: PHAuthorizationStatus
         if #available(iOS 14, tvOS 14, macOS 11.0, *) {
             status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
@@ -52,7 +52,7 @@ extension CXPhotosPermission {
     /// Prompts the user to grant the app permission to access the photo library.
     ///
     /// - Parameter handler: The callback the app invokes when it’s made a determination of the app’s status.
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         if #available(iOS 14, tvOS 14, macOS 11.0, *) {
             PHPhotoLibrary.requestAuthorization(for: .readWrite) { status in
@@ -101,18 +101,18 @@ import AVFoundation
 
 /// The app's Info.plist must contain a `NSCameraUsageDescription` key.
 public class CXCameraPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .camera }
+    public var type: CXPermissionType { return .camera }
 }
 
 extension CXCameraPermission {
     
     /// Represents the user explicitly granted this app access to the camera.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         return transform(for: status)
@@ -145,7 +145,7 @@ extension CXCameraPermission {
     /// Prompts the user to grant the app permission to access the camera.
     ///
     /// - Parameter completion: A callback the app invokes with the result that indicates whether the user granted or denied access to your app.
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { granted in
             let result = CXPermissionResult(type: self.type, status: granted ? .authorized : self.status)
@@ -164,18 +164,18 @@ import AVFoundation
 
 /// The app's Info.plist must contain a `NSMicrophoneUsageDescription` key.
 public class CXMicrophonePermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .microphone }
+    public var type: CXPermissionType { return .microphone }
 }
 
 extension CXMicrophonePermission {
     
     /// Represents the user explicitly granted this app access to the microphone.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         let status = AVCaptureDevice.authorizationStatus(for: AVMediaType.audio)
         return transform(for: status)
@@ -198,7 +198,7 @@ extension CXMicrophonePermission {
     /// Prompts the user to grant the app permission to access the camera.
     ///
     /// - Parameter completion: A callback the app invokes with the result that indicates whether the user granted or denied access to your app.
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         AVCaptureDevice.requestAccess(for: AVMediaType.audio) { granted in
             let result = CXPermissionResult(type: self.type, status: granted ? .authorized : self.status)
@@ -261,14 +261,18 @@ extension CXMicrophonePermission {
 import CoreLocation
 
 /// The app's Info.plist must contain the `NSLocationUsageDescription` and `NSLocationWhenInUseUsageDescription` key.
-public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
+public class CXAbstractLocationPermission: NSObject, CLLocationManagerDelegate {
     
     /// The block for location fetching.
     fileprivate var fetchingHandler: ((Double, Double, NSError?) -> Void)?
     /// The block for location updating.
     fileprivate var authorizedHandler: ((CXPermissionResult) -> Void)?
     
-    private var type_: CXPermissionType!
+    @objc public private(set) var type: CXPermissionType = .locationInUse
+    
+    public override init() {
+        assert(Swift.type(of: self) != CXAbstractLocationPermission.self, "Please use subclass[`CXLocationAlwaysPermission`, `CXLocationInUsePermission`]")
+    }
     
     /// Represents the user explicitly granted this app access to the location.
     @objc public var authorized: Bool
@@ -312,7 +316,8 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
         }
     }
     
-    @objc public func setupLocationManager() {
+    @objc public func setupLocationManager()
+    {
         if locationManager != nil { return }
         locationManager = CLLocationManager()
         locationManager?.delegate = self
@@ -320,7 +325,8 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
         locationManager?.desiredAccuracy = kCLLocationAccuracyBest
     }
     
-    @objc public func startUpdatingLocation(_ type: CXPermissionType) {
+    @objc public func startUpdatingLocation()
+    {
         if locationManager == nil { return }
         #if os(iOS)
         type == .locationAlways
@@ -347,7 +353,7 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
     public func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation])
     {
         guard let location = locations.last else { return }
-        authorizedHandler?(CXPermissionResult(type: type_, status: .authorized))
+        authorizedHandler?(CXPermissionResult(type: type, status: .authorized))
         let latitude  = location.coordinate.latitude
         let longitude = location.coordinate.longitude
         fetchingHandler?(latitude, longitude, nil)
@@ -359,16 +365,16 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
         fetchingHandler?(0, 0, err)
         if err.code == CLAuthorizationStatus.notDetermined.rawValue {
             CXLogger.log(level: .error, message: "User has not yet made a choice with regards to this application.")
-            authorizedHandler?(CXPermissionResult(type: type_, status: .unknown))
+            authorizedHandler?(CXPermissionResult(type: type, status: .unknown))
         } else if err.code == CLAuthorizationStatus.restricted.rawValue {
             CXLogger.log(level: .error, message: "This application is not authorized to use location services.")
-            authorizedHandler?(CXPermissionResult(type: type_, status: .unauthorized))
+            authorizedHandler?(CXPermissionResult(type: type, status: .unauthorized))
         } else if err.code == CLAuthorizationStatus.denied.rawValue {
             CXLogger.log(level: .error, message: "The user denied the use of location services for the app or they are disabled globally in Settings.")
-            authorizedHandler?(CXPermissionResult(type: type_, status: .unauthorized))
+            authorizedHandler?(CXPermissionResult(type: type, status: .unauthorized))
         } else {
             CXLogger.log(level: .error, message: "error=\(err)")
-            authorizedHandler?(CXPermissionResult(type: type_, status: status))
+            authorizedHandler?(CXPermissionResult(type: type, status: status))
         }
     }
     #endif
@@ -376,8 +382,8 @@ public class CXLocationBasePermission: NSObject, CLLocationManagerDelegate {
 }
 
 /// The app's Info.plist must contain a `NSLocationAlwaysUsageDescription` key.
-public class CXLocationAlwaysPermission: CXLocationBasePermission, CXPermission {
-    @objc public var type: CXPermissionType { return .locationAlways }
+public class CXLocationAlwaysPermission: CXAbstractLocationPermission, CXPermission {
+    public override var type: CXPermissionType { return .locationAlways }
 }
 
 extension CXLocationAlwaysPermission {
@@ -385,12 +391,12 @@ extension CXLocationAlwaysPermission {
     /// Prompts the user to grant the app permission to access the location.
     ///
     /// - Parameter completion: A callback the app invokes.
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         authorizedHandler = completion
         #if canImport(CoreLocation)
         setupLocationManager()
-        startUpdatingLocation(type)
+        startUpdatingLocation()
         #endif
     }
     
@@ -400,15 +406,15 @@ extension CXLocationAlwaysPermission {
         fetchingHandler = completion
         #if canImport(CoreLocation)
         setupLocationManager()
-        startUpdatingLocation(type)
+        startUpdatingLocation()
         #endif
     }
     
 }
 
 /// The app's Info.plist must contain a `NSLocationWhenInUseUsageDescription` key.
-public class CXLocationInUsePermission: CXLocationBasePermission, CXPermission {
-    @objc public var type: CXPermissionType { .locationInUse }
+public class CXLocationInUsePermission: CXAbstractLocationPermission, CXPermission {
+    public override var type: CXPermissionType { .locationInUse }
 }
 
 extension CXLocationInUsePermission {
@@ -416,12 +422,12 @@ extension CXLocationInUsePermission {
     /// Prompts the user to grant the app permission to access the location.
     ///
     /// - Parameter completion: A callback the app invokes.
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         authorizedHandler = completion
         #if canImport(CoreLocation)
         setupLocationManager()
-        startUpdatingLocation(type)
+        startUpdatingLocation()
         #endif
     }
     
@@ -431,7 +437,7 @@ extension CXLocationInUsePermission {
         fetchingHandler = completion
         #if canImport(CoreLocation)
         setupLocationManager()
-        startUpdatingLocation(type)
+        startUpdatingLocation()
         #endif
     }
     
@@ -445,13 +451,13 @@ extension CXLocationInUsePermission {
 import UserNotifications
 
 public class CXNotificationPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { .notification }
+    public var type: CXPermissionType { .notification }
 }
 
 extension CXNotificationPermission {
     
     /// Represents the user explicitly granted this app access to the notification.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
@@ -470,7 +476,7 @@ extension CXNotificationPermission {
         return status
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         if #available(macOS 10.14, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
             return transform(for: unStatus)
@@ -504,7 +510,8 @@ extension CXNotificationPermission {
         }
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void) {
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    {
         if #available(macOS 10.14, iOS 10.0, watchOS 3.0, tvOS 10.0, *) {
             let center = UNUserNotificationCenter.current()
             center.requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
@@ -545,7 +552,7 @@ import CoreBluetooth
 
 /// The app's Info.plist must contain the `NSBluetoothAlwaysUsageDescription` and `NSBluetoothPeripheralUsageDescription` key.
 public class CXBluetoothPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .bluetooth }
+    public var type: CXPermissionType { return .bluetooth }
     
     fileprivate var centralManager: CBCentralManager?
     fileprivate var authorizedHandler: ((CXPermissionResult) -> Void)?
@@ -554,12 +561,12 @@ public class CXBluetoothPermission: NSObject, CXPermission {
 extension CXBluetoothPermission: CBCentralManagerDelegate {
     
     /// Represents the user explicitly granted this app access to the bluetooth.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         if #available(iOS 13.0, *) {
             var status: CBManagerAuthorization
@@ -593,11 +600,12 @@ extension CXBluetoothPermission: CBCentralManagerDelegate {
         authorizedHandler = nil
     }
     
-    public func centralManagerDidUpdateState(_ central: CBCentralManager) {
+    public func centralManagerDidUpdateState(_ central: CBCentralManager)
+    {
         authorizedHandler?(CXPermissionResult(type: type, status: status))
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         authorizedHandler = completion
         if centralManager == nil {
@@ -616,15 +624,18 @@ extension CXBluetoothPermission: CBCentralManagerDelegate {
 #if os(iOS) && canImport(LocalAuthentication)
 import LocalAuthentication
 
-public class CXDeviceSafetyContext: NSObject {
+public class CXAbstractDeviceSafetyPermission: NSObject {
     @objc public private(set) var type: CXPermissionType = .deviceBiometrics
+    @objc public var localizedReason: String = " "
     
-    @objc public init(type: CXPermissionType) {
-        self.type = type
+    @objc public override init() {
+        if Swift.type(of: self) == CXAbstractDeviceSafetyPermission.self {
+            fatalError("Please user subclass[`CXDeviceBiometricsPermission`, `CXDevicePasscodePermission`]")
+        }
     }
 }
 
-extension CXDeviceSafetyContext {
+extension CXAbstractDeviceSafetyPermission {
     
     @available(iOS 11.0, *)
     @objc public var biometryType: LABiometryType
@@ -666,8 +677,10 @@ extension CXDeviceSafetyContext {
                 switch error?.code {
                 case nil where isReady:
                     return .unknown
+                    // Biometry is not available on the device.
                 case LAError.biometryNotAvailable.rawValue:
-                    return .unauthorized
+                    return .disabled
+                    // The user has no enrolled biometric identities.
                 case LAError.biometryNotEnrolled.rawValue:
                     return .unauthorized
                 default:
@@ -681,11 +694,14 @@ extension CXDeviceSafetyContext {
         }
     }
     
-    /// Evaluates the device biometrics.
+    /// Evaluates the device biometrics or device passcode.
     @available(iOS 8.0, *)
-    @objc public func evaluateDeviceBiometrics(completion: @escaping (CXPermissionResult) -> Void)
+    @objc public func evaluateDeviceSafetyPolicy(completion: @escaping (CXPermissionResult) -> Void)
     {
-        LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: " ") { success, error in
+        let policy: LAPolicy = type == .deviceBiometrics
+        ? .deviceOwnerAuthenticationWithBiometrics
+        : .deviceOwnerAuthentication
+        LAContext().evaluatePolicy(policy, localizedReason: localizedReason) { success, error in
             if error != nil {
                 CXLogger.log(level: .error, message: "error=\(error!).")
             }
@@ -694,15 +710,8 @@ extension CXDeviceSafetyContext {
         }
     }
     
-    /// Evaluates the device passcode.
-    @available(iOS 8.0, *)
-    @objc public func evaluateDevicePasscode(completion: @escaping (CXPermissionResult) -> Void)
-    {
-        LAContext().evaluatePolicy(.deviceOwnerAuthentication, localizedReason: " ") { success, error in
-            if error != nil {
-                CXLogger.log(level: .error, message: "error=\(error!).")
-            }
-            let result = CXPermissionResult(type: self.type, status: success ? .authorized : .unauthorized)
+    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void) {
+        evaluateDeviceSafetyPolicy { result in
             completion(result)
         }
     }
@@ -710,17 +719,21 @@ extension CXDeviceSafetyContext {
 }
 
 /// The app's Info.plist must contain a `NSFaceIDUsageDescription` key.
-public class CXDeviceBiometricsPermission: CXDeviceSafetyContext, CXPermission {
-    @objc public override var type: CXPermissionType { return .deviceBiometrics }
+public class CXDeviceBiometricsPermission: CXAbstractDeviceSafetyPermission, CXPermission {
+    public override var type: CXPermissionType { .deviceBiometrics }
+    
+    @objc public override init() {
+        super.init()
+        self.localizedReason = "Biometrics Authentication"
+    }
+    
+    @objc public init(localizedReason: String) {
+        super.init()
+        self.localizedReason = localizedReason
+    }
 }
 
 extension CXDeviceBiometricsPermission {
-    
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void) {
-        evaluateDeviceBiometrics { result in
-            completion(result)
-        }
-    }
     
     #if swift(>=5.5)
     @available(iOS 13.0, *)
@@ -728,7 +741,7 @@ extension CXDeviceBiometricsPermission {
     {
         var result: CXPermissionResult
         do {
-            let success = try await LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: " ")
+            let success = try await LAContext().evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: localizedReason)
             result = CXPermissionResult(type: type, status: success ? .authorized : .unauthorized)
         } catch let error {
             CXLogger.log(level: .error, message: "error=\(error).")
@@ -740,24 +753,27 @@ extension CXDeviceBiometricsPermission {
     
 }
 
-public class CXDevicePasscodePermission: CXDeviceSafetyContext, CXPermission {
-    @objc public override var type: CXPermissionType { return .devicePasscode }
+public class CXDevicePasscodePermission: CXAbstractDeviceSafetyPermission, CXPermission {
+    public override var type: CXPermissionType { .devicePasscode }
+    
+    @objc public override init() {
+        super.init()
+    }
+    
+    @objc public init(localizedReason: String) {
+        super.init()
+        self.localizedReason = localizedReason
+    }
 }
 
 extension CXDevicePasscodePermission {
-    
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void) {
-        evaluateDevicePasscode { result in
-            completion(result)
-        }
-    }
     
     #if swift(>=5.5)
     @available(iOS 13.0, *)
     public func evaluateDevicePasscode() async -> CXPermissionResult
     {
         do {
-            let success = try await LAContext().evaluatePolicy(.deviceOwnerAuthentication, localizedReason: " ")
+            let success = try await LAContext().evaluatePolicy(.deviceOwnerAuthentication, localizedReason: localizedReason)
             return CXPermissionResult(type: type, status: success ? .authorized : .unauthorized)
         } catch let error {
             CXLogger.log(level: .error, message: "error=\(error).")
@@ -777,25 +793,26 @@ import Contacts
 
 /// The app's Info.plist must contain a `NSContactsUsageDescription` key.
 public class CXContactsPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .contacts }
+    public var type: CXPermissionType { return .contacts }
 }
 
 extension CXContactsPermission {
     
     /// Represents the user explicitly granted this app access to the contacts.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
     /// Returns the current status to access the contact data.
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         let status = CNContactStore.authorizationStatus(for: CNEntityType.contacts)
         return transform(for: status)
     }
     
-    @objc public func transform(for status: CNAuthorizationStatus) -> CXPermissionStatus {
+    @objc public func transform(for status: CNAuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -819,7 +836,7 @@ extension CXContactsPermission {
     }
     #endif
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         let contactStore = CNContactStore()
         contactStore.requestAccess(for: CNEntityType.contacts) { granted, error in
@@ -834,7 +851,8 @@ extension CXContactsPermission {
     /// Fetches contacts from the contacts store app.
     ///
     /// - Parameter completion: A block called, when enumeration of all contacts matching a contact fetch request.
-    @objc public func fetchContacts(completion: @escaping ([CNContact]) -> Void) {
+    @objc public func fetchContacts(completion: @escaping ([CNContact]) -> Void)
+    {
         /// Specified keys.
         let keysToFetch = [CNContactGivenNameKey as NSString,
                            CNContactFamilyNameKey as NSString,
@@ -851,7 +869,8 @@ extension CXContactsPermission {
     /// - Parameters:
     ///   - keysToFetch: An array of contact property keys and/or key descriptors from contacts objects to be fetched in the returned contacts. For a list of possible keys, see [Contact Keys](doc://com.apple.documentation/documentation/contacts/contact_keys?language=swift).
     ///   - completion: A block called, when enumeration of all contacts matching a contact fetch request.
-    @objc public func fetchContacts(_ keys: [CNKeyDescriptor]?, completion: @escaping ([CNContact]) -> Void) {
+    @objc public func fetchContacts(_ keys: [CNKeyDescriptor]?, completion: @escaping ([CNContact]) -> Void)
+    {
         guard let keysToFetch = keys else {
             CXLogger.log(level: .info, message: "The keys is null.")
             completion([])
@@ -902,25 +921,26 @@ import EventKit
 
 /// The app's Info.plist must contain a `NSRemindersUsageDescription` key.
 public class CXReminderPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .reminder }
+    public var type: CXPermissionType { return .reminder }
 }
 
 extension CXReminderPermission {
     
     /// Represents the user explicitly granted this app access to the reminder.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         // The current authorization status for a reminder entity type.
         let status = EKEventStore.authorizationStatus(for: EKEntityType.reminder)
         return transform(for: status)
     }
     
-    @objc public func transform(for status: EKAuthorizationStatus) -> CXPermissionStatus {
+    @objc public func transform(for status: EKAuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -929,7 +949,7 @@ extension CXReminderPermission {
         }
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.reminder) { (granted, error) in
@@ -951,25 +971,26 @@ extension CXReminderPermission {
 
 /// The app's Info.plist must contain a `NSCalendarsUsageDescription` key.
 public class CXCalendarPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .event }
+    public var type: CXPermissionType { return .event }
 }
 
 extension CXCalendarPermission {
     
     /// Represents the user explicitly granted this app access to the calendar.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         // The current authorization status for a calendar entity type.
         let status = EKEventStore.authorizationStatus(for: EKEntityType.event)
         return transform(for: status)
     }
     
-    @objc public func transform(for status: EKAuthorizationStatus) -> CXPermissionStatus {
+    @objc public func transform(for status: EKAuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -978,7 +999,7 @@ extension CXCalendarPermission {
         }
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         let eventStore = EKEventStore()
         eventStore.requestAccess(to: EKEntityType.event) { (granted, error) in
@@ -1001,18 +1022,18 @@ import CoreMotion
 
 /// The app's Info.plist must contain a `NSMotionUsageDescription` key.
 public class CXMotionPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .motion }
+    public var type: CXPermissionType { return .motion }
 }
 
 extension CXMotionPermission {
     
     /// Represents the user explicitly granted this app access to the motion.
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         if #available(iOS 11.0, *) {
             let status = CMMotionActivityManager.authorizationStatus()
@@ -1023,7 +1044,8 @@ extension CXMotionPermission {
     }
     
     @available(iOS 11.0, *)
-    @objc public func transform(for status: CMAuthorizationStatus) -> CXPermissionStatus {
+    @objc public func transform(for status: CMAuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -1032,7 +1054,7 @@ extension CXMotionPermission {
         }
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         let manager = CMMotionActivityManager()
         let today = Date()
@@ -1057,23 +1079,24 @@ import Speech
 
 /// The app's Info.plist must contain a `NSSpeechRecognitionUsageDescription` key.
 public class CXSpeechPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .speech }
+    public var type: CXPermissionType { return .speech }
 }
 
 extension CXSpeechPermission {
     
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         let status = SFSpeechRecognizer.authorizationStatus()
         return transform(for: status)
     }
     
-    @objc public func transform(for status: SFSpeechRecognizerAuthorizationStatus) -> CXPermissionStatus {
+    @objc public func transform(for status: SFSpeechRecognizerAuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -1082,7 +1105,7 @@ extension CXSpeechPermission {
         }
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         SFSpeechRecognizer.requestAuthorization { status in
             completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
@@ -1095,24 +1118,24 @@ extension CXSpeechPermission {
 
 //MARK: - Siri
 
-#if canImport(Intents)
+#if !os(macOS) && canImport(Intents)
 import Intents
 
 /// The app's Info.plist must contain a `NSSiriUsageDescription` key.
 public class CXSiriPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .intents }
+    public var type: CXPermissionType { return .intents }
 }
 
 extension CXSiriPermission {
     
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
-        if #available(tvOS 14.0, *) {
+        if #available(iOS 10.0, tvOS 14.0, watchOS 6.0, *) {
             let status = INPreferences.siriAuthorizationStatus()
             return transform(for: status)
         } else {
@@ -1120,8 +1143,9 @@ extension CXSiriPermission {
         }
     }
     
-    @available(tvOS 14.0, *)
-    @objc public func transform(for status: INSiriAuthorizationStatus) -> CXPermissionStatus {
+    @available(iOS 10.0, tvOS 14.0, watchOS 6.0, *)
+    @objc public func transform(for status: INSiriAuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -1130,9 +1154,9 @@ extension CXSiriPermission {
         }
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
-        if #available(tvOS 14.0, *) {
+        if #available(iOS 10.0, tvOS 14.0, watchOS 6.0, *) {
             INPreferences.requestSiriAuthorization { status in
                 completion(CXPermissionResult(type: self.type, status: self.transform(for: status)))
             }
@@ -1151,17 +1175,17 @@ import MediaPlayer
 
 /// The app's Info.plist must contain a `NSAppleMusicUsageDescription` key.
 public class CXMediaPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .media }
+    public var type: CXPermissionType { return .media }
 }
 
 extension CXMediaPermission {
     
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         if #available(iOS 9.3, *) {
             let status = MPMediaLibrary.authorizationStatus()
@@ -1172,7 +1196,8 @@ extension CXMediaPermission {
     }
     
     @available(iOS 9.3, *)
-    @objc public func transform(for status: MPMediaLibraryAuthorizationStatus) -> CXPermissionStatus {
+    @objc public func transform(for status: MPMediaLibraryAuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -1190,7 +1215,7 @@ extension CXMediaPermission {
     }
     #endif
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         if #available(iOS 9.3, *) {
             MPMediaLibrary.requestAuthorization { status in
@@ -1212,17 +1237,17 @@ import AppTrackingTransparency
 
 /// The app's Info.plist must contain a `NSUserTrackingUsageDescription` key.
 public class CXAppTrackingPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .appTracking }
+    public var type: CXPermissionType { return .appTracking }
 }
 
 extension CXAppTrackingPermission {
     
-    @objc public var authorized: Bool
+    public var authorized: Bool
     {
         return status == .authorized
     }
     
-    @objc public var status: CXPermissionStatus
+    public var status: CXPermissionStatus
     {
         if #available(iOS 14, *) {
             let status = ATTrackingManager.trackingAuthorizationStatus
@@ -1233,7 +1258,8 @@ extension CXAppTrackingPermission {
     }
     
     @available(iOS 14, *)
-    @objc public func transform(for status: ATTrackingManager.AuthorizationStatus) -> CXPermissionStatus {
+    @objc public func transform(for status: ATTrackingManager.AuthorizationStatus) -> CXPermissionStatus
+    {
         switch status {
         case .notDetermined: return .unknown
         case .restricted, .denied: return .unauthorized
@@ -1242,7 +1268,7 @@ extension CXAppTrackingPermission {
         }
     }
     
-    @objc public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
+    public func requestAccess(completion: @escaping (CXPermissionResult) -> Void)
     {
         if #available(iOS 14, *) {
             ATTrackingManager.requestTrackingAuthorization { status in
@@ -1265,7 +1291,7 @@ extension CXAppTrackingPermission {
 import HealthKit
 
 public class CXHealthPermission: NSObject, CXPermission {
-    @objc public var type: CXPermissionType { return .health }
+    public var type: CXPermissionType { return .health }
 }
 
 /// The app's Info.plist must contain the `NSHealthUpdateUsageDescription` and `NSHealthShareUsageDescription` key.
