@@ -51,7 +51,7 @@ import OverlayController
 
 public protocol CXSwiftViewWrapable: AnyObject {
     #if os(iOS) && canImport(OverlayController)
-    func cx_ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle, position: OverlayLayoutPosition, positionOffset: CGFloat, style: OverlaySlideStyle, windowLevel: OverlayWindowLevel, isDismissOnMaskTouched: Bool, isPanGestureEnabled: Bool, panDismissPercent: CGFloat, duration: TimeInterval, completion: (() -> Void)?)
+    func cx_ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle, position: OverlayLayoutPosition, positionOffset: CGFloat, style: OverlaySlideStyle, windowLevel: OverlayWindowLevel, isDismissOnMaskTouched: Bool, isPanGestureEnabled: Bool, panDismissPercent: CGFloat, duration: TimeInterval, completion: (() -> Void)?, didDismiss: @escaping () -> Void)
     func cx_ovcDismiss(duration: TimeInterval, completion: (() -> Void)?)
     #endif
 }
