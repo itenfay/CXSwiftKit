@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>CXSwiftKit</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,8 +26,16 @@
 	<true/>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>请允许访问APP的音频文件，用来上传音频</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>请允许app访问蓝牙，在您同意后，您才可以使用蓝牙功能</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>请允许app访问蓝牙，在您同意后，您才可以使用蓝牙功能</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>请允许app访问日历，在您同意后，您才可以使用日历功能</string>
 	<key>NSCameraUsageDescription</key>
 	<string>请允许访问相机，以方便拍摄并上传用户头像以及背景图等</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>请允许app访问Face ID，在您同意后，您才可以使用Face ID功能</string>
 	<key>NSLocalNetworkUsageDescription</key>
 	<string>请允许使用本地网络进行数请求访问, 作为视频的预缓存</string>
 	<key>NSLocationAlwaysUsageDescription</key>
@@ -40,8 +50,12 @@
 	<string>请允许app访问你的相册，照片仅用作用户头像、背景图等</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>请允许app访问你的相册，照片仅用作用户头像、背景图等</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>请允许app访问Reminder，在您同意后，您才可以使用Reminder功能</string>
+	<key>NSSiriUsageDescription</key>
+	<string>请允许app访问Siri，在您同意后，您才可以使用Siri功能</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>请允许app使用语音识别功能,在您同意后，您才可以进行语言识别进行语音转文字搜索功能</string>
+	<string>请允许app使用语音识别功能，在您同意后，您才可以进行语言识别进行语音转文字搜索功能</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -55,5 +69,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 	</array>
+	<key>kTCCServiceMediaLibrary</key>
+	<string>请允许app访问Apple Music，在您同意后，您才可以使用Apple Music功能</string>
 </dict>
 </plist>
