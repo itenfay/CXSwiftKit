@@ -26,33 +26,8 @@ target 'CXSwiftKit_Example' do
   # HandyJSON
   pod 'HandyJSON'
   
-  # KafkaRefresh
-  pod 'KafkaRefresh'
-  # MJRefresh
-  pod 'MJRefresh'
-  
-  # SVProgressHUD
-  pod 'SVProgressHUD'
-  # SwiftMessages
-  pod 'SwiftMessages'
-  # Toaster
-  pod 'Toaster'
-  # Toast_Swift
-  pod 'Toast-Swift', '~> 5.0.1'
-  
   # Starscream
   pod 'Starscream'
-  
-  # DZNEmptyDataSet
-  pod 'DZNEmptyDataSet'
-  
-  # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
-  pod 'SVGAPlayer'
-  #pod 'SSZipArchive', '~> 2.1.4'
-  #pod 'Protobuf', '~> 3.4'
-  
-  # OverlayController
-  pod 'OverlayController'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths

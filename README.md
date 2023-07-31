@@ -77,9 +77,6 @@ CXSwiftKit
   ┃   ┃   ┣ CXDocumentDelegate.swift
   ┃   ┃   ┣ CXDocumentPicker.swift
   ┃   ┃   ┗ CXDocumentDelegate.swift
-  ┃   ┣ EmptyDataSet // Used to set empty data for list view.
-  ┃   ┃   ┣ CXEmptyDataSetMediator.swift 
-  ┃   ┃   ┗ CXEmptyDataSetStyle.swift
   ┃   ┣ ImageBuffer // Used to process image buffer.
   ┃   ┃   ┗ CXImageBufferProcessor.swift  
   ┃   ┣ Permissions 
@@ -89,9 +86,6 @@ CXSwiftKit
   ┃   ┃    // deviceBiometrics, devicePasscode, contacts, reminder, event, motion, siri, health, media, appTracking.
   ┃   ┃   ┣ CXPermissionStatus.swift
   ┃   ┃   ┣ CXPermissionType.swift
-  ┃   ┣ svga // Used to show animation of the svga file in iOS.
-  ┃   ┃   ┣ CXSvgaPlayManager.swift
-  ┃   ┃   ┣ CXSvgaPlayOperation.swift
   ┃   ┣ Timer
   ┃   ┃   ┣ CXDispatchTimer.swift
   ┃   ┃   ┗ CXTimer.swift
@@ -156,16 +150,11 @@ CXSwiftKit
   ┃   ┗ CXResponseResult.swift
   ┃
   ┣ Protocol
-  ┃   ┣ CXCommonWrapable.swift         // Abstracts common calls for `SVProgressHUD, SwiftMessages, Toaster`
   ┃   ┣ CXViewControllerWrapable.swift // Used to present or dismiss view.
   ┃   ┗ CXViewWrapable.swift           // Used to present or dismiss view, abstracts common calls for `Toast_Swift`
   ┃
   ┗ Rx
-      ┣ Button+RxCx.swift        // Used to show indicator
-      ┣ EmptyDataSet+RxCx.swift  // Used to bind empty data set for list view.
-      ┣ KafkaRefresh+RxCx.swift  // Used to set refresh control for list view.
-      ┣ Kingfisher+RxCx.swift    // Used to set remote image for image view.
-      ┗ MJRefresh+RxCx.swift     // Used to set refresh control for list view.
+     ┗ Button+RxCx.swift        // Used to show indicator
 ```
 
 ## 处理错误

@@ -500,17 +500,6 @@ extension CXSwiftBase where T : CXView {
     }
     #endif
     
-    #if os(iOS) && canImport(OverlayController)
-    public func ovcPresent(_ view: UIView?, maskStyle: OverlayMaskStyle = .black(opacity: 0.7), position: OverlayLayoutPosition = .bottom, positionOffset: CGFloat = 0, style: OverlaySlideStyle = .fromToBottom, windowLevel: OverlayWindowLevel = .low, isDismissOnMaskTouched: Bool = true, isPanGestureEnabled: Bool = true, panDismissPercent: CGFloat = 0.5, duration: TimeInterval = 0.3, completion: (() -> Void)? = nil, didDismiss: @escaping () -> Void)
-    {
-        self.base.cx_ovcPresent(view, maskStyle: maskStyle, position: position, positionOffset: positionOffset, style: style, windowLevel: windowLevel, isDismissOnMaskTouched: isDismissOnMaskTouched, isPanGestureEnabled: isPanGestureEnabled, panDismissPercent: panDismissPercent, duration: duration, completion: completion, didDismiss: didDismiss)
-    }
-    
-    public func ovcDismiss(duration: TimeInterval = 0.3, completion: (() -> Void)? = nil) {
-        self.base.cx_ovcDismiss(duration: duration, completion: completion)
-    }
-    #endif
-    
     public func makeConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         self.base.cx_makeConstraints(maker: maker)
     }
@@ -1503,62 +1492,6 @@ extension UIView: CXViewWrapable {
 }
 #endif
 
-//MARK: - CXSwiftViewWrapable
-
-#if os(iOS) && canImport(OverlayController)
-extension UIView: CXSwiftViewWrapable {
-    
-    private var cx_overlayController: OverlayController? {
-        get {
-            return objc_getAssociatedObject(self, &CXAssociatedKey.presentByOverlayController) as? OverlayController
-        }
-        set (ovc) {
-            objc_setAssociatedObject(self, &CXAssociatedKey.presentByOverlayController, ovc, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
-    public func cx_ovcPresent(
-        _ view: UIView?,
-        maskStyle: OverlayMaskStyle = .black(opacity: 0.7),
-        position: OverlayLayoutPosition = .bottom,
-        positionOffset: CGFloat = 0,
-        style: OverlaySlideStyle = .fromToBottom,
-        windowLevel: OverlayWindowLevel = .low,
-        isDismissOnMaskTouched: Bool = true,
-        isPanGestureEnabled: Bool = true,
-        panDismissPercent: CGFloat = 0.5,
-        duration: TimeInterval = 0.3,
-        completion: (() -> Void)? = nil,
-        didDismiss: @escaping () -> Void)
-    {
-        guard let overlayView = view else { return }
-        overlayView.cx_overlayController = OverlayController(view: overlayView)
-        overlayView.cx_overlayController?.maskStyle = maskStyle
-        overlayView.cx_overlayController?.layoutPosition = position
-        overlayView.cx_overlayController?.offsetSpacing = positionOffset
-        overlayView.cx_overlayController?.presentationStyle = style
-        overlayView.cx_overlayController?.windowLevel = windowLevel
-        overlayView.cx_overlayController?.isDismissOnMaskTouched = isDismissOnMaskTouched
-        overlayView.cx_overlayController?.isPanGestureEnabled = isPanGestureEnabled
-        overlayView.cx_overlayController?.panDismissRatio = panDismissPercent
-        overlayView.cx_overlayController?.present(in: self, duration: duration, completion: completion)
-        overlayView.cx_overlayController?.didDismissClosure = { [weak oView = overlayView] ovc in
-            didDismiss()
-            oView?.cx_overlayController = nil
-        }
-    }
-    
-    public func cx_ovcDismiss(duration: TimeInterval = 0.3, completion: (() -> Void)? = nil) {
-        assert(cx_overlayController != nil, "Please invoke ovcDismiss(::) method with the overlay view.")
-        cx_overlayController?.dissmiss(duration: duration, completion: { [weak self] in
-            completion?()
-            self?.cx_overlayController = nil
-        })
-    }
-    
-}
-#endif
-
 //MARK: - Constraints
 
 extension CXView {
@@ -1876,53 +1809,5 @@ extension CXView {
         return heightAnchor
     }
 }
-
-#if os(iOS) && canImport(Toast_Swift)
-import Toast_Swift
-
-extension UIView: CXToastViewWrapable {
-    
-    public func cx_showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        cx_showToast(message, image: nil, completion: completion)
-    }
-    
-    public func cx_showToast(_ message: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        cx_showToast(message, title: nil, image: image, style: ToastManager.shared.style, completion: completion)
-    }
-    
-    public func cx_showToast(_ message: String?, title: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        cx_showToast(message, title: title, image: image, style: ToastManager.shared.style, completion: completion)
-    }
-    
-    public func cx_showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, position: ToastPosition = ToastManager.shared.position, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        self.makeToast(message, duration: duration, position: position, title: title, image: image, style: style, completion: completion)
-    }
-    
-    public func cx_showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, point: CGPoint, title: String? = nil, image: UIImage? = nil, style: ToastStyle = ToastManager.shared.style, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        self.makeToast(message, duration: duration, point: point, title: title, image: image, style: style, completion: completion)
-    }
-    
-    public func cx_hideAllToasts()
-    {
-        self.hideAllToasts()
-    }
-    
-    public func cx_showToastActivity(_ position: ToastPosition)
-    {
-        self.makeToastActivity(position)
-    }
-    
-    public func cx_hideToastActivity()
-    {
-        self.hideToastActivity()
-    }
-    
-}
-#endif
 
 #endif

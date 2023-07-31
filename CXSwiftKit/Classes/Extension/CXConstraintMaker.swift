@@ -171,14 +171,14 @@ public class CXConstraintMaker: NSObject {
     @objc public var centerY: CXConstraintYAxisItem!
     
     @objc public init(
-        top: CXConstraintYAxisItem!,
-        leading: CXConstraintXAxisItem!,
-        bottom: CXConstraintYAxisItem!,
-        trailing: CXConstraintXAxisItem!,
-        width: CXConstraintDimensionItem!,
-        height: CXConstraintDimensionItem!,
-        centerX: CXConstraintXAxisItem!,
-        centerY: CXConstraintYAxisItem!)
+        top: CXConstraintYAxisItem,
+        leading: CXConstraintXAxisItem,
+        bottom: CXConstraintYAxisItem,
+        trailing: CXConstraintXAxisItem,
+        width: CXConstraintDimensionItem,
+        height: CXConstraintDimensionItem,
+        centerX: CXConstraintXAxisItem,
+        centerY: CXConstraintYAxisItem)
     {
         self.top = top
         self.leading = leading

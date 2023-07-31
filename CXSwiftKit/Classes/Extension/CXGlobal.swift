@@ -88,9 +88,9 @@ public let cxTabBarH: CGFloat = 49 + cxSafeAreaBottom
 #if os(iOS) || os(tvOS)
 
 /// Load image named xxx.
-public func cxLoadImage(named: String) -> UIImage
+public func cxLoadImage(named: String) -> CXImage
 {
-    return UIImage(named: named) ?? UIImage()
+    return CXImage(named: named) ?? CXImage()
 }
 
 public func cxShowAlert(in controller: UIViewController,
@@ -316,7 +316,7 @@ import Kingfisher
 public func cxDownloadImage(withUrl url: String,
                             options: KingfisherOptionsInfo? = nil,
                             progressBlock: DownloadProgressBlock? = nil,
-                            completionHandler: @escaping (UIImage?, Error?) -> Void)
+                            completionHandler: @escaping (CXImage?, Error?) -> Void)
 {
     guard let aURL = URL.init(string: url) else {
         DispatchQueue.cx.mainAsync { completionHandler(nil, nil) }
@@ -394,7 +394,7 @@ public func cxSDWebDownloadImage(
     with url: String,
     options: SDWebImageDownloaderOptions = [],
     progress: ((Int, Int, URL?) -> Void)? = nil,
-    completion: @escaping (UIImage?, Data?, Error?) -> Void)
+    completion: @escaping (CXImage?, Data?, Error?) -> Void)
 {
     let sdDownloader = SDWebImageDownloader.shared
     sdDownloader.downloadImage(with: URL(string: url), options: options) { (receivedSize, expectedSize, targetURL) in

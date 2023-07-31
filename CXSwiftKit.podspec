@@ -60,11 +60,6 @@ Pod::Spec.new do |s|
   
   s.subspec "Protocol" do |pt|
     pt.source_files = 'CXSwiftKit/Classes/Protocol/*.{swift}'
-    #pt.dependency 'Toaster'
-    #pt.dependency 'Toast-Swift', '~> 5.0.1'
-    #pt.dependency 'SwiftMessages'
-    #pt.dependency 'SVProgressHUD'
-    #pt.dependency 'OverlayController'
   end
   
   s.subspec "Extension" do |ext|
@@ -125,11 +120,11 @@ Pod::Spec.new do |s|
       dp.source_files = 'CXSwiftKit/Classes/Core/DocumentPicker/*.{swift}'
     end
     
-    core.subspec "EmptyDataSet" do |eds|
-      eds.source_files = 'CXSwiftKit/Classes/Core/EmptyDataSet/*.{swift}'
-      eds.dependency 'CXSwiftKit/Extension'
+    #core.subspec "EmptyDataSet" do |eds|
+      #eds.source_files = 'CXSwiftKit/Classes/Core/EmptyDataSet/*.{swift}'
+      #eds.dependency 'CXSwiftKit/Extension'
       #eds.dependency 'DZNEmptyDataSet'
-    end
+    #end
     
     core.subspec "ImageBuffer" do |imgbuffer|
       imgbuffer.source_files = 'CXSwiftKit/Classes/Core/ImageBuffer/*.{swift}'
@@ -140,12 +135,12 @@ Pod::Spec.new do |s|
       pm.dependency 'CXSwiftKit/Base'
     end
     
-    core.subspec "svga" do |svga|
-      svga.source_files = 'CXSwiftKit/Classes/Core/svga/*.{swift}'
-      svga.dependency 'CXSwiftKit/Base'
+    #core.subspec "svga" do |svga|
+      #svga.source_files = 'CXSwiftKit/Classes/Core/svga/*.{swift}'
+      #svga.dependency 'CXSwiftKit/Base'
       # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
       #svga.dependency 'SVGAPlayer'
-    end
+    #end
     
     core.subspec "Timer" do |timer|
       timer.source_files = 'CXSwiftKit/Classes/Core/Timer/*.{swift}'
@@ -171,14 +166,8 @@ Pod::Spec.new do |s|
   
   s.subspec "Rx" do |rx|
     rx.source_files = 'CXSwiftKit/Classes/Rx/*.{swift}'
-    rx.ios.deployment_target = '10.0'
-    rx.tvos.deployment_target = '10.0'
-    rx.dependency 'CXSwiftKit/Core/EmptyDataSet'
     rx.dependency 'RxCocoa'
     rx.dependency 'RxSwift'
-    rx.dependency 'Kingfisher'
-    #rx.dependency 'MJRefresh'
-    #rx.dependency 'KafkaRefresh'
   end
   
 end
