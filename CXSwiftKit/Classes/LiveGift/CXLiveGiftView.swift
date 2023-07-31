@@ -109,11 +109,10 @@ extension CXLiveGiftView {
         addSubview(giftImageView)
         addSubview(countLabel)
         
-        backGroundView.frame = CGRect(x: 2, y: 50, width: 220, height: 30)
-        backGroundView.lvgAddCorner(roundingCorners: [UIRectCorner.bottomRight, UIRectCorner.topRight], cornerSize: CGSize(width: 15, height: 15))
-        contentLabel.frame = CGRect(x: 2, y: backGroundView.bounds.size.height/2 - 10/2, width: 150, height: 10)
+        backGroundView.frame = CGRect(x: 2, y: 30, width: 220, height: 50)
+        contentLabel.frame = CGRect(x: 2, y: backGroundView.bounds.size.height/2 - 10/2, width: 150, height: 20)
         giftImageView.frame = CGRect(x: 148, y: 0, width: 80, height: 80)
-        countLabel.frame = CGRect(x: 225, y: 50, width: 50, height: 30)
+        countLabel.frame = CGRect(x: 225, y: 30, width: 50, height: 50)
     }
     
     func show(giftModel: CXLiveGiftModel, isfinished: animationFinished? = nil) {
@@ -169,7 +168,7 @@ extension CXLiveGiftView {
 
 extension UIView {
     
-    public func lvgAddCorner(roundingCorners: UIRectCorner, cornerSize: CGSize) {
+    public func cx_addCorner(roundingCorners: UIRectCorner, cornerSize: CGSize) {
         let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: roundingCorners, cornerRadii: cornerSize)
         let cornerLayer = CAShapeLayer()
         cornerLayer.frame = bounds
