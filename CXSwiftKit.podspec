@@ -60,11 +60,11 @@ Pod::Spec.new do |s|
   
   s.subspec "Protocol" do |pt|
     pt.source_files = 'CXSwiftKit/Classes/Protocol/*.{swift}'
-    pt.dependency 'Toaster'
-    pt.dependency 'Toast-Swift', '~> 5.0.1'
-    pt.dependency 'SwiftMessages'
-    pt.dependency 'SVProgressHUD'
-    pt.dependency 'OverlayController'
+    #pt.dependency 'Toaster'
+    #pt.dependency 'Toast-Swift', '~> 5.0.1'
+    #pt.dependency 'SwiftMessages'
+    #pt.dependency 'SVProgressHUD'
+    #pt.dependency 'OverlayController'
   end
   
   s.subspec "Extension" do |ext|
@@ -128,7 +128,7 @@ Pod::Spec.new do |s|
     core.subspec "EmptyDataSet" do |eds|
       eds.source_files = 'CXSwiftKit/Classes/Core/EmptyDataSet/*.{swift}'
       eds.dependency 'CXSwiftKit/Extension'
-      eds.dependency 'DZNEmptyDataSet'
+      #eds.dependency 'DZNEmptyDataSet'
     end
     
     core.subspec "ImageBuffer" do |imgbuffer|
@@ -177,7 +177,7 @@ Pod::Spec.new do |s|
     rx.dependency 'RxCocoa'
     rx.dependency 'RxSwift'
     rx.dependency 'Kingfisher'
-    rx.dependency 'MJRefresh'
+    #rx.dependency 'MJRefresh'
     #rx.dependency 'KafkaRefresh'
   end
   
