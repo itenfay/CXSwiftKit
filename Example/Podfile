@@ -28,6 +28,10 @@ target 'CXSwiftKit_Example' do
   # Starscream
   pod 'Starscream'
   
+  pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '1.0.3'
+  # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
+  pod 'SVGAPlayer'
+  
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths
   end
