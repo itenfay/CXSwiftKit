@@ -27,6 +27,8 @@ pod 'CXSwiftKit'
 
 ## 预览
 
+**更多内容需要你来探索。**
+
 <div align=left>
 &emsp; <img src="https://github.com/chenxing640/CXSwiftKit/raw/master/IMG_0716.gif" width="50%" />
 </div>
