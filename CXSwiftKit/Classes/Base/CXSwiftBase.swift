@@ -70,7 +70,6 @@ public protocol CXSwiftBaseCompatible {
 
 /// Implements this protocol by default.
 public extension CXSwiftBaseCompatible {
-    
     static var cx: CXSwiftBase<Self>.Type {
         get { return CXSwiftBase<Self>.self }
         set {}
@@ -80,5 +79,4 @@ public extension CXSwiftBaseCompatible {
         get { return CXSwiftBase<Self>(self) }
         set {}
     }
-    
 }
