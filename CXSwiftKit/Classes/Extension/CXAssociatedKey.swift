@@ -23,7 +23,6 @@ internal struct CXAssociatedKey {
     
     /// The key for the white indicator of button.
     static var buttonWhiteIndicator = "cx.button.whiteIndicator"
-    static var buttonCurrentText = "cx.button.currentText"
     
     /// The key for saving image to photos album.
     static var imageSavedToPhotosAlbum = "cx.imageSavedTo.photosalbum"

@@ -83,7 +83,7 @@ Pod::Spec.new do |s|
     network.source_files = 'CXSwiftKit/Classes/NetWork/*.{swift}'
     network.dependency 'CXSwiftKit/Base'
     network.dependency 'Moya'
-    network.dependency 'HandyJSON'
+    #network.dependency 'HandyJSON'
     # Ignored
     #network.vendored_frameworks = 'Framwork1.xcframwork', 'Framwork2.xcframwork'
   end
@@ -161,13 +161,6 @@ Pod::Spec.new do |s|
       wd.source_files = 'CXSwiftKit/Classes/Core/Widget/*.{swift}'
       wd.dependency 'CXSwiftKit/Base'
     end
-    
-  end
-  
-  s.subspec "Rx" do |rx|
-    rx.source_files = 'CXSwiftKit/Classes/Rx/*.{swift}'
-    rx.dependency 'RxCocoa'
-    rx.dependency 'RxSwift'
   end
   
 end

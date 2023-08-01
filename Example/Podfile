@@ -9,7 +9,6 @@ target 'CXSwiftKit_Example' do
   # Keychain
   pod 'DYFSwiftKeychain'
   
-  # -- TEST --
   # Kingfisher
   pod 'Kingfisher'
   # SDWebImage

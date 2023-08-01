@@ -150,11 +150,8 @@ CXSwiftKit
   ┃   ┗ CXResponseResult.swift
   ┃
   ┣ Protocol
-  ┃   ┣ CXViewControllerWrapable.swift // Used to present or dismiss view.
-  ┃   ┗ CXViewWrapable.swift           // Used to present or dismiss view, abstracts common calls for `Toast_Swift`
-  ┃
-  ┗ Rx
-     ┗ Button+RxCx.swift        // Used to show indicator
+      ┣ CXViewControllerWrapable.swift // Used to present or dismiss view.
+      ┗ CXViewWrapable.swift           // Used to present or dismiss view.
 ```
 
 ## 处理错误
