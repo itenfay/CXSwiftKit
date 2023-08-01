@@ -67,6 +67,7 @@ Pod::Spec.new do |s|
     ext.dependency 'CXSwiftKit/Base'
     ext.dependency 'CXSwiftKit/Protocol'
     ext.dependency 'Kingfisher'
+    #ext.dependency 'SDWebImage'
   end
   
   s.subspec "FileOperation" do |fo|
@@ -83,7 +84,6 @@ Pod::Spec.new do |s|
     network.source_files = 'CXSwiftKit/Classes/NetWork/*.{swift}'
     network.dependency 'CXSwiftKit/Base'
     network.dependency 'Moya'
-    #network.dependency 'HandyJSON'
     # Ignored
     #network.vendored_frameworks = 'Framwork1.xcframwork', 'Framwork2.xcframwork'
   end
@@ -94,8 +94,6 @@ Pod::Spec.new do |s|
     core.dependency 'CXSwiftKit/FileOperation'
     core.dependency 'DYFSwiftKeychain'
     core.dependency 'HandyJSON'
-    core.dependency 'Kingfisher'
-    #core.dependency 'SDWebImage'
     
     core.subspec "AR" do |ar|
       ar.source_files = 'CXSwiftKit/Classes/Core/AR/*.{swift}'
@@ -120,12 +118,6 @@ Pod::Spec.new do |s|
       dp.source_files = 'CXSwiftKit/Classes/Core/DocumentPicker/*.{swift}'
     end
     
-    #core.subspec "EmptyDataSet" do |eds|
-      #eds.source_files = 'CXSwiftKit/Classes/Core/EmptyDataSet/*.{swift}'
-      #eds.dependency 'CXSwiftKit/Extension'
-      #eds.dependency 'DZNEmptyDataSet'
-    #end
-    
     core.subspec "ImageBuffer" do |imgbuffer|
       imgbuffer.source_files = 'CXSwiftKit/Classes/Core/ImageBuffer/*.{swift}'
     end
@@ -134,13 +126,6 @@ Pod::Spec.new do |s|
       pm.source_files = 'CXSwiftKit/Classes/Core/Permissions/*.{swift}'
       pm.dependency 'CXSwiftKit/Base'
     end
-    
-    #core.subspec "svga" do |svga|
-      #svga.source_files = 'CXSwiftKit/Classes/Core/svga/*.{swift}'
-      #svga.dependency 'CXSwiftKit/Base'
-      # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
-      #svga.dependency 'SVGAPlayer'
-    #end
     
     core.subspec "Timer" do |timer|
       timer.source_files = 'CXSwiftKit/Classes/Core/Timer/*.{swift}'
