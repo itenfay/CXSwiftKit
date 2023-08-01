@@ -57,9 +57,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
     public weak var delegate: CXWebSocketDelegate?
     
     public static var networkStatusDidChangeNotification: Notification.Name {
-        return "CXNetworkStatusDidChangeNotification"
-            .cx
-            .asNotificationName()!
+        return Notification.Name("CXNetworkStatusDidChangeNotification")
     }
     
     public required init(urlString: String) {
