@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import CXSwiftKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import CXSwiftKit
 
 class DocumentPickerController: CXSKTableViewController<BaseSectionModel, DocumentModel> {
     

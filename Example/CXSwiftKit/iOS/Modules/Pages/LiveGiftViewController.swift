@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import CXSwiftKit
 import RxSwift
 import RxCocoa
-import SVGAPlayer
+import CXSwiftKit
 
 class LiveGiftViewController: BaseViewController {
     
@@ -133,7 +132,7 @@ class LiveGiftViewController: BaseViewController {
         
         CXLiveGiftManager.shared.topAnimationView.modify(backgroundModifier: { backgroundView in
             backgroundView.backgroundColor = UIColor.cx.randomColor
-            backgroundView.cx_addCorner(roundingCorners: [UIRectCorner.bottomRight, UIRectCorner.topRight], cornerSize: CGSize(width: 15, height: 25))
+            backgroundView.cx_addCorner(roundingCorners: [UIRectCorner.bottomRight, UIRectCorner.topRight], cornerSize: CGSize(width: 25, height: 25))
         }, giftImageModifier: { imageView, model in
             //imageView.cx.setImage(withUrl: model.giftAssetUrl)
         }, contentModifier: { label, content in
@@ -144,7 +143,7 @@ class LiveGiftViewController: BaseViewController {
         
         CXLiveGiftManager.shared.bottomAnimationView.modify(backgroundModifier: { backgroundView in
             backgroundView.backgroundColor = UIColor.cx.randomColor
-            backgroundView.cx_addCorner(roundingCorners: [UIRectCorner.bottomRight, UIRectCorner.topRight], cornerSize: CGSize(width: 15, height: 25))
+            backgroundView.cx_addCorner(roundingCorners: [UIRectCorner.bottomRight, UIRectCorner.topRight], cornerSize: CGSize(width: 25, height: 25))
         }, giftImageModifier: { imageView, model in
             //imageView.cx.setImage(withUrl: model.giftAssetUrl)
         }, contentModifier: { label, content in

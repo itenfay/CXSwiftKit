@@ -11,8 +11,9 @@ import UIKit
 #if canImport(SVGAPlayer)
 import SVGAPlayer
 import CXSwiftKit
+import MarsUIKit
 
-@objc public protocol CXSKSvgaPlayPresentable: AnyObject {
+@objc public protocol CXSKSvgaPlayPresentable {
     var svgaPlayer: SVGAPlayer? { get set }
 }
 
@@ -22,7 +23,7 @@ public class CXSKSvgaPlayManager: NSObject, CXSKSvgaPlayPresentable {
     
     @objc public private(set) var svgaParser: SVGAParser!
     
-    // Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
+    // SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
     // pod trunk push xxx报错这个错误，编译不过，所以单独拎出来
     @objc public weak var svgaPlayer: SVGAPlayer? {
         didSet {
@@ -36,7 +37,7 @@ public class CXSKSvgaPlayManager: NSObject, CXSKSvgaPlayPresentable {
     
     @objc public var svgaAnimatedToPercentageHandler: ((_ percentage: CGFloat) -> Void)?
     
-    private var currentOp: CXSvgaPlayOperation?
+    private var currentOp: MarsSvgaPlayOperation?
     private var retryCount: Int8 = 3
     private var animationFinished: Bool = false
     private let mutex = DispatchSemaphore(value: 1)
@@ -50,7 +51,7 @@ public class CXSKSvgaPlayManager: NSObject, CXSKSvgaPlayPresentable {
     @objc public func play(url: String?, loops: Int = 1, clearsAfterStop: Bool = true) {
         svgaPlayer?.loops = Int32(loops)
         svgaPlayer?.clearsAfterStop = clearsAfterStop
-        let operation = CXSvgaPlayOperation.create(withUrl: url) { [unowned self] op in
+        let operation = MarsSvgaPlayOperation.create(withUrl: url) { [unowned self] op in
             self.currentOp = op
             self.play(with: op)
         }
@@ -60,14 +61,14 @@ public class CXSKSvgaPlayManager: NSObject, CXSKSvgaPlayPresentable {
     @objc public func play(named: String?, inBundle bundle: Bundle? = nil, loops: Int = 1, clearsAfterStop: Bool = true) {
         svgaPlayer?.loops = Int32(loops)
         svgaPlayer?.clearsAfterStop = clearsAfterStop
-        let operation = CXSvgaPlayOperation.create(withName: named, inBundle: bundle) { [unowned self] op in
+        let operation = MarsSvgaPlayOperation.create(withName: named, inBundle: bundle) { [unowned self] op in
             self.currentOp = op
             self.play(with: op)
         }
         queue.addOperation(operation)
     }
     
-    private func play(with op: CXSvgaPlayOperation) {
+    private func play(with op: MarsSvgaPlayOperation) {
         if let url = op.svgaUrl, !url.isEmpty {
             svgaParser.parse(with: URL.init(string: url)!) { [unowned self] videoItem in
                 self.displaySvga(withHidden: false)
@@ -93,7 +94,7 @@ public class CXSKSvgaPlayManager: NSObject, CXSKSvgaPlayPresentable {
         }
     }
     
-    private func retryToplay(with op: CXSvgaPlayOperation) {
+    private func retryToplay(with op: MarsSvgaPlayOperation) {
         if retryCount == 0 {
             finishAnimating()
         } else {

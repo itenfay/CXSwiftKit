@@ -7,9 +7,10 @@
 //
 
 import UIKit
-import CXSwiftKit
 import RxSwift
 import RxCocoa
+import CXSwiftKit
+import MarsUIKit
 
 class OverlayViewController: BaseViewController {
     
@@ -52,7 +53,7 @@ class OverlayViewController: BaseViewController {
         emptyDataVC = EmptyDataViewController()
         emptyDataVC.view.frame = CGRect(x: 0, y: 0, width: cxScreenWidth, height: cxScreenHeight/1.5)
         emptyDataVC.ovcPresented = true
-        view.cx.ovcPresent(emptyDataVC.view) { [weak self] in
+        view.ms.ovcPresent(emptyDataVC.view) { [weak self] in
             self?.emptyDataVC = nil
         }
     }

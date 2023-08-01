@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import CXSwiftKit
 import RxSwift
 import RxCocoa
 import SVGAPlayer
+import CXSwiftKit
 
 class SvgaViewController: BaseViewController {
     

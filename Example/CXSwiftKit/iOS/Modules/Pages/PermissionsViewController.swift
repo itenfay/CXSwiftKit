@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import CXSwiftKit
 import RxSwift
 import RxCocoa
 import RxDataSources
+import CXSwiftKit
+import MarsUIKit
 
 class PermissionsViewController: CXSKTableViewController<BaseSectionModel, PermissionModel> {
     
@@ -189,7 +190,7 @@ class PermissionsViewController: CXSKTableViewController<BaseSectionModel, Permi
                 self?.handlePermissionResult(result, with: indexPath)
             }
         } else {
-            cx.makeToast(text: "\(permission.type.description) 已授权！")
+            ms.makeToast(text: "\(permission.type.description) 已授权！")
         }
     }
     
