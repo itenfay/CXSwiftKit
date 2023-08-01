@@ -110,7 +110,7 @@ extension CXLiveGiftView {
         addSubview(countLabel)
         
         backGroundView.frame = CGRect(x: 2, y: 30, width: 220, height: 50)
-        contentLabel.frame = CGRect(x: 2, y: backGroundView.bounds.size.height/2 - 10/2, width: 150, height: 20)
+        contentLabel.frame = CGRect(x: 2, y: backGroundView.bounds.size.height/2 - 20/2, width: 150, height: 20)
         giftImageView.frame = CGRect(x: 148, y: 0, width: 80, height: 80)
         countLabel.frame = CGRect(x: 225, y: 30, width: 50, height: 50)
     }
