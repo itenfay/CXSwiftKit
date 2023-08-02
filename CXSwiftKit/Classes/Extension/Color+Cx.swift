@@ -233,8 +233,8 @@ extension CXColor {
     /// - Returns: The color difference of two colors.
     @objc public func cx_diff(byColor color: CXColor) -> Double
     {
-        let c1 = self.cx.getRGBA()
-        let c2 = color.cx.getRGBA()
+        let c1 = self.cx_getRGBA()
+        let c2 = color.cx_getRGBA()
         
         if c1.red == nil || c2.red == nil {
             // failure.
