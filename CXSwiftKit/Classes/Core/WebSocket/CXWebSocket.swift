@@ -77,10 +77,11 @@ public class CXWebSocket: NSObject, ISKWebSocket {
     }
     
     private func addNotification() {
-        self.cx.addObserver(
-            self,
-            selector: #selector(notifyNetworkStatusChanged(_:)),
-            name: Self.networkStatusDidChangeNotification)
+        NotificationCenter.default
+            .addObserver(self,
+                         selector: #selector(notifyNetworkStatusChanged(_:)),
+                         name: Self.networkStatusDidChangeNotification,
+                         object: nil)
     }
     
     /// The exterior notifies network status has changed.
@@ -193,7 +194,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
             reconnectTime = reconnectMaxTime
         }
         
-        DispatchQueue.cx.mainAsyncAfter(reconnectTime) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + reconnectTime) {
             self.socket = nil
             self.connect()
         }
@@ -210,7 +211,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
     }
     
     deinit {
-        self.cx.removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         CXLogger.log(level: .info, message: "[WS] \(type(of: self)) deinit.")
     }
     
