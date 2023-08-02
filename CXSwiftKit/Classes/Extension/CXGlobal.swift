@@ -145,7 +145,7 @@ public func cxSynchronize(_ obj: Any, closure: @escaping () -> Void)
 ///   - work: The work item to be invoked on the queue.
 public func cxDelayToDispatch(_ delay: TimeInterval, execute work: @escaping () -> Void)
 {
-    DispatchQueue.cx.mainAsyncAfter(delay, execute: work)
+    DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: work)
 }
 
 /// Unsafely converts an unmanaged class reference to a pointer.
@@ -309,7 +309,7 @@ public func cxVideoSnapshot(withUrl url: String?, time: Int, width: CGFloat = 0,
 
 // MARK: - Kingfisher
 
-#if canImport(Kingfisher)
+#if canImport(Kingfisher) && !os(watchOS)
 import Kingfisher
 
 /// Gets an image from a given url string.
@@ -319,18 +319,18 @@ public func cxDownloadImage(withUrl url: String,
                             completionHandler: @escaping (CXImage?, Error?) -> Void)
 {
     guard let aURL = URL.init(string: url) else {
-        DispatchQueue.cx.mainAsync { completionHandler(nil, nil) }
+        DispatchQueue.main.async { completionHandler(nil, nil) }
         return
     }
     KingfisherManager.shared.retrieveImage(with: aURL, options: options, progressBlock: progressBlock) { (result) in
         switch result {
         case .success(let imageResult):
-            DispatchQueue.cx.mainAsync {
+            DispatchQueue.main.async {
                 completionHandler(imageResult.image, nil)
             }
         case .failure(let error):
             CXLogger.log(level: .error, message: "error: \(error)")
-            DispatchQueue.cx.mainAsync { completionHandler(nil, error) }
+            DispatchQueue.main.async { completionHandler(nil, error) }
         }
     }
 }
@@ -367,13 +367,6 @@ public func cxClearKingfisherExpiredCache(completionHandler handler: (() -> Void
     //ImageCache.default.cleanExpiredMemoryCache()
     //ImageCache.default.cleanExpiredDiskCache(completion: handler)
     ImageCache.default.cleanExpiredCache(completion: handler)
-}
-
-/// Sets up the referer of Kingfisher.
-public func cxSetupKingfisherReferer(_ referer: String)
-{
-    let referer = CXKingfisherReferer(headers: ["Referer": referer])
-    KingfisherManager.shared.defaultOptions = [.requestModifier(referer)]
 }
 
 #endif
