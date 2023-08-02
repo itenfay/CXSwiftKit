@@ -7,6 +7,7 @@
 
 import Foundation
 
+#if !os(watchOS)
 public class CXConstraintItem: NSObject {
     internal var isEqual: Bool = false
     internal var isGreaterThanOrEqual: Bool = false
@@ -190,3 +191,5 @@ public class CXConstraintMaker: NSObject {
         self.centerY = centerY
     }
 }
+
+#endif
