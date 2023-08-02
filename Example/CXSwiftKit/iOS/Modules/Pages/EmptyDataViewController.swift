@@ -50,8 +50,8 @@ class EmptyDataViewController: BaseViewController {
             closeBtn.setTitleColor(UIColor.cx.color(withHexString: "0x999999"), for: .highlighted)
             closeBtn.titleLabel?.font = UIFont.cx.semiboldPingFang(ofSize: 16)
             view.cx.add(subviews: closeBtn)
-            closeBtn.cx.makeSafeAreaConstraints { [self] maker in
-                maker.top.equalTo(10)
+            closeBtn.cx.makeConstraints { [self] maker in
+                maker.top.equalToAnchor(view.cx.safeTopAnchor).offset(10)
                 maker.leading.equalToAnchor(view.leadingAnchor).offset(15)
                 maker.width.equalTo(40)
                 maker.height.equalTo(40)

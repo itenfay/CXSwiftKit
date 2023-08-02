@@ -500,12 +500,20 @@ extension CXSwiftBase where T : CXView {
     }
     #endif
     
-    public func makeConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
+    #if !os(watchOS)
+    public func makeConstraints(maker: @escaping (CXConstraintMaker) -> Void)
+    {
         self.base.cx_makeConstraints(maker: maker)
     }
     
-    public func makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
-        self.base.cx_makeSafeAreaConstraints(maker: maker)
+    public func remakeConstraints(maker: @escaping (CXConstraintMaker) -> Void)
+    {
+        base.cx_remakeConstraints(maker: maker)
+    }
+    
+    public func removeConstraints()
+    {
+        base.cx_removeConstraints()
     }
     
     /// The insets that you use to determine the safe area for this view.
@@ -514,38 +522,46 @@ extension CXSwiftBase where T : CXView {
         self.base.cx_safeAreaInsets // return
     }
     
-    public var safeTopAnchor: NSLayoutYAxisAnchor {
+    public var safeTopAnchor: NSLayoutYAxisAnchor
+    {
         return self.base.cx_safeTopAnchor
     }
     
-    public var safeLeadingAnchor: NSLayoutXAxisAnchor {
+    public var safeLeadingAnchor: NSLayoutXAxisAnchor
+    {
         return self.base.cx_safeLeadingAnchor
     }
     
-    public var safeBottomAnchor: NSLayoutYAxisAnchor {
+    public var safeBottomAnchor: NSLayoutYAxisAnchor
+    {
         return self.base.cx_safeBottomAnchor
     }
     
-    public var safeTrailingAnchor: NSLayoutXAxisAnchor {
+    public var safeTrailingAnchor: NSLayoutXAxisAnchor
+    {
         return self.base.cx_safeTrailingAnchor
     }
     
-    public var safeCenterXAnchor: NSLayoutXAxisAnchor {
+    public var safeCenterXAnchor: NSLayoutXAxisAnchor
+    {
         return self.base.cx_safeCenterXAnchor
     }
     
-    public var safeCenterYAnchor: NSLayoutYAxisAnchor {
+    public var safeCenterYAnchor: NSLayoutYAxisAnchor
+    {
         return self.base.cx_safeCenterYAnchor
     }
     
-    public var safeWidthAnchor: NSLayoutDimension {
+    public var safeWidthAnchor: NSLayoutDimension
+    {
         return self.base.cx_safeWidthAnchor
     }
     
-    public var safeHeightAnchor: NSLayoutDimension {
+    public var safeHeightAnchor: NSLayoutDimension
+    {
         return self.base.cx_safeHeightAnchor
     }
-    
+    #endif
 }
 
 //MARK: - Layout
@@ -1496,6 +1512,7 @@ extension UIView: CXViewWrapable {
 
 extension CXView {
     
+    #if !os(watchOS)
     @objc public func cx_makeConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         assert(superview != nil, "The receiver’s superview is nil.")
         guard let spView = superview else { return }
@@ -1615,120 +1632,17 @@ extension CXView {
         }
     }
     
-    @objc public func cx_makeSafeAreaConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
-        assert(superview != nil, "The receiver’s superview is nil.")
-        guard let spView = superview else { return }
-        translatesAutoresizingMaskIntoConstraints = false
-        
-        let cMaker = CXConstraintMaker(top: CXConstraintYAxisItem(),
-                                       leading: CXConstraintXAxisItem(),
-                                       bottom: CXConstraintYAxisItem(),
-                                       trailing: CXConstraintXAxisItem(),
-                                       width: CXConstraintDimensionItem(),
-                                       height: CXConstraintDimensionItem(),
-                                       centerX: CXConstraintXAxisItem(),
-                                       centerY: CXConstraintYAxisItem())
-        maker(cMaker)
-        
-        if cMaker.top.hasConstraints {
-            let anchor = cMaker.top.yAnchor ?? spView.cx_safeTopAnchor
-            if cMaker.top.isEqual {
-                topAnchor.constraint(equalTo: anchor, constant: cMaker.top.value).isActive = true
-            } else if cMaker.top.isGreaterThanOrEqual {
-                topAnchor.constraint(greaterThanOrEqualTo: anchor, constant: cMaker.top.value).isActive = true
-            } else if cMaker.top.isLessThanOrEqual {
-                topAnchor.constraint(lessThanOrEqualTo: anchor, constant: cMaker.top.value).isActive = true
-            }
-        }
-        if cMaker.leading.hasConstraints {
-            let anchor = cMaker.leading.xAnchor ?? spView.cx_safeLeadingAnchor
-            if cMaker.leading.isEqual {
-                leadingAnchor.constraint(equalTo: anchor, constant: cMaker.leading.value).isActive = true
-            } else if cMaker.leading.isGreaterThanOrEqual {
-                leadingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: cMaker.leading.value).isActive = true
-            } else if cMaker.leading.isLessThanOrEqual {
-                leadingAnchor.constraint(lessThanOrEqualTo: anchor, constant: cMaker.leading.value).isActive = true
-            }
-        }
-        if cMaker.bottom.hasConstraints {
-            let anchor = cMaker.bottom.yAnchor ?? spView.cx_safeBottomAnchor
-            if cMaker.bottom.isEqual {
-                bottomAnchor.constraint(equalTo: anchor, constant: cMaker.bottom.value).isActive = true
-            } else if cMaker.bottom.isGreaterThanOrEqual {
-                bottomAnchor.constraint(greaterThanOrEqualTo: anchor, constant: cMaker.bottom.value).isActive = true
-            } else if cMaker.bottom.isLessThanOrEqual {
-                bottomAnchor.constraint(lessThanOrEqualTo: anchor, constant: cMaker.bottom.value).isActive = true
-            }
-        }
-        if cMaker.trailing.hasConstraints {
-            let anchor = cMaker.trailing.xAnchor ?? spView.cx_safeTrailingAnchor
-            if cMaker.trailing.isEqual {
-                trailingAnchor.constraint(equalTo: anchor, constant: cMaker.trailing.value).isActive = true
-            } else if cMaker.trailing.isGreaterThanOrEqual {
-                trailingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: cMaker.trailing.value).isActive = true
-            } else if cMaker.trailing.isLessThanOrEqual {
-                trailingAnchor.constraint(lessThanOrEqualTo: anchor, constant: cMaker.trailing.value).isActive = true
-            }
-        }
-        if cMaker.centerX.hasConstraints {
-            let anchor = cMaker.centerX.xAnchor ?? spView.cx_safeCenterXAnchor
-            if cMaker.centerX.isEqual {
-                centerXAnchor.constraint(equalTo: anchor, constant: cMaker.centerX.value).isActive = true
-            } else if cMaker.centerX.isGreaterThanOrEqual {
-                centerXAnchor.constraint(greaterThanOrEqualTo: anchor, constant: cMaker.centerX.value).isActive = true
-            } else if cMaker.centerX.isLessThanOrEqual {
-                centerXAnchor.constraint(lessThanOrEqualTo: anchor, constant: cMaker.centerX.value).isActive = true
-            }
-        }
-        if cMaker.centerY.hasConstraints {
-            let anchor = cMaker.centerY.yAnchor ?? spView.cx_safeCenterYAnchor
-            if cMaker.centerY.isEqual {
-                centerYAnchor.constraint(equalTo: anchor, constant: cMaker.centerY.value).isActive = true
-            } else if cMaker.centerY.isGreaterThanOrEqual {
-                centerYAnchor.constraint(greaterThanOrEqualTo: anchor, constant: cMaker.centerY.value).isActive = true
-            } else if cMaker.centerY.isLessThanOrEqual {
-                centerYAnchor.constraint(lessThanOrEqualTo: anchor, constant: cMaker.centerY.value).isActive = true
-            }
-        }
-        
-        if cMaker.width.hasConstraints {
-            if let dimension = cMaker.width.dimens {
-                if cMaker.width.isEqual {
-                    widthAnchor.constraint(equalTo: dimension, constant: cMaker.width.value).isActive = true
-                } else if cMaker.width.isGreaterThanOrEqual {
-                    widthAnchor.constraint(greaterThanOrEqualTo: dimension, constant: cMaker.width.value).isActive = true
-                } else if cMaker.width.isLessThanOrEqual {
-                    widthAnchor.constraint(lessThanOrEqualTo: dimension, constant: cMaker.width.value).isActive = true
-                }
-            } else {
-                if cMaker.width.isEqual {
-                    widthAnchor.constraint(equalToConstant: cMaker.width.value).isActive = true
-                } else if cMaker.width.isGreaterThanOrEqual {
-                    widthAnchor.constraint(greaterThanOrEqualToConstant: cMaker.width.value).isActive = true
-                } else if cMaker.width.isLessThanOrEqual {
-                    widthAnchor.constraint(lessThanOrEqualToConstant: cMaker.width.value).isActive = true
-                }
-            }
-        }
-        if cMaker.height.hasConstraints {
-            if let dimension = cMaker.height.dimens {
-                if cMaker.height.isEqual {
-                    heightAnchor.constraint(equalTo: dimension, constant: cMaker.height.value).isActive = true
-                } else if cMaker.height.isGreaterThanOrEqual {
-                    heightAnchor.constraint(greaterThanOrEqualTo: dimension, constant: cMaker.height.value).isActive = true
-                } else if cMaker.height.isLessThanOrEqual {
-                    heightAnchor.constraint(lessThanOrEqualTo: dimension, constant: cMaker.height.value).isActive = true
-                }
-            } else {
-                if cMaker.height.isEqual {
-                    heightAnchor.constraint(equalToConstant: cMaker.height.value).isActive = true
-                } else if cMaker.height.isGreaterThanOrEqual {
-                    heightAnchor.constraint(greaterThanOrEqualToConstant: cMaker.height.value).isActive = true
-                } else if cMaker.height.isLessThanOrEqual {
-                    heightAnchor.constraint(lessThanOrEqualToConstant: cMaker.height.value).isActive = true
-                }
-            }
-        }
+    @objc public func cx_remakeConstraints(maker: @escaping (CXConstraintMaker) -> Void)
+    {
+        cx_removeConstraints()
+        cx_makeConstraints(maker: maker)
+    }
+    
+    @objc public func cx_removeConstraints()
+    {
+        guard constraints.count > 0 else { return }
+        NSLayoutConstraint.deactivate(constraints)
+        //constraints.forEach { $0.isActive = false }
     }
     
     /// The insets that you use to determine the safe area for this view.
@@ -1808,6 +1722,7 @@ extension CXView {
         }
         return heightAnchor
     }
+    #endif
 }
 
 #endif
