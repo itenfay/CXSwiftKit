@@ -29,4 +29,11 @@ public class CXKingfisherReferer: ImageDownloadRequestModifier {
     
 }
 
+/// Sets up the referer of Kingfisher.
+public func cxSetupKingfisherReferer(_ referer: String)
+{
+    let referer = CXKingfisherReferer(headers: ["Referer": referer])
+    KingfisherManager.shared.defaultOptions = [.requestModifier(referer)]
+}
+
 #endif
