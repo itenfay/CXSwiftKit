@@ -156,6 +156,10 @@ CXSwiftKit
       ┗ CXViewWrapable.swift           // Used to present or dismiss view.
 ```
 
+## 推荐
+
+- [CXDownload](https://github.com/chenxing640/CXDownload) - 实现Swift断点续传下载，支持Objective-C。包含大文件下载，后台下载，杀死进程，重新启动时继续下载，设置下载并发数，监听网络改变等。
+
 ## 处理错误
 
 如果在`SVGAPlayer`库中报以下错误：
@@ -169,7 +173,7 @@ Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid i
 >    [worker release];
 > }
 
-那么在`Svga.pbobjc.m`或者`Svga.pbobjc.h`文件中添加以下头文件。
+那么在`Svga.pbobjc.h`或者`Svga.pbobjc.m`文件中添加以下头文件。
 
 ```
 #import <libkern/OSAtomic.h>

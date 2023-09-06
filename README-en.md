@@ -157,6 +157,10 @@ CXSwiftKit
       ┗ CXViewWrapable.swift           // Used to present or dismiss view.
 ```
 
+## 推荐
+
+- [CXDownload](https://github.com/chenxing640/CXDownload) - Realization of breakpoint transmission download with Swift, support Objective-C. Including large file download, background download, killing the process, continuing to download when restarting, setting the number of concurrent downloads, monitoring network changes and so on.
+
 ## Handling Error
 
 if `SVGAPlayer` library occurs this error：
@@ -170,7 +174,7 @@ Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid i
 >    [worker release];
 > }
 
-Add the header in `Svga.pbobjc.m` or `Svga.pbobjc.h`.
+Add the header in `Svga.pbobjc.h` or `Svga.pbobjc.m`.
 
 ```
 #import <libkern/OSAtomic.h>
