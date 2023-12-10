@@ -170,7 +170,7 @@ Pod::Spec.new do |s|
     rxb.source_files = 'CXSwiftKit/Classes/RxButton/*.{swift}'
     rxb.dependency 'CXSwiftKit/Core/Extension'
     rxb.dependency 'RxSwift'
-    rxb.dependency 'RxCocoa
+    rxb.dependency 'RxCocoa'
   end
   
   s.subspec "RxEmptyDataSet" do |rxeds|
