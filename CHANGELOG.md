@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+### **2.0.0 (12/09/2023)**
+
+- Readjust the directory structure.
+- Updates some contents.
+- Adds some sample pages.
+
 ### **1.6.0 (07/28/2023)**
 
 - fixes some erros.
