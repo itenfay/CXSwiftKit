@@ -9,6 +9,6 @@
 import Foundation
 import CXSwiftKit
 
-class BaseModel: CXBaseModel {
+class BaseModel: CXHJBaseModel {
     required init() {}
 }

@@ -10,7 +10,6 @@ import UIKit
 import CXSwiftKit
 import SVProgressHUD
 import Toaster
-import MarsUIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func checkApp() {
         let appCtx = CXAppContext()
         if appCtx.checkResign("ZH09RJOI") {
-            ms_showMessages(withStyle: .dark, body: "App被重签了！")
+            cx_showMessages(withStyle: .dark, body: "App被重签了！")
         }
     }
     

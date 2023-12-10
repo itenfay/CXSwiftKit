@@ -11,9 +11,10 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import CXSwiftKit
-import MarsUIKit
 
-class PhotoLibraryViewController:  CXSKTableViewController<BaseSectionModel, AlbumModel> {
+class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvidable {
+    typealias S = ListSectionEntity
+    typealias T = AlbumModel
     
     private var tableView: UITableView!
     private let disposeBag = DisposeBag()
@@ -125,8 +126,7 @@ class PhotoLibraryViewController:  CXSKTableViewController<BaseSectionModel, Alb
             self?.itemDidSelect(at: indexPath)
         }).disposed(by: disposeBag)
     }
-    
-    override func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: AlbumModel) -> UITableViewCell {
+    func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: AlbumModel) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell")
         if cell == nil {
             cell = BaseTableViewCell(style: .subtitle, reuseIdentifier: "AlbumCell")
@@ -147,18 +147,18 @@ class PhotoLibraryViewController:  CXSKTableViewController<BaseSectionModel, Alb
     
     func itemDidSelect(at indexPath: IndexPath) {
         CXLog.info("row-\(indexPath.row): did click!")
-        ms.makeToast(text: "Row-\(indexPath.row): did click!")
+        cx.makeToast(text: "Row-\(indexPath.row): did click!")
     }
     
     private func saveToAssetCollection(with type: Int) {
-        ms.showProgressHUD(withStatus: "处理中...")
+        cx.showProgressHUD(withStatus: "处理中...")
         if type == 1 {
             saveAvatarToPhotosAlbum()
             return
         } else if type == 4 {
             let scale = UIScreen.main.scale
             let albumModels = photoLibHandle.fetchAlbums()
-            let sectionModel = BaseSectionModel()
+            let sectionModel = ListSectionEntity()
             var items = [AlbumModel]()
             for model in albumModels {
                 CXLogger.log(level: .info, message: "name=\(model.name), identifier=\(model.identifier), count=\(model.count)")
@@ -184,28 +184,28 @@ class PhotoLibraryViewController:  CXSKTableViewController<BaseSectionModel, Alb
                 }
             }
             
-            ms.dismissProgressHUD()
+            cx.dismissProgressHUD()
             
             let list = makeAnimatedListProvider {
                 Observable.just([AnimatableSectionModel(model: sectionModel, items: items)])
             }
-            list.bind(to: tableView.rx.items(dataSource: makeAnimatedDataSource())).disposed(by: disposeBag)
+            list.bind(to: tableView.rx.items(dataSource: provideAnimatedDataSource())).disposed(by: disposeBag)
             return
         }
         do {
             switch type {
             case 2:
                 guard let path = Bundle.main.path(forResource: "panorama_3", ofType: "jpg") else {
-                    ms.showMessages(withStyle: .light, body: "图片资源不存在！")
+                    cx.showMessages(withStyle: .light, body: "图片资源不存在！")
                     return
                 }
                 try photoLibHandle.addPhoto(URL(localFilePath: path), toAlbum: "CXAlbum", completionHandler: { [weak self] success, error in
                     DispatchQueue.cx.mainAsync {
                         if success {
                             CXLogger.log(level: .info, message: "panorama_3.jpg 保存成功!")
-                            self?.ms.showMessages(withStyle: .light, body: "panorama_3.jpg 保存成功!")
+                            self?.cx.showMessages(withStyle: .light, body: "panorama_3.jpg 保存成功!")
                         }
-                        self?.ms.dismissProgressHUD()
+                        self?.cx.dismissProgressHUD()
                     }
                 })
             case 3:
@@ -213,19 +213,19 @@ class PhotoLibraryViewController:  CXSKTableViewController<BaseSectionModel, Alb
                     DispatchQueue.cx.mainAsync {
                         if success {
                             CXLogger.log(level: .info, message: "sample_320x240.mp4 保存成功!")
-                            self?.ms.showMessages(withStyle: .dark, body: "sample_320x240.mp4 保存成功!")
+                            self?.cx.showMessages(withStyle: .dark, body: "sample_320x240.mp4 保存成功!")
                         }
-                        self?.ms.dismissProgressHUD()
+                        self?.cx.dismissProgressHUD()
                     }
                 })
             default: break
             }
         } catch CXPhotoLibraryOperator.PHLError.failed(let description) {
             CXLogger.log(level: .info, message:"\(description)")
-            ms.dismissProgressHUD()
+            cx.dismissProgressHUD()
         } catch {
             CXLogger.log(level: .info, message:"\(error.localizedDescription)")
-            ms.dismissProgressHUD()
+            cx.dismissProgressHUD()
         }
     }
     
@@ -235,11 +235,11 @@ class PhotoLibraryViewController:  CXSKTableViewController<BaseSectionModel, Alb
             DispatchQueue.cx.mainAsync {
                 if error == nil {
                     CXLogger.log(level: .info, message: "save complelely!")
-                    self?.ms.showMessages(withStyle: .light, body: "Avatar 保存成功!")
+                    self?.cx.showMessages(withStyle: .light, body: "Avatar 保存成功!")
                 } else {
                     CXLogger.log(level: .error, message: "error=\(error!)")
                 }
-                self?.ms.dismissProgressHUD()
+                self?.cx.dismissProgressHUD()
             }
         }
     }

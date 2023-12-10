@@ -12,12 +12,14 @@ import RxCocoa
 import RxDataSources
 import CXSwiftKit
 
-class DocumentPickerController: CXSKTableViewController<BaseSectionModel, DocumentModel> {
+class DocumentPickerController: BaseViewController, CXTableViewDataSourceProvidable {
+    typealias S = ListSectionEntity
+    typealias T = DocumentModel
     
     private var tableView: UITableView!
     private let disposeBag = DisposeBag()
     private var documentPicker: CXDocumentPicker!
-    private var items = BehaviorRelay<[AnimatableSectionModel<BaseSectionModel, DocumentModel>]>(value: [])
+    private var items = BehaviorRelay<[AnimatableSectionModel<ListSectionEntity, DocumentModel>]>(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,13 +76,13 @@ class DocumentPickerController: CXSKTableViewController<BaseSectionModel, Docume
     }
     
     private func bind() {
-        items.bind(to: tableView.rx.items(dataSource: makeAnimatedDataSource())).disposed(by: disposeBag)
+        items.bind(to: tableView.rx.items(dataSource: provideAnimatedDataSource())).disposed(by: disposeBag)
         tableView.rx.itemSelected.asDriver().drive(onNext: { [weak self] indexPath in
             self?.itemDidSelect(at: indexPath)
         }).disposed(by: disposeBag)
     }
     
-    override func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: DocumentModel) -> UITableViewCell {
+    func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: DocumentModel) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "DocumentPickerCell")
         if cell == nil {
             cell = BaseTableViewCell(style: .subtitle, reuseIdentifier: "DocumentPickerCell")
@@ -112,7 +114,7 @@ extension DocumentPickerController: CXDocumentDelegate {
             return
         }
         let models = docs.map { DocumentModel(fileURL: $0.fileURL, name: $0.localizedName) }
-        let sectionModel = BaseSectionModel()
+        let sectionModel = ListSectionEntity()
         //let list = makeAnimatedListProvider {
         //    Observable.just([AnimatableSectionModel(model: sectionModel, items: models)])
         //}

@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import CXSwiftKit
 
-class DocumentModel: BaseCellModel {
+class DocumentModel: CXCellEntity {
     var fileURL: URL
     var name: String
     

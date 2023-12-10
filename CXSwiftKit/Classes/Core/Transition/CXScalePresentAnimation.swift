@@ -139,16 +139,10 @@ public class CXScalePresentAnimation: NSObject, UIViewControllerAnimatedTransiti
         
         cx.postNotification(withName: Self.scaleAnimationDidStart.cx.asNotificationName()!)
         
-        //UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .layoutSubviews, animations: {
-        //    toVC.view.center = CGPoint.init(x: finalFrame.origin.x + finalFrame.size.width/2, y: finalFrame.origin.y + finalFrame.size.height/2)
-        //    toVC.view.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
-        //}) { finished in
-        //    transitionContext.completeTransition(true)
-        //}
-        UIView.animate(withDuration: duration, delay: 0.0, options: .layoutSubviews) {
+        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1.0, options: .layoutSubviews, animations: {
             toVC.view.center = CGPoint.init(x: finalFrame.origin.x + finalFrame.size.width/2, y: finalFrame.origin.y + finalFrame.size.height/2)
             toVC.view.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
-        } completion: { finished in
+        }) { finished in
             transitionContext.completeTransition(true)
         }
     }

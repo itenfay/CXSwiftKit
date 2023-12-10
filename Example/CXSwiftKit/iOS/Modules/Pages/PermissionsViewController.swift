@@ -11,14 +11,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import CXSwiftKit
-import MarsUIKit
 
-class PermissionsViewController: CXSKTableViewController<BaseSectionModel, PermissionModel> {
+class PermissionsViewController: BaseViewController, CXTableViewDataSourceProvidable {
+    typealias S = ListSectionEntity
+    typealias T = PermissionModel
     
     private var tableView: UITableView!
     private let disposeBag = DisposeBag()
     
-    private var items = BehaviorRelay<[AnimatableSectionModel<BaseSectionModel, PermissionModel>]>(value: [])
+    private var items = BehaviorRelay<[AnimatableSectionModel<ListSectionEntity, PermissionModel>]>(value: [])
     private var permissions: [CXPermission] = []
     
     override func viewDidLoad() {
@@ -28,7 +29,7 @@ class PermissionsViewController: CXSKTableViewController<BaseSectionModel, Permi
     }
     
     func initData() {
-        let sectionModel = BaseSectionModel()
+        let sectionModel = ListSectionEntity()
         var items = [PermissionModel]()
         
         let photosPermission = CXPhotosPermission()
@@ -153,13 +154,13 @@ class PermissionsViewController: CXSKTableViewController<BaseSectionModel, Permi
     }
     
     private func bind() {
-        items.bind(to: tableView.rx.items(dataSource: makeAnimatedDataSource())).disposed(by: disposeBag)
+        items.bind(to: tableView.rx.items(dataSource: provideAnimatedDataSource())).disposed(by: disposeBag)
         tableView.rx.itemSelected.asDriver().drive(onNext: { [weak self] indexPath in
             self?.itemDidSelect(at: indexPath)
         }).disposed(by: disposeBag)
     }
     
-    override func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: PermissionModel) -> UITableViewCell {
+    func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: PermissionModel) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "PermissionCell")
         if cell == nil {
             cell = BaseTableViewCell(style: .subtitle, reuseIdentifier: "PermissionCell")
@@ -190,7 +191,7 @@ class PermissionsViewController: CXSKTableViewController<BaseSectionModel, Permi
                 self?.handlePermissionResult(result, with: indexPath)
             }
         } else {
-            ms.makeToast(text: "\(permission.type.description) 已授权！")
+            cx.makeToast(text: "\(permission.type.description) 已授权！")
         }
     }
     

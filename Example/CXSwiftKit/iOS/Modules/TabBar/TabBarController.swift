@@ -50,7 +50,7 @@ class TabBarController: UITabBarController {
             tabBar.backgroundColor = bgColor
             tabBar.shadowImage = nil
             tabBar.tintColor = UIColor.black
-            tabBar.barTintColor = UIColor.black
+            //tabBar.barTintColor = bgColor
         }
     }
     

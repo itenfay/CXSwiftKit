@@ -8,17 +8,10 @@
 import Foundation
 
 //MARK: - CXBaseModel
-
-#if canImport(HandyJSON)
-import HandyJSON
-public protocol CXBaseModel: HandyJSON {}
-#else
 public protocol CXBaseModel {}
-#endif
 
-//MARK: - CXObjcBaseModel
-
-@objc public protocol CXObjcBaseModel: AnyObject {}
+//MARK: - CXOBaseModel
+@objc public protocol CXOBaseModel: AnyObject {}
 
 #if os(iOS) || os(tvOS)
 import UIKit

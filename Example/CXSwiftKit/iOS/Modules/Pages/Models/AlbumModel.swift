@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import CXSwiftKit
 import RxCocoa
 import RxSwift
 import CXSwiftKit
 
-class PermissionModel: BaseCellModel {
+class PermissionModel: CXCellEntity {
     let type = BehaviorRelay<CXPermissionType>(value: .none)
     let status = BehaviorRelay<CXPermissionStatus>(value: .unknown)
 }

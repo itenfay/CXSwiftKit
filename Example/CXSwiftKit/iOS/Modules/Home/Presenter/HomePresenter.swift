@@ -26,7 +26,7 @@ class HomePresenter: BasePresenter {
     }
     
     override func loadData() {
-        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition", "Document Picker", "Overlay View", "Live Gift", "Network Request", "Permissions", "Draw QuadCurve"]
+        let names: [String] = ["Device Info", "Photo Library", "EmptyData Set", "SVGA Animation", "Transition", "Document Picker", "Overlay View", "Custom Overlay View", "Live Gift", "Network Request", "Permissions", "Draw QuadCurve"]
         for name in names {
             let model = DataModel(name: name)
             dataSource.append(model)
@@ -89,6 +89,8 @@ extension HomePresenter: UITableViewDelegate, UITableViewDataSource {
             controller = DocumentPickerController()
         case "Overlay View":
             controller = OverlayViewController()
+        case "Custom Overlay View":
+            controller = CustomOverlayViewController()
         case "Live Gift":
             controller = LiveGiftViewController()
         case "Network Request":

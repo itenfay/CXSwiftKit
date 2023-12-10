@@ -58,17 +58,11 @@ public class CXScaleDismissAnimation: NSObject, UIViewControllerAnimatedTransiti
         fromVC.view.alpha = 0.0
         snapshotView?.center = fromVC.view.center
         //snapshotView?.transform = CGAffineTransform.init(scaleX: scaleRatio, y: scaleRatio)
-        //UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.2, options: .curveEaseInOut, animations: {
-        //    snapshotView?.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
-        //    snapshotView?.frame = finalFrame
-        //}) { finished in
-        //    transitionContext.finishInteractiveTransition()
-        //    transitionContext.completeTransition(true)
-        //    snapshotView?.removeFromSuperview()
-        //}
-        UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseInOut) {
+        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.2, options: .curveEaseInOut, animations: {
+            //snapshotView?.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
             snapshotView?.frame = finalFrame
-        } completion: { finished in
+        }) { finished in
+            snapshotView?.alpha = 0.0
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
             snapshotView?.removeFromSuperview()

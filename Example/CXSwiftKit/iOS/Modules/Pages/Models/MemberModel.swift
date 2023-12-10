@@ -9,7 +9,7 @@
 import Foundation
 import CXSwiftKit
 
-struct MemberModel: CXBaseModel {
+struct MemberModel: CXHJBaseModel {
     var id: String?
     var name: String?
     var url: String?

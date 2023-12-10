@@ -27,7 +27,7 @@ import AVFAudio
     var category: CXRecordingOptionCategory { get }
     var filePath: String { get }
     func makeFilePath(fileName: String) -> String
-    var onFinish: (() -> Void)? { get set }
+    var onFinish: ((Bool) -> Void)? { get set }
     var onError: ((String) -> Void)? { get set }
     func prepareToRecord()
     func prepareToRecord(_ fileName: String, category: CXRecordingOptionCategory)
@@ -53,7 +53,7 @@ public class CXAudioRecorder: NSObject, ISKAudioRecorder {
     public private(set) var filePath: String = ""
     
     /// The closure for finishing recording.
-    public var onFinish: (() -> Void)?
+    public var onFinish: ((Bool) -> Void)?
     /// The closure for the error.
     public var onError: ((String) -> Void)?
     
@@ -226,9 +226,7 @@ public class CXAudioRecorder: NSObject, ISKAudioRecorder {
 extension CXAudioRecorder: AVAudioRecorderDelegate {
     
     public func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        if flag {
-            onFinish?()
-        }
+        onFinish?(flag)
     }
     
 }

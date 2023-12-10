@@ -11,14 +11,15 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import CXSwiftKit
-import MarsUIKit
 
-class TransitionViewController: CXSKCollectionViewController<BaseSectionModel, BaseCellModel> {
+class TransitionViewController: BaseViewController, CXCollectionViewDataSourceProvidable {
+    typealias S = ListSectionEntity
+    typealias T = ListCellEntity
     
     private var collectionView: UICollectionView!
     private var disposeBag = DisposeBag()
     
-    private var dataList = BehaviorRelay<[SectionModel<BaseSectionModel, BaseCellModel>]>(value: [])
+    private var dataList = BehaviorRelay<[SectionModel<ListSectionEntity, ListCellEntity>]>(value: [])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,20 +57,20 @@ class TransitionViewController: CXSKCollectionViewController<BaseSectionModel, B
     }
     
     func loadData() {
-        ms_showProgressHUD(withStatus: "正在加载数据...")
+        cx_showProgressHUD(withStatus: "正在加载数据...")
         cxDelayToDispatch(0.5) {
             self.fillInData()
-            self.ms_dismissProgressHUD()
+            self.cx_dismissProgressHUD()
         }
     }
     
     private func fillInData() {
-        var list: [SectionModel<BaseSectionModel, BaseCellModel>] = []
-        let section = BaseSectionModel()
-        var items: [BaseCellModel] = []
+        var list: [SectionModel<ListSectionEntity, ListCellEntity>] = []
+        let section = ListSectionEntity()
+        var items: [ListCellEntity] = []
         for i in 0..<50 {
             CXLog.info("i=\(i)")
-            let item = BaseCellModel()
+            let item = ListCellEntity()
             item.reuseIdentifier = "TransitionCollectionViewCell"
             items.append(item)
         }
@@ -78,18 +79,13 @@ class TransitionViewController: CXSKCollectionViewController<BaseSectionModel, B
     }
     
     func bind() {
-        dataList.bind(to: collectionView.rx.items(dataSource: makeDataSource())).disposed(by: disposeBag)
+        dataList.bind(to: collectionView.rx.items(dataSource: provideDataSource())).disposed(by: disposeBag)
         collectionView.rx.itemSelected.asDriver().drive(onNext: { [weak self] indexPath in
             self?.didSelectItem(at: indexPath)
         }).disposed(by: disposeBag)
     }
     
-    override func configureCell(
-        cv collectionView: UICollectionView,
-        cell: UICollectionViewCell,
-        indexPath: IndexPath,
-        item: BaseCellModel)
-    {
+    func configureCell(cv collectionView: UICollectionView, cell: UICollectionViewCell, indexPath: IndexPath, item: ListCellEntity) {
         if let transitionCell = cell as? TransitionCollectionViewCell {
             transitionCell.stackView.backgroundColor = UIColor.cx.randomColor
         }

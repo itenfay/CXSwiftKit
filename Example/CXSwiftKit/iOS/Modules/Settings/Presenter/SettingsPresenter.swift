@@ -8,7 +8,6 @@
 
 import UIKit
 import CXSwiftKit
-import MarsUIKit
 
 protocol ISettingsPresenter: AnyObject {
     func clearButtonPressed()
@@ -33,10 +32,10 @@ class SettingsPresenter: BasePresenter, ISettingsPresenter {
     }
     
     private func clearLocalCaches() {
-        ms_showProgressHUD(withStatus: "正在清理中")
+        cx_showProgressHUD(withStatus: "正在清理中")
         cxClearKingfisherCache {
-            self.ms_dismissProgressHUD()
-            self.ms_showMessages(withStyle: .dark, body: "清理完成")
+            self.cx_dismissProgressHUD()
+            self.cx_showMessages(withStyle: .dark, body: "清理完成")
         }
     }
     

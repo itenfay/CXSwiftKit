@@ -103,21 +103,3 @@ class BaseCollectionViewCell: UICollectionViewCell, IBaseView {
     
     func addActions() {}
 }
-
-import RxCocoa
-import RxSwift
-
-class BaseReusableView: UICollectionReusableView {
-    
-    var disposeBag: DisposeBag = DisposeBag()
-    
-    func updateDisposeBag() {
-        disposeBag = DisposeBag()
-    }
-    
-    /// Override
-    func bind(to viewModel: BaseHeaderFooterModel) {
-        updateDisposeBag()
-    }
-    
-}

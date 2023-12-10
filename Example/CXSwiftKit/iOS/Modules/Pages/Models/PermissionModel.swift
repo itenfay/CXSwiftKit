@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import CXSwiftKit
 
-class AlbumModel: BaseCellModel {
+class AlbumModel: CXCellEntity {
     let id: String
     let name: String
     let count: Int
