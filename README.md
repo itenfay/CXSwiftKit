@@ -178,7 +178,6 @@ CXSwiftKit
   ┃   ┃   ┣ CXOverlayViewEx.swift      
   ┃   ┃   ┗ CXOverlayViewWrapable.swift      
   ┃   ┣ CXAppContext.swift
-  ┃   ┣ CXConstraintMaker.swift
   ┃   ┣ CXDevice.swift                 // Used to provide some device informations.
   ┃   ┣ CXDeviceScreenMonitor.swift    // Used to observe some changes of device screen.
   ┃   ┣ CXGlobal.swift                 // Provides some global methods.
@@ -202,6 +201,7 @@ CXSwiftKit
   ┃   ┃   ┣ CALayer+Cx.swift
   ┃   ┃   ┣ CGFloat+Cx.swift
   ┃   ┃   ┣ Color+Cx.swift
+  ┃   ┃   ┣ CXConstraintMaker.swift
   ┃   ┃   ┣ Date+Cx.swift
   ┃   ┃   ┣ Device+Cx.swift
   ┃   ┃   ┣ Dictionary+Cx.swift

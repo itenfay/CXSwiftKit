@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
   
   s.swift_versions = ['4.2', '5.0']
   
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.osx.deployment_target = '11.0'
   s.tvos.deployment_target = '10.0'
   s.watchos.deployment_target = "5.0"
@@ -62,6 +62,7 @@ Pod::Spec.new do |s|
   
   s.subspec "AR" do |ar|
     ar.source_files = 'CXSwiftKit/Classes/AR/*.{swift}'
+    ar.dependency 'CXSwiftKit/Base'
     ar.dependency 'SCNLine'
   end
   
@@ -81,7 +82,7 @@ Pod::Spec.new do |s|
     
     core.subspec "FileOperation" do |fo|
       fo.source_files = 'CXSwiftKit/Classes/Core/FileOperation/*.{swift}'
-      fo.dependency 'CXSwiftKit/Extension'
+      fo.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "AVToolbox" do |avtb|
