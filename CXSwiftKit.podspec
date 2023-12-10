@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '1.6.0'
+  s.version          = '2.0.0'
   s.summary          = 'CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.'
 
 # This description is used to generate tags and improve search results.
@@ -36,6 +36,9 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
+  s.default_subspec = 'Core'
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
   #s.source_files = 'CXSwiftKit/Classes/**/*'
   
@@ -49,7 +52,6 @@ Pod::Spec.new do |s|
   
   s.subspec "Base" do |base|
     base.source_files = 'CXSwiftKit/Classes/Base/*.{swift}'
-    base.dependency 'HandyJSON'
   end
   
   s.subspec "ApplePay" do |applepay|
@@ -58,54 +60,33 @@ Pod::Spec.new do |s|
     applepay.dependency 'CXSwiftKit/Base'
   end
   
-  s.subspec "Protocol" do |pt|
-    pt.source_files = 'CXSwiftKit/Classes/Protocol/*.{swift}'
-  end
-  
-  s.subspec "Extension" do |ext|
-    ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
-    ext.dependency 'CXSwiftKit/Base'
-    ext.dependency 'CXSwiftKit/Protocol'
-    ext.dependency 'Kingfisher'
-    #ext.dependency 'SDWebImage'
-  end
-  
-  s.subspec "FileOperation" do |fo|
-    fo.source_files = 'CXSwiftKit/Classes/FileOperation/*.{swift}'
-    fo.dependency 'CXSwiftKit/Extension'
-  end
-  
-  s.subspec "LiveGift" do |livegift|
-    livegift.source_files = 'CXSwiftKit/Classes/LiveGift/*.{swift}'
-    livegift.dependency 'CXSwiftKit/Extension'
-  end
-  
-  s.subspec "NetWork" do |network|
-    network.source_files = 'CXSwiftKit/Classes/NetWork/*.{swift}'
-    network.dependency 'CXSwiftKit/Base'
-    network.dependency 'Moya'
-    # Ignored
-    #network.vendored_frameworks = 'Framwork1.xcframwork', 'Framwork2.xcframwork'
+  s.subspec "AR" do |ar|
+    ar.source_files = 'CXSwiftKit/Classes/AR/*.{swift}'
+    ar.dependency 'SCNLine'
   end
   
   s.subspec "Core" do |core|
     core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
-    core.dependency 'CXSwiftKit/Extension'
-    core.dependency 'CXSwiftKit/FileOperation'
     core.dependency 'DYFSwiftKeychain'
-    core.dependency 'HandyJSON'
-    
-    core.subspec "AR" do |ar|
-      ar.source_files = 'CXSwiftKit/Classes/Core/AR/*.{swift}'
-    end
+    core.dependency 'CXSwiftKit/Base'
     
     core.subspec "Atomic" do |atom|
       atom.source_files = 'CXSwiftKit/Classes/Core/Atomic/*.{swift}'
     end
     
+    core.subspec "Extension" do |ext|
+      ext.source_files = 'CXSwiftKit/Classes/Core/Extension/*.{swift}'
+      ext.dependency 'CXSwiftKit/Base'
+    end
+    
+    core.subspec "FileOperation" do |fo|
+      fo.source_files = 'CXSwiftKit/Classes/Core/FileOperation/*.{swift}'
+      fo.dependency 'CXSwiftKit/Extension'
+    end
+    
     core.subspec "AVToolbox" do |avtb|
       avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
-      avtb.dependency 'CXSwiftKit/FileOperation'
+      avtb.dependency 'CXSwiftKit/Core/FileOperation'
     end
     
     core.subspec "Camera" do |cam|
@@ -114,12 +95,22 @@ Pod::Spec.new do |s|
       cam.dependency 'CXSwiftKit/Core/Atomic'
     end
     
+    core.subspec "CustomOverlayView" do |cov|
+      cov.source_files = 'CXSwiftKit/Classes/Core/CustomOverlayView/*.{swift}'
+      cov.dependency 'CXSwiftKit/Core/Extension'
+    end
+    
     core.subspec "DocumentPicker" do |dp|
       dp.source_files = 'CXSwiftKit/Classes/Core/DocumentPicker/*.{swift}'
     end
     
     core.subspec "ImageBuffer" do |imgbuffer|
       imgbuffer.source_files = 'CXSwiftKit/Classes/Core/ImageBuffer/*.{swift}'
+    end
+    
+    core.subspec "LiveGift" do |livegift|
+      livegift.source_files = 'CXSwiftKit/Classes/Core/LiveGift/*.{swift}'
+      #livegift.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Permissions" do |pm|
@@ -133,19 +124,126 @@ Pod::Spec.new do |s|
     
     core.subspec "Transition" do |transition|
       transition.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
-      transition.dependency 'CXSwiftKit/Extension'
-    end
-    
-    core.subspec "WebSocket" do |ws|
-      ws.source_files = 'CXSwiftKit/Classes/Core/WebSocket/*.{swift}'
-      ws.dependency 'CXSwiftKit/Base'
-      ws.dependency 'Starscream'
+      transition.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Widget" do |wd|
       wd.source_files = 'CXSwiftKit/Classes/Core/Widget/*.{swift}'
       wd.dependency 'CXSwiftKit/Base'
     end
+  end
+  
+  s.subspec "EmptyDataSet" do |eds|
+    eds.source_files = 'CXSwiftKit/Classes/EmptyDataSet/*.{swift}'
+    eds.dependency 'CXSwiftKit/Core/Extension'
+    eds.dependency 'DZNEmptyDataSet'
+  end
+  
+  s.subspec "HandyJSONHelper" do |hjson|
+    hjson.source_files = 'CXSwiftKit/Classes/HandyJSONHelper/*.{swift}'
+    hjson.dependency 'CXSwiftKit/Base'
+    hjson.dependency 'HandyJSON'
+  end
+  
+  s.subspec "KingfisherWrapper" do |kfw|
+    kfw.source_files = 'CXSwiftKit/Classes/KingfisherWrapper/*.{swift}'
+    kfw.dependency 'CXSwiftKit/Base'
+    kfw.dependency 'Kingfisher'
+  end
+  
+  s.subspec "NetWork" do |network|
+    network.source_files = 'CXSwiftKit/Classes/NetWork/*.{swift}'
+    network.dependency 'CXSwiftKit/Base'
+    network.dependency 'Moya'
+    network.dependency 'HandyJSON'
+    # Ignored
+    #network.vendored_frameworks = 'Framwork1.xcframwork', 'Framwork2.xcframwork'
+  end
+  
+  s.subspec "OverlayView" do |ov|
+    ov.source_files = 'CXSwiftKit/Classes/OverlayView/*.{swift}'
+    ov.dependency 'CXSwiftKit/Base'
+    ov.dependency 'OverlayController'
+  end
+  
+  s.subspec "RxButton" do |rxb|
+    rxb.source_files = 'CXSwiftKit/Classes/RxButton/*.{swift}'
+    rxb.dependency 'CXSwiftKit/Core/Extension'
+    rxb.dependency 'RxSwift'
+    rxb.dependency 'RxCocoa
+  end
+  
+  s.subspec "RxEmptyDataSet" do |rxeds|
+    rxeds.source_files = 'CXSwiftKit/Classes/RxEmptyDataSet/*.{swift}'
+    rxeds.dependency 'CXSwiftKit/EmptyDataSet'
+    rxeds.dependency 'RxSwift'
+    rxeds.dependency 'RxCocoa'
+  end
+  
+  s.subspec "RxKafkaRefresh" do |rxkafkar|
+    rxkafkar.source_files = 'CXSwiftKit/Classes/RxKafkaRefresh/*.{swift}'
+    rxkafkar.dependency 'KafkaRefresh'
+    rxkafkar.dependency 'RxSwift'
+    rxkafkar.dependency 'RxCocoa'
+  end
+  
+  s.subspec "RxKingfisher" do |rxkf|
+    rxkf.source_files = 'CXSwiftKit/Classes/RxKingfisher/*.{swift}'
+    rxkf.dependency 'CXSwiftKit/Core/Extension'
+    rxkf.dependency 'Kingfisher'
+    rxkf.dependency 'RxSwift'
+    rxkf.dependency 'RxCocoa'
+  end
+  
+  s.subspec "RxListDataSource" do |rxlds|
+    rxlds.source_files = 'CXSwiftKit/Classes/RxListDataSource/*.{swift}'
+    rxlds.dependency 'RxSwift'
+    rxlds.dependency 'RxCocoa'
+    rxlds.dependency 'RxDataSources'
+  end
+  
+  s.subspec "RxMJRefresh" do |rxmj|
+    rxmj.source_files = 'CXSwiftKit/Classes/RxMJRefresh/*.{swift}'
+    rxmj.dependency 'MJRefresh'
+    rxmj.dependency 'RxSwift'
+    rxmj.dependency 'RxCocoa'
+  end
+  
+  s.subspec "SDWebImageWrapper" do |sdwebw|
+    sdwebw.source_files = 'CXSwiftKit/Classes/SDWebImageWrapper/*.{swift}'
+    sdwebw.dependency 'SDWebImage'
+  end
+  
+  s.subspec "SvgaPlay" do |svgap|
+    svgap.source_files = 'CXSwiftKit/Classes/SvgaPlay/*.{swift}'
+    svgap.dependency 'SVGAPlayer'
+  end
+  
+  s.subspec "SVProgressHUDEx" do |svph|
+    svph.source_files = 'CXSwiftKit/Classes/SVProgressHUDEx/*.{swift}'
+    svph.dependency 'SVProgressHUD'
+  end
+  
+  s.subspec "SwiftMessagesEx" do |smsg|
+    smsg.source_files = 'CXSwiftKit/Classes/SwiftMessagesEx/*.{swift}'
+    smsg.dependency 'CXSwiftKit/Core/Extension'
+    smsg.dependency 'SwiftMessages'
+  end
+  
+  s.subspec "ToasterEx" do |toast|
+    toast.source_files = 'CXSwiftKit/Classes/ToasterEx/*.{swift}'
+    toast.dependency 'Toaster'
+  end
+  
+  s.subspec "ToastSwiftEx" do |toastsw|
+    toastsw.source_files = 'CXSwiftKit/Classes/ToastSwiftEx/*.{swift}'
+    toastsw.dependency 'Toast_Swift'
+  end
+  
+  s.subspec "WebSocket" do |ws|
+    ws.source_files = 'CXSwiftKit/Classes/WebSocket/*.{swift}'
+    ws.dependency 'CXSwiftKit/Base'
+    ws.dependency 'Starscream'
   end
   
 end
