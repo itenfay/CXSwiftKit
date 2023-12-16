@@ -217,7 +217,7 @@ Pod::Spec.new do |s|
   
   s.subspec "SvgaPlay" do |svgap|
     svgap.source_files = 'CXSwiftKit/Classes/SvgaPlay/*.{swift}'
-    svgap.dependency 'SVGAPlayer'
+    svvap.vendored_frameworks = 'CXSwiftKit/Assets/SVGAPlayerXFWK/SVGAPlayer.xcframwork'
   end
   
   s.subspec "SVProgressHUDEx" do |svph|
