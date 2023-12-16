@@ -1,0 +1,811 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     '/Users/jc/Library/Developer/Xcode/DerivedData/CXSwiftKit-cwtcvwfcrdzqprdbkapxhlyjjcpq/Build/Products/Release-iphoneos/SVGAPlayer/SVGAPlayer.framework/SVGAPlayer'
+relocations:
+  - { offsetInCU: 0x36, offset: 0x72BC5, size: 0x8, addend: 0x0, symName: _SVGAPlayerVersionString, symObjAddr: 0x0, symBinAddr: 0x186E0, symSize: 0x0 }
+  - { offsetInCU: 0x6C, offset: 0x72BFB, size: 0x8, addend: 0x0, symName: _SVGAPlayerVersionNumber, symObjAddr: 0x28, symBinAddr: 0x18708, symSize: 0x0 }
+  - { offsetInCU: 0x28, offset: 0x72C39, size: 0x8, addend: 0x0, symName: '+[SVGAProtoMovieParams descriptor]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0xA0 }
+  - { offsetInCU: 0x3A, offset: 0x72C4B, size: 0x8, addend: 0x0, symName: '+[SVGAProtoMovieParams descriptor]', symObjAddr: 0x0, symBinAddr: 0x4000, symSize: 0xA0 }
+  - { offsetInCU: 0x42, offset: 0x72C53, size: 0x8, addend: 0x0, symName: _SVGAProtoSvgaRoot_FileDescriptor, symObjAddr: 0xA0, symBinAddr: 0x40A0, symSize: 0x4C }
+  - { offsetInCU: 0x6A, offset: 0x72C7B, size: 0x8, addend: 0x0, symName: _descriptor.descriptor, symObjAddr: 0x85E8, symBinAddr: 0x271A8, symSize: 0x0 }
+  - { offsetInCU: 0x80, offset: 0x72C91, size: 0x8, addend: 0x0, symName: _descriptor.fields, symObjAddr: 0x2058, symBinAddr: 0x26960, symSize: 0x0 }
+  - { offsetInCU: 0x101, offset: 0x72D12, size: 0x8, addend: 0x0, symName: '+[SVGAProtoSpriteEntity descriptor]', symObjAddr: 0xEC, symBinAddr: 0x40EC, symSize: 0xA0 }
+  - { offsetInCU: 0x109, offset: 0x72D1A, size: 0x8, addend: 0x0, symName: '+[SVGAProtoAudioEntity descriptor]', symObjAddr: 0x18C, symBinAddr: 0x418C, symSize: 0xA0 }
+  - { offsetInCU: 0x131, offset: 0x72D42, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.13, symObjAddr: 0x85F0, symBinAddr: 0x271B0, symSize: 0x0 }
+  - { offsetInCU: 0x147, offset: 0x72D58, size: 0x8, addend: 0x0, symName: _descriptor.fields.14, symObjAddr: 0x20D8, symBinAddr: 0x269E0, symSize: 0x0 }
+  - { offsetInCU: 0x1A7, offset: 0x72DB8, size: 0x8, addend: 0x0, symName: '+[SVGAProtoAudioEntity descriptor]', symObjAddr: 0x18C, symBinAddr: 0x418C, symSize: 0xA0 }
+  - { offsetInCU: 0x1AF, offset: 0x72DC0, size: 0x8, addend: 0x0, symName: '+[SVGAProtoLayout descriptor]', symObjAddr: 0x22C, symBinAddr: 0x422C, symSize: 0x8C }
+  - { offsetInCU: 0x1D7, offset: 0x72DE8, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.30, symObjAddr: 0x85F8, symBinAddr: 0x271B8, symSize: 0x0 }
+  - { offsetInCU: 0x1ED, offset: 0x72DFE, size: 0x8, addend: 0x0, symName: _descriptor.fields.31, symObjAddr: 0x2138, symBinAddr: 0x26A40, symSize: 0x0 }
+  - { offsetInCU: 0x24F, offset: 0x72E60, size: 0x8, addend: 0x0, symName: '+[SVGAProtoLayout descriptor]', symObjAddr: 0x22C, symBinAddr: 0x422C, symSize: 0x8C }
+  - { offsetInCU: 0x257, offset: 0x72E68, size: 0x8, addend: 0x0, symName: '+[SVGAProtoTransform descriptor]', symObjAddr: 0x2B8, symBinAddr: 0x42B8, symSize: 0x8C }
+  - { offsetInCU: 0x281, offset: 0x72E92, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.46, symObjAddr: 0x8600, symBinAddr: 0x271C0, symSize: 0x0 }
+  - { offsetInCU: 0x298, offset: 0x72EA9, size: 0x8, addend: 0x0, symName: _descriptor.fields.47, symObjAddr: 0x21D8, symBinAddr: 0x26AE0, symSize: 0x0 }
+  - { offsetInCU: 0x2DD, offset: 0x72EEE, size: 0x8, addend: 0x0, symName: '+[SVGAProtoTransform descriptor]', symObjAddr: 0x2B8, symBinAddr: 0x42B8, symSize: 0x8C }
+  - { offsetInCU: 0x2E5, offset: 0x72EF6, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity descriptor]', symObjAddr: 0x344, symBinAddr: 0x4344, symSize: 0xA8 }
+  - { offsetInCU: 0x30F, offset: 0x72F20, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.58, symObjAddr: 0x8608, symBinAddr: 0x271C8, symSize: 0x0 }
+  - { offsetInCU: 0x326, offset: 0x72F37, size: 0x8, addend: 0x0, symName: _descriptor.fields.59, symObjAddr: 0x2258, symBinAddr: 0x26B60, symSize: 0x0 }
+  - { offsetInCU: 0x37B, offset: 0x72F8C, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity descriptor]', symObjAddr: 0x344, symBinAddr: 0x4344, symSize: 0xA8 }
+  - { offsetInCU: 0x383, offset: 0x72F94, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeType_EnumDescriptor, symObjAddr: 0x3EC, symBinAddr: 0x43EC, symSize: 0x7C }
+  - { offsetInCU: 0x3AD, offset: 0x72FBE, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.74, symObjAddr: 0x8610, symBinAddr: 0x271D0, symSize: 0x0 }
+  - { offsetInCU: 0x3C4, offset: 0x72FD5, size: 0x8, addend: 0x0, symName: _descriptor.fields.75, symObjAddr: 0x2318, symBinAddr: 0x26C20, symSize: 0x0 }
+  - { offsetInCU: 0x3DB, offset: 0x72FEC, size: 0x8, addend: 0x0, symName: _descriptor.oneofs, symObjAddr: 0x23D8, symBinAddr: 0x26CE0, symSize: 0x0 }
+  - { offsetInCU: 0x42C, offset: 0x7303D, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeType_EnumDescriptor, symObjAddr: 0x3EC, symBinAddr: 0x43EC, symSize: 0x7C }
+  - { offsetInCU: 0x434, offset: 0x73045, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_Type_RawValue, symObjAddr: 0x468, symBinAddr: 0x4468, symSize: 0x38 }
+  - { offsetInCU: 0x45B, offset: 0x7306C, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeType_EnumDescriptor.descriptor, symObjAddr: 0x8618, symBinAddr: 0x271D8, symSize: 0x0 }
+  - { offsetInCU: 0x47F, offset: 0x73090, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeType_EnumDescriptor.values, symObjAddr: 0x2FF8, symBinAddr: 0x18754, symSize: 0x0 }
+  - { offsetInCU: 0x4D3, offset: 0x730E4, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_ShapeArgs descriptor]', symObjAddr: 0x548, symBinAddr: 0x4548, symSize: 0xA0 }
+  - { offsetInCU: 0x4DB, offset: 0x730EC, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_RectArgs descriptor]', symObjAddr: 0x5E8, symBinAddr: 0x45E8, symSize: 0xB0 }
+  - { offsetInCU: 0x505, offset: 0x73116, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.109, symObjAddr: 0x8620, symBinAddr: 0x271E0, symSize: 0x0 }
+  - { offsetInCU: 0x51C, offset: 0x7312D, size: 0x8, addend: 0x0, symName: _descriptor.fields.110, symObjAddr: 0x23E0, symBinAddr: 0x26CE8, symSize: 0x0 }
+  - { offsetInCU: 0x571, offset: 0x73182, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_RectArgs descriptor]', symObjAddr: 0x5E8, symBinAddr: 0x45E8, symSize: 0xB0 }
+  - { offsetInCU: 0x579, offset: 0x7318A, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_EllipseArgs descriptor]', symObjAddr: 0x698, symBinAddr: 0x4698, symSize: 0xB0 }
+  - { offsetInCU: 0x5A3, offset: 0x731B4, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.114, symObjAddr: 0x8628, symBinAddr: 0x271E8, symSize: 0x0 }
+  - { offsetInCU: 0x5BA, offset: 0x731CB, size: 0x8, addend: 0x0, symName: _descriptor.fields.115, symObjAddr: 0x2400, symBinAddr: 0x26D08, symSize: 0x0 }
+  - { offsetInCU: 0x60C, offset: 0x7321D, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_EllipseArgs descriptor]', symObjAddr: 0x698, symBinAddr: 0x4698, symSize: 0xB0 }
+  - { offsetInCU: 0x614, offset: 0x73225, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_ShapeStyle descriptor]', symObjAddr: 0x748, symBinAddr: 0x4748, symSize: 0xB0 }
+  - { offsetInCU: 0x63E, offset: 0x7324F, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.122, symObjAddr: 0x8630, symBinAddr: 0x271F0, symSize: 0x0 }
+  - { offsetInCU: 0x655, offset: 0x73266, size: 0x8, addend: 0x0, symName: _descriptor.fields.123, symObjAddr: 0x24A0, symBinAddr: 0x26DA8, symSize: 0x0 }
+  - { offsetInCU: 0x6A7, offset: 0x732B8, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_ShapeStyle descriptor]', symObjAddr: 0x748, symBinAddr: 0x4748, symSize: 0xB0 }
+  - { offsetInCU: 0x6AF, offset: 0x732C0, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_EnumDescriptor, symObjAddr: 0x7F8, symBinAddr: 0x47F8, symSize: 0x84 }
+  - { offsetInCU: 0x6D9, offset: 0x732EA, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.132, symObjAddr: 0x8638, symBinAddr: 0x271F8, symSize: 0x0 }
+  - { offsetInCU: 0x6F0, offset: 0x73301, size: 0x8, addend: 0x0, symName: _descriptor.fields.133, symObjAddr: 0x2520, symBinAddr: 0x26E28, symSize: 0x0 }
+  - { offsetInCU: 0x752, offset: 0x73363, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_EnumDescriptor, symObjAddr: 0x7F8, symBinAddr: 0x47F8, symSize: 0x84 }
+  - { offsetInCU: 0x75A, offset: 0x7336B, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_EnumDescriptor, symObjAddr: 0x87C, symBinAddr: 0x487C, symSize: 0x84 }
+  - { offsetInCU: 0x781, offset: 0x73392, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_EnumDescriptor.descriptor, symObjAddr: 0x8640, symBinAddr: 0x27200, symSize: 0x0 }
+  - { offsetInCU: 0x7A5, offset: 0x733B6, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_EnumDescriptor.values, symObjAddr: 0x3050, symBinAddr: 0x187AC, symSize: 0x0 }
+  - { offsetInCU: 0x7ED, offset: 0x733FE, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_EnumDescriptor, symObjAddr: 0x87C, symBinAddr: 0x487C, symSize: 0x84 }
+  - { offsetInCU: 0x7F5, offset: 0x73406, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_RawValue, symObjAddr: 0x900, symBinAddr: 0x4900, symSize: 0x38 }
+  - { offsetInCU: 0x81C, offset: 0x7342D, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_EnumDescriptor.descriptor, symObjAddr: 0x8648, symBinAddr: 0x27208, symSize: 0x0 }
+  - { offsetInCU: 0x840, offset: 0x73451, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_EnumDescriptor.values, symObjAddr: 0x3098, symBinAddr: 0x187F4, symSize: 0x0 }
+  - { offsetInCU: 0x87C, offset: 0x7348D, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_ShapeStyle_RGBAColor descriptor]', symObjAddr: 0xA48, symBinAddr: 0x4A48, symSize: 0xA0 }
+  - { offsetInCU: 0x884, offset: 0x73495, size: 0x8, addend: 0x0, symName: '+[SVGAProtoFrameEntity descriptor]', symObjAddr: 0xAE8, symBinAddr: 0x4AE8, symSize: 0xA0 }
+  - { offsetInCU: 0x8AE, offset: 0x734BF, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.168, symObjAddr: 0x8650, symBinAddr: 0x27210, symSize: 0x0 }
+  - { offsetInCU: 0x8C5, offset: 0x734D6, size: 0x8, addend: 0x0, symName: _descriptor.fields.169, symObjAddr: 0x2640, symBinAddr: 0x26F48, symSize: 0x0 }
+  - { offsetInCU: 0x90A, offset: 0x7351B, size: 0x8, addend: 0x0, symName: '+[SVGAProtoFrameEntity descriptor]', symObjAddr: 0xAE8, symBinAddr: 0x4AE8, symSize: 0xA0 }
+  - { offsetInCU: 0x912, offset: 0x73523, size: 0x8, addend: 0x0, symName: '+[SVGAProtoMovieEntity descriptor]', symObjAddr: 0xB88, symBinAddr: 0x4B88, symSize: 0x8C }
+  - { offsetInCU: 0x93C, offset: 0x7354D, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.176, symObjAddr: 0x8658, symBinAddr: 0x27218, symSize: 0x0 }
+  - { offsetInCU: 0x953, offset: 0x73564, size: 0x8, addend: 0x0, symName: _descriptor.fields.177, symObjAddr: 0x26C0, symBinAddr: 0x26FC8, symSize: 0x0 }
+  - { offsetInCU: 0x9A5, offset: 0x735B6, size: 0x8, addend: 0x0, symName: '+[SVGAProtoMovieEntity descriptor]', symObjAddr: 0xB88, symBinAddr: 0x4B88, symSize: 0x8C }
+  - { offsetInCU: 0x9D7, offset: 0x735E8, size: 0x8, addend: 0x0, symName: _descriptor.descriptor.194, symObjAddr: 0x8660, symBinAddr: 0x27220, symSize: 0x0 }
+  - { offsetInCU: 0x9EE, offset: 0x735FF, size: 0x8, addend: 0x0, symName: _descriptor.fields.195, symObjAddr: 0x2760, symBinAddr: 0x27068, symSize: 0x0 }
+  - { offsetInCU: 0xA33, offset: 0x73644, size: 0x8, addend: 0x0, symName: _SVGAProtoSvgaRoot_FileDescriptor, symObjAddr: 0xA0, symBinAddr: 0x40A0, symSize: 0x4C }
+  - { offsetInCU: 0xA3B, offset: 0x7364C, size: 0x8, addend: 0x0, symName: '+[SVGAProtoSpriteEntity descriptor]', symObjAddr: 0xEC, symBinAddr: 0x40EC, symSize: 0xA0 }
+  - { offsetInCU: 0xA5F, offset: 0x73670, size: 0x8, addend: 0x0, symName: _SVGAProtoSvgaRoot_FileDescriptor.descriptor, symObjAddr: 0x8668, symBinAddr: 0x27228, symSize: 0x0 }
+  - { offsetInCU: 0xEB9, offset: 0x73ACA, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_Type_RawValue, symObjAddr: 0x468, symBinAddr: 0x4468, symSize: 0x38 }
+  - { offsetInCU: 0xEC1, offset: 0x73AD2, size: 0x8, addend: 0x0, symName: _SetSVGAProtoShapeEntity_Type_RawValue, symObjAddr: 0x4A0, symBinAddr: 0x44A0, symSize: 0x60 }
+  - { offsetInCU: 0xF13, offset: 0x73B24, size: 0x8, addend: 0x0, symName: _SetSVGAProtoShapeEntity_Type_RawValue, symObjAddr: 0x4A0, symBinAddr: 0x44A0, symSize: 0x60 }
+  - { offsetInCU: 0xF1B, offset: 0x73B2C, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ClearArgsOneOfCase, symObjAddr: 0x500, symBinAddr: 0x4500, symSize: 0x3C }
+  - { offsetInCU: 0xF7A, offset: 0x73B8B, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ClearArgsOneOfCase, symObjAddr: 0x500, symBinAddr: 0x4500, symSize: 0x3C }
+  - { offsetInCU: 0xF82, offset: 0x73B93, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeType_IsValidValue, symObjAddr: 0x53C, symBinAddr: 0x453C, symSize: 0xC }
+  - { offsetInCU: 0xFCC, offset: 0x73BDD, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeType_IsValidValue, symObjAddr: 0x53C, symBinAddr: 0x453C, symSize: 0xC }
+  - { offsetInCU: 0xFD4, offset: 0x73BE5, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_ShapeArgs descriptor]', symObjAddr: 0x548, symBinAddr: 0x4548, symSize: 0xA0 }
+  - { offsetInCU: 0x1009, offset: 0x73C1A, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_RawValue, symObjAddr: 0x900, symBinAddr: 0x4900, symSize: 0x38 }
+  - { offsetInCU: 0x1011, offset: 0x73C22, size: 0x8, addend: 0x0, symName: _SetSVGAProtoShapeEntity_ShapeStyle_LineCap_RawValue, symObjAddr: 0x938, symBinAddr: 0x4938, symSize: 0x60 }
+  - { offsetInCU: 0x1063, offset: 0x73C74, size: 0x8, addend: 0x0, symName: _SetSVGAProtoShapeEntity_ShapeStyle_LineCap_RawValue, symObjAddr: 0x938, symBinAddr: 0x4938, symSize: 0x60 }
+  - { offsetInCU: 0x106B, offset: 0x73C7C, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_RawValue, symObjAddr: 0x998, symBinAddr: 0x4998, symSize: 0x38 }
+  - { offsetInCU: 0x10CA, offset: 0x73CDB, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_RawValue, symObjAddr: 0x998, symBinAddr: 0x4998, symSize: 0x38 }
+  - { offsetInCU: 0x10D2, offset: 0x73CE3, size: 0x8, addend: 0x0, symName: _SetSVGAProtoShapeEntity_ShapeStyle_LineJoin_RawValue, symObjAddr: 0x9D0, symBinAddr: 0x49D0, symSize: 0x60 }
+  - { offsetInCU: 0x1124, offset: 0x73D35, size: 0x8, addend: 0x0, symName: _SetSVGAProtoShapeEntity_ShapeStyle_LineJoin_RawValue, symObjAddr: 0x9D0, symBinAddr: 0x49D0, symSize: 0x60 }
+  - { offsetInCU: 0x112C, offset: 0x73D3D, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_IsValidValue, symObjAddr: 0xA30, symBinAddr: 0x4A30, symSize: 0xC }
+  - { offsetInCU: 0x118B, offset: 0x73D9C, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineCap_IsValidValue, symObjAddr: 0xA30, symBinAddr: 0x4A30, symSize: 0xC }
+  - { offsetInCU: 0x1193, offset: 0x73DA4, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_IsValidValue, symObjAddr: 0xA3C, symBinAddr: 0x4A3C, symSize: 0xC }
+  - { offsetInCU: 0x11C8, offset: 0x73DD9, size: 0x8, addend: 0x0, symName: _SVGAProtoShapeEntity_ShapeStyle_LineJoin_IsValidValue, symObjAddr: 0xA3C, symBinAddr: 0x4A3C, symSize: 0xC }
+  - { offsetInCU: 0x11D0, offset: 0x73DE1, size: 0x8, addend: 0x0, symName: '+[SVGAProtoShapeEntity_ShapeStyle_RGBAColor descriptor]', symObjAddr: 0xA48, symBinAddr: 0x4A48, symSize: 0xA0 }
+  - { offsetInCU: 0x28, offset: 0x73E7F, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity initWithProtoObject:]', symObjAddr: 0x0, symBinAddr: 0x4C14, symSize: 0xB0 }
+  - { offsetInCU: 0x30, offset: 0x73E87, size: 0x8, addend: 0x0, symName: '_OBJC_CLASS_$_SVGAAudioEntity', symObjAddr: 0x100, symBinAddr: 0x264A8, symSize: 0x0 }
+  - { offsetInCU: 0x142, offset: 0x73F99, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity initWithProtoObject:]', symObjAddr: 0x0, symBinAddr: 0x4C14, symSize: 0xB0 }
+  - { offsetInCU: 0x14A, offset: 0x73FA1, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity audioKey]', symObjAddr: 0xB0, symBinAddr: 0x4CC4, symSize: 0x8 }
+  - { offsetInCU: 0x191, offset: 0x73FE8, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity audioKey]', symObjAddr: 0xB0, symBinAddr: 0x4CC4, symSize: 0x8 }
+  - { offsetInCU: 0x199, offset: 0x73FF0, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setAudioKey:]', symObjAddr: 0xB8, symBinAddr: 0x4CCC, symSize: 0xC }
+  - { offsetInCU: 0x1D2, offset: 0x74029, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setAudioKey:]', symObjAddr: 0xB8, symBinAddr: 0x4CCC, symSize: 0xC }
+  - { offsetInCU: 0x1DA, offset: 0x74031, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity startFrame]', symObjAddr: 0xC4, symBinAddr: 0x4CD8, symSize: 0x8 }
+  - { offsetInCU: 0x21D, offset: 0x74074, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity startFrame]', symObjAddr: 0xC4, symBinAddr: 0x4CD8, symSize: 0x8 }
+  - { offsetInCU: 0x225, offset: 0x7407C, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setStartFrame:]', symObjAddr: 0xCC, symBinAddr: 0x4CE0, symSize: 0x8 }
+  - { offsetInCU: 0x262, offset: 0x740B9, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setStartFrame:]', symObjAddr: 0xCC, symBinAddr: 0x4CE0, symSize: 0x8 }
+  - { offsetInCU: 0x26A, offset: 0x740C1, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity endFrame]', symObjAddr: 0xD4, symBinAddr: 0x4CE8, symSize: 0x8 }
+  - { offsetInCU: 0x2AD, offset: 0x74104, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity endFrame]', symObjAddr: 0xD4, symBinAddr: 0x4CE8, symSize: 0x8 }
+  - { offsetInCU: 0x2B5, offset: 0x7410C, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setEndFrame:]', symObjAddr: 0xDC, symBinAddr: 0x4CF0, symSize: 0x8 }
+  - { offsetInCU: 0x2F2, offset: 0x74149, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setEndFrame:]', symObjAddr: 0xDC, symBinAddr: 0x4CF0, symSize: 0x8 }
+  - { offsetInCU: 0x2FA, offset: 0x74151, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity startTime]', symObjAddr: 0xE4, symBinAddr: 0x4CF8, symSize: 0x8 }
+  - { offsetInCU: 0x33D, offset: 0x74194, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity startTime]', symObjAddr: 0xE4, symBinAddr: 0x4CF8, symSize: 0x8 }
+  - { offsetInCU: 0x345, offset: 0x7419C, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setStartTime:]', symObjAddr: 0xEC, symBinAddr: 0x4D00, symSize: 0x8 }
+  - { offsetInCU: 0x382, offset: 0x741D9, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity setStartTime:]', symObjAddr: 0xEC, symBinAddr: 0x4D00, symSize: 0x8 }
+  - { offsetInCU: 0x38A, offset: 0x741E1, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity .cxx_destruct]', symObjAddr: 0xF4, symBinAddr: 0x4D08, symSize: 0xC }
+  - { offsetInCU: 0x3CD, offset: 0x74224, size: 0x8, addend: 0x0, symName: '-[SVGAAudioEntity .cxx_destruct]', symObjAddr: 0xF4, symBinAddr: 0x4D08, symSize: 0xC }
+  - { offsetInCU: 0x3D5, offset: 0x7422C, size: 0x8, addend: 0x0, symName: '_OBJC_CLASS_$_SVGAAudioEntity', symObjAddr: 0x100, symBinAddr: 0x264A8, symSize: 0x0 }
+  - { offsetInCU: 0x28, offset: 0x74320, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer initWithAudioItem:videoItem:]', symObjAddr: 0x0, symBinAddr: 0x4D14, symSize: 0x1B0 }
+  - { offsetInCU: 0x30, offset: 0x74328, size: 0x8, addend: 0x0, symName: '_OBJC_CLASS_$_SVGAAudioLayer', symObjAddr: 0x218, symBinAddr: 0x264F8, symSize: 0x0 }
+  - { offsetInCU: 0x150, offset: 0x74448, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer initWithAudioItem:videoItem:]', symObjAddr: 0x0, symBinAddr: 0x4D14, symSize: 0x1B0 }
+  - { offsetInCU: 0x158, offset: 0x74450, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer audioPlayer]', symObjAddr: 0x1B0, symBinAddr: 0x4EC4, symSize: 0x8 }
+  - { offsetInCU: 0x1AF, offset: 0x744A7, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer audioPlayer]', symObjAddr: 0x1B0, symBinAddr: 0x4EC4, symSize: 0x8 }
+  - { offsetInCU: 0x1B7, offset: 0x744AF, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer setAudioPlayer:]', symObjAddr: 0x1B8, symBinAddr: 0x4ECC, symSize: 0xC }
+  - { offsetInCU: 0x1F0, offset: 0x744E8, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer setAudioPlayer:]', symObjAddr: 0x1B8, symBinAddr: 0x4ECC, symSize: 0xC }
+  - { offsetInCU: 0x1F8, offset: 0x744F0, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer audioItem]', symObjAddr: 0x1C4, symBinAddr: 0x4ED8, symSize: 0x8 }
+  - { offsetInCU: 0x23B, offset: 0x74533, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer audioItem]', symObjAddr: 0x1C4, symBinAddr: 0x4ED8, symSize: 0x8 }
+  - { offsetInCU: 0x243, offset: 0x7453B, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer setAudioItem:]', symObjAddr: 0x1CC, symBinAddr: 0x4EE0, symSize: 0xC }
+  - { offsetInCU: 0x27C, offset: 0x74574, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer setAudioItem:]', symObjAddr: 0x1CC, symBinAddr: 0x4EE0, symSize: 0xC }
+  - { offsetInCU: 0x284, offset: 0x7457C, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer audioPlaying]', symObjAddr: 0x1D8, symBinAddr: 0x4EEC, symSize: 0x8 }
+  - { offsetInCU: 0x2C7, offset: 0x745BF, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer audioPlaying]', symObjAddr: 0x1D8, symBinAddr: 0x4EEC, symSize: 0x8 }
+  - { offsetInCU: 0x2CF, offset: 0x745C7, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer setAudioPlaying:]', symObjAddr: 0x1E0, symBinAddr: 0x4EF4, symSize: 0x8 }
+  - { offsetInCU: 0x30C, offset: 0x74604, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer setAudioPlaying:]', symObjAddr: 0x1E0, symBinAddr: 0x4EF4, symSize: 0x8 }
+  - { offsetInCU: 0x314, offset: 0x7460C, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer .cxx_destruct]', symObjAddr: 0x1E8, symBinAddr: 0x4EFC, symSize: 0x30 }
+  - { offsetInCU: 0x355, offset: 0x7464D, size: 0x8, addend: 0x0, symName: '-[SVGAAudioLayer .cxx_destruct]', symObjAddr: 0x1E8, symBinAddr: 0x4EFC, symSize: 0x30 }
+  - { offsetInCU: 0x35D, offset: 0x74655, size: 0x8, addend: 0x0, symName: '_OBJC_CLASS_$_SVGAAudioLayer', symObjAddr: 0x218, symBinAddr: 0x264F8, symSize: 0x0 }
+  - { offsetInCU: 0x28, offset: 0x74764, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath setValues:]', symObjAddr: 0x0, symBinAddr: 0x4F2C, symSize: 0x2B0 }
+  - { offsetInCU: 0x3A, offset: 0x74776, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath setValues:]', symObjAddr: 0x0, symBinAddr: 0x4F2C, symSize: 0x2B0 }
+  - { offsetInCU: 0x42, offset: 0x7477E, size: 0x8, addend: 0x0, symName: '___28-[SVGABezierPath setValues:]_block_invoke', symObjAddr: 0x2B0, symBinAddr: 0x51DC, symSize: 0x16C }
+  - { offsetInCU: 0x66, offset: 0x747A2, size: 0x8, addend: 0x0, symName: '_setValues:.validMethods', symObjAddr: 0x4378, symBinAddr: 0x27230, symSize: 0x0 }
+  - { offsetInCU: 0x7C, offset: 0x747B8, size: 0x8, addend: 0x0, symName: '_setValues:.onceToken', symObjAddr: 0x4380, symBinAddr: 0x27238, symSize: 0x0 }
+  - { offsetInCU: 0x209, offset: 0x74945, size: 0x8, addend: 0x0, symName: '___28-[SVGABezierPath setValues:]_block_invoke', symObjAddr: 0x2B0, symBinAddr: 0x51DC, symSize: 0x16C }
+  - { offsetInCU: 0x211, offset: 0x7494D, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath createLayer]', symObjAddr: 0x41C, symBinAddr: 0x5348, symSize: 0xC0 }
+  - { offsetInCU: 0x237, offset: 0x74973, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath createLayer]', symObjAddr: 0x41C, symBinAddr: 0x5348, symSize: 0xC0 }
+  - { offsetInCU: 0x23F, offset: 0x7497B, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath operate:args:]', symObjAddr: 0x4DC, symBinAddr: 0x5408, symSize: 0x78C }
+  - { offsetInCU: 0x286, offset: 0x749C2, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath operate:args:]', symObjAddr: 0x4DC, symBinAddr: 0x5408, symSize: 0x78C }
+  - { offsetInCU: 0x28E, offset: 0x749CA, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath argFloat:relativeValue:]', symObjAddr: 0xC68, symBinAddr: 0x5B94, symSize: 0x8 }
+  - { offsetInCU: 0x407, offset: 0x74B43, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath argFloat:relativeValue:]', symObjAddr: 0xC68, symBinAddr: 0x5B94, symSize: 0x8 }
+  - { offsetInCU: 0x40F, offset: 0x74B4B, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath argPoint:relative:]', symObjAddr: 0xC70, symBinAddr: 0x5B9C, symSize: 0x4C }
+  - { offsetInCU: 0x46E, offset: 0x74BAA, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath argPoint:relative:]', symObjAddr: 0xC70, symBinAddr: 0x5B9C, symSize: 0x4C }
+  - { offsetInCU: 0x476, offset: 0x74BB2, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath displaying]', symObjAddr: 0xCBC, symBinAddr: 0x5BE8, symSize: 0x10 }
+  - { offsetInCU: 0x4D5, offset: 0x74C11, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath displaying]', symObjAddr: 0xCBC, symBinAddr: 0x5BE8, symSize: 0x10 }
+  - { offsetInCU: 0x4DD, offset: 0x74C19, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath setDisplaying:]', symObjAddr: 0xCCC, symBinAddr: 0x5BF8, symSize: 0x10 }
+  - { offsetInCU: 0x51A, offset: 0x74C56, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath setDisplaying:]', symObjAddr: 0xCCC, symBinAddr: 0x5BF8, symSize: 0x10 }
+  - { offsetInCU: 0x522, offset: 0x74C5E, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath backValues]', symObjAddr: 0xCDC, symBinAddr: 0x5C08, symSize: 0x10 }
+  - { offsetInCU: 0x563, offset: 0x74C9F, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath backValues]', symObjAddr: 0xCDC, symBinAddr: 0x5C08, symSize: 0x10 }
+  - { offsetInCU: 0x56B, offset: 0x74CA7, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath setBackValues:]', symObjAddr: 0xCEC, symBinAddr: 0x5C18, symSize: 0xC }
+  - { offsetInCU: 0x5A4, offset: 0x74CE0, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath setBackValues:]', symObjAddr: 0xCEC, symBinAddr: 0x5C18, symSize: 0xC }
+  - { offsetInCU: 0x5AC, offset: 0x74CE8, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath .cxx_destruct]', symObjAddr: 0xCF8, symBinAddr: 0x5C24, symSize: 0x14 }
+  - { offsetInCU: 0x5ED, offset: 0x74D29, size: 0x8, addend: 0x0, symName: '-[SVGABezierPath .cxx_destruct]', symObjAddr: 0xCF8, symBinAddr: 0x5C24, symSize: 0x14 }
+  - { offsetInCU: 0x28, offset: 0x74E53, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer initWithFrames:]', symObjAddr: 0x0, symBinAddr: 0x5C38, symSize: 0xE0 }
+  - { offsetInCU: 0xBC, offset: 0x74EE7, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer initWithFrames:]', symObjAddr: 0x0, symBinAddr: 0x5C38, symSize: 0xE0 }
+  - { offsetInCU: 0xC4, offset: 0x74EEF, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer stepToFrame:]', symObjAddr: 0xE0, symBinAddr: 0x5D18, symSize: 0x4 }
+  - { offsetInCU: 0x10B, offset: 0x74F36, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer stepToFrame:]', symObjAddr: 0xE0, symBinAddr: 0x5D18, symSize: 0x4 }
+  - { offsetInCU: 0x113, offset: 0x74F3E, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer frames]', symObjAddr: 0xE4, symBinAddr: 0x5D1C, symSize: 0x10 }
+  - { offsetInCU: 0x153, offset: 0x74F7E, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer frames]', symObjAddr: 0xE4, symBinAddr: 0x5D1C, symSize: 0x10 }
+  - { offsetInCU: 0x15B, offset: 0x74F86, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer setFrames:]', symObjAddr: 0xF4, symBinAddr: 0x5D2C, symSize: 0x14 }
+  - { offsetInCU: 0x194, offset: 0x74FBF, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer setFrames:]', symObjAddr: 0xF4, symBinAddr: 0x5D2C, symSize: 0x14 }
+  - { offsetInCU: 0x19C, offset: 0x74FC7, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer drawedFrame]', symObjAddr: 0x108, symBinAddr: 0x5D40, symSize: 0x10 }
+  - { offsetInCU: 0x1DF, offset: 0x7500A, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer drawedFrame]', symObjAddr: 0x108, symBinAddr: 0x5D40, symSize: 0x10 }
+  - { offsetInCU: 0x1E7, offset: 0x75012, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer setDrawedFrame:]', symObjAddr: 0x118, symBinAddr: 0x5D50, symSize: 0x10 }
+  - { offsetInCU: 0x224, offset: 0x7504F, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer setDrawedFrame:]', symObjAddr: 0x118, symBinAddr: 0x5D50, symSize: 0x10 }
+  - { offsetInCU: 0x22C, offset: 0x75057, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer .cxx_destruct]', symObjAddr: 0x128, symBinAddr: 0x5D60, symSize: 0x14 }
+  - { offsetInCU: 0x26F, offset: 0x7509A, size: 0x8, addend: 0x0, symName: '-[SVGABitmapLayer .cxx_destruct]', symObjAddr: 0x128, symBinAddr: 0x5D60, symSize: 0x14 }
+  - { offsetInCU: 0x28, offset: 0x7511E, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer initWithFrames:]', symObjAddr: 0x0, symBinAddr: 0x5D74, symSize: 0xDC }
+  - { offsetInCU: 0x286, offset: 0x7537C, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer initWithFrames:]', symObjAddr: 0x0, symBinAddr: 0x5D74, symSize: 0xDC }
+  - { offsetInCU: 0x28E, offset: 0x75384, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer stepToFrame:]', symObjAddr: 0xDC, symBinAddr: 0x5E50, symSize: 0x370 }
+  - { offsetInCU: 0x2D5, offset: 0x753CB, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer stepToFrame:]', symObjAddr: 0xDC, symBinAddr: 0x5E50, symSize: 0x370 }
+  - { offsetInCU: 0x2DD, offset: 0x753D3, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setFrame:]', symObjAddr: 0x44C, symBinAddr: 0x61C0, symSize: 0x278 }
+  - { offsetInCU: 0x3C1, offset: 0x754B7, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setFrame:]', symObjAddr: 0x44C, symBinAddr: 0x61C0, symSize: 0x278 }
+  - { offsetInCU: 0x3C9, offset: 0x754BF, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setBitmapLayer:]', symObjAddr: 0x6C4, symBinAddr: 0x6438, symSize: 0x6C }
+  - { offsetInCU: 0x44A, offset: 0x75540, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setBitmapLayer:]', symObjAddr: 0x6C4, symBinAddr: 0x6438, symSize: 0x6C }
+  - { offsetInCU: 0x452, offset: 0x75548, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setVectorLayer:]', symObjAddr: 0x730, symBinAddr: 0x64A4, symSize: 0x6C }
+  - { offsetInCU: 0x495, offset: 0x7558B, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setVectorLayer:]', symObjAddr: 0x730, symBinAddr: 0x64A4, symSize: 0x6C }
+  - { offsetInCU: 0x49D, offset: 0x75593, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setDynamicHidden:]', symObjAddr: 0x79C, symBinAddr: 0x6510, symSize: 0x10 }
+  - { offsetInCU: 0x4E0, offset: 0x755D6, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setDynamicHidden:]', symObjAddr: 0x79C, symBinAddr: 0x6510, symSize: 0x10 }
+  - { offsetInCU: 0x4E8, offset: 0x755DE, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer resetTextLayerProperties:]', symObjAddr: 0x7AC, symBinAddr: 0x6520, symSize: 0x188 }
+  - { offsetInCU: 0x52A, offset: 0x75620, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer resetTextLayerProperties:]', symObjAddr: 0x7AC, symBinAddr: 0x6520, symSize: 0x188 }
+  - { offsetInCU: 0x532, offset: 0x75628, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer imageKey]', symObjAddr: 0x934, symBinAddr: 0x66A8, symSize: 0x10 }
+  - { offsetInCU: 0x595, offset: 0x7568B, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer imageKey]', symObjAddr: 0x934, symBinAddr: 0x66A8, symSize: 0x10 }
+  - { offsetInCU: 0x59D, offset: 0x75693, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setImageKey:]', symObjAddr: 0x944, symBinAddr: 0x66B8, symSize: 0x14 }
+  - { offsetInCU: 0x5D6, offset: 0x756CC, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setImageKey:]', symObjAddr: 0x944, symBinAddr: 0x66B8, symSize: 0x14 }
+  - { offsetInCU: 0x5DE, offset: 0x756D4, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer dynamicHidden]', symObjAddr: 0x958, symBinAddr: 0x66CC, symSize: 0x10 }
+  - { offsetInCU: 0x621, offset: 0x75717, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer dynamicHidden]', symObjAddr: 0x958, symBinAddr: 0x66CC, symSize: 0x10 }
+  - { offsetInCU: 0x629, offset: 0x7571F, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer dynamicDrawingBlock]', symObjAddr: 0x968, symBinAddr: 0x66DC, symSize: 0x10 }
+  - { offsetInCU: 0x666, offset: 0x7575C, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer dynamicDrawingBlock]', symObjAddr: 0x968, symBinAddr: 0x66DC, symSize: 0x10 }
+  - { offsetInCU: 0x66E, offset: 0x75764, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setDynamicDrawingBlock:]', symObjAddr: 0x978, symBinAddr: 0x66EC, symSize: 0xC }
+  - { offsetInCU: 0x6A7, offset: 0x7579D, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setDynamicDrawingBlock:]', symObjAddr: 0x978, symBinAddr: 0x66EC, symSize: 0xC }
+  - { offsetInCU: 0x6AF, offset: 0x757A5, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer bitmapLayer]', symObjAddr: 0x984, symBinAddr: 0x66F8, symSize: 0x10 }
+  - { offsetInCU: 0x6F0, offset: 0x757E6, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer bitmapLayer]', symObjAddr: 0x984, symBinAddr: 0x66F8, symSize: 0x10 }
+  - { offsetInCU: 0x6F8, offset: 0x757EE, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer vectorLayer]', symObjAddr: 0x994, symBinAddr: 0x6708, symSize: 0x10 }
+  - { offsetInCU: 0x731, offset: 0x75827, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer vectorLayer]', symObjAddr: 0x994, symBinAddr: 0x6708, symSize: 0x10 }
+  - { offsetInCU: 0x739, offset: 0x7582F, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer textLayer]', symObjAddr: 0x9A4, symBinAddr: 0x6718, symSize: 0x10 }
+  - { offsetInCU: 0x772, offset: 0x75868, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer textLayer]', symObjAddr: 0x9A4, symBinAddr: 0x6718, symSize: 0x10 }
+  - { offsetInCU: 0x77A, offset: 0x75870, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setTextLayer:]', symObjAddr: 0x9B4, symBinAddr: 0x6728, symSize: 0x14 }
+  - { offsetInCU: 0x7B3, offset: 0x758A9, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setTextLayer:]', symObjAddr: 0x9B4, symBinAddr: 0x6728, symSize: 0x14 }
+  - { offsetInCU: 0x7BB, offset: 0x758B1, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer frames]', symObjAddr: 0x9C8, symBinAddr: 0x673C, symSize: 0x10 }
+  - { offsetInCU: 0x7FE, offset: 0x758F4, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer frames]', symObjAddr: 0x9C8, symBinAddr: 0x673C, symSize: 0x10 }
+  - { offsetInCU: 0x806, offset: 0x758FC, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setFrames:]', symObjAddr: 0x9D8, symBinAddr: 0x674C, symSize: 0x14 }
+  - { offsetInCU: 0x83F, offset: 0x75935, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setFrames:]', symObjAddr: 0x9D8, symBinAddr: 0x674C, symSize: 0x14 }
+  - { offsetInCU: 0x847, offset: 0x7593D, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer textLayerAlignment]', symObjAddr: 0x9EC, symBinAddr: 0x6760, symSize: 0x10 }
+  - { offsetInCU: 0x88A, offset: 0x75980, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer textLayerAlignment]', symObjAddr: 0x9EC, symBinAddr: 0x6760, symSize: 0x10 }
+  - { offsetInCU: 0x892, offset: 0x75988, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setTextLayerAlignment:]', symObjAddr: 0x9FC, symBinAddr: 0x6770, symSize: 0x10 }
+  - { offsetInCU: 0x8CF, offset: 0x759C5, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer setTextLayerAlignment:]', symObjAddr: 0x9FC, symBinAddr: 0x6770, symSize: 0x10 }
+  - { offsetInCU: 0x8D7, offset: 0x759CD, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer .cxx_destruct]', symObjAddr: 0xA0C, symBinAddr: 0x6780, symSize: 0x90 }
+  - { offsetInCU: 0x91A, offset: 0x75A10, size: 0x8, addend: 0x0, symName: '-[SVGAContentLayer .cxx_destruct]', symObjAddr: 0xA0C, symBinAddr: 0x6780, symSize: 0x90 }
+  - { offsetInCU: 0x28, offset: 0x75B45, size: 0x8, addend: 0x0, symName: '-[SVGAExporter toImages]', symObjAddr: 0x0, symBinAddr: 0x6810, symSize: 0x1F4 }
+  - { offsetInCU: 0x179, offset: 0x75C96, size: 0x8, addend: 0x0, symName: '-[SVGAExporter toImages]', symObjAddr: 0x0, symBinAddr: 0x6810, symSize: 0x1F4 }
+  - { offsetInCU: 0x181, offset: 0x75C9E, size: 0x8, addend: 0x0, symName: '-[SVGAExporter saveImages:filePrefix:]', symObjAddr: 0x1F4, symBinAddr: 0x6A04, symSize: 0x29C }
+  - { offsetInCU: 0x212, offset: 0x75D2F, size: 0x8, addend: 0x0, symName: '-[SVGAExporter saveImages:filePrefix:]', symObjAddr: 0x1F4, symBinAddr: 0x6A04, symSize: 0x29C }
+  - { offsetInCU: 0x21A, offset: 0x75D37, size: 0x8, addend: 0x0, symName: '-[SVGAExporter draw]', symObjAddr: 0x490, symBinAddr: 0x6CA0, symSize: 0x178 }
+  - { offsetInCU: 0x2DA, offset: 0x75DF7, size: 0x8, addend: 0x0, symName: '-[SVGAExporter draw]', symObjAddr: 0x490, symBinAddr: 0x6CA0, symSize: 0x178 }
+  - { offsetInCU: 0x2E2, offset: 0x75DFF, size: 0x8, addend: 0x0, symName: '___20-[SVGAExporter draw]_block_invoke', symObjAddr: 0x608, symBinAddr: 0x6E18, symSize: 0xF4 }
+  - { offsetInCU: 0x315, offset: 0x75E32, size: 0x8, addend: 0x0, symName: '___20-[SVGAExporter draw]_block_invoke', symObjAddr: 0x608, symBinAddr: 0x6E18, symSize: 0xF4 }
+  - { offsetInCU: 0x31D, offset: 0x75E3A, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s, symObjAddr: 0x6FC, symBinAddr: 0x6F0C, symSize: 0x8 }
+  - { offsetInCU: 0x3BB, offset: 0x75ED8, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s, symObjAddr: 0x6FC, symBinAddr: 0x6F0C, symSize: 0x8 }
+  - { offsetInCU: 0x3C3, offset: 0x75EE0, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s, symObjAddr: 0x704, symBinAddr: 0x6F14, symSize: 0x8 }
+  - { offsetInCU: 0x3EC, offset: 0x75F09, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s, symObjAddr: 0x704, symBinAddr: 0x6F14, symSize: 0x8 }
+  - { offsetInCU: 0x3F4, offset: 0x75F11, size: 0x8, addend: 0x0, symName: '-[SVGAExporter update]', symObjAddr: 0x70C, symBinAddr: 0x6F1C, symSize: 0x144 }
+  - { offsetInCU: 0x414, offset: 0x75F31, size: 0x8, addend: 0x0, symName: '-[SVGAExporter update]', symObjAddr: 0x70C, symBinAddr: 0x6F1C, symSize: 0x144 }
+  - { offsetInCU: 0x41C, offset: 0x75F39, size: 0x8, addend: 0x0, symName: '-[SVGAExporter videoItem]', symObjAddr: 0x850, symBinAddr: 0x7060, symSize: 0x8 }
+  - { offsetInCU: 0x466, offset: 0x75F83, size: 0x8, addend: 0x0, symName: '-[SVGAExporter videoItem]', symObjAddr: 0x850, symBinAddr: 0x7060, symSize: 0x8 }
+  - { offsetInCU: 0x46E, offset: 0x75F8B, size: 0x8, addend: 0x0, symName: '-[SVGAExporter setVideoItem:]', symObjAddr: 0x858, symBinAddr: 0x7068, symSize: 0xC }
+  - { offsetInCU: 0x4A7, offset: 0x75FC4, size: 0x8, addend: 0x0, symName: '-[SVGAExporter setVideoItem:]', symObjAddr: 0x858, symBinAddr: 0x7068, symSize: 0xC }
+  - { offsetInCU: 0x4AF, offset: 0x75FCC, size: 0x8, addend: 0x0, symName: '-[SVGAExporter drawLayer]', symObjAddr: 0x864, symBinAddr: 0x7074, symSize: 0x8 }
+  - { offsetInCU: 0x4F2, offset: 0x7600F, size: 0x8, addend: 0x0, symName: '-[SVGAExporter drawLayer]', symObjAddr: 0x864, symBinAddr: 0x7074, symSize: 0x8 }
+  - { offsetInCU: 0x4FA, offset: 0x76017, size: 0x8, addend: 0x0, symName: '-[SVGAExporter setDrawLayer:]', symObjAddr: 0x86C, symBinAddr: 0x707C, symSize: 0xC }
+  - { offsetInCU: 0x533, offset: 0x76050, size: 0x8, addend: 0x0, symName: '-[SVGAExporter setDrawLayer:]', symObjAddr: 0x86C, symBinAddr: 0x707C, symSize: 0xC }
+  - { offsetInCU: 0x53B, offset: 0x76058, size: 0x8, addend: 0x0, symName: '-[SVGAExporter currentFrame]', symObjAddr: 0x878, symBinAddr: 0x7088, symSize: 0x8 }
+  - { offsetInCU: 0x57E, offset: 0x7609B, size: 0x8, addend: 0x0, symName: '-[SVGAExporter currentFrame]', symObjAddr: 0x878, symBinAddr: 0x7088, symSize: 0x8 }
+  - { offsetInCU: 0x586, offset: 0x760A3, size: 0x8, addend: 0x0, symName: '-[SVGAExporter setCurrentFrame:]', symObjAddr: 0x880, symBinAddr: 0x7090, symSize: 0x8 }
+  - { offsetInCU: 0x5C3, offset: 0x760E0, size: 0x8, addend: 0x0, symName: '-[SVGAExporter setCurrentFrame:]', symObjAddr: 0x880, symBinAddr: 0x7090, symSize: 0x8 }
+  - { offsetInCU: 0x5CB, offset: 0x760E8, size: 0x8, addend: 0x0, symName: '-[SVGAExporter .cxx_destruct]', symObjAddr: 0x888, symBinAddr: 0x7098, symSize: 0x30 }
+  - { offsetInCU: 0x60E, offset: 0x7612B, size: 0x8, addend: 0x0, symName: '-[SVGAExporter .cxx_destruct]', symObjAddr: 0x888, symBinAddr: 0x7098, symSize: 0x30 }
+  - { offsetInCU: 0x28, offset: 0x76444, size: 0x8, addend: 0x0, symName: '+[SVGAImageView load]', symObjAddr: 0x0, symBinAddr: 0x70C8, symSize: 0x2C }
+  - { offsetInCU: 0x46, offset: 0x76462, size: 0x8, addend: 0x0, symName: _sharedParser, symObjAddr: 0x25C8, symBinAddr: 0x27240, symSize: 0x0 }
+  - { offsetInCU: 0x1AC, offset: 0x765C8, size: 0x8, addend: 0x0, symName: '+[SVGAImageView load]', symObjAddr: 0x0, symBinAddr: 0x70C8, symSize: 0x2C }
+  - { offsetInCU: 0x1B4, offset: 0x765D0, size: 0x8, addend: 0x0, symName: '-[SVGAImageView initWithCoder:]', symObjAddr: 0x2C, symBinAddr: 0x70F4, symSize: 0x48 }
+  - { offsetInCU: 0x1E3, offset: 0x765FF, size: 0x8, addend: 0x0, symName: '-[SVGAImageView initWithCoder:]', symObjAddr: 0x2C, symBinAddr: 0x70F4, symSize: 0x48 }
+  - { offsetInCU: 0x1EB, offset: 0x76607, size: 0x8, addend: 0x0, symName: '-[SVGAImageView setImageName:]', symObjAddr: 0x74, symBinAddr: 0x713C, symSize: 0x140 }
+  - { offsetInCU: 0x232, offset: 0x7664E, size: 0x8, addend: 0x0, symName: '-[SVGAImageView setImageName:]', symObjAddr: 0x74, symBinAddr: 0x713C, symSize: 0x140 }
+  - { offsetInCU: 0x23A, offset: 0x76656, size: 0x8, addend: 0x0, symName: '___30-[SVGAImageView setImageName:]_block_invoke', symObjAddr: 0x1B4, symBinAddr: 0x727C, symSize: 0x44 }
+  - { offsetInCU: 0x27D, offset: 0x76699, size: 0x8, addend: 0x0, symName: '___30-[SVGAImageView setImageName:]_block_invoke', symObjAddr: 0x1B4, symBinAddr: 0x727C, symSize: 0x44 }
+  - { offsetInCU: 0x2D4, offset: 0x766F0, size: 0x8, addend: 0x0, symName: '___30-[SVGAImageView setImageName:]_block_invoke.5', symObjAddr: 0x208, symBinAddr: 0x72C0, symSize: 0x44 }
+  - { offsetInCU: 0x2DC, offset: 0x766F8, size: 0x8, addend: 0x0, symName: '-[SVGAImageView autoPlay]', symObjAddr: 0x24C, symBinAddr: 0x7304, symSize: 0x10 }
+  - { offsetInCU: 0x32B, offset: 0x76747, size: 0x8, addend: 0x0, symName: '-[SVGAImageView autoPlay]', symObjAddr: 0x24C, symBinAddr: 0x7304, symSize: 0x10 }
+  - { offsetInCU: 0x333, offset: 0x7674F, size: 0x8, addend: 0x0, symName: '-[SVGAImageView setAutoPlay:]', symObjAddr: 0x25C, symBinAddr: 0x7314, symSize: 0x10 }
+  - { offsetInCU: 0x370, offset: 0x7678C, size: 0x8, addend: 0x0, symName: '-[SVGAImageView setAutoPlay:]', symObjAddr: 0x25C, symBinAddr: 0x7314, symSize: 0x10 }
+  - { offsetInCU: 0x378, offset: 0x76794, size: 0x8, addend: 0x0, symName: '-[SVGAImageView imageName]', symObjAddr: 0x26C, symBinAddr: 0x7324, symSize: 0x10 }
+  - { offsetInCU: 0x3B9, offset: 0x767D5, size: 0x8, addend: 0x0, symName: '-[SVGAImageView imageName]', symObjAddr: 0x26C, symBinAddr: 0x7324, symSize: 0x10 }
+  - { offsetInCU: 0x3C1, offset: 0x767DD, size: 0x8, addend: 0x0, symName: '-[SVGAImageView .cxx_destruct]', symObjAddr: 0x27C, symBinAddr: 0x7334, symSize: 0x14 }
+  - { offsetInCU: 0x3FA, offset: 0x76816, size: 0x8, addend: 0x0, symName: '-[SVGAImageView .cxx_destruct]', symObjAddr: 0x27C, symBinAddr: 0x7334, symSize: 0x14 }
+  - { offsetInCU: 0x28, offset: 0x769FE, size: 0x8, addend: 0x0, symName: '+[SVGAParser load]', symObjAddr: 0x0, symBinAddr: 0x7348, symSize: 0x68 }
+  - { offsetInCU: 0x54, offset: 0x76A2A, size: 0x8, addend: 0x0, symName: _parseQueue, symObjAddr: 0xE248, symBinAddr: 0x27248, symSize: 0x0 }
+  - { offsetInCU: 0x73, offset: 0x76A49, size: 0x8, addend: 0x0, symName: _unzipQueue, symObjAddr: 0xE250, symBinAddr: 0x27250, symSize: 0x0 }
+  - { offsetInCU: 0x132, offset: 0x76B08, size: 0x8, addend: 0x0, symName: '+[SVGAParser load]', symObjAddr: 0x0, symBinAddr: 0x7348, symSize: 0x68 }
+  - { offsetInCU: 0x13A, offset: 0x76B10, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithURL:completionBlock:failureBlock:]', symObjAddr: 0x68, symBinAddr: 0x73B0, symSize: 0x9C }
+  - { offsetInCU: 0x169, offset: 0x76B3F, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithURL:completionBlock:failureBlock:]', symObjAddr: 0x68, symBinAddr: 0x73B0, symSize: 0x9C }
+  - { offsetInCU: 0x171, offset: 0x76B47, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]', symObjAddr: 0x104, symBinAddr: 0x744C, symSize: 0x33C }
+  - { offsetInCU: 0x1D4, offset: 0x76BAA, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]', symObjAddr: 0x104, symBinAddr: 0x744C, symSize: 0x33C }
+  - { offsetInCU: 0x1DC, offset: 0x76BB2, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0x440, symBinAddr: 0x7788, symSize: 0xE0 }
+  - { offsetInCU: 0x23F, offset: 0x76C15, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0x440, symBinAddr: 0x7788, symSize: 0xE0 }
+  - { offsetInCU: 0x247, offset: 0x76C1D, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32b, symObjAddr: 0x520, symBinAddr: 0x7868, symSize: 0x10 }
+  - { offsetInCU: 0x281, offset: 0x76C57, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32b, symObjAddr: 0x520, symBinAddr: 0x7868, symSize: 0x10 }
+  - { offsetInCU: 0x2B4, offset: 0x76C8A, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke.8', symObjAddr: 0x538, symBinAddr: 0x7878, symSize: 0xC8 }
+  - { offsetInCU: 0x2BC, offset: 0x76C92, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_2', symObjAddr: 0x600, symBinAddr: 0x7940, symSize: 0x10 }
+  - { offsetInCU: 0x306, offset: 0x76CDC, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_2', symObjAddr: 0x600, symBinAddr: 0x7940, symSize: 0x10 }
+  - { offsetInCU: 0x30E, offset: 0x76CE4, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40b, symObjAddr: 0x610, symBinAddr: 0x7950, symSize: 0x34 }
+  - { offsetInCU: 0x359, offset: 0x76D2F, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40b, symObjAddr: 0x610, symBinAddr: 0x7950, symSize: 0x34 }
+  - { offsetInCU: 0x361, offset: 0x76D37, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s, symObjAddr: 0x644, symBinAddr: 0x7984, symSize: 0x28 }
+  - { offsetInCU: 0x38B, offset: 0x76D61, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s, symObjAddr: 0x644, symBinAddr: 0x7984, symSize: 0x28 }
+  - { offsetInCU: 0x393, offset: 0x76D69, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke.10', symObjAddr: 0x66C, symBinAddr: 0x79AC, symSize: 0x118 }
+  - { offsetInCU: 0x3B2, offset: 0x76D88, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke.10', symObjAddr: 0x66C, symBinAddr: 0x79AC, symSize: 0x118 }
+  - { offsetInCU: 0x3BA, offset: 0x76D90, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_2.11', symObjAddr: 0x784, symBinAddr: 0x7AC4, symSize: 0x10 }
+  - { offsetInCU: 0x429, offset: 0x76DFF, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_2.11', symObjAddr: 0x784, symBinAddr: 0x7AC4, symSize: 0x10 }
+  - { offsetInCU: 0x431, offset: 0x76E07, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48b, symObjAddr: 0x794, symBinAddr: 0x7AD4, symSize: 0x3C }
+  - { offsetInCU: 0x47C, offset: 0x76E52, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48b, symObjAddr: 0x794, symBinAddr: 0x7AD4, symSize: 0x3C }
+  - { offsetInCU: 0x484, offset: 0x76E5A, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s, symObjAddr: 0x7D0, symBinAddr: 0x7B10, symSize: 0x30 }
+  - { offsetInCU: 0x4AE, offset: 0x76E84, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s, symObjAddr: 0x7D0, symBinAddr: 0x7B10, symSize: 0x30 }
+  - { offsetInCU: 0x4B6, offset: 0x76E8C, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke.14', symObjAddr: 0x800, symBinAddr: 0x7B40, symSize: 0x204 }
+  - { offsetInCU: 0x4D5, offset: 0x76EAB, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke.14', symObjAddr: 0x800, symBinAddr: 0x7B40, symSize: 0x204 }
+  - { offsetInCU: 0x4DD, offset: 0x76EB3, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_2.15', symObjAddr: 0xA04, symBinAddr: 0x7D44, symSize: 0xC8 }
+  - { offsetInCU: 0x57C, offset: 0x76F52, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_2.15', symObjAddr: 0xA04, symBinAddr: 0x7D44, symSize: 0xC8 }
+  - { offsetInCU: 0x584, offset: 0x76F5A, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_3', symObjAddr: 0xACC, symBinAddr: 0x7E0C, symSize: 0x10 }
+  - { offsetInCU: 0x5CE, offset: 0x76FA4, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_3', symObjAddr: 0xACC, symBinAddr: 0x7E0C, symSize: 0x10 }
+  - { offsetInCU: 0x5D6, offset: 0x76FAC, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_4', symObjAddr: 0xADC, symBinAddr: 0x7E1C, symSize: 0x118 }
+  - { offsetInCU: 0x621, offset: 0x76FF7, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_4', symObjAddr: 0xADC, symBinAddr: 0x7E1C, symSize: 0x118 }
+  - { offsetInCU: 0x629, offset: 0x76FFF, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_5', symObjAddr: 0xBF4, symBinAddr: 0x7F34, symSize: 0x10 }
+  - { offsetInCU: 0x698, offset: 0x7706E, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_5', symObjAddr: 0xBF4, symBinAddr: 0x7F34, symSize: 0x10 }
+  - { offsetInCU: 0x6A0, offset: 0x77076, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_6', symObjAddr: 0xC04, symBinAddr: 0x7F44, symSize: 0x10 }
+  - { offsetInCU: 0x6EB, offset: 0x770C1, size: 0x8, addend: 0x0, symName: '___63-[SVGAParser parseWithURLRequest:completionBlock:failureBlock:]_block_invoke_6', symObjAddr: 0xC04, symBinAddr: 0x7F44, symSize: 0x10 }
+  - { offsetInCU: 0x6F3, offset: 0x770C9, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48b56b, symObjAddr: 0xC14, symBinAddr: 0x7F54, symSize: 0x4C }
+  - { offsetInCU: 0x73E, offset: 0x77114, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48b56b, symObjAddr: 0xC14, symBinAddr: 0x7F54, symSize: 0x4C }
+  - { offsetInCU: 0x746, offset: 0x7711C, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s56s, symObjAddr: 0xC60, symBinAddr: 0x7FA0, symSize: 0x38 }
+  - { offsetInCU: 0x770, offset: 0x77146, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s56s, symObjAddr: 0xC60, symBinAddr: 0x7FA0, symSize: 0x38 }
+  - { offsetInCU: 0x778, offset: 0x7714E, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithNamed:inBundle:completionBlock:failureBlock:]', symObjAddr: 0xC98, symBinAddr: 0x7FD8, symSize: 0x200 }
+  - { offsetInCU: 0x797, offset: 0x7716D, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithNamed:inBundle:completionBlock:failureBlock:]', symObjAddr: 0xC98, symBinAddr: 0x7FD8, symSize: 0x200 }
+  - { offsetInCU: 0x79F, offset: 0x77175, size: 0x8, addend: 0x0, symName: '___67-[SVGAParser parseWithNamed:inBundle:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0xE98, symBinAddr: 0x81D8, symSize: 0xE0 }
+  - { offsetInCU: 0x822, offset: 0x771F8, size: 0x8, addend: 0x0, symName: '___67-[SVGAParser parseWithNamed:inBundle:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0xE98, symBinAddr: 0x81D8, symSize: 0xE0 }
+  - { offsetInCU: 0x82A, offset: 0x77200, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]', symObjAddr: 0xF78, symBinAddr: 0x82B8, symSize: 0xEC }
+  - { offsetInCU: 0x864, offset: 0x7723A, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]', symObjAddr: 0xF78, symBinAddr: 0x82B8, symSize: 0xEC }
+  - { offsetInCU: 0x86C, offset: 0x77242, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0x1064, symBinAddr: 0x83A4, symSize: 0x550 }
+  - { offsetInCU: 0x8CF, offset: 0x772A5, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0x1064, symBinAddr: 0x83A4, symSize: 0x550 }
+  - { offsetInCU: 0x8D7, offset: 0x772AD, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_2', symObjAddr: 0x15B4, symBinAddr: 0x88F4, symSize: 0x10 }
+  - { offsetInCU: 0xA1C, offset: 0x773F2, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_2', symObjAddr: 0x15B4, symBinAddr: 0x88F4, symSize: 0x10 }
+  - { offsetInCU: 0xA24, offset: 0x773FA, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_3', symObjAddr: 0x15C4, symBinAddr: 0x8904, symSize: 0x10 }
+  - { offsetInCU: 0xA6F, offset: 0x77445, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_3', symObjAddr: 0x15C4, symBinAddr: 0x8904, symSize: 0x10 }
+  - { offsetInCU: 0xA77, offset: 0x7744D, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_4', symObjAddr: 0x15D4, symBinAddr: 0x8914, symSize: 0x5C }
+  - { offsetInCU: 0xAC2, offset: 0x77498, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_4', symObjAddr: 0x15D4, symBinAddr: 0x8914, symSize: 0x5C }
+  - { offsetInCU: 0xACA, offset: 0x774A0, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_5', symObjAddr: 0x1630, symBinAddr: 0x8970, symSize: 0x10 }
+  - { offsetInCU: 0xB04, offset: 0x774DA, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_5', symObjAddr: 0x1630, symBinAddr: 0x8970, symSize: 0x10 }
+  - { offsetInCU: 0xB0C, offset: 0x774E2, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_6', symObjAddr: 0x1640, symBinAddr: 0x8980, symSize: 0x5C }
+  - { offsetInCU: 0xB57, offset: 0x7752D, size: 0x8, addend: 0x0, symName: '___61-[SVGAParser parseWithCacheKey:completionBlock:failureBlock:]_block_invoke_6', symObjAddr: 0x1640, symBinAddr: 0x8980, symSize: 0x5C }
+  - { offsetInCU: 0xB5F, offset: 0x77535, size: 0x8, addend: 0x0, symName: '-[SVGAParser clearCache:]', symObjAddr: 0x169C, symBinAddr: 0x89DC, symSize: 0x58 }
+  - { offsetInCU: 0xB99, offset: 0x7756F, size: 0x8, addend: 0x0, symName: '-[SVGAParser clearCache:]', symObjAddr: 0x169C, symBinAddr: 0x89DC, symSize: 0x58 }
+  - { offsetInCU: 0xBA1, offset: 0x77577, size: 0x8, addend: 0x0, symName: '+[SVGAParser isZIPData:]', symObjAddr: 0x16F4, symBinAddr: 0x8A34, symSize: 0x34 }
+  - { offsetInCU: 0xBF4, offset: 0x775CA, size: 0x8, addend: 0x0, symName: '+[SVGAParser isZIPData:]', symObjAddr: 0x16F4, symBinAddr: 0x8A34, symSize: 0x34 }
+  - { offsetInCU: 0xBFC, offset: 0x775D2, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]', symObjAddr: 0x1728, symBinAddr: 0x8A68, symSize: 0x284 }
+  - { offsetInCU: 0xC57, offset: 0x7762D, size: 0x8, addend: 0x0, symName: '-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]', symObjAddr: 0x1728, symBinAddr: 0x8A68, symSize: 0x284 }
+  - { offsetInCU: 0xC5F, offset: 0x77635, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0x19AC, symBinAddr: 0x8CEC, symSize: 0x10 }
+  - { offsetInCU: 0xCE2, offset: 0x776B8, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke', symObjAddr: 0x19AC, symBinAddr: 0x8CEC, symSize: 0x10 }
+  - { offsetInCU: 0xCEA, offset: 0x776C0, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_2', symObjAddr: 0x19BC, symBinAddr: 0x8CFC, symSize: 0x1A4 }
+  - { offsetInCU: 0xD35, offset: 0x7770B, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_2', symObjAddr: 0x19BC, symBinAddr: 0x8CFC, symSize: 0x1A4 }
+  - { offsetInCU: 0xD3D, offset: 0x77713, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_3', symObjAddr: 0x1B60, symBinAddr: 0x8EA0, symSize: 0x10 }
+  - { offsetInCU: 0xE12, offset: 0x777E8, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_3', symObjAddr: 0x1B60, symBinAddr: 0x8EA0, symSize: 0x10 }
+  - { offsetInCU: 0xE1A, offset: 0x777F0, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s56b, symObjAddr: 0x1B70, symBinAddr: 0x8EB0, symSize: 0x44 }
+  - { offsetInCU: 0xE65, offset: 0x7783B, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s56b, symObjAddr: 0x1B70, symBinAddr: 0x8EB0, symSize: 0x44 }
+  - { offsetInCU: 0xE6D, offset: 0x77843, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke.35', symObjAddr: 0x1BB4, symBinAddr: 0x8EF4, symSize: 0x3A4 }
+  - { offsetInCU: 0xE97, offset: 0x7786D, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke.35', symObjAddr: 0x1BB4, symBinAddr: 0x8EF4, symSize: 0x3A4 }
+  - { offsetInCU: 0xE9F, offset: 0x77875, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_2.36', symObjAddr: 0x1F58, symBinAddr: 0x9298, symSize: 0xC8 }
+  - { offsetInCU: 0xF5B, offset: 0x77931, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_2.36', symObjAddr: 0x1F58, symBinAddr: 0x9298, symSize: 0xC8 }
+  - { offsetInCU: 0xF63, offset: 0x77939, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_3.37', symObjAddr: 0x2020, symBinAddr: 0x9360, symSize: 0x10 }
+  - { offsetInCU: 0xFAD, offset: 0x77983, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_3.37', symObjAddr: 0x2020, symBinAddr: 0x9360, symSize: 0x10 }
+  - { offsetInCU: 0xFB5, offset: 0x7798B, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_4', symObjAddr: 0x2030, symBinAddr: 0x9370, symSize: 0xD0 }
+  - { offsetInCU: 0x1000, offset: 0x779D6, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_4', symObjAddr: 0x2030, symBinAddr: 0x9370, symSize: 0xD0 }
+  - { offsetInCU: 0x1008, offset: 0x779DE, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_5', symObjAddr: 0x2100, symBinAddr: 0x9440, symSize: 0x10 }
+  - { offsetInCU: 0x1078, offset: 0x77A4E, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_5', symObjAddr: 0x2100, symBinAddr: 0x9440, symSize: 0x10 }
+  - { offsetInCU: 0x1080, offset: 0x77A56, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_6', symObjAddr: 0x2110, symBinAddr: 0x9450, symSize: 0x4 }
+  - { offsetInCU: 0x10CB, offset: 0x77AA1, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_6', symObjAddr: 0x2110, symBinAddr: 0x9450, symSize: 0x4 }
+  - { offsetInCU: 0x10D3, offset: 0x77AA9, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_7', symObjAddr: 0x2114, symBinAddr: 0x9454, symSize: 0x51C }
+  - { offsetInCU: 0x1134, offset: 0x77B0A, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_7', symObjAddr: 0x2114, symBinAddr: 0x9454, symSize: 0x51C }
+  - { offsetInCU: 0x113C, offset: 0x77B12, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_8', symObjAddr: 0x2630, symBinAddr: 0x9970, symSize: 0x10 }
+  - { offsetInCU: 0x129D, offset: 0x77C73, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_8', symObjAddr: 0x2630, symBinAddr: 0x9970, symSize: 0x10 }
+  - { offsetInCU: 0x12A5, offset: 0x77C7B, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_9', symObjAddr: 0x2640, symBinAddr: 0x9980, symSize: 0x10 }
+  - { offsetInCU: 0x12F3, offset: 0x77CC9, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_9', symObjAddr: 0x2640, symBinAddr: 0x9980, symSize: 0x10 }
+  - { offsetInCU: 0x12FB, offset: 0x77CD1, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_10', symObjAddr: 0x2650, symBinAddr: 0x9990, symSize: 0x5C }
+  - { offsetInCU: 0x1349, offset: 0x77D1F, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_10', symObjAddr: 0x2650, symBinAddr: 0x9990, symSize: 0x5C }
+  - { offsetInCU: 0x1351, offset: 0x77D27, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_11', symObjAddr: 0x26AC, symBinAddr: 0x99EC, symSize: 0x10 }
+  - { offsetInCU: 0x138D, offset: 0x77D63, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_11', symObjAddr: 0x26AC, symBinAddr: 0x99EC, symSize: 0x10 }
+  - { offsetInCU: 0x1395, offset: 0x77D6B, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_12', symObjAddr: 0x26BC, symBinAddr: 0x99FC, symSize: 0x5C }
+  - { offsetInCU: 0x13E3, offset: 0x77DB9, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_12', symObjAddr: 0x26BC, symBinAddr: 0x99FC, symSize: 0x5C }
+  - { offsetInCU: 0x13EB, offset: 0x77DC1, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s56b64b, symObjAddr: 0x2718, symBinAddr: 0x9A58, symSize: 0x54 }
+  - { offsetInCU: 0x1427, offset: 0x77DFD, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s56b64b, symObjAddr: 0x2718, symBinAddr: 0x9A58, symSize: 0x54 }
+  - { offsetInCU: 0x142F, offset: 0x77E05, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s56s64s, symObjAddr: 0x276C, symBinAddr: 0x9AAC, symSize: 0x40 }
+  - { offsetInCU: 0x1459, offset: 0x77E2F, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s56s64s, symObjAddr: 0x276C, symBinAddr: 0x9AAC, symSize: 0x40 }
+  - { offsetInCU: 0x1461, offset: 0x77E37, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke.44', symObjAddr: 0x27AC, symBinAddr: 0x9AEC, symSize: 0x5C }
+  - { offsetInCU: 0x1480, offset: 0x77E56, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke.44', symObjAddr: 0x27AC, symBinAddr: 0x9AEC, symSize: 0x5C }
+  - { offsetInCU: 0x1488, offset: 0x77E5E, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_2.45', symObjAddr: 0x2808, symBinAddr: 0x9B48, symSize: 0x58 }
+  - { offsetInCU: 0x14C4, offset: 0x77E9A, size: 0x8, addend: 0x0, symName: '___66-[SVGAParser parseWithData:cacheKey:completionBlock:failureBlock:]_block_invoke_2.45', symObjAddr: 0x2808, symBinAddr: 0x9B48, symSize: 0x58 }
+  - { offsetInCU: 0x14CC, offset: 0x77EA2, size: 0x8, addend: 0x0, symName: '-[SVGAParser cacheKey:]', symObjAddr: 0x2860, symBinAddr: 0x9BA0, symSize: 0x54 }
+  - { offsetInCU: 0x1508, offset: 0x77EDE, size: 0x8, addend: 0x0, symName: '-[SVGAParser cacheKey:]', symObjAddr: 0x2860, symBinAddr: 0x9BA0, symSize: 0x54 }
+  - { offsetInCU: 0x1510, offset: 0x77EE6, size: 0x8, addend: 0x0, symName: '-[SVGAParser cacheDirectory:]', symObjAddr: 0x28B4, symBinAddr: 0x9BF4, symSize: 0x9C }
+  - { offsetInCU: 0x1559, offset: 0x77F2F, size: 0x8, addend: 0x0, symName: '-[SVGAParser cacheDirectory:]', symObjAddr: 0x28B4, symBinAddr: 0x9BF4, symSize: 0x9C }
+  - { offsetInCU: 0x1561, offset: 0x77F37, size: 0x8, addend: 0x0, symName: '-[SVGAParser MD5String:]', symObjAddr: 0x2950, symBinAddr: 0x9C90, symSize: 0xEC }
+  - { offsetInCU: 0x15B7, offset: 0x77F8D, size: 0x8, addend: 0x0, symName: '-[SVGAParser MD5String:]', symObjAddr: 0x2950, symBinAddr: 0x9C90, symSize: 0xEC }
+  - { offsetInCU: 0x15BF, offset: 0x77F95, size: 0x8, addend: 0x0, symName: '-[SVGAParser zlibInflate:]', symObjAddr: 0x2A3C, symBinAddr: 0x9D7C, symSize: 0x18C }
+  - { offsetInCU: 0x1625, offset: 0x77FFB, size: 0x8, addend: 0x0, symName: '-[SVGAParser zlibInflate:]', symObjAddr: 0x2A3C, symBinAddr: 0x9D7C, symSize: 0x18C }
+  - { offsetInCU: 0x162D, offset: 0x78003, size: 0x8, addend: 0x0, symName: '-[SVGAParser enabledMemoryCache]', symObjAddr: 0x2BC8, symBinAddr: 0x9F08, symSize: 0x8 }
+  - { offsetInCU: 0x16DF, offset: 0x780B5, size: 0x8, addend: 0x0, symName: '-[SVGAParser enabledMemoryCache]', symObjAddr: 0x2BC8, symBinAddr: 0x9F08, symSize: 0x8 }
+  - { offsetInCU: 0x16E7, offset: 0x780BD, size: 0x8, addend: 0x0, symName: '-[SVGAParser setEnabledMemoryCache:]', symObjAddr: 0x2BD0, symBinAddr: 0x9F10, symSize: 0x8 }
+  - { offsetInCU: 0x1724, offset: 0x780FA, size: 0x8, addend: 0x0, symName: '-[SVGAParser setEnabledMemoryCache:]', symObjAddr: 0x2BD0, symBinAddr: 0x9F10, symSize: 0x8 }
+  - { offsetInCU: 0x28, offset: 0x79718, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer init]', symObjAddr: 0x0, symBinAddr: 0x9F18, symSize: 0x50 }
+  - { offsetInCU: 0x3CE, offset: 0x79ABE, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer init]', symObjAddr: 0x0, symBinAddr: 0x9F18, symSize: 0x50 }
+  - { offsetInCU: 0x3D6, offset: 0x79AC6, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer initWithFrame:]', symObjAddr: 0x50, symBinAddr: 0x9F68, symSize: 0x50 }
+  - { offsetInCU: 0x40D, offset: 0x79AFD, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer initWithFrame:]', symObjAddr: 0x50, symBinAddr: 0x9F68, symSize: 0x50 }
+  - { offsetInCU: 0x415, offset: 0x79B05, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer initWithCoder:]', symObjAddr: 0xA0, symBinAddr: 0x9FB8, symSize: 0x50 }
+  - { offsetInCU: 0x45C, offset: 0x79B4C, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer initWithCoder:]', symObjAddr: 0xA0, symBinAddr: 0x9FB8, symSize: 0x50 }
+  - { offsetInCU: 0x464, offset: 0x79B54, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer initPlayer]', symObjAddr: 0xF0, symBinAddr: 0xA008, symSize: 0x2C }
+  - { offsetInCU: 0x4AB, offset: 0x79B9B, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer initPlayer]', symObjAddr: 0xF0, symBinAddr: 0xA008, symSize: 0x2C }
+  - { offsetInCU: 0x4B3, offset: 0x79BA3, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer willMoveToSuperview:]', symObjAddr: 0x11C, symBinAddr: 0xA034, symSize: 0x54 }
+  - { offsetInCU: 0x4E6, offset: 0x79BD6, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer willMoveToSuperview:]', symObjAddr: 0x11C, symBinAddr: 0xA034, symSize: 0x54 }
+  - { offsetInCU: 0x4EE, offset: 0x79BDE, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer startAnimation]', symObjAddr: 0x170, symBinAddr: 0xA088, symSize: 0x1D4 }
+  - { offsetInCU: 0x531, offset: 0x79C21, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer startAnimation]', symObjAddr: 0x170, symBinAddr: 0xA088, symSize: 0x1D4 }
+  - { offsetInCU: 0x539, offset: 0x79C29, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer startAnimationWithRange:reverse:]', symObjAddr: 0x344, symBinAddr: 0xA25C, symSize: 0x250 }
+  - { offsetInCU: 0x56C, offset: 0x79C5C, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer startAnimationWithRange:reverse:]', symObjAddr: 0x344, symBinAddr: 0xA25C, symSize: 0x250 }
+  - { offsetInCU: 0x574, offset: 0x79C64, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer pauseAnimation]', symObjAddr: 0x594, symBinAddr: 0xA4AC, symSize: 0x8 }
+  - { offsetInCU: 0x602, offset: 0x79CF2, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer pauseAnimation]', symObjAddr: 0x594, symBinAddr: 0xA4AC, symSize: 0x8 }
+  - { offsetInCU: 0x60A, offset: 0x79CFA, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stopAnimation]', symObjAddr: 0x59C, symBinAddr: 0xA4B4, symSize: 0x28 }
+  - { offsetInCU: 0x63C, offset: 0x79D2C, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stopAnimation]', symObjAddr: 0x59C, symBinAddr: 0xA4B4, symSize: 0x28 }
+  - { offsetInCU: 0x644, offset: 0x79D34, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stopAnimation:]', symObjAddr: 0x5C4, symBinAddr: 0xA4DC, symSize: 0x88 }
+  - { offsetInCU: 0x677, offset: 0x79D67, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stopAnimation:]', symObjAddr: 0x5C4, symBinAddr: 0xA4DC, symSize: 0x88 }
+  - { offsetInCU: 0x67F, offset: 0x79D6F, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clear]', symObjAddr: 0x64C, symBinAddr: 0xA564, symSize: 0x4C }
+  - { offsetInCU: 0x6C2, offset: 0x79DB2, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clear]', symObjAddr: 0x64C, symBinAddr: 0xA564, symSize: 0x4C }
+  - { offsetInCU: 0x6CA, offset: 0x79DBA, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clearAudios]', symObjAddr: 0x698, symBinAddr: 0xA5B0, symSize: 0x12C }
+  - { offsetInCU: 0x6FD, offset: 0x79DED, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clearAudios]', symObjAddr: 0x698, symBinAddr: 0xA5B0, symSize: 0x12C }
+  - { offsetInCU: 0x705, offset: 0x79DF5, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stepToFrame:andPlay:]', symObjAddr: 0x7C4, symBinAddr: 0xA6DC, symSize: 0x21C }
+  - { offsetInCU: 0x74F, offset: 0x79E3F, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stepToFrame:andPlay:]', symObjAddr: 0x7C4, symBinAddr: 0xA6DC, symSize: 0x21C }
+  - { offsetInCU: 0x757, offset: 0x79E47, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stepToPercentage:andPlay:]', symObjAddr: 0x9E0, symBinAddr: 0xA8F8, symSize: 0xC8 }
+  - { offsetInCU: 0x7AE, offset: 0x79E9E, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer stepToPercentage:andPlay:]', symObjAddr: 0x9E0, symBinAddr: 0xA8F8, symSize: 0xC8 }
+  - { offsetInCU: 0x7B6, offset: 0x79EA6, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer draw]', symObjAddr: 0xAA8, symBinAddr: 0xA9C0, symSize: 0x2DC }
+  - { offsetInCU: 0x821, offset: 0x79F11, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer draw]', symObjAddr: 0xAA8, symBinAddr: 0xA9C0, symSize: 0x2DC }
+  - { offsetInCU: 0x829, offset: 0x79F19, size: 0x8, addend: 0x0, symName: '___18-[SVGAPlayer draw]_block_invoke', symObjAddr: 0xD84, symBinAddr: 0xAC9C, symSize: 0x92C }
+  - { offsetInCU: 0x88C, offset: 0x79F7C, size: 0x8, addend: 0x0, symName: '___18-[SVGAPlayer draw]_block_invoke', symObjAddr: 0xD84, symBinAddr: 0xAC9C, symSize: 0x92C }
+  - { offsetInCU: 0x894, offset: 0x79F84, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s, symObjAddr: 0x16B0, symBinAddr: 0xB5C8, symSize: 0x30 }
+  - { offsetInCU: 0xA16, offset: 0x7A106, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48s, symObjAddr: 0x16B0, symBinAddr: 0xB5C8, symSize: 0x30 }
+  - { offsetInCU: 0xA48, offset: 0x7A138, size: 0x8, addend: 0x0, symName: '___18-[SVGAPlayer draw]_block_invoke.20', symObjAddr: 0x1710, symBinAddr: 0xB5F8, symSize: 0x8C }
+  - { offsetInCU: 0xA50, offset: 0x7A140, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s, symObjAddr: 0x179C, symBinAddr: 0xB684, symSize: 0x28 }
+  - { offsetInCU: 0xAEE, offset: 0x7A1DE, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s, symObjAddr: 0x179C, symBinAddr: 0xB684, symSize: 0x28 }
+  - { offsetInCU: 0xBA4, offset: 0x7A294, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer resize]', symObjAddr: 0x17EC, symBinAddr: 0xB6AC, symSize: 0xB78 }
+  - { offsetInCU: 0xBAC, offset: 0x7A29C, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer layoutSubviews]', symObjAddr: 0x2364, symBinAddr: 0xC224, symSize: 0x48 }
+  - { offsetInCU: 0x1153, offset: 0x7A843, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer layoutSubviews]', symObjAddr: 0x2364, symBinAddr: 0xC224, symSize: 0x48 }
+  - { offsetInCU: 0x115B, offset: 0x7A84B, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer update]', symObjAddr: 0x23AC, symBinAddr: 0xC26C, symSize: 0x39C }
+  - { offsetInCU: 0x118F, offset: 0x7A87F, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer update]', symObjAddr: 0x23AC, symBinAddr: 0xC26C, symSize: 0x39C }
+  - { offsetInCU: 0x1197, offset: 0x7A887, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer next]', symObjAddr: 0x2748, symBinAddr: 0xC608, symSize: 0x3F8 }
+  - { offsetInCU: 0x11FB, offset: 0x7A8EB, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer next]', symObjAddr: 0x2748, symBinAddr: 0xC608, symSize: 0x3F8 }
+  - { offsetInCU: 0x1203, offset: 0x7A8F3, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setVideoItem:]', symObjAddr: 0x2B40, symBinAddr: 0xCA00, symSize: 0xEC }
+  - { offsetInCU: 0x13B1, offset: 0x7AAA1, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setVideoItem:]', symObjAddr: 0x2B40, symBinAddr: 0xCA00, symSize: 0xEC }
+  - { offsetInCU: 0x13B9, offset: 0x7AAA9, size: 0x8, addend: 0x0, symName: '___27-[SVGAPlayer setVideoItem:]_block_invoke', symObjAddr: 0x2C2C, symBinAddr: 0xCAEC, symSize: 0x28 }
+  - { offsetInCU: 0x13FE, offset: 0x7AAEE, size: 0x8, addend: 0x0, symName: '___27-[SVGAPlayer setVideoItem:]_block_invoke', symObjAddr: 0x2C2C, symBinAddr: 0xCAEC, symSize: 0x28 }
+  - { offsetInCU: 0x1448, offset: 0x7AB38, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setImage:forKey:]', symObjAddr: 0x2C64, symBinAddr: 0xCB14, symSize: 0x228 }
+  - { offsetInCU: 0x1450, offset: 0x7AB40, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setImageWithURL:forKey:]', symObjAddr: 0x2E8C, symBinAddr: 0xCD3C, symSize: 0xEC }
+  - { offsetInCU: 0x14CF, offset: 0x7ABBF, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setImageWithURL:forKey:]', symObjAddr: 0x2E8C, symBinAddr: 0xCD3C, symSize: 0xEC }
+  - { offsetInCU: 0x14D7, offset: 0x7ABC7, size: 0x8, addend: 0x0, symName: '___37-[SVGAPlayer setImageWithURL:forKey:]_block_invoke', symObjAddr: 0x2F78, symBinAddr: 0xCE28, symSize: 0xE4 }
+  - { offsetInCU: 0x152D, offset: 0x7AC1D, size: 0x8, addend: 0x0, symName: '___37-[SVGAPlayer setImageWithURL:forKey:]_block_invoke', symObjAddr: 0x2F78, symBinAddr: 0xCE28, symSize: 0xE4 }
+  - { offsetInCU: 0x1535, offset: 0x7AC25, size: 0x8, addend: 0x0, symName: '___37-[SVGAPlayer setImageWithURL:forKey:]_block_invoke_2', symObjAddr: 0x305C, symBinAddr: 0xCF0C, symSize: 0x10 }
+  - { offsetInCU: 0x15DB, offset: 0x7ACCB, size: 0x8, addend: 0x0, symName: '___37-[SVGAPlayer setImageWithURL:forKey:]_block_invoke_2', symObjAddr: 0x305C, symBinAddr: 0xCF0C, symSize: 0x10 }
+  - { offsetInCU: 0x15E3, offset: 0x7ACD3, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setImage:forKey:referenceLayer:]', symObjAddr: 0x306C, symBinAddr: 0xCF1C, symSize: 0x4 }
+  - { offsetInCU: 0x1648, offset: 0x7AD38, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setImage:forKey:referenceLayer:]', symObjAddr: 0x306C, symBinAddr: 0xCF1C, symSize: 0x4 }
+  - { offsetInCU: 0x1650, offset: 0x7AD40, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setAttributedText:forKey:]', symObjAddr: 0x3070, symBinAddr: 0xCF20, symSize: 0x44C }
+  - { offsetInCU: 0x16AE, offset: 0x7AD9E, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setAttributedText:forKey:]', symObjAddr: 0x3070, symBinAddr: 0xCF20, symSize: 0x44C }
+  - { offsetInCU: 0x16B6, offset: 0x7ADA6, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDrawingBlock:forKey:]', symObjAddr: 0x34BC, symBinAddr: 0xD36C, symSize: 0x210 }
+  - { offsetInCU: 0x177F, offset: 0x7AE6F, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDrawingBlock:forKey:]', symObjAddr: 0x34BC, symBinAddr: 0xD36C, symSize: 0x210 }
+  - { offsetInCU: 0x1787, offset: 0x7AE77, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setHidden:forKey:]', symObjAddr: 0x36CC, symBinAddr: 0xD57C, symSize: 0x20C }
+  - { offsetInCU: 0x1806, offset: 0x7AEF6, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setHidden:forKey:]', symObjAddr: 0x36CC, symBinAddr: 0xD57C, symSize: 0x20C }
+  - { offsetInCU: 0x180E, offset: 0x7AEFE, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clearDynamicObjects]', symObjAddr: 0x38D8, symBinAddr: 0xD788, symSize: 0x44 }
+  - { offsetInCU: 0x188D, offset: 0x7AF7D, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clearDynamicObjects]', symObjAddr: 0x38D8, symBinAddr: 0xD788, symSize: 0x44 }
+  - { offsetInCU: 0x1895, offset: 0x7AF85, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicObjects]', symObjAddr: 0x391C, symBinAddr: 0xD7CC, symSize: 0x68 }
+  - { offsetInCU: 0x18C9, offset: 0x7AFB9, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicObjects]', symObjAddr: 0x391C, symBinAddr: 0xD7CC, symSize: 0x68 }
+  - { offsetInCU: 0x18D1, offset: 0x7AFC1, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicTexts]', symObjAddr: 0x3984, symBinAddr: 0xD834, symSize: 0x68 }
+  - { offsetInCU: 0x1909, offset: 0x7AFF9, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicTexts]', symObjAddr: 0x3984, symBinAddr: 0xD834, symSize: 0x68 }
+  - { offsetInCU: 0x1911, offset: 0x7B001, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicHiddens]', symObjAddr: 0x39EC, symBinAddr: 0xD89C, symSize: 0x68 }
+  - { offsetInCU: 0x1949, offset: 0x7B039, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicHiddens]', symObjAddr: 0x39EC, symBinAddr: 0xD89C, symSize: 0x68 }
+  - { offsetInCU: 0x1951, offset: 0x7B041, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicDrawings]', symObjAddr: 0x3A54, symBinAddr: 0xD904, symSize: 0x68 }
+  - { offsetInCU: 0x1989, offset: 0x7B079, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer dynamicDrawings]', symObjAddr: 0x3A54, symBinAddr: 0xD904, symSize: 0x68 }
+  - { offsetInCU: 0x1991, offset: 0x7B081, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer mainRunLoopMode]', symObjAddr: 0x3ABC, symBinAddr: 0xD96C, symSize: 0x44 }
+  - { offsetInCU: 0x19C9, offset: 0x7B0B9, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer mainRunLoopMode]', symObjAddr: 0x3ABC, symBinAddr: 0xD96C, symSize: 0x44 }
+  - { offsetInCU: 0x19D1, offset: 0x7B0C1, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer delegate]', symObjAddr: 0x3B00, symBinAddr: 0xD9B0, symSize: 0x20 }
+  - { offsetInCU: 0x1A0D, offset: 0x7B0FD, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer delegate]', symObjAddr: 0x3B00, symBinAddr: 0xD9B0, symSize: 0x20 }
+  - { offsetInCU: 0x1A15, offset: 0x7B105, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDelegate:]', symObjAddr: 0x3B20, symBinAddr: 0xD9D0, symSize: 0x14 }
+  - { offsetInCU: 0x1A4D, offset: 0x7B13D, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDelegate:]', symObjAddr: 0x3B20, symBinAddr: 0xD9D0, symSize: 0x14 }
+  - { offsetInCU: 0x1A55, offset: 0x7B145, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer videoItem]', symObjAddr: 0x3B34, symBinAddr: 0xD9E4, symSize: 0x10 }
+  - { offsetInCU: 0x1A98, offset: 0x7B188, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer videoItem]', symObjAddr: 0x3B34, symBinAddr: 0xD9E4, symSize: 0x10 }
+  - { offsetInCU: 0x1AA0, offset: 0x7B190, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer loops]', symObjAddr: 0x3B44, symBinAddr: 0xD9F4, symSize: 0x10 }
+  - { offsetInCU: 0x1AD9, offset: 0x7B1C9, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer loops]', symObjAddr: 0x3B44, symBinAddr: 0xD9F4, symSize: 0x10 }
+  - { offsetInCU: 0x1AE1, offset: 0x7B1D1, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setLoops:]', symObjAddr: 0x3B54, symBinAddr: 0xDA04, symSize: 0x10 }
+  - { offsetInCU: 0x1B1A, offset: 0x7B20A, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setLoops:]', symObjAddr: 0x3B54, symBinAddr: 0xDA04, symSize: 0x10 }
+  - { offsetInCU: 0x1B22, offset: 0x7B212, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clearsAfterStop]', symObjAddr: 0x3B64, symBinAddr: 0xDA14, symSize: 0x10 }
+  - { offsetInCU: 0x1B61, offset: 0x7B251, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer clearsAfterStop]', symObjAddr: 0x3B64, symBinAddr: 0xDA14, symSize: 0x10 }
+  - { offsetInCU: 0x1B69, offset: 0x7B259, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setClearsAfterStop:]', symObjAddr: 0x3B74, symBinAddr: 0xDA24, symSize: 0x10 }
+  - { offsetInCU: 0x1BA6, offset: 0x7B296, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setClearsAfterStop:]', symObjAddr: 0x3B74, symBinAddr: 0xDA24, symSize: 0x10 }
+  - { offsetInCU: 0x1BAE, offset: 0x7B29E, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer fillMode]', symObjAddr: 0x3B84, symBinAddr: 0xDA34, symSize: 0x10 }
+  - { offsetInCU: 0x1BEF, offset: 0x7B2DF, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer fillMode]', symObjAddr: 0x3B84, symBinAddr: 0xDA34, symSize: 0x10 }
+  - { offsetInCU: 0x1BF7, offset: 0x7B2E7, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setFillMode:]', symObjAddr: 0x3B94, symBinAddr: 0xDA44, symSize: 0xC }
+  - { offsetInCU: 0x1C30, offset: 0x7B320, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setFillMode:]', symObjAddr: 0x3B94, symBinAddr: 0xDA44, symSize: 0xC }
+  - { offsetInCU: 0x1C38, offset: 0x7B328, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setMainRunLoopMode:]', symObjAddr: 0x3BA0, symBinAddr: 0xDA50, symSize: 0xC }
+  - { offsetInCU: 0x1C79, offset: 0x7B369, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setMainRunLoopMode:]', symObjAddr: 0x3BA0, symBinAddr: 0xDA50, symSize: 0xC }
+  - { offsetInCU: 0x1C81, offset: 0x7B371, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer drawLayer]', symObjAddr: 0x3BAC, symBinAddr: 0xDA5C, symSize: 0x10 }
+  - { offsetInCU: 0x1CC6, offset: 0x7B3B6, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer drawLayer]', symObjAddr: 0x3BAC, symBinAddr: 0xDA5C, symSize: 0x10 }
+  - { offsetInCU: 0x1CCE, offset: 0x7B3BE, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDrawLayer:]', symObjAddr: 0x3BBC, symBinAddr: 0xDA6C, symSize: 0x14 }
+  - { offsetInCU: 0x1D07, offset: 0x7B3F7, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDrawLayer:]', symObjAddr: 0x3BBC, symBinAddr: 0xDA6C, symSize: 0x14 }
+  - { offsetInCU: 0x1D0F, offset: 0x7B3FF, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer audioLayers]', symObjAddr: 0x3BD0, symBinAddr: 0xDA80, symSize: 0x10 }
+  - { offsetInCU: 0x1D52, offset: 0x7B442, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer audioLayers]', symObjAddr: 0x3BD0, symBinAddr: 0xDA80, symSize: 0x10 }
+  - { offsetInCU: 0x1D5A, offset: 0x7B44A, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setAudioLayers:]', symObjAddr: 0x3BE0, symBinAddr: 0xDA90, symSize: 0x14 }
+  - { offsetInCU: 0x1D93, offset: 0x7B483, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setAudioLayers:]', symObjAddr: 0x3BE0, symBinAddr: 0xDA90, symSize: 0x14 }
+  - { offsetInCU: 0x1D9B, offset: 0x7B48B, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer displayLink]', symObjAddr: 0x3BF4, symBinAddr: 0xDAA4, symSize: 0x10 }
+  - { offsetInCU: 0x1DDE, offset: 0x7B4CE, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer displayLink]', symObjAddr: 0x3BF4, symBinAddr: 0xDAA4, symSize: 0x10 }
+  - { offsetInCU: 0x1DE6, offset: 0x7B4D6, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDisplayLink:]', symObjAddr: 0x3C04, symBinAddr: 0xDAB4, symSize: 0x14 }
+  - { offsetInCU: 0x1E1F, offset: 0x7B50F, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDisplayLink:]', symObjAddr: 0x3C04, symBinAddr: 0xDAB4, symSize: 0x14 }
+  - { offsetInCU: 0x1E27, offset: 0x7B517, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer currentFrame]', symObjAddr: 0x3C18, symBinAddr: 0xDAC8, symSize: 0x10 }
+  - { offsetInCU: 0x1E6A, offset: 0x7B55A, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer currentFrame]', symObjAddr: 0x3C18, symBinAddr: 0xDAC8, symSize: 0x10 }
+  - { offsetInCU: 0x1E72, offset: 0x7B562, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setCurrentFrame:]', symObjAddr: 0x3C28, symBinAddr: 0xDAD8, symSize: 0x10 }
+  - { offsetInCU: 0x1EAF, offset: 0x7B59F, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setCurrentFrame:]', symObjAddr: 0x3C28, symBinAddr: 0xDAD8, symSize: 0x10 }
+  - { offsetInCU: 0x1EB7, offset: 0x7B5A7, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer contentLayers]', symObjAddr: 0x3C38, symBinAddr: 0xDAE8, symSize: 0x10 }
+  - { offsetInCU: 0x1EFA, offset: 0x7B5EA, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer contentLayers]', symObjAddr: 0x3C38, symBinAddr: 0xDAE8, symSize: 0x10 }
+  - { offsetInCU: 0x1F02, offset: 0x7B5F2, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setContentLayers:]', symObjAddr: 0x3C48, symBinAddr: 0xDAF8, symSize: 0xC }
+  - { offsetInCU: 0x1F3B, offset: 0x7B62B, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setContentLayers:]', symObjAddr: 0x3C48, symBinAddr: 0xDAF8, symSize: 0xC }
+  - { offsetInCU: 0x1F43, offset: 0x7B633, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicObjects:]', symObjAddr: 0x3C54, symBinAddr: 0xDB04, symSize: 0xC }
+  - { offsetInCU: 0x1F84, offset: 0x7B674, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicObjects:]', symObjAddr: 0x3C54, symBinAddr: 0xDB04, symSize: 0xC }
+  - { offsetInCU: 0x1F8C, offset: 0x7B67C, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicTexts:]', symObjAddr: 0x3C60, symBinAddr: 0xDB10, symSize: 0xC }
+  - { offsetInCU: 0x1FCD, offset: 0x7B6BD, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicTexts:]', symObjAddr: 0x3C60, symBinAddr: 0xDB10, symSize: 0xC }
+  - { offsetInCU: 0x1FD5, offset: 0x7B6C5, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicDrawings:]', symObjAddr: 0x3C6C, symBinAddr: 0xDB1C, symSize: 0xC }
+  - { offsetInCU: 0x2016, offset: 0x7B706, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicDrawings:]', symObjAddr: 0x3C6C, symBinAddr: 0xDB1C, symSize: 0xC }
+  - { offsetInCU: 0x201E, offset: 0x7B70E, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicHiddens:]', symObjAddr: 0x3C78, symBinAddr: 0xDB28, symSize: 0xC }
+  - { offsetInCU: 0x205F, offset: 0x7B74F, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setDynamicHiddens:]', symObjAddr: 0x3C78, symBinAddr: 0xDB28, symSize: 0xC }
+  - { offsetInCU: 0x2067, offset: 0x7B757, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer loopCount]', symObjAddr: 0x3C84, symBinAddr: 0xDB34, symSize: 0x10 }
+  - { offsetInCU: 0x20A8, offset: 0x7B798, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer loopCount]', symObjAddr: 0x3C84, symBinAddr: 0xDB34, symSize: 0x10 }
+  - { offsetInCU: 0x20B0, offset: 0x7B7A0, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setLoopCount:]', symObjAddr: 0x3C94, symBinAddr: 0xDB44, symSize: 0x10 }
+  - { offsetInCU: 0x20E9, offset: 0x7B7D9, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setLoopCount:]', symObjAddr: 0x3C94, symBinAddr: 0xDB44, symSize: 0x10 }
+  - { offsetInCU: 0x20F1, offset: 0x7B7E1, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer currentRange]', symObjAddr: 0x3CA4, symBinAddr: 0xDB54, symSize: 0x14 }
+  - { offsetInCU: 0x2130, offset: 0x7B820, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer currentRange]', symObjAddr: 0x3CA4, symBinAddr: 0xDB54, symSize: 0x14 }
+  - { offsetInCU: 0x2138, offset: 0x7B828, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setCurrentRange:]', symObjAddr: 0x3CB8, symBinAddr: 0xDB68, symSize: 0x14 }
+  - { offsetInCU: 0x2175, offset: 0x7B865, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setCurrentRange:]', symObjAddr: 0x3CB8, symBinAddr: 0xDB68, symSize: 0x14 }
+  - { offsetInCU: 0x217D, offset: 0x7B86D, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer forwardAnimating]', symObjAddr: 0x3CCC, symBinAddr: 0xDB7C, symSize: 0x10 }
+  - { offsetInCU: 0x21C2, offset: 0x7B8B2, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer forwardAnimating]', symObjAddr: 0x3CCC, symBinAddr: 0xDB7C, symSize: 0x10 }
+  - { offsetInCU: 0x21CA, offset: 0x7B8BA, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setForwardAnimating:]', symObjAddr: 0x3CDC, symBinAddr: 0xDB8C, symSize: 0x10 }
+  - { offsetInCU: 0x2207, offset: 0x7B8F7, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setForwardAnimating:]', symObjAddr: 0x3CDC, symBinAddr: 0xDB8C, symSize: 0x10 }
+  - { offsetInCU: 0x220F, offset: 0x7B8FF, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer reversing]', symObjAddr: 0x3CEC, symBinAddr: 0xDB9C, symSize: 0x10 }
+  - { offsetInCU: 0x2250, offset: 0x7B940, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer reversing]', symObjAddr: 0x3CEC, symBinAddr: 0xDB9C, symSize: 0x10 }
+  - { offsetInCU: 0x2258, offset: 0x7B948, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setReversing:]', symObjAddr: 0x3CFC, symBinAddr: 0xDBAC, symSize: 0x10 }
+  - { offsetInCU: 0x2295, offset: 0x7B985, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer setReversing:]', symObjAddr: 0x3CFC, symBinAddr: 0xDBAC, symSize: 0x10 }
+  - { offsetInCU: 0x229D, offset: 0x7B98D, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer .cxx_destruct]', symObjAddr: 0x3D0C, symBinAddr: 0xDBBC, symSize: 0x104 }
+  - { offsetInCU: 0x22DE, offset: 0x7B9CE, size: 0x8, addend: 0x0, symName: '-[SVGAPlayer .cxx_destruct]', symObjAddr: 0x3D0C, symBinAddr: 0xDBBC, symSize: 0x104 }
+  - { offsetInCU: 0x28, offset: 0x7C04C, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer initWithFrames:]', symObjAddr: 0x0, symBinAddr: 0xDCC0, symSize: 0x100 }
+  - { offsetInCU: 0x557, offset: 0x7C57B, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer initWithFrames:]', symObjAddr: 0x0, symBinAddr: 0xDCC0, symSize: 0x100 }
+  - { offsetInCU: 0x55F, offset: 0x7C583, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetKeepFrameCache]', symObjAddr: 0x100, symBinAddr: 0xDDC0, symSize: 0x14C }
+  - { offsetInCU: 0x5A6, offset: 0x7C5CA, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetKeepFrameCache]', symObjAddr: 0x100, symBinAddr: 0xDDC0, symSize: 0x14C }
+  - { offsetInCU: 0x5AE, offset: 0x7C5D2, size: 0x8, addend: 0x0, symName: ___Block_byref_object_copy_, symObjAddr: 0x24C, symBinAddr: 0xDF0C, symSize: 0x10 }
+  - { offsetInCU: 0x60E, offset: 0x7C632, size: 0x8, addend: 0x0, symName: ___Block_byref_object_copy_, symObjAddr: 0x24C, symBinAddr: 0xDF0C, symSize: 0x10 }
+  - { offsetInCU: 0x616, offset: 0x7C63A, size: 0x8, addend: 0x0, symName: ___Block_byref_object_dispose_, symObjAddr: 0x25C, symBinAddr: 0xDF1C, symSize: 0x8 }
+  - { offsetInCU: 0x63C, offset: 0x7C660, size: 0x8, addend: 0x0, symName: ___Block_byref_object_dispose_, symObjAddr: 0x25C, symBinAddr: 0xDF1C, symSize: 0x8 }
+  - { offsetInCU: 0x644, offset: 0x7C668, size: 0x8, addend: 0x0, symName: '___38-[SVGAVectorLayer resetKeepFrameCache]_block_invoke', symObjAddr: 0x264, symBinAddr: 0xDF24, symSize: 0xB4 }
+  - { offsetInCU: 0x663, offset: 0x7C687, size: 0x8, addend: 0x0, symName: '___38-[SVGAVectorLayer resetKeepFrameCache]_block_invoke', symObjAddr: 0x264, symBinAddr: 0xDF24, symSize: 0xB4 }
+  - { offsetInCU: 0x66B, offset: 0x7C68F, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40r48r, symObjAddr: 0x318, symBinAddr: 0xDFD8, symSize: 0x44 }
+  - { offsetInCU: 0x6FE, offset: 0x7C722, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40r48r, symObjAddr: 0x318, symBinAddr: 0xDFD8, symSize: 0x44 }
+  - { offsetInCU: 0x706, offset: 0x7C72A, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40r48r, symObjAddr: 0x35C, symBinAddr: 0xE01C, symSize: 0x38 }
+  - { offsetInCU: 0x730, offset: 0x7C754, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40r48r, symObjAddr: 0x35C, symBinAddr: 0xE01C, symSize: 0x38 }
+  - { offsetInCU: 0x738, offset: 0x7C75C, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer stepToFrame:]', symObjAddr: 0x394, symBinAddr: 0xE054, symSize: 0x68 }
+  - { offsetInCU: 0x757, offset: 0x7C77B, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer stepToFrame:]', symObjAddr: 0x394, symBinAddr: 0xE054, symSize: 0x68 }
+  - { offsetInCU: 0x75F, offset: 0x7C783, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer isKeepFrame:]', symObjAddr: 0x3FC, symBinAddr: 0xE0BC, symSize: 0x20C }
+  - { offsetInCU: 0x7A6, offset: 0x7C7CA, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer isKeepFrame:]', symObjAddr: 0x3FC, symBinAddr: 0xE0BC, symSize: 0x20C }
+  - { offsetInCU: 0x7AE, offset: 0x7C7D2, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer requestKeepFrame:]', symObjAddr: 0x608, symBinAddr: 0xE2C8, symSize: 0xFC }
+  - { offsetInCU: 0x7F5, offset: 0x7C819, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer requestKeepFrame:]', symObjAddr: 0x608, symBinAddr: 0xE2C8, symSize: 0xFC }
+  - { offsetInCU: 0x7FD, offset: 0x7C821, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer drawFrame:]', symObjAddr: 0x704, symBinAddr: 0xE3C4, symSize: 0x420 }
+  - { offsetInCU: 0x84C, offset: 0x7C870, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer drawFrame:]', symObjAddr: 0x704, symBinAddr: 0xE3C4, symSize: 0x420 }
+  - { offsetInCU: 0x854, offset: 0x7C878, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createCurveLayer:]', symObjAddr: 0xB24, symBinAddr: 0xE7E4, symSize: 0x188 }
+  - { offsetInCU: 0x8E8, offset: 0x7C90C, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createCurveLayer:]', symObjAddr: 0xB24, symBinAddr: 0xE7E4, symSize: 0x188 }
+  - { offsetInCU: 0x8F0, offset: 0x7C914, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createCurveLayerWithProto:]', symObjAddr: 0xCAC, symBinAddr: 0xE96C, symSize: 0x178 }
+  - { offsetInCU: 0x957, offset: 0x7C97B, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createCurveLayerWithProto:]', symObjAddr: 0xCAC, symBinAddr: 0xE96C, symSize: 0x178 }
+  - { offsetInCU: 0x95F, offset: 0x7C983, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createEllipseLayer:]', symObjAddr: 0xE24, symBinAddr: 0xEAE4, symSize: 0x42C }
+  - { offsetInCU: 0x9C6, offset: 0x7C9EA, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createEllipseLayer:]', symObjAddr: 0xE24, symBinAddr: 0xEAE4, symSize: 0x42C }
+  - { offsetInCU: 0x9CE, offset: 0x7C9F2, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createEllipseLayerWithProto:]', symObjAddr: 0x1250, symBinAddr: 0xEF10, symSize: 0x1FC }
+  - { offsetInCU: 0xAAB, offset: 0x7CACF, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createEllipseLayerWithProto:]', symObjAddr: 0x1250, symBinAddr: 0xEF10, symSize: 0x1FC }
+  - { offsetInCU: 0xAB3, offset: 0x7CAD7, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createRectLayer:]', symObjAddr: 0x144C, symBinAddr: 0xF10C, symSize: 0x4EC }
+  - { offsetInCU: 0xB2D, offset: 0x7CB51, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createRectLayer:]', symObjAddr: 0x144C, symBinAddr: 0xF10C, symSize: 0x4EC }
+  - { offsetInCU: 0xB35, offset: 0x7CB59, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createRectLayerWithProto:]', symObjAddr: 0x1938, symBinAddr: 0xF5F8, symSize: 0x1C4 }
+  - { offsetInCU: 0xC26, offset: 0x7CC4A, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer createRectLayerWithProto:]', symObjAddr: 0x1938, symBinAddr: 0xF5F8, symSize: 0x1C4 }
+  - { offsetInCU: 0xC2E, offset: 0x7CC52, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetStyles:shape:]', symObjAddr: 0x1AFC, symBinAddr: 0xF7BC, symSize: 0xD80 }
+  - { offsetInCU: 0xCA8, offset: 0x7CCCC, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetStyles:shape:]', symObjAddr: 0x1AFC, symBinAddr: 0xF7BC, symSize: 0xD80 }
+  - { offsetInCU: 0xCB0, offset: 0x7CCD4, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetStyles:protoShape:]', symObjAddr: 0x287C, symBinAddr: 0x1053C, symSize: 0x6B0 }
+  - { offsetInCU: 0xD86, offset: 0x7CDAA, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetStyles:protoShape:]', symObjAddr: 0x287C, symBinAddr: 0x1053C, symSize: 0x6B0 }
+  - { offsetInCU: 0xD8E, offset: 0x7CDB2, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetTransform:shape:]', symObjAddr: 0x2F2C, symBinAddr: 0x10BEC, symSize: 0x598 }
+  - { offsetInCU: 0xE64, offset: 0x7CE88, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetTransform:shape:]', symObjAddr: 0x2F2C, symBinAddr: 0x10BEC, symSize: 0x598 }
+  - { offsetInCU: 0xE6C, offset: 0x7CE90, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetTransform:protoShape:]', symObjAddr: 0x34C4, symBinAddr: 0x11184, symSize: 0x1A8 }
+  - { offsetInCU: 0xF19, offset: 0x7CF3D, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer resetTransform:protoShape:]', symObjAddr: 0x34C4, symBinAddr: 0x11184, symSize: 0x1A8 }
+  - { offsetInCU: 0xF21, offset: 0x7CF45, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer frames]', symObjAddr: 0x366C, symBinAddr: 0x1132C, symSize: 0x10 }
+  - { offsetInCU: 0xFCE, offset: 0x7CFF2, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer frames]', symObjAddr: 0x366C, symBinAddr: 0x1132C, symSize: 0x10 }
+  - { offsetInCU: 0xFD6, offset: 0x7CFFA, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer setFrames:]', symObjAddr: 0x367C, symBinAddr: 0x1133C, symSize: 0x14 }
+  - { offsetInCU: 0x100F, offset: 0x7D033, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer setFrames:]', symObjAddr: 0x367C, symBinAddr: 0x1133C, symSize: 0x14 }
+  - { offsetInCU: 0x1017, offset: 0x7D03B, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer drawedFrame]', symObjAddr: 0x3690, symBinAddr: 0x11350, symSize: 0x10 }
+  - { offsetInCU: 0x105A, offset: 0x7D07E, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer drawedFrame]', symObjAddr: 0x3690, symBinAddr: 0x11350, symSize: 0x10 }
+  - { offsetInCU: 0x1062, offset: 0x7D086, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer setDrawedFrame:]', symObjAddr: 0x36A0, symBinAddr: 0x11360, symSize: 0x10 }
+  - { offsetInCU: 0x109F, offset: 0x7D0C3, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer setDrawedFrame:]', symObjAddr: 0x36A0, symBinAddr: 0x11360, symSize: 0x10 }
+  - { offsetInCU: 0x10A7, offset: 0x7D0CB, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer keepFrameCache]', symObjAddr: 0x36B0, symBinAddr: 0x11370, symSize: 0x10 }
+  - { offsetInCU: 0x10EA, offset: 0x7D10E, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer keepFrameCache]', symObjAddr: 0x36B0, symBinAddr: 0x11370, symSize: 0x10 }
+  - { offsetInCU: 0x10F2, offset: 0x7D116, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer setKeepFrameCache:]', symObjAddr: 0x36C0, symBinAddr: 0x11380, symSize: 0x14 }
+  - { offsetInCU: 0x112B, offset: 0x7D14F, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer setKeepFrameCache:]', symObjAddr: 0x36C0, symBinAddr: 0x11380, symSize: 0x14 }
+  - { offsetInCU: 0x1133, offset: 0x7D157, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer .cxx_destruct]', symObjAddr: 0x36D4, symBinAddr: 0x11394, symSize: 0x40 }
+  - { offsetInCU: 0x1176, offset: 0x7D19A, size: 0x8, addend: 0x0, symName: '-[SVGAVectorLayer .cxx_destruct]', symObjAddr: 0x36D4, symBinAddr: 0x11394, symSize: 0x40 }
+  - { offsetInCU: 0x28, offset: 0x7D4E5, size: 0x8, addend: 0x0, symName: '+[SVGAVideoEntity load]', symObjAddr: 0x0, symBinAddr: 0x113D4, symSize: 0x28 }
+  - { offsetInCU: 0x3A, offset: 0x7D4F7, size: 0x8, addend: 0x0, symName: '+[SVGAVideoEntity load]', symObjAddr: 0x0, symBinAddr: 0x113D4, symSize: 0x28 }
+  - { offsetInCU: 0x42, offset: 0x7D4FF, size: 0x8, addend: 0x0, symName: '___23+[SVGAVideoEntity load]_block_invoke', symObjAddr: 0x28, symBinAddr: 0x113FC, symSize: 0x7C }
+  - { offsetInCU: 0x67, offset: 0x7D524, size: 0x8, addend: 0x0, symName: _load.onceToken, symObjAddr: 0x8398, symBinAddr: 0x27258, symSize: 0x0 }
+  - { offsetInCU: 0xBA, offset: 0x7D577, size: 0x8, addend: 0x0, symName: _videoCache, symObjAddr: 0x83A0, symBinAddr: 0x27260, symSize: 0x0 }
+  - { offsetInCU: 0xD9, offset: 0x7D596, size: 0x8, addend: 0x0, symName: _weakCache, symObjAddr: 0x83A8, symBinAddr: 0x27268, symSize: 0x0 }
+  - { offsetInCU: 0xF8, offset: 0x7D5B5, size: 0x8, addend: 0x0, symName: _videoSemaphore, symObjAddr: 0x83B0, symBinAddr: 0x27270, symSize: 0x0 }
+  - { offsetInCU: 0x2BD, offset: 0x7D77A, size: 0x8, addend: 0x0, symName: '___23+[SVGAVideoEntity load]_block_invoke', symObjAddr: 0x28, symBinAddr: 0x113FC, symSize: 0x7C }
+  - { offsetInCU: 0x2C5, offset: 0x7D782, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity initWithJSONObject:cacheDir:]', symObjAddr: 0xA4, symBinAddr: 0x11478, symSize: 0xDC }
+  - { offsetInCU: 0x2EB, offset: 0x7D7A8, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity initWithJSONObject:cacheDir:]', symObjAddr: 0xA4, symBinAddr: 0x11478, symSize: 0xDC }
+  - { offsetInCU: 0x2F3, offset: 0x7D7B0, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetMovieWithJSONObject:]', symObjAddr: 0x180, symBinAddr: 0x11554, symSize: 0x208 }
+  - { offsetInCU: 0x34A, offset: 0x7D807, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetMovieWithJSONObject:]', symObjAddr: 0x180, symBinAddr: 0x11554, symSize: 0x208 }
+  - { offsetInCU: 0x352, offset: 0x7D80F, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetImagesWithJSONObject:]', symObjAddr: 0x388, symBinAddr: 0x1175C, symSize: 0x114 }
+  - { offsetInCU: 0x42E, offset: 0x7D8EB, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetImagesWithJSONObject:]', symObjAddr: 0x388, symBinAddr: 0x1175C, symSize: 0x114 }
+  - { offsetInCU: 0x436, offset: 0x7D8F3, size: 0x8, addend: 0x0, symName: '___45-[SVGAVideoEntity resetImagesWithJSONObject:]_block_invoke', symObjAddr: 0x49C, symBinAddr: 0x11870, symSize: 0x148 }
+  - { offsetInCU: 0x4AC, offset: 0x7D969, size: 0x8, addend: 0x0, symName: '___45-[SVGAVideoEntity resetImagesWithJSONObject:]_block_invoke', symObjAddr: 0x49C, symBinAddr: 0x11870, symSize: 0x148 }
+  - { offsetInCU: 0x585, offset: 0x7DA42, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetSpritesWithJSONObject:]', symObjAddr: 0x634, symBinAddr: 0x119B8, symSize: 0x10C }
+  - { offsetInCU: 0x58D, offset: 0x7DA4A, size: 0x8, addend: 0x0, symName: '___46-[SVGAVideoEntity resetSpritesWithJSONObject:]_block_invoke', symObjAddr: 0x740, symBinAddr: 0x11AC4, symSize: 0x7C }
+  - { offsetInCU: 0x603, offset: 0x7DAC0, size: 0x8, addend: 0x0, symName: '___46-[SVGAVideoEntity resetSpritesWithJSONObject:]_block_invoke', symObjAddr: 0x740, symBinAddr: 0x11AC4, symSize: 0x7C }
+  - { offsetInCU: 0x694, offset: 0x7DB51, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity initWithProtoObject:cacheDir:]', symObjAddr: 0x7CC, symBinAddr: 0x11B40, symSize: 0xDC }
+  - { offsetInCU: 0x69C, offset: 0x7DB59, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetMovieWithProtoObject:]', symObjAddr: 0x8A8, symBinAddr: 0x11C1C, symSize: 0xF0 }
+  - { offsetInCU: 0x6F3, offset: 0x7DBB0, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetMovieWithProtoObject:]', symObjAddr: 0x8A8, symBinAddr: 0x11C1C, symSize: 0xF0 }
+  - { offsetInCU: 0x6FB, offset: 0x7DBB8, size: 0x8, addend: 0x0, symName: '+[SVGAVideoEntity isMP3Data:]', symObjAddr: 0x998, symBinAddr: 0x11D0C, symSize: 0x34 }
+  - { offsetInCU: 0x73E, offset: 0x7DBFB, size: 0x8, addend: 0x0, symName: '+[SVGAVideoEntity isMP3Data:]', symObjAddr: 0x998, symBinAddr: 0x11D0C, symSize: 0x34 }
+  - { offsetInCU: 0x746, offset: 0x7DC03, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetImagesWithProtoObject:]', symObjAddr: 0x9CC, symBinAddr: 0x11D40, symSize: 0x424 }
+  - { offsetInCU: 0x7A1, offset: 0x7DC5E, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetImagesWithProtoObject:]', symObjAddr: 0x9CC, symBinAddr: 0x11D40, symSize: 0x424 }
+  - { offsetInCU: 0x7A9, offset: 0x7DC66, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetSpritesWithProtoObject:]', symObjAddr: 0xDF0, symBinAddr: 0x12164, symSize: 0xE8 }
+  - { offsetInCU: 0x8E2, offset: 0x7DD9F, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetSpritesWithProtoObject:]', symObjAddr: 0xDF0, symBinAddr: 0x12164, symSize: 0xE8 }
+  - { offsetInCU: 0x8EA, offset: 0x7DDA7, size: 0x8, addend: 0x0, symName: '___47-[SVGAVideoEntity resetSpritesWithProtoObject:]_block_invoke', symObjAddr: 0xED8, symBinAddr: 0x1224C, symSize: 0x7C }
+  - { offsetInCU: 0x94D, offset: 0x7DE0A, size: 0x8, addend: 0x0, symName: '___47-[SVGAVideoEntity resetSpritesWithProtoObject:]_block_invoke', symObjAddr: 0xED8, symBinAddr: 0x1224C, symSize: 0x7C }
+  - { offsetInCU: 0x955, offset: 0x7DE12, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetAudiosWithProtoObject:]', symObjAddr: 0xF54, symBinAddr: 0x122C8, symSize: 0xE8 }
+  - { offsetInCU: 0x9DE, offset: 0x7DE9B, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity resetAudiosWithProtoObject:]', symObjAddr: 0xF54, symBinAddr: 0x122C8, symSize: 0xE8 }
+  - { offsetInCU: 0x9E6, offset: 0x7DEA3, size: 0x8, addend: 0x0, symName: '___46-[SVGAVideoEntity resetAudiosWithProtoObject:]_block_invoke', symObjAddr: 0x103C, symBinAddr: 0x123B0, symSize: 0x7C }
+  - { offsetInCU: 0xA49, offset: 0x7DF06, size: 0x8, addend: 0x0, symName: '___46-[SVGAVideoEntity resetAudiosWithProtoObject:]_block_invoke', symObjAddr: 0x103C, symBinAddr: 0x123B0, symSize: 0x7C }
+  - { offsetInCU: 0xA51, offset: 0x7DF0E, size: 0x8, addend: 0x0, symName: '+[SVGAVideoEntity readCache:]', symObjAddr: 0x10B8, symBinAddr: 0x1242C, symSize: 0x8C }
+  - { offsetInCU: 0xADA, offset: 0x7DF97, size: 0x8, addend: 0x0, symName: '+[SVGAVideoEntity readCache:]', symObjAddr: 0x10B8, symBinAddr: 0x1242C, symSize: 0x8C }
+  - { offsetInCU: 0xAE2, offset: 0x7DF9F, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity saveCache:]', symObjAddr: 0x1144, symBinAddr: 0x124B8, symSize: 0x64 }
+  - { offsetInCU: 0xB35, offset: 0x7DFF2, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity saveCache:]', symObjAddr: 0x1144, symBinAddr: 0x124B8, symSize: 0x64 }
+  - { offsetInCU: 0xB3D, offset: 0x7DFFA, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity saveWeakCache:]', symObjAddr: 0x11A8, symBinAddr: 0x1251C, symSize: 0x64 }
+  - { offsetInCU: 0xB80, offset: 0x7E03D, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity saveWeakCache:]', symObjAddr: 0x11A8, symBinAddr: 0x1251C, symSize: 0x64 }
+  - { offsetInCU: 0xB88, offset: 0x7E045, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity videoSize]', symObjAddr: 0x120C, symBinAddr: 0x12580, symSize: 0x8 }
+  - { offsetInCU: 0xBCB, offset: 0x7E088, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity videoSize]', symObjAddr: 0x120C, symBinAddr: 0x12580, symSize: 0x8 }
+  - { offsetInCU: 0xBD3, offset: 0x7E090, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setVideoSize:]', symObjAddr: 0x1214, symBinAddr: 0x12588, symSize: 0x8 }
+  - { offsetInCU: 0xC0E, offset: 0x7E0CB, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setVideoSize:]', symObjAddr: 0x1214, symBinAddr: 0x12588, symSize: 0x8 }
+  - { offsetInCU: 0xC16, offset: 0x7E0D3, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity FPS]', symObjAddr: 0x121C, symBinAddr: 0x12590, symSize: 0x8 }
+  - { offsetInCU: 0xC5B, offset: 0x7E118, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity FPS]', symObjAddr: 0x121C, symBinAddr: 0x12590, symSize: 0x8 }
+  - { offsetInCU: 0xC63, offset: 0x7E120, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setFPS:]', symObjAddr: 0x1224, symBinAddr: 0x12598, symSize: 0x8 }
+  - { offsetInCU: 0xC9C, offset: 0x7E159, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setFPS:]', symObjAddr: 0x1224, symBinAddr: 0x12598, symSize: 0x8 }
+  - { offsetInCU: 0xCA4, offset: 0x7E161, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity frames]', symObjAddr: 0x122C, symBinAddr: 0x125A0, symSize: 0x8 }
+  - { offsetInCU: 0xCE3, offset: 0x7E1A0, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity frames]', symObjAddr: 0x122C, symBinAddr: 0x125A0, symSize: 0x8 }
+  - { offsetInCU: 0xCEB, offset: 0x7E1A8, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setFrames:]', symObjAddr: 0x1234, symBinAddr: 0x125A8, symSize: 0x8 }
+  - { offsetInCU: 0xD24, offset: 0x7E1E1, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setFrames:]', symObjAddr: 0x1234, symBinAddr: 0x125A8, symSize: 0x8 }
+  - { offsetInCU: 0xD2C, offset: 0x7E1E9, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity images]', symObjAddr: 0x123C, symBinAddr: 0x125B0, symSize: 0x8 }
+  - { offsetInCU: 0xD6B, offset: 0x7E228, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity images]', symObjAddr: 0x123C, symBinAddr: 0x125B0, symSize: 0x8 }
+  - { offsetInCU: 0xD73, offset: 0x7E230, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setImages:]', symObjAddr: 0x1244, symBinAddr: 0x125B8, symSize: 0x8 }
+  - { offsetInCU: 0xDAC, offset: 0x7E269, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setImages:]', symObjAddr: 0x1244, symBinAddr: 0x125B8, symSize: 0x8 }
+  - { offsetInCU: 0xDB4, offset: 0x7E271, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity audiosData]', symObjAddr: 0x124C, symBinAddr: 0x125C0, symSize: 0x8 }
+  - { offsetInCU: 0xDF5, offset: 0x7E2B2, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity audiosData]', symObjAddr: 0x124C, symBinAddr: 0x125C0, symSize: 0x8 }
+  - { offsetInCU: 0xDFD, offset: 0x7E2BA, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setAudiosData:]', symObjAddr: 0x1254, symBinAddr: 0x125C8, symSize: 0x8 }
+  - { offsetInCU: 0xE36, offset: 0x7E2F3, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setAudiosData:]', symObjAddr: 0x1254, symBinAddr: 0x125C8, symSize: 0x8 }
+  - { offsetInCU: 0xE3E, offset: 0x7E2FB, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity sprites]', symObjAddr: 0x125C, symBinAddr: 0x125D0, symSize: 0x8 }
+  - { offsetInCU: 0xE7F, offset: 0x7E33C, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity sprites]', symObjAddr: 0x125C, symBinAddr: 0x125D0, symSize: 0x8 }
+  - { offsetInCU: 0xE87, offset: 0x7E344, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setSprites:]', symObjAddr: 0x1264, symBinAddr: 0x125D8, symSize: 0x8 }
+  - { offsetInCU: 0xEC0, offset: 0x7E37D, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setSprites:]', symObjAddr: 0x1264, symBinAddr: 0x125D8, symSize: 0x8 }
+  - { offsetInCU: 0xEC8, offset: 0x7E385, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity audios]', symObjAddr: 0x126C, symBinAddr: 0x125E0, symSize: 0x8 }
+  - { offsetInCU: 0xF09, offset: 0x7E3C6, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity audios]', symObjAddr: 0x126C, symBinAddr: 0x125E0, symSize: 0x8 }
+  - { offsetInCU: 0xF11, offset: 0x7E3CE, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setAudios:]', symObjAddr: 0x1274, symBinAddr: 0x125E8, symSize: 0x8 }
+  - { offsetInCU: 0xF4A, offset: 0x7E407, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setAudios:]', symObjAddr: 0x1274, symBinAddr: 0x125E8, symSize: 0x8 }
+  - { offsetInCU: 0xF52, offset: 0x7E40F, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity cacheDir]', symObjAddr: 0x127C, symBinAddr: 0x125F0, symSize: 0x8 }
+  - { offsetInCU: 0xF93, offset: 0x7E450, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity cacheDir]', symObjAddr: 0x127C, symBinAddr: 0x125F0, symSize: 0x8 }
+  - { offsetInCU: 0xF9B, offset: 0x7E458, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setCacheDir:]', symObjAddr: 0x1284, symBinAddr: 0x125F8, symSize: 0x8 }
+  - { offsetInCU: 0xFD4, offset: 0x7E491, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity setCacheDir:]', symObjAddr: 0x1284, symBinAddr: 0x125F8, symSize: 0x8 }
+  - { offsetInCU: 0xFDC, offset: 0x7E499, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity .cxx_destruct]', symObjAddr: 0x128C, symBinAddr: 0x12600, symSize: 0x54 }
+  - { offsetInCU: 0x101D, offset: 0x7E4DA, size: 0x8, addend: 0x0, symName: '-[SVGAVideoEntity .cxx_destruct]', symObjAddr: 0x128C, symBinAddr: 0x12600, symSize: 0x54 }
+  - { offsetInCU: 0x28, offset: 0x7EA7F, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity initWithJSONObject:]', symObjAddr: 0x0, symBinAddr: 0x12654, symSize: 0x1D0 }
+  - { offsetInCU: 0x12E, offset: 0x7EB85, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity initWithJSONObject:]', symObjAddr: 0x0, symBinAddr: 0x12654, symSize: 0x1D0 }
+  - { offsetInCU: 0x136, offset: 0x7EB8D, size: 0x8, addend: 0x0, symName: '___44-[SVGAVideoSpriteEntity initWithJSONObject:]_block_invoke', symObjAddr: 0x1D0, symBinAddr: 0x12824, symSize: 0x80 }
+  - { offsetInCU: 0x1E3, offset: 0x7EC3A, size: 0x8, addend: 0x0, symName: '___44-[SVGAVideoSpriteEntity initWithJSONObject:]_block_invoke', symObjAddr: 0x1D0, symBinAddr: 0x12824, symSize: 0x80 }
+  - { offsetInCU: 0x251, offset: 0x7ECA8, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity initWithProtoObject:]', symObjAddr: 0x260, symBinAddr: 0x128A4, symSize: 0x1C8 }
+  - { offsetInCU: 0x259, offset: 0x7ECB0, size: 0x8, addend: 0x0, symName: '___45-[SVGAVideoSpriteEntity initWithProtoObject:]_block_invoke', symObjAddr: 0x428, symBinAddr: 0x12A6C, symSize: 0x80 }
+  - { offsetInCU: 0x306, offset: 0x7ED5D, size: 0x8, addend: 0x0, symName: '___45-[SVGAVideoSpriteEntity initWithProtoObject:]_block_invoke', symObjAddr: 0x428, symBinAddr: 0x12A6C, symSize: 0x80 }
+  - { offsetInCU: 0x30E, offset: 0x7ED65, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity requestLayerWithBitmap:]', symObjAddr: 0x4A8, symBinAddr: 0x12AEC, symSize: 0x158 }
+  - { offsetInCU: 0x374, offset: 0x7EDCB, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity requestLayerWithBitmap:]', symObjAddr: 0x4A8, symBinAddr: 0x12AEC, symSize: 0x158 }
+  - { offsetInCU: 0x37C, offset: 0x7EDD3, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity imageKey]', symObjAddr: 0x600, symBinAddr: 0x12C44, symSize: 0x8 }
+  - { offsetInCU: 0x3D3, offset: 0x7EE2A, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity imageKey]', symObjAddr: 0x600, symBinAddr: 0x12C44, symSize: 0x8 }
+  - { offsetInCU: 0x3DB, offset: 0x7EE32, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity frames]', symObjAddr: 0x608, symBinAddr: 0x12C4C, symSize: 0x8 }
+  - { offsetInCU: 0x414, offset: 0x7EE6B, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity frames]', symObjAddr: 0x608, symBinAddr: 0x12C4C, symSize: 0x8 }
+  - { offsetInCU: 0x41C, offset: 0x7EE73, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity matteKey]', symObjAddr: 0x610, symBinAddr: 0x12C54, symSize: 0x8 }
+  - { offsetInCU: 0x455, offset: 0x7EEAC, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity matteKey]', symObjAddr: 0x610, symBinAddr: 0x12C54, symSize: 0x8 }
+  - { offsetInCU: 0x45D, offset: 0x7EEB4, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity .cxx_destruct]', symObjAddr: 0x618, symBinAddr: 0x12C5C, symSize: 0x3C }
+  - { offsetInCU: 0x496, offset: 0x7EEED, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteEntity .cxx_destruct]', symObjAddr: 0x618, symBinAddr: 0x12C5C, symSize: 0x3C }
+  - { offsetInCU: 0x28, offset: 0x7F2B4, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity initWithJSONObject:]', symObjAddr: 0x0, symBinAddr: 0x12C98, symSize: 0x5BC }
+  - { offsetInCU: 0x1EF, offset: 0x7F47B, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity initWithJSONObject:]', symObjAddr: 0x0, symBinAddr: 0x12C98, symSize: 0x5BC }
+  - { offsetInCU: 0x1F7, offset: 0x7F483, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity initWithProtoObject:]', symObjAddr: 0x5BC, symBinAddr: 0x13254, symSize: 0x408 }
+  - { offsetInCU: 0x56E, offset: 0x7F7FA, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity initWithProtoObject:]', symObjAddr: 0x5BC, symBinAddr: 0x13254, symSize: 0x408 }
+  - { offsetInCU: 0x576, offset: 0x7F802, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity maskLayer]', symObjAddr: 0x9C4, symBinAddr: 0x1365C, symSize: 0xB0 }
+  - { offsetInCU: 0x7C4, offset: 0x7FA50, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity maskLayer]', symObjAddr: 0x9C4, symBinAddr: 0x1365C, symSize: 0xB0 }
+  - { offsetInCU: 0x7CC, offset: 0x7FA58, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity alpha]', symObjAddr: 0xA74, symBinAddr: 0x1370C, symSize: 0x8 }
+  - { offsetInCU: 0x826, offset: 0x7FAB2, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity alpha]', symObjAddr: 0xA74, symBinAddr: 0x1370C, symSize: 0x8 }
+  - { offsetInCU: 0x82E, offset: 0x7FABA, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setAlpha:]', symObjAddr: 0xA7C, symBinAddr: 0x13714, symSize: 0x8 }
+  - { offsetInCU: 0x869, offset: 0x7FAF5, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setAlpha:]', symObjAddr: 0xA7C, symBinAddr: 0x13714, symSize: 0x8 }
+  - { offsetInCU: 0x871, offset: 0x7FAFD, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity transform]', symObjAddr: 0xA84, symBinAddr: 0x1371C, symSize: 0x14 }
+  - { offsetInCU: 0x8B5, offset: 0x7FB41, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity transform]', symObjAddr: 0xA84, symBinAddr: 0x1371C, symSize: 0x14 }
+  - { offsetInCU: 0x8BD, offset: 0x7FB49, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setTransform:]', symObjAddr: 0xA98, symBinAddr: 0x13730, symSize: 0x14 }
+  - { offsetInCU: 0x8F8, offset: 0x7FB84, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setTransform:]', symObjAddr: 0xA98, symBinAddr: 0x13730, symSize: 0x14 }
+  - { offsetInCU: 0x900, offset: 0x7FB8C, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity layout]', symObjAddr: 0xAAC, symBinAddr: 0x13744, symSize: 0xC }
+  - { offsetInCU: 0x944, offset: 0x7FBD0, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity layout]', symObjAddr: 0xAAC, symBinAddr: 0x13744, symSize: 0xC }
+  - { offsetInCU: 0x94C, offset: 0x7FBD8, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setLayout:]', symObjAddr: 0xAB8, symBinAddr: 0x13750, symSize: 0xC }
+  - { offsetInCU: 0x987, offset: 0x7FC13, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setLayout:]', symObjAddr: 0xAB8, symBinAddr: 0x13750, symSize: 0xC }
+  - { offsetInCU: 0x98F, offset: 0x7FC1B, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity nx]', symObjAddr: 0xAC4, symBinAddr: 0x1375C, symSize: 0x8 }
+  - { offsetInCU: 0x9D4, offset: 0x7FC60, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity nx]', symObjAddr: 0xAC4, symBinAddr: 0x1375C, symSize: 0x8 }
+  - { offsetInCU: 0x9DC, offset: 0x7FC68, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setNx:]', symObjAddr: 0xACC, symBinAddr: 0x13764, symSize: 0x8 }
+  - { offsetInCU: 0xA17, offset: 0x7FCA3, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setNx:]', symObjAddr: 0xACC, symBinAddr: 0x13764, symSize: 0x8 }
+  - { offsetInCU: 0xA1F, offset: 0x7FCAB, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity ny]', symObjAddr: 0xAD4, symBinAddr: 0x1376C, symSize: 0x8 }
+  - { offsetInCU: 0xA63, offset: 0x7FCEF, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity ny]', symObjAddr: 0xAD4, symBinAddr: 0x1376C, symSize: 0x8 }
+  - { offsetInCU: 0xA6B, offset: 0x7FCF7, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setNy:]', symObjAddr: 0xADC, symBinAddr: 0x13774, symSize: 0x8 }
+  - { offsetInCU: 0xAA6, offset: 0x7FD32, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setNy:]', symObjAddr: 0xADC, symBinAddr: 0x13774, symSize: 0x8 }
+  - { offsetInCU: 0xAAE, offset: 0x7FD3A, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setMaskLayer:]', symObjAddr: 0xAE4, symBinAddr: 0x1377C, symSize: 0xC }
+  - { offsetInCU: 0xAF2, offset: 0x7FD7E, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setMaskLayer:]', symObjAddr: 0xAE4, symBinAddr: 0x1377C, symSize: 0xC }
+  - { offsetInCU: 0xAFA, offset: 0x7FD86, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity shapes]', symObjAddr: 0xAF0, symBinAddr: 0x13788, symSize: 0x8 }
+  - { offsetInCU: 0xB3D, offset: 0x7FDC9, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity shapes]', symObjAddr: 0xAF0, symBinAddr: 0x13788, symSize: 0x8 }
+  - { offsetInCU: 0xB45, offset: 0x7FDD1, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setShapes:]', symObjAddr: 0xAF8, symBinAddr: 0x13790, symSize: 0xC }
+  - { offsetInCU: 0xB7E, offset: 0x7FE0A, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setShapes:]', symObjAddr: 0xAF8, symBinAddr: 0x13790, symSize: 0xC }
+  - { offsetInCU: 0xB86, offset: 0x7FE12, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity previousFrame]', symObjAddr: 0xB04, symBinAddr: 0x1379C, symSize: 0x8 }
+  - { offsetInCU: 0xBC9, offset: 0x7FE55, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity previousFrame]', symObjAddr: 0xB04, symBinAddr: 0x1379C, symSize: 0x8 }
+  - { offsetInCU: 0xBD1, offset: 0x7FE5D, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setPreviousFrame:]', symObjAddr: 0xB0C, symBinAddr: 0x137A4, symSize: 0xC }
+  - { offsetInCU: 0xC0A, offset: 0x7FE96, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setPreviousFrame:]', symObjAddr: 0xB0C, symBinAddr: 0x137A4, symSize: 0xC }
+  - { offsetInCU: 0xC12, offset: 0x7FE9E, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity clipPath]', symObjAddr: 0xB18, symBinAddr: 0x137B0, symSize: 0x8 }
+  - { offsetInCU: 0xC55, offset: 0x7FEE1, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity clipPath]', symObjAddr: 0xB18, symBinAddr: 0x137B0, symSize: 0x8 }
+  - { offsetInCU: 0xC5D, offset: 0x7FEE9, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setClipPath:]', symObjAddr: 0xB20, symBinAddr: 0x137B8, symSize: 0xC }
+  - { offsetInCU: 0xC96, offset: 0x7FF22, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity setClipPath:]', symObjAddr: 0xB20, symBinAddr: 0x137B8, symSize: 0xC }
+  - { offsetInCU: 0xC9E, offset: 0x7FF2A, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity .cxx_destruct]', symObjAddr: 0xB2C, symBinAddr: 0x137C4, symSize: 0x48 }
+  - { offsetInCU: 0xCE1, offset: 0x7FF6D, size: 0x8, addend: 0x0, symName: '-[SVGAVideoSpriteFrameEntity .cxx_destruct]', symObjAddr: 0xB2C, symBinAddr: 0x137C4, symSize: 0x48 }
+  - { offsetInCU: 0x2C, offset: 0x80198, size: 0x8, addend: 0x0, symName: __ZL15__ARCLite__loadv, symObjAddr: 0x0, symBinAddr: 0x1380C, symSize: 0x32C }
+  - { offsetInCU: 0x4C, offset: 0x801B8, size: 0x8, addend: 0x0, symName: '_OBJC_METACLASS_$___ARCLite__', symObjAddr: 0x1888, symBinAddr: 0x26908, symSize: 0x0 }
+  - { offsetInCU: 0x604, offset: 0x80770, size: 0x8, addend: 0x0, symName: '__ZL24OBJC_CLASS_$___ARCLite__', symObjAddr: 0x18B0, symBinAddr: 0x26930, symSize: 0x0 }
+  - { offsetInCU: 0x623, offset: 0x8078F, size: 0x8, addend: 0x0, symName: '__ZL27OBJC_CLASS_RO_$___ARCLite__', symObjAddr: 0x1920, symBinAddr: 0x24FF8, symSize: 0x0 }
+  - { offsetInCU: 0x642, offset: 0x807AE, size: 0x8, addend: 0x0, symName: '__ZL31OBJC_METACLASS_RO_$___ARCLite__', symObjAddr: 0x18D8, symBinAddr: 0x24FB0, symSize: 0x0 }
+  - { offsetInCU: 0x661, offset: 0x807CD, size: 0x8, addend: 0x0, symName: '__ZL32OBJC_$_CLASS_METHODS___ARCLite__', symObjAddr: 0x1968, symBinAddr: 0x25040, symSize: 0x0 }
+  - { offsetInCU: 0x673, offset: 0x807DF, size: 0x8, addend: 0x0, symName: __ZL22add_image_hook_swiftV1PK11mach_headerl, symObjAddr: 0x33C, symBinAddr: 0x13B48, symSize: 0x3E4 }
+  - { offsetInCU: 0x67B, offset: 0x807E7, size: 0x8, addend: 0x0, symName: __ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class, symObjAddr: 0x720, symBinAddr: 0x13F2C, symSize: 0x54 }
+  - { offsetInCU: 0x6A0, offset: 0x8080C, size: 0x8, addend: 0x0, symName: __ZZL22add_image_hook_swiftV1PK11mach_headerlE7patches, symObjAddr: 0x2D668, symBinAddr: 0x272E0, symSize: 0x0 }
+  - { offsetInCU: 0x1207, offset: 0x81373, size: 0x8, addend: 0x0, symName: __ZL31original_objc_allocateClassPair, symObjAddr: 0x2D720, symBinAddr: 0x27398, symSize: 0x0 }
+  - { offsetInCU: 0x128A, offset: 0x813F6, size: 0x8, addend: 0x0, symName: __ZL31original_object_getIndexedIvars, symObjAddr: 0x2D728, symBinAddr: 0x273A0, symSize: 0x0 }
+  - { offsetInCU: 0x12F5, offset: 0x81461, size: 0x8, addend: 0x0, symName: __ZL22original_objc_getClass, symObjAddr: 0x2D730, symBinAddr: 0x273A8, symSize: 0x0 }
+  - { offsetInCU: 0x1331, offset: 0x8149D, size: 0x8, addend: 0x0, symName: __ZL26original_objc_getMetaClass, symObjAddr: 0x2D738, symBinAddr: 0x273B0, symSize: 0x0 }
+  - { offsetInCU: 0x1350, offset: 0x814BC, size: 0x8, addend: 0x0, symName: __ZL30original_objc_getRequiredClass, symObjAddr: 0x2D740, symBinAddr: 0x273B8, symSize: 0x0 }
+  - { offsetInCU: 0x136F, offset: 0x814DB, size: 0x8, addend: 0x0, symName: __ZL25original_objc_lookUpClass, symObjAddr: 0x2D748, symBinAddr: 0x273C0, symSize: 0x0 }
+  - { offsetInCU: 0x138E, offset: 0x814FA, size: 0x8, addend: 0x0, symName: __ZL25original_objc_getProtocol, symObjAddr: 0x2D750, symBinAddr: 0x273C8, symSize: 0x0 }
+  - { offsetInCU: 0x13CA, offset: 0x81536, size: 0x8, addend: 0x0, symName: __ZL12demangleLock, symObjAddr: 0x1DB8, symBinAddr: 0x27168, symSize: 0x0 }
+  - { offsetInCU: 0x1454, offset: 0x815C0, size: 0x8, addend: 0x0, symName: __ZL9Demangled, symObjAddr: 0x2D770, symBinAddr: 0x273E8, symSize: 0x0 }
+  - { offsetInCU: 0x152F, offset: 0x8169B, size: 0x8, addend: 0x0, symName: __ZL22original_class_getName, symObjAddr: 0x2D758, symBinAddr: 0x273D0, symSize: 0x0 }
+  - { offsetInCU: 0x156B, offset: 0x816D7, size: 0x8, addend: 0x0, symName: __ZL25original_protocol_getName, symObjAddr: 0x2D760, symBinAddr: 0x273D8, symSize: 0x0 }
+  - { offsetInCU: 0x15A7, offset: 0x81713, size: 0x8, addend: 0x0, symName: __ZL36original_objc_copyClassNamesForImage, symObjAddr: 0x2D768, symBinAddr: 0x273E0, symSize: 0x0 }
+  - { offsetInCU: 0x15FE, offset: 0x8176A, size: 0x8, addend: 0x0, symName: __ZL30NSUndoManagerProxy_targetClass, symObjAddr: 0x2D600, symBinAddr: 0x27278, symSize: 0x0 }
+  - { offsetInCU: 0x1635, offset: 0x817A1, size: 0x8, addend: 0x0, symName: __ZL29original_NSManagedObject_init, symObjAddr: 0x2D608, symBinAddr: 0x27280, symSize: 0x0 }
+  - { offsetInCU: 0x1691, offset: 0x817FD, size: 0x8, addend: 0x0, symName: __ZL40original_NSManagedObject_allocWithEntity, symObjAddr: 0x2D610, symBinAddr: 0x27288, symSize: 0x0 }
+  - { offsetInCU: 0x16DF, offset: 0x8184B, size: 0x8, addend: 0x0, symName: __ZL35original_NSManagedObject_allocBatch, symObjAddr: 0x2D618, symBinAddr: 0x27290, symSize: 0x0 }
+  - { offsetInCU: 0x1748, offset: 0x818B4, size: 0x8, addend: 0x0, symName: __ZL25NSMutableDictionary_class, symObjAddr: 0x2D620, symBinAddr: 0x27298, symSize: 0x0 }
+  - { offsetInCU: 0x1767, offset: 0x818D3, size: 0x8, addend: 0x0, symName: __ZL22NSConstantString_class, symObjAddr: 0x2D628, symBinAddr: 0x272A0, symSize: 0x0 }
+  - { offsetInCU: 0x1786, offset: 0x818F2, size: 0x8, addend: 0x0, symName: __ZL14NSString_class, symObjAddr: 0x2D630, symBinAddr: 0x272A8, symSize: 0x0 }
+  - { offsetInCU: 0x17A5, offset: 0x81911, size: 0x8, addend: 0x0, symName: __ZL36original_NSKKMS_fastIndexForKnownKey, symObjAddr: 0x2D638, symBinAddr: 0x272B0, symSize: 0x0 }
+  - { offsetInCU: 0x1802, offset: 0x8196E, size: 0x8, addend: 0x0, symName: __ZL27original_NSKKMS_indexForKey, symObjAddr: 0x2D640, symBinAddr: 0x272B8, symSize: 0x0 }
+  - { offsetInCU: 0x1821, offset: 0x8198D, size: 0x8, addend: 0x0, symName: __ZL28original_NSKKsD_objectForKey, symObjAddr: 0x2D648, symBinAddr: 0x272C0, symSize: 0x0 }
+  - { offsetInCU: 0x1840, offset: 0x819AC, size: 0x8, addend: 0x0, symName: __ZL34original_NSKKsD_removeObjectForKey, symObjAddr: 0x2D650, symBinAddr: 0x272C8, symSize: 0x0 }
+  - { offsetInCU: 0x1886, offset: 0x819F2, size: 0x8, addend: 0x0, symName: __ZL32original_NSKKsD_setObject_forKey, symObjAddr: 0x2D658, symBinAddr: 0x272D0, symSize: 0x0 }
+  - { offsetInCU: 0x18D5, offset: 0x81A41, size: 0x8, addend: 0x0, symName: __ZL40original_NSKKsD_addEntriesFromDictionary, symObjAddr: 0x2D660, symBinAddr: 0x272D8, symSize: 0x0 }
+  - { offsetInCU: 0x21AE, offset: 0x8231A, size: 0x8, addend: 0x0, symName: __ZL15__ARCLite__loadv, symObjAddr: 0x0, symBinAddr: 0x1380C, symSize: 0x32C }
+  - { offsetInCU: 0x21B6, offset: 0x82322, size: 0x8, addend: 0x0, symName: __ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_, symObjAddr: 0x32C, symBinAddr: 0x13B38, symSize: 0x10 }
+  - { offsetInCU: 0x2583, offset: 0x826EF, size: 0x8, addend: 0x0, symName: __ZL58__arclite_NSMutableDictionary__setObject_forKeyedSubscriptP19NSMutableDictionaryP13objc_selectorP11objc_objectS4_, symObjAddr: 0x32C, symBinAddr: 0x13B38, symSize: 0x10 }
+  - { offsetInCU: 0x258B, offset: 0x826F7, size: 0x8, addend: 0x0, symName: __ZL22add_image_hook_swiftV1PK11mach_headerl, symObjAddr: 0x33C, symBinAddr: 0x13B48, symSize: 0x3E4 }
+  - { offsetInCU: 0x336F, offset: 0x834DB, size: 0x8, addend: 0x0, symName: __ZL42__arclite_NSUndoManagerProxy_isKindOfClassP11objc_objectP13objc_selectorP10objc_class, symObjAddr: 0x720, symBinAddr: 0x13F2C, symSize: 0x54 }
+  - { offsetInCU: 0x3377, offset: 0x834E3, size: 0x8, addend: 0x0, symName: __ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector, symObjAddr: 0x774, symBinAddr: 0x13F80, symSize: 0x1C }
+  - { offsetInCU: 0x33EC, offset: 0x83558, size: 0x8, addend: 0x0, symName: __ZL30__arclite_NSManagedObject_initP11objc_objectP13objc_selector, symObjAddr: 0x774, symBinAddr: 0x13F80, symSize: 0x1C }
+  - { offsetInCU: 0x33F4, offset: 0x83560, size: 0x8, addend: 0x0, symName: __ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_, symObjAddr: 0x790, symBinAddr: 0x13F9C, symSize: 0x1C }
+  - { offsetInCU: 0x3454, offset: 0x835C0, size: 0x8, addend: 0x0, symName: __ZL41__arclite_NSManagedObject_allocWithEntityP11objc_objectP13objc_selectorS0_, symObjAddr: 0x790, symBinAddr: 0x13F9C, symSize: 0x1C }
+  - { offsetInCU: 0x345C, offset: 0x835C8, size: 0x8, addend: 0x0, symName: __ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j, symObjAddr: 0x7AC, symBinAddr: 0x13FB8, symSize: 0x50 }
+  - { offsetInCU: 0x34D1, offset: 0x8363D, size: 0x8, addend: 0x0, symName: __ZL36__arclite_NSManagedObject_allocBatchP11objc_objectP13objc_selectorPS0_S0_j, symObjAddr: 0x7AC, symBinAddr: 0x13FB8, symSize: 0x50 }
+  - { offsetInCU: 0x34D9, offset: 0x83645, size: 0x8, addend: 0x0, symName: __ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x7FC, symBinAddr: 0x14008, symSize: 0x68 }
+  - { offsetInCU: 0x35A0, offset: 0x8370C, size: 0x8, addend: 0x0, symName: __ZL37__arclite_NSKKMS_fastIndexForKnownKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x7FC, symBinAddr: 0x14008, symSize: 0x68 }
+  - { offsetInCU: 0x35A8, offset: 0x83714, size: 0x8, addend: 0x0, symName: __ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x864, symBinAddr: 0x14070, symSize: 0x68 }
+  - { offsetInCU: 0x3632, offset: 0x8379E, size: 0x8, addend: 0x0, symName: __ZL28__arclite_NSKKMS_indexForKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x864, symBinAddr: 0x14070, symSize: 0x68 }
+  - { offsetInCU: 0x363A, offset: 0x837A6, size: 0x8, addend: 0x0, symName: __ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x8CC, symBinAddr: 0x140D8, symSize: 0x68 }
+  - { offsetInCU: 0x36C4, offset: 0x83830, size: 0x8, addend: 0x0, symName: __ZL29__arclite_NSKKsD_objectForKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x8CC, symBinAddr: 0x140D8, symSize: 0x68 }
+  - { offsetInCU: 0x36CC, offset: 0x83838, size: 0x8, addend: 0x0, symName: __ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x934, symBinAddr: 0x14140, symSize: 0x6C }
+  - { offsetInCU: 0x3756, offset: 0x838C2, size: 0x8, addend: 0x0, symName: __ZL35__arclite_NSKKsD_removeObjectForKeyP11objc_objectP13objc_selectorS0_, symObjAddr: 0x934, symBinAddr: 0x14140, symSize: 0x6C }
+  - { offsetInCU: 0x375E, offset: 0x838CA, size: 0x8, addend: 0x0, symName: __ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_, symObjAddr: 0x9A0, symBinAddr: 0x141AC, symSize: 0x80 }
+  - { offsetInCU: 0x37CB, offset: 0x83937, size: 0x8, addend: 0x0, symName: __ZL33__arclite_NSKKsD_setObject_forKeyP11objc_objectP13objc_selectorS0_S0_, symObjAddr: 0x9A0, symBinAddr: 0x141AC, symSize: 0x80 }
+  - { offsetInCU: 0x37D3, offset: 0x8393F, size: 0x8, addend: 0x0, symName: __ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary, symObjAddr: 0xA20, symBinAddr: 0x1422C, symSize: 0xCC }
+  - { offsetInCU: 0x3855, offset: 0x839C1, size: 0x8, addend: 0x0, symName: __ZL41__arclite_NSKKsD_addEntriesFromDictionaryP11objc_objectP13objc_selectorP12NSDictionary, symObjAddr: 0xA20, symBinAddr: 0x1422C, symSize: 0xCC }
+  - { offsetInCU: 0x385D, offset: 0x839C9, size: 0x8, addend: 0x0, symName: __ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info, symObjAddr: 0xAEC, symBinAddr: 0x142F8, symSize: 0x2F0 }
+  - { offsetInCU: 0x3AC4, offset: 0x83C30, size: 0x8, addend: 0x0, symName: __ZL28__arclite_objc_readClassPairP10objc_classPK15objc_image_info, symObjAddr: 0xAEC, symBinAddr: 0x142F8, symSize: 0x2F0 }
+  - { offsetInCU: 0x3ACC, offset: 0x83C38, size: 0x8, addend: 0x0, symName: __ZL32__arclite_objc_allocateClassPairP10objc_classPKcm, symObjAddr: 0xDDC, symBinAddr: 0x145E8, symSize: 0xD0 }
+  - { offsetInCU: 0x3EED, offset: 0x84059, size: 0x8, addend: 0x0, symName: __ZL32__arclite_objc_allocateClassPairP10objc_classPKcm, symObjAddr: 0xDDC, symBinAddr: 0x145E8, symSize: 0xD0 }
+  - { offsetInCU: 0x3EF5, offset: 0x84061, size: 0x8, addend: 0x0, symName: __ZL32__arclite_object_getIndexedIvarsP11objc_object, symObjAddr: 0xEAC, symBinAddr: 0x146B8, symSize: 0x60 }
+  - { offsetInCU: 0x4066, offset: 0x841D2, size: 0x8, addend: 0x0, symName: __ZL32__arclite_object_getIndexedIvarsP11objc_object, symObjAddr: 0xEAC, symBinAddr: 0x146B8, symSize: 0x60 }
+  - { offsetInCU: 0x406E, offset: 0x841DA, size: 0x8, addend: 0x0, symName: __ZL23__arclite_objc_getClassPKc, symObjAddr: 0xF0C, symBinAddr: 0x14718, symSize: 0x68 }
+  - { offsetInCU: 0x4110, offset: 0x8427C, size: 0x8, addend: 0x0, symName: __ZL23__arclite_objc_getClassPKc, symObjAddr: 0xF0C, symBinAddr: 0x14718, symSize: 0x68 }
+  - { offsetInCU: 0x4118, offset: 0x84284, size: 0x8, addend: 0x0, symName: __ZL27__arclite_objc_getMetaClassPKc, symObjAddr: 0xF74, symBinAddr: 0x14780, symSize: 0x68 }
+  - { offsetInCU: 0x4192, offset: 0x842FE, size: 0x8, addend: 0x0, symName: __ZL27__arclite_objc_getMetaClassPKc, symObjAddr: 0xF74, symBinAddr: 0x14780, symSize: 0x68 }
+  - { offsetInCU: 0x419A, offset: 0x84306, size: 0x8, addend: 0x0, symName: __ZL31__arclite_objc_getRequiredClassPKc, symObjAddr: 0xFDC, symBinAddr: 0x147E8, symSize: 0x68 }
+  - { offsetInCU: 0x4214, offset: 0x84380, size: 0x8, addend: 0x0, symName: __ZL31__arclite_objc_getRequiredClassPKc, symObjAddr: 0xFDC, symBinAddr: 0x147E8, symSize: 0x68 }
+  - { offsetInCU: 0x421C, offset: 0x84388, size: 0x8, addend: 0x0, symName: __ZL26__arclite_objc_lookUpClassPKc, symObjAddr: 0x1044, symBinAddr: 0x14850, symSize: 0x68 }
+  - { offsetInCU: 0x4296, offset: 0x84402, size: 0x8, addend: 0x0, symName: __ZL26__arclite_objc_lookUpClassPKc, symObjAddr: 0x1044, symBinAddr: 0x14850, symSize: 0x68 }
+  - { offsetInCU: 0x429E, offset: 0x8440A, size: 0x8, addend: 0x0, symName: __ZL26__arclite_objc_getProtocolPKc, symObjAddr: 0x10AC, symBinAddr: 0x148B8, symSize: 0x68 }
+  - { offsetInCU: 0x4318, offset: 0x84484, size: 0x8, addend: 0x0, symName: __ZL26__arclite_objc_getProtocolPKc, symObjAddr: 0x10AC, symBinAddr: 0x148B8, symSize: 0x68 }
+  - { offsetInCU: 0x4320, offset: 0x8448C, size: 0x8, addend: 0x0, symName: __ZL23__arclite_class_getNameP10objc_class, symObjAddr: 0x1114, symBinAddr: 0x14920, symSize: 0x20 }
+  - { offsetInCU: 0x439A, offset: 0x84506, size: 0x8, addend: 0x0, symName: __ZL23__arclite_class_getNameP10objc_class, symObjAddr: 0x1114, symBinAddr: 0x14920, symSize: 0x20 }
+  - { offsetInCU: 0x43A2, offset: 0x8450E, size: 0x8, addend: 0x0, symName: __ZL26__arclite_protocol_getNameP8Protocol, symObjAddr: 0x1134, symBinAddr: 0x14940, symSize: 0x20 }
+  - { offsetInCU: 0x43D8, offset: 0x84544, size: 0x8, addend: 0x0, symName: __ZL26__arclite_protocol_getNameP8Protocol, symObjAddr: 0x1134, symBinAddr: 0x14940, symSize: 0x20 }
+  - { offsetInCU: 0x43E0, offset: 0x8454C, size: 0x8, addend: 0x0, symName: __ZL37__arclite_objc_copyClassNamesForImagePKcPj, symObjAddr: 0x1154, symBinAddr: 0x14960, symSize: 0x80 }
+  - { offsetInCU: 0x4416, offset: 0x84582, size: 0x8, addend: 0x0, symName: __ZL37__arclite_objc_copyClassNamesForImagePKcPj, symObjAddr: 0x1154, symBinAddr: 0x14960, symSize: 0x80 }
+  - { offsetInCU: 0x441E, offset: 0x8458A, size: 0x8, addend: 0x0, symName: __ZL17transcribeMethodsP10objc_classP15glue_class_ro_t, symObjAddr: 0x11D4, symBinAddr: 0x149E0, symSize: 0x90 }
+  - { offsetInCU: 0x44F0, offset: 0x8465C, size: 0x8, addend: 0x0, symName: __ZL17transcribeMethodsP10objc_classP15glue_class_ro_t, symObjAddr: 0x11D4, symBinAddr: 0x149E0, symSize: 0x90 }
+  - { offsetInCU: 0x44F8, offset: 0x84664, size: 0x8, addend: 0x0, symName: __ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t, symObjAddr: 0x1264, symBinAddr: 0x14A70, symSize: 0x68 }
+  - { offsetInCU: 0x4611, offset: 0x8477D, size: 0x8, addend: 0x0, symName: __ZL19transcribeProtocolsP10objc_classP15glue_class_ro_t, symObjAddr: 0x1264, symBinAddr: 0x14A70, symSize: 0x68 }
+  - { offsetInCU: 0x4619, offset: 0x84785, size: 0x8, addend: 0x0, symName: __ZL20transcribePropertiesP10objc_classP15glue_class_ro_t, symObjAddr: 0x12CC, symBinAddr: 0x14AD8, symSize: 0x9C }
+  - { offsetInCU: 0x46BB, offset: 0x84827, size: 0x8, addend: 0x0, symName: __ZL20transcribePropertiesP10objc_classP15glue_class_ro_t, symObjAddr: 0x12CC, symBinAddr: 0x14AD8, symSize: 0x9C }
+  - { offsetInCU: 0x46C3, offset: 0x8482F, size: 0x8, addend: 0x0, symName: __ZL14initialize_impP11objc_objectP13objc_selector, symObjAddr: 0x1368, symBinAddr: 0x14B74, symSize: 0x4 }
+  - { offsetInCU: 0x47B7, offset: 0x84923, size: 0x8, addend: 0x0, symName: __ZL14initialize_impP11objc_objectP13objc_selector, symObjAddr: 0x1368, symBinAddr: 0x14B74, symSize: 0x4 }
+  - { offsetInCU: 0x47BF, offset: 0x8492B, size: 0x8, addend: 0x0, symName: __ZL18allocateMaybeSwiftP18glue_swift_class_tm, symObjAddr: 0x136C, symBinAddr: 0x14B78, symSize: 0x84 }
+  - { offsetInCU: 0x4826, offset: 0x84992, size: 0x8, addend: 0x0, symName: __ZL18allocateMaybeSwiftP18glue_swift_class_tm, symObjAddr: 0x136C, symBinAddr: 0x14B78, symSize: 0x84 }
+  - { offsetInCU: 0x482E, offset: 0x8499A, size: 0x8, addend: 0x0, symName: __ZL22copySwiftV1MangledNamePKcb, symObjAddr: 0x13F0, symBinAddr: 0x14BFC, symSize: 0x14C }
+  - { offsetInCU: 0x48F8, offset: 0x84A64, size: 0x8, addend: 0x0, symName: __ZL22copySwiftV1MangledNamePKcb, symObjAddr: 0x13F0, symBinAddr: 0x14BFC, symSize: 0x14C }
+  - { offsetInCU: 0x4900, offset: 0x84A6C, size: 0x8, addend: 0x0, symName: __ZL13demangledNamePKcb, symObjAddr: 0x153C, symBinAddr: 0x14D48, symSize: 0x1AC }
+  - { offsetInCU: 0x4A98, offset: 0x84C04, size: 0x8, addend: 0x0, symName: __ZL13demangledNamePKcb, symObjAddr: 0x153C, symBinAddr: 0x14D48, symSize: 0x1AC }
+  - { offsetInCU: 0x4AA0, offset: 0x84C0C, size: 0x8, addend: 0x0, symName: __ZL16scanMangledFieldRPKcS0_S1_Ri, symObjAddr: 0x16E8, symBinAddr: 0x14EF4, symSize: 0xA8 }
+  - { offsetInCU: 0x4BEA, offset: 0x84D56, size: 0x8, addend: 0x0, symName: __ZL16scanMangledFieldRPKcS0_S1_Ri, symObjAddr: 0x16E8, symBinAddr: 0x14EF4, symSize: 0xA8 }
+  - { offsetInCU: 0x4BF2, offset: 0x84D5E, size: 0x8, addend: 0x0, symName: __ZL30arclite_uninitialized_functionv, symObjAddr: 0x1790, symBinAddr: 0x14F9C, symSize: 0x4 }
+  - { offsetInCU: 0x4CE7, offset: 0x84E53, size: 0x8, addend: 0x0, symName: __ZL30arclite_uninitialized_functionv, symObjAddr: 0x1790, symBinAddr: 0x14F9C, symSize: 0x4 }
+  - { offsetInCU: 0x4CEF, offset: 0x84E5B, size: 0x8, addend: 0x0, symName: __ZL12cxxConstructP11objc_object, symObjAddr: 0x1794, symBinAddr: 0x14FA0, symSize: 0x34 }
+  - { offsetInCU: 0x4D08, offset: 0x84E74, size: 0x8, addend: 0x0, symName: __ZL12cxxConstructP11objc_object, symObjAddr: 0x1794, symBinAddr: 0x14FA0, symSize: 0x34 }
+  - { offsetInCU: 0x4D10, offset: 0x84E7C, size: 0x8, addend: 0x0, symName: __ZL20fixStringForCoreDataP11objc_object, symObjAddr: 0x17C8, symBinAddr: 0x14FD4, symSize: 0xB4 }
+  - { offsetInCU: 0x4D6E, offset: 0x84EDA, size: 0x8, addend: 0x0, symName: __ZL20fixStringForCoreDataP11objc_object, symObjAddr: 0x17C8, symBinAddr: 0x14FD4, symSize: 0xB4 }
+...
