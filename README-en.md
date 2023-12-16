@@ -255,7 +255,7 @@ CXSwiftKit
   ┃       ┗ CXVerticalSlider.swift                       // The vertical slider for iOS or tvOS.
   ┃
   ┣ EmptyDataSet
-  ┃   ┣ CXEmptyDataSetMediator.swift
+  ┃   ┣ CXEmptyDataSetDecorator.swift
   ┃   ┗ CXEmptyDataSetStyle.swift
   ┃
   ┣ HandyJSONHelper
