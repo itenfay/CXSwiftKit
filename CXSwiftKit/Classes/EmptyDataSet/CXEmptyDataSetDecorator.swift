@@ -1,5 +1,5 @@
 //
-//  CXEmptyDataSetMediator.swift
+//  CXEmptyDataSetDecorator.swift
 //  CXSwiftKit
 //
 //  Created by chenxing on 2022/5/9.
@@ -13,11 +13,11 @@ import QuartzCore
 #if canImport(DZNEmptyDataSet)
 import DZNEmptyDataSet
 
-@objc public protocol CXEmptyDataSetPresentable: AnyObject {
+@objc public protocol CXEmptyDataSettable: AnyObject {
     var listView: UIScrollView? { get set }
 }
 
-public class CXEmptyDataSetMediator: NSObject, CXEmptyDataSetPresentable {
+public class CXEmptyDataSetDecorator: NSObject, CXEmptyDataSettable {
     
     /// The current list view.
     @objc public weak var listView: UIScrollView?
@@ -77,7 +77,7 @@ public class CXEmptyDataSetMediator: NSObject, CXEmptyDataSetPresentable {
     
 }
 
-extension CXEmptyDataSetMediator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
+extension CXEmptyDataSetDecorator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSource {
     
     //MARK: - DZNEmptyDataSetSource
     
