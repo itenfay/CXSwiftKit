@@ -38,7 +38,7 @@ public class CXEmptyDataSetDecorator: NSObject, CXEmptyDataSettable {
     /// The boolean value controls the refresh of empty data set.
     private var isLoading: Bool = false {
         didSet {
-            reloadEmptyDataSet()
+            forceRefreshEmptyData()
         }
     }
     
@@ -56,8 +56,8 @@ public class CXEmptyDataSetDecorator: NSObject, CXEmptyDataSettable {
         listView?.emptyDataSetDelegate = self
     }
     
-    /// Refresh layout of the target list view.
-    @objc public func refreshLayout() {
+    /// Refresh the empty data of the target list view..
+    @objc public func refreshEmptyData() {
         guard let view = listView else { return }
         if view.isKind(of: UITableView.self) {
             if let tableView = view as? UITableView {
@@ -70,8 +70,8 @@ public class CXEmptyDataSetDecorator: NSObject, CXEmptyDataSettable {
         }
     }
     
-    /// Reload the empty data set.
-    @objc public func reloadEmptyDataSet() {
+    /// Force refresh the empty data set.
+    @objc public func forceRefreshEmptyData() {
         listView?.reloadEmptyDataSet()
     }
     
@@ -188,15 +188,14 @@ extension CXEmptyDataSetDecorator: DZNEmptyDataSetDelegate, DZNEmptyDataSetSourc
     }
     
     public func emptyDataSet(_ scrollView: UIScrollView!, didTap view: UIView!) {
-        if isLoading { return }
-        isLoading = true
-        onReload?()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            self.isLoading = false
-        }
+        handleTapAction()
     }
     
     public func emptyDataSet(_ scrollView: UIScrollView!, didTap button: UIButton!) {
+        handleTapAction()
+    }
+    
+    private func handleTapAction() {
         if isLoading { return }
         isLoading = true
         onReload?()

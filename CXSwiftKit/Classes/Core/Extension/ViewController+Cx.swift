@@ -83,7 +83,7 @@ extension UIViewController {
         return false
     }
     
-    /// Remove a set of controllers from the stack, also include self.
+    /// Remove a set of controllers from the stack.
     @objc public func cx_removeControllersFromStack(_ clses: [UIViewController.Type]) {
         DispatchQueue.cx.mainAsyncAfter(0.2) {
             guard let nc = self.navigationController else {
@@ -91,7 +91,8 @@ extension UIViewController {
             }
             var vcs: [UIViewController] = []
             vcs.append(contentsOf: nc.viewControllers.reversed())
-            vcs.removeAll { $0 == self }
+            // Remove self.
+            //vcs.removeAll { $0 == self }
             for cls in clses {
                 vcs.removeAll { $0.isKind(of: cls) }
             }

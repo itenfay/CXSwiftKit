@@ -214,7 +214,7 @@ extension CXSwiftBase where T == String {
     }
     
     /// Return a Base-64 encoded string for the url.
-    public func safeUrlBase64Encode() -> String? {
+    public func urlBase64Encode() -> String? {
         guard let base = self.base.cx.base64Encode() else {
             return nil
         }
@@ -226,7 +226,7 @@ extension CXSwiftBase where T == String {
     }
     
     /// The Base-64 decoding for the url.
-    public func safeUrlBase64Decode() -> String? {
+    public func urlBase64Decode() -> String? {
         // '-' -> '+'
         // '_' -> '/'
         // Less than 4 times the length, complement' ='

@@ -19,7 +19,7 @@ public enum CXEmptyDataSetType {
     case networkError(desc: String?)
 }
 
-extension Reactive where Base: CXEmptyDataSetMediator {
+extension Reactive where Base: CXEmptyDataSetDecorator {
     
     public var cx_empty: Binder<CXEmptyDataSetType> {
         return Binder(base) { (target, type) in
@@ -41,7 +41,7 @@ extension Reactive where Base: CXEmptyDataSetMediator {
                 target.style = style
             }
             target.bindEmptyDataSet()
-            target.reloadEmptyDataSet()
+            target.forceRefreshEmptyData()
         }
     }
     

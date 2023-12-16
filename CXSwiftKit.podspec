@@ -30,9 +30,9 @@ Pod::Spec.new do |s|
   
   s.swift_versions = ['4.2', '5.0']
   
-  s.ios.deployment_target = '11.0'
+  s.ios.deployment_target = '12.0'
   s.osx.deployment_target = '11.0'
-  s.tvos.deployment_target = '10.0'
+  s.tvos.deployment_target = '12.0'
   s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
@@ -238,7 +238,7 @@ Pod::Spec.new do |s|
   
   s.subspec "ToastSwiftEx" do |toastsw|
     toastsw.source_files = 'CXSwiftKit/Classes/ToastSwiftEx/*.{swift}'
-    toastsw.dependency 'Toast_Swift'
+    toastsw.dependency 'Toast_Swift', '~> 5.0.1'
   end
   
   s.subspec "WebSocket" do |ws|

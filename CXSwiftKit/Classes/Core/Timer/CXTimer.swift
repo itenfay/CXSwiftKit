@@ -47,7 +47,7 @@ public class CXTimer: NSObject {
     }
     
     @objc public func schedule(repeating interval: TimeInterval, userInfo: Any?, invocation: @escaping (CXTimer) -> Void) {
-        //assert(interval > 0, "The repeat time interval for the timer can not less than or equal to zero.")
+        assert(interval >= 0, "The repeat time interval for the timer can not less than or equal to zero.")
         if timer != nil { return }
         repeatingInterval = interval
         invocationHandler = invocation

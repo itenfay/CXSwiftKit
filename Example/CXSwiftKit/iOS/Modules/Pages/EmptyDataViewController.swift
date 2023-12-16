@@ -15,7 +15,7 @@ class EmptyDataViewController: BaseViewController {
     
     private var tableView: UITableView!
     
-    private lazy var eds: CXEmptyDataSetMediator = CXEmptyDataSetMediator()
+    private lazy var eds: CXEmptyDataSetDecorator = CXEmptyDataSetDecorator()
     private let subject = BehaviorSubject<CXEmptyDataSetType>(value: .emptyData(desc: ""))
     private let disposeBag = DisposeBag()
     private var dataArray: [String] = []

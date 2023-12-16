@@ -39,7 +39,7 @@ extension UIView: CXOverlayViewWrapable {
         }
         set {
             let obj = NSNumber(value: newValue?.rawValue ?? 0)
-            objc_setAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection, obj, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection, obj, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
     }
     
@@ -150,7 +150,7 @@ extension UIViewController: CXOverlayViewControllerWrapable {
         }
         set {
             let obj = NSNumber(value: newValue?.rawValue ?? 0)
-            objc_setAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection, obj, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &CXAssociatedKey.presentOverlayDirection, obj, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
     }
     
