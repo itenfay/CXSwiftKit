@@ -151,9 +151,12 @@ CXSwiftKit
   ┃
   ┣ Base
   ┃   ┣ CXAssociatedKey.swift
-  ┃   ┣ CXConfig.swift    // The configuration of this kit.
-  ┃   ┣ CXLogger.swift    // Outputs logs to the console.
-  ┃   ┗ CXSwiftBase.swift // Declares a `CXSwiftBaseCompatible` protocol, etc. You can use `cx` in the app, e.g.: view.cx.right = 10
+  ┃   ┣ CXConfig.swift              // The configuration of this kit.
+  ┃   ┣ CXConstraintMaker.swift  
+  ┃   ┣ CXGlobal.swift              // Provides some global methods
+  ┃   ┣ CXLock.swift                // Includes multi-thread locks(`CXUnfairLock, CXMutex, CXRecursiveMutex, CXSpin, CXConditionLock`).
+  ┃   ┣ CXLogger.swift              // Outputs logs to the console.
+  ┃   ┗ CXSwiftBase.swift           // Declares a `CXSwiftBaseCompatible` protocol, etc. You can use `cx` in the app, e.g.: view.cx.right = 10
   ┃
   ┣ Core
   ┃   ┣ Atomic
@@ -180,9 +183,7 @@ CXSwiftKit
   ┃   ┣ CXAppContext.swift
   ┃   ┣ CXDevice.swift                 // Used to provide some device informations.
   ┃   ┣ CXDeviceScreenMonitor.swift    // Used to observe some changes of device screen.
-  ┃   ┣ CXGlobal.swift                 // Provides some global methods.
   ┃   ┣ CXHaptics.swift                // Some haptic feedback that works on iPhone 6 and up.
-  ┃   ┣ CXLock.swift                   // Includes multi-thread locks(`CXUnfairLock, CXMutex, CXRecursiveMutex, CXSpin, CXConditionLock`).
   ┃   ┣ CXPhotoLibraryOperator.swift   // Used to operate the photo library.
   ┃   ┣ CXScreenRecorder.swift         // The recorder that provides the ability to record audio and video of your app.
   ┃   ┣ CXSwiftUtils.swift
@@ -201,7 +202,6 @@ CXSwiftKit
   ┃   ┃   ┣ CALayer+Cx.swift
   ┃   ┃   ┣ CGFloat+Cx.swift
   ┃   ┃   ┣ Color+Cx.swift
-  ┃   ┃   ┣ CXConstraintMaker.swift
   ┃   ┃   ┣ Date+Cx.swift
   ┃   ┃   ┣ Device+Cx.swift
   ┃   ┃   ┣ Dictionary+Cx.swift
@@ -239,7 +239,7 @@ CXSwiftKit
   ┃   ┃   ┣ CXPermission.swift
   ┃   ┃   ┣ CXPermissionResult.swift
   ┃   ┃   ┣ CXPermissions.swift // Includes photos, camera, microphone, locationAlways, locationInUse, notification, bluetooth, 
-  ┃   ┃    // deviceBiometrics, devicePasscode, contacts, reminder, event, motion, siri, health, media, appTracking.
+  ┃   ┃   ┃ // deviceBiometrics, devicePasscode, contacts, reminder, event, motion, siri, health, media, appTracking.
   ┃   ┃   ┣ CXPermissionStatus.swift
   ┃   ┃   ┣ CXPermissionType.swift
   ┃   ┣ Timer
