@@ -5,8 +5,8 @@
 //  Created by chenxing on 2022/11/14.
 //
 
-#if !os(tvOS) && !os(watchOS) && canImport(PassKit)
 import Foundation
+#if !os(tvOS) && !os(watchOS) && canImport(PassKit)
 import PassKit
 
 @objc public protocol ISKApplePayContext {
@@ -24,7 +24,7 @@ import PassKit
     
     init(controller: CXViewController)
     
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(macOS)
     func makeOSPaymentButton(frame: CXRect) -> PKPaymentButton
     func makeOSPaymentButton(frame: CXRect, type: PKPaymentButtonType, style: PKPaymentButtonStyle) -> PKPaymentButton
     func makePaymentButton(frame: CXRect) -> PKPaymentButton
@@ -77,7 +77,7 @@ public class CXApplePayContext: NSObject, ISKApplePayContext {
     public var didSelectShippingContact: ((PKContact) -> Void)?
     public var didSelectShippingMethod: ((PKShippingMethod) -> Void)?
     
-    #if os(iOS) || os(tvOS)
+    #if os(iOS) || os(macOS)
     public func makeOSPaymentButton(frame: CXRect) -> PKPaymentButton {
         return makeOSPaymentButton(frame: frame, type: .buy, style: .black)
     }
