@@ -27,7 +27,7 @@ class CustomOverlayViewController: BaseViewController {
     override func makeUI() {
         let paddingX: CGFloat = 15
         let paddingY: CGFloat = 10
-        let btnW = (cxScreenWidth - 5*paddingX) / 4
+        let btnW = (cxScreenWidth - 4*paddingX) / 3
         let btnH: CGFloat = 40
         
         let btnA = UIButton(type: .custom)
@@ -89,13 +89,30 @@ class CustomOverlayViewController: BaseViewController {
         btnD.showsTouchWhenHighlighted = true
         view.addSubview(btnD)
         btnD.cx.makeConstraints { maker in
-            maker.top.equalToAnchor(btnC.topAnchor)
-            maker.leading.equalToAnchor(btnC.trailingAnchor).offset(paddingX)
+            maker.top.equalToAnchor(btnA.bottomAnchor).offset(paddingY)
+            maker.leading.equalToAnchor(btnA.leadingAnchor)
             maker.width.equalTo(btnW)
             maker.height.equalTo(btnH)
         }
         btnD.rx.tap.asDriver().drive(onNext: { [weak self] in
             self?.onClick(with: 4)
+        }).disposed(by: disposeBag)
+        
+        let btnE = UIButton(type: .custom)
+        btnE.backgroundColor = .gray
+        btnE.setTitle("FromCenter", for: .normal)
+        btnE.titleLabel?.font = UIFont.cx.mediumPingFang(ofSize: 16)
+        btnE.layer.cornerRadius = 10
+        btnE.showsTouchWhenHighlighted = true
+        view.addSubview(btnE)
+        btnE.cx.makeConstraints { maker in
+            maker.top.equalToAnchor(btnD.topAnchor)
+            maker.leading.equalToAnchor(btnD.trailingAnchor).offset(paddingX)
+            maker.width.equalTo(btnW)
+            maker.height.equalTo(btnH)
+        }
+        btnE.rx.tap.asDriver().drive(onNext: { [weak self] in
+            self?.onClick(with: 5)
         }).disposed(by: disposeBag)
     }
     
@@ -109,6 +126,7 @@ class CustomOverlayViewController: BaseViewController {
             self?.emptyDataVC = nil
         }
         var overlayRatio = 0.8
+        var fromCenter: Bool = false
         var overlayDirection: CXOverlayDirection = .bottom
         if tag == 1 {
             overlayRatio = 0.6
@@ -122,18 +140,44 @@ class CustomOverlayViewController: BaseViewController {
         } else if tag == 4 {
             overlayRatio = 0.6
             overlayDirection = .right
+        } else if tag == 5 {
+            fromCenter = true
         }
         makeNavigationBarHidden(true)
         let r = arc4random_uniform(2)
         if r == 0 {
             emptyDataVC.useViewPresented = true
+            if fromCenter {
+                emptyDataVC.isPresentedFromCenter = true
+                emptyDataVC.view.cx.width = CGFloat.cx_screenWidth - 60
+                emptyDataVC.view.cx_height = 400
+                emptyDataVC.view.cx.cornerRadius = 10
+                self.view.cx.presentFromCenter(emptyDataVC.view) {
+                    CXLogger.log(level: .info, message: "[V] present from center")
+                }
+                fromCenter = false
+                return
+            }
+            emptyDataVC.isPresentedFromCenter = false
             self.view.cx.present(emptyDataVC.view, overlayRatio: overlayRatio, overlayDirection: overlayDirection) {
-                CXLogger.log(level: .info, message: "present")
+                CXLogger.log(level: .info, message: "[V] present")
             }
         } else {
             emptyDataVC.useViewPresented = false
+            if fromCenter {
+                emptyDataVC.isPresentedFromCenter = true
+                emptyDataVC.view.cx.width = CGFloat.cx_screenWidth - 50
+                emptyDataVC.view.cx_height = 500
+                emptyDataVC.view.cx.cornerRadius = 10
+                self.cx.presentFromCenter(emptyDataVC) {
+                    CXLogger.log(level: .info, message: "[VC] present from center")
+                }
+                fromCenter = false
+                return
+            }
+            emptyDataVC.isPresentedFromCenter = false
             self.cx.present(emptyDataVC, overlayRatio: overlayRatio, overlayDirection: overlayDirection) {
-                CXLogger.log(level: .info, message: "present")
+                CXLogger.log(level: .info, message: "[VC] present")
             }
         }
     }

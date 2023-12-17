@@ -22,6 +22,16 @@ extension CXSwiftBase where T : CXView {
     {
         self.base.cx_dismiss(completion: completion)
     }
+    
+    /// Present the view from center.
+    public func presentFromCenter(_ view: UIView?, completion: (() -> Void)? = nil) {
+        self.base.cx_presentFromCenter(view, completion: completion)
+    }
+    
+    /// Dismiss the presenting view from center.
+    public func dismissFromCenter(completion: (() -> Void)? = nil) {
+        self.base.cx_dismissFromCenter(completion: completion)
+    }
     #endif
     
 }
@@ -43,7 +53,11 @@ extension UIView: CXOverlayViewWrapable {
         }
     }
     
-    private var cx_overlayMaskView: UIView? {
+    public var cx_overlayMaskView: UIView? {
+        return fpOverlayMaskView
+    }
+    
+    private var fpOverlayMaskView: UIView? {
         get {
             return objc_getAssociatedObject(self,&CXAssociatedKey.presentOverlayMask) as? UIView
         }
@@ -58,7 +72,8 @@ extension UIView: CXOverlayViewWrapable {
         _view.cx_overlayDirection = overlayDirection
         let maskView = UIView(frame: self.bounds)
         maskView.backgroundColor = UIColor.cx_color(withHexString: "#000000", alpha: 0.3)
-        _view.cx_overlayMaskView = maskView
+        maskView.isUserInteractionEnabled = true
+        _view.fpOverlayMaskView = maskView
         addSubview(maskView)
         addSubview(_view)
         var aView = _view
@@ -113,7 +128,48 @@ extension UIView: CXOverlayViewWrapable {
             }
         } completion: { _ in
             maskView?.removeFromSuperview()
-            self.removeFromSuperview()
+            aView.removeFromSuperview()
+            completion?()
+        }
+    }
+    
+    public func cx_presentFromCenter(_ view: UIView?, completion: (() -> Void)? = nil) {
+        guard let _view = view else { return }
+        let maskView = UIView(frame: self.bounds)
+        maskView.backgroundColor = UIColor.cx_color(withHexString: "#000000", alpha: 0.3)
+        maskView.isUserInteractionEnabled = true
+        _view.fpOverlayMaskView = maskView
+        addSubview(maskView)
+        addSubview(_view)
+        var aView = _view
+        aView.cx.centerX = self.cx.centerX
+        aView.cx.centerY = self.cx.centerY
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction,
+            .beginFromCurrentState
+        ]
+        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+            aView.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
+        } completion: { finished in
+            aView.transform = CGAffineTransformIdentity
+            completion?()
+        }
+    }
+    
+    public func cx_dismissFromCenter(completion: (() -> Void)? = nil) {
+        let maskView = cx_overlayMaskView
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction
+        ]
+        var aView = self
+        aView.alpha = 1.0
+        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+            aView.alpha = 0.0
+        } completion: { finished in
+            maskView?.removeFromSuperview()
+            aView.removeFromSuperview()
             completion?()
         }
     }
@@ -132,6 +188,16 @@ extension CXSwiftBase where T : CXViewController {
     /// Dismiss the view controller.
     public func dismiss(completion: (() -> Void)? = nil) {
         self.base.cx_dismiss(completion: completion)
+    }
+    
+    /// Present the view controller from center.
+    public func presentFromCenter(_ controller: UIViewController?, completion: (() -> Void)? = nil) {
+        self.base.cx_presentFromCenter(controller, completion: completion)
+    }
+    
+    /// Dismiss the view controller from center.
+    public func dismissFromCenter(completion: (() -> Void)? = nil) {
+        self.base.cx_dismissFromCenter(completion: completion)
     }
     #endif
     
@@ -154,7 +220,11 @@ extension UIViewController: CXOverlayViewControllerWrapable {
         }
     }
     
-    private var cx_overlayMaskView: UIView? {
+    public var cx_overlayMaskView: UIView? {
+        return fpOverlayMaskView
+    }
+    
+    private var fpOverlayMaskView: UIView? {
         get {
             return objc_getAssociatedObject(self, &CXAssociatedKey.presentOverlayMask) as? UIView
         }
@@ -169,7 +239,8 @@ extension UIViewController: CXOverlayViewControllerWrapable {
         vc.cx_overlayDirection = overlayDirection
         let maskView = UIView(frame: view.bounds)
         maskView.backgroundColor = UIColor.cx_color(withHexString: "#000000", alpha: 0.3)
-        vc.cx_overlayMaskView = maskView
+        maskView.isUserInteractionEnabled = true
+        vc.fpOverlayMaskView = maskView
         addChild(vc)
         view.addSubview(maskView)
         view.addSubview(vc.view)
@@ -226,7 +297,51 @@ extension UIViewController: CXOverlayViewControllerWrapable {
             }
         } completion: { _ in
             maskView?.removeFromSuperview()
-            self.view.removeFromSuperview()
+            aView.removeFromSuperview()
+            self.removeFromParent()
+            completion?()
+        }
+    }
+    
+    public func cx_presentFromCenter(_ controller: UIViewController?, completion: (() -> Void)? = nil) {
+        guard let vc = controller else { return }
+        let maskView = UIView(frame: view.bounds)
+        maskView.backgroundColor = UIColor.cx_color(withHexString: "#000000", alpha: 0.3)
+        maskView.isUserInteractionEnabled = true
+        vc.fpOverlayMaskView = maskView
+        addChild(vc)
+        view.addSubview(maskView)
+        view.addSubview(vc.view)
+        var aView = vc.view!
+        aView.cx.centerX = view.cx.centerX
+        aView.cx.centerY = view.cx.centerY
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction,
+            .beginFromCurrentState
+        ]
+        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+            aView.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
+        } completion: { finished in
+            aView.transform = CGAffineTransformIdentity
+            completion?()
+        }
+    }
+    
+    public func cx_dismissFromCenter(completion: (() -> Void)? = nil) {
+        guard let _ = parent else { return }
+        let maskView = self.cx_overlayMaskView
+        let animationOptions: UIView.AnimationOptions = [
+            .curveEaseInOut,
+            .allowUserInteraction
+        ]
+        var aView = view!
+        aView.alpha = 1.0
+        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+            aView.alpha = 0.0
+        } completion: { finished in
+            maskView?.removeFromSuperview()
+            aView.removeFromSuperview()
             self.removeFromParent()
             completion?()
         }
@@ -235,5 +350,4 @@ extension UIViewController: CXOverlayViewControllerWrapable {
 }
 
 #endif
-
 #endif

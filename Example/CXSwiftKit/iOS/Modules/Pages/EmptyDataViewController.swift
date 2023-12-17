@@ -28,10 +28,14 @@ class EmptyDataViewController: BaseViewController {
     var customOverlay: Bool = false
     var useViewPresented: Bool = false
     var onOverlayDismiss: (() -> Void)?
+    var isPresentedFromCenter: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
+        DispatchQueue.cx.mainAsyncAfter(0.5) {
+            self.bindAction()
+        }
     }
     
     override func configure() {
@@ -91,11 +95,25 @@ class EmptyDataViewController: BaseViewController {
         }
     }
     
+    private func bindAction() {
+        let vcTap = UITapGestureRecognizer(target: self, action: #selector(onTapAction))
+        self.cx_overlayMaskView?.addGestureRecognizer(vcTap)
+        let viewTap = UITapGestureRecognizer(target: self, action: #selector(onTapAction))
+        self.view.cx_overlayMaskView?.addGestureRecognizer(viewTap)
+    }
+    
+    @objc func onTapAction() {
+        dismissController()
+    }
+    
     private func dismissController() {
         if ovcPresented {
             view.cx.ovcDismiss()
-        } else if customOverlay {
+        } else if customOverlay && !isPresentedFromCenter {
             useViewPresented ? view.cx.dismiss() : self.cx.dismiss()
+            onOverlayDismiss?()
+        } else if customOverlay && isPresentedFromCenter {
+            useViewPresented ? view.cx.dismissFromCenter() : self.cx.dismissFromCenter()
             onOverlayDismiss?()
         } else {
             self.dismiss(animated: true)
