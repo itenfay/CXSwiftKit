@@ -36,7 +36,7 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
-  s.default_subspec = 'Core'
+  s.default_subspecs = 'Base', 'Core'
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
@@ -54,23 +54,7 @@ Pod::Spec.new do |s|
     base.source_files = 'CXSwiftKit/Classes/Base/*.{swift}'
   end
   
-  s.subspec "ApplePay" do |applepay|
-    applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
-    applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
-    applepay.dependency 'CXSwiftKit/Base'
-  end
-  
-  s.subspec "AR" do |ar|
-    ar.source_files = 'CXSwiftKit/Classes/AR/*.{swift}'
-    ar.dependency 'CXSwiftKit/Base'
-    ar.dependency 'SCNLine'
-  end
-  
   s.subspec "Core" do |core|
-    core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
-    core.dependency 'DYFSwiftKeychain'
-    core.dependency 'CXSwiftKit/Base'
-    
     core.subspec "Atomic" do |atom|
       atom.source_files = 'CXSwiftKit/Classes/Core/Atomic/*.{swift}'
     end
@@ -111,7 +95,6 @@ Pod::Spec.new do |s|
     
     core.subspec "LiveGift" do |livegift|
       livegift.source_files = 'CXSwiftKit/Classes/Core/LiveGift/*.{swift}'
-      #livegift.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Permissions" do |pm|
@@ -121,6 +104,7 @@ Pod::Spec.new do |s|
     
     core.subspec "Timer" do |timer|
       timer.source_files = 'CXSwiftKit/Classes/Core/Timer/*.{swift}'
+      timer.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Transition" do |transition|
@@ -128,10 +112,28 @@ Pod::Spec.new do |s|
       transition.dependency 'CXSwiftKit/Core/Extension'
     end
     
+    core.subspec "Utils" do |uts|
+      uts.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
+      uts.dependency 'CXSwiftKit/Core/FileOperation'
+      uts.dependency 'DYFSwiftKeychain'
+    end
+    
     core.subspec "Widget" do |wd|
       wd.source_files = 'CXSwiftKit/Classes/Core/Widget/*.{swift}'
       wd.dependency 'CXSwiftKit/Base'
     end
+  end
+  
+  s.subspec "ApplePay" do |applepay|
+    applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
+    applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
+    applepay.dependency 'CXSwiftKit/Base'
+  end
+  
+  s.subspec "AR" do |ar|
+    ar.source_files = 'CXSwiftKit/Classes/AR/*.{swift}'
+    ar.dependency 'CXSwiftKit/Base'
+    ar.dependency 'SCNLine'
   end
   
   s.subspec "EmptyDataSet" do |eds|
@@ -156,7 +158,7 @@ Pod::Spec.new do |s|
     network.source_files = 'CXSwiftKit/Classes/NetWork/*.{swift}'
     network.dependency 'CXSwiftKit/Base'
     network.dependency 'Moya'
-    network.dependency 'HandyJSON'
+    network.dependency 'HandyJSON', '~> 5.0.4-beta'
     # Ignored
     #network.vendored_frameworks = 'Framwork1.xcframwork', 'Framwork2.xcframwork'
   end
@@ -217,7 +219,7 @@ Pod::Spec.new do |s|
   
   s.subspec "SvgaPlay" do |svgap|
     svgap.source_files = 'CXSwiftKit/Classes/SvgaPlay/*.{swift}'
-    svvap.vendored_frameworks = 'CXSwiftKit/Assets/SVGAPlayerXFWK/SVGAPlayer.xcframwork'
+    svgap.vendored_frameworks = 'CXSwiftKit/Assets/SVGAPlayerXFWK/SVGAPlayer.xcframwork'
   end
   
   s.subspec "SVProgressHUDEx" do |svph|
