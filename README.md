@@ -138,7 +138,7 @@ pod 'CXSwiftKit/WebSocket', '~> 2.0.0'
 ```
 CXSwiftKit
   ┣ ApplePay
-  ┃   ┗ CXApplePayContext.swift // The implementation for Apple payment.
+  ┃   ┗ CXApplePayContext.swift     // The implementation for Apple payment.
   ┃
   ┣ AR
   ┃   ┣ ARSCNView+Cx.swift          // Used to supply extensions of ARSCNView.
@@ -179,16 +179,7 @@ CXSwiftKit
   ┃   ┣ CustomOverlayView
   ┃   ┃   ┣ CXOverlayViewControllerWrapable.swift  
   ┃   ┃   ┣ CXOverlayViewEx.swift      
-  ┃   ┃   ┗ CXOverlayViewWrapable.swift      
-  ┃   ┣ CXAppContext.swift
-  ┃   ┣ CXDevice.swift                 // Used to provide some device informations.
-  ┃   ┣ CXDeviceScreenMonitor.swift    // Used to observe some changes of device screen.
-  ┃   ┣ CXHaptics.swift                // Some haptic feedback that works on iPhone 6 and up.
-  ┃   ┣ CXPhotoLibraryOperator.swift   // Used to operate the photo library.
-  ┃   ┣ CXScreenRecorder.swift         // The recorder that provides the ability to record audio and video of your app.
-  ┃   ┣ CXSwiftUtils.swift
-  ┃   ┣ CXSwipeInteractor.swift        // Add swipe gesture for the view, and observe its action.
-  ┃   ┣ CXTakeScreenshotDetector.swift // The detector for taking screenshot.
+  ┃   ┃   ┗ CXOverlayViewWrapable.swift
   ┃   ┣ DocumentPicker // The document picker for iOS.
   ┃   ┃   ┣ CXDocument.swift
   ┃   ┃   ┣ CXDocumentDelegate.swift
@@ -249,9 +240,19 @@ CXSwiftKit
   ┃   ┃   ┣ CXScaleDismissAnimation.swift
   ┃   ┃   ┣ CXScalePresentAnimation.swift
   ┃   ┃   ┗ CXSwipeLeftInteractiveTransition.swift
+  ┃   ┣ Utils 
+  ┃   ┃   ┣ CXAppContext.swift
+  ┃   ┃   ┣ CXDevice.swift                 // Used to provide some device informations.
+  ┃   ┃   ┣ CXDeviceScreenMonitor.swift    // Used to observe some changes of device screen.
+  ┃   ┃   ┣ CXHaptics.swift                // Some haptic feedback that works on iPhone 6 and up.
+  ┃   ┃   ┣ CXPhotoLibraryOperator.swift   // Used to operate the photo library.
+  ┃   ┃   ┣ CXScreenRecorder.swift         // The recorder that provides the ability to record audio and video of your app.
+  ┃   ┃   ┣ CXSwiftUtils.swift
+  ┃   ┃   ┣ CXSwipeInteractor.swift        // Add swipe gesture for the view, and observe its action.
+  ┃   ┃   ┗ CXTakeScreenshotDetector.swift // The detector for taking screenshot.
   ┃   ┗ Widget
-  ┃       ┣ CXCircleProgressButton.swift                 // The circle progress button for iOS or tvOS.
-  ┃       ┗ CXVerticalSlider.swift                       // The vertical slider for iOS or tvOS.
+  ┃       ┣ CXCircleProgressButton.swift   // The circle progress button for iOS or tvOS.
+  ┃       ┗ CXVerticalSlider.swift         // The vertical slider for iOS or tvOS.
   ┃
   ┣ EmptyDataSet
   ┃   ┣ CXEmptyDataSetDecorator.swift
