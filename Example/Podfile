@@ -19,7 +19,7 @@ target 'CXSwiftKit_Example' do
   # Moya
   pod 'Moya'
   # HandyJSON
-  pod 'HandyJSON'
+  pod 'HandyJSON', '~> 5.0.4-beta'
   
   # Kingfisher
   pod 'Kingfisher'
