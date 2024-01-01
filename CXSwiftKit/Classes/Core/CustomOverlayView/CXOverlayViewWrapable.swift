@@ -16,9 +16,9 @@ import UIKit
 
 @objc public protocol CXOverlayViewWrapable: AnyObject {
     var cx_overlayMaskView: UIView? { get }
-    func cx_present(_ view: UIView?, overlayRatio: CGFloat, overlayDirection: CXOverlayDirection, completion: (() -> Void)?)
+    func cx_present(_ view: UIView?, overlayRatio: CGFloat, overlayDirection: CXOverlayDirection, completion: (() -> Void)?, dismiss: @escaping () -> Void)
     func cx_dismiss(completion: (() -> Void)?)
-    func cx_presentFromCenter(_ view: UIView?, completion: (() -> Void)?)
+    func cx_presentFromCenter(_ view: UIView?, completion: (() -> Void)?, dismiss: @escaping () -> Void)
     func cx_dismissFromCenter(completion: (() -> Void)?)
 }
 

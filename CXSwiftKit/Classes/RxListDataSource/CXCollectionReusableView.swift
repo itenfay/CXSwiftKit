@@ -14,7 +14,7 @@ import RxSwift
 
 open class CXCollectionReusableView: UICollectionReusableView {
     
-    public var disposeBag = DisposeBag()
+    open var disposeBag = DisposeBag()
     
     open func makeDisposeBag() {
         disposeBag = DisposeBag()

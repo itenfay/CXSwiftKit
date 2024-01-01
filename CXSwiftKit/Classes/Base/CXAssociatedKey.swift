@@ -31,6 +31,8 @@ internal struct CXAssociatedKey {
     /// The key for presenting overlay direction.
     static var presentOverlayDirection = "cx.present.overlayDirection"
     static var presentOverlayMask = "cx.present.overlayMask"
+    static var dismissOverlayAction = "cx.dismiss.overlayAction"
+    static var overlayIsFromCenter = "cx.present.isFromCenter"
     
     /// The key for presenting view by overlay controller.
     static var presentByOverlayController = "cx.presentView.overlayController"
