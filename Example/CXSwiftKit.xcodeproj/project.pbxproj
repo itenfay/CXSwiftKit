@@ -126,7 +126,7 @@
 		79AE5BDB2A723E8800A6126F /* MemberRequestEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberRequestEntity.swift; sourceTree = "<group>"; };
 		79AE5BDE2A72449B00A6126F /* PermissionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionsViewController.swift; sourceTree = "<group>"; };
 		79AE5BE02A725B9E00A6126F /* PermissionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PermissionModel.swift; sourceTree = "<group>"; };
-		79B0314A2A64E56200FC85C8 /* CXSwiftKit_Example-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CXSwiftKit_Example-Bridging-Header.h"; sourceTree = "<group>"; };
+		79B0314A2A64E56200FC85C8 /* CXSKE-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CXSKE-Bridging-Header.h"; sourceTree = "<group>"; };
 		79EBFDB02A6A4F7300242993 /* SettingsPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPresenter.swift; sourceTree = "<group>"; };
 		79EBFDB22A6A4F7300242993 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		79EBFDB42A6A4F7300242993 /* SettingsModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 				795D684E2A284E840052B7C4 /* Resources */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				79B0314A2A64E56200FC85C8 /* CXSwiftKit_Example-Bridging-Header.h */,
+				79B0314A2A64E56200FC85C8 /* CXSKE-Bridging-Header.h */,
 			);
 			name = "Example for CXSwiftKit";
 			path = CXSwiftKit;
@@ -1029,14 +1029,14 @@
 				DEVELOPMENT_TEAM = WL2647US2R;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CXSwiftKit;
+				INFOPLIST_KEY_CFBundleDisplayName = CXSK;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.demo.cxswiftkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "CXSwiftKit/CXSwiftKit_Example-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CXSwiftKit/CXSKE-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
@@ -1055,14 +1055,14 @@
 				DEVELOPMENT_TEAM = WL2647US2R;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CXSwiftKit;
+				INFOPLIST_KEY_CFBundleDisplayName = CXSK;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 2.0.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.demo.cxswiftkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "CXSwiftKit/CXSwiftKit_Example-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "CXSwiftKit/CXSKE-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 5.0;
 			};

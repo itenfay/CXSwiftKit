@@ -25,7 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CXConfig.enableLog = CXAppContext().isDebug
         
         ReachabilityManager.shared.startListening()
-        checkApp()
+        
+        DispatchQueue.cx.mainAsyncAfter(2) {
+            self.checkApp()
+        }
         
         return true
     }

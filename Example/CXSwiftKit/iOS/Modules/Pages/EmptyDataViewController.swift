@@ -33,9 +33,9 @@ class EmptyDataViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        DispatchQueue.cx.mainAsyncAfter(0.5) {
-            self.bindAction()
-        }
+        //DispatchQueue.cx.mainAsyncAfter(0.5) {
+            //self.bindAction()
+        //}
     }
     
     override func configure() {
@@ -110,14 +110,22 @@ class EmptyDataViewController: BaseViewController {
         if ovcPresented {
             view.cx.ovcDismiss()
         } else if customOverlay && !isPresentedFromCenter {
-            useViewPresented ? view.cx.dismiss() : self.cx.dismiss()
-            onOverlayDismiss?()
+            useViewPresented 
+            ? view.cx.dismiss()
+            : self.cx.dismiss()
+            //onOverlayDismiss?()
         } else if customOverlay && isPresentedFromCenter {
-            useViewPresented ? view.cx.dismissFromCenter() : self.cx.dismissFromCenter()
-            onOverlayDismiss?()
+            useViewPresented 
+            ? view.cx.dismissFromCenter()
+            : self.cx.dismissFromCenter()
+            //onOverlayDismiss?()
         } else {
             self.dismiss(animated: true)
         }
+    }
+    
+    deinit {
+        CXLogger.log(level: .info, message: "deinit")
     }
     
 }

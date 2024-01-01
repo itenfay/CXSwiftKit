@@ -143,26 +143,51 @@ class CustomOverlayViewController: BaseViewController {
         } else if tag == 5 {
             fromCenter = true
         }
-        makeNavigationBarHidden(true)
-        let r = arc4random_uniform(2)
-        if r == 0 {
+        
+        let r = arc4random_uniform(3)
+        if r == 0 || r == 1 {
+            if r == 0 {
+                makeNavigationBarHidden(true)
+            }
             emptyDataVC.useViewPresented = true
             if fromCenter {
                 emptyDataVC.isPresentedFromCenter = true
                 emptyDataVC.view.cx.width = CGFloat.cx_screenWidth - 60
                 emptyDataVC.view.cx_height = 400
                 emptyDataVC.view.cx.cornerRadius = 10
-                self.view.cx.presentFromCenter(emptyDataVC.view) {
-                    CXLogger.log(level: .info, message: "[V] present from center")
+                if r == 0 {
+                    self.view.cx.presentFromCenter(emptyDataVC.view) {
+                        CXLogger.log(level: .info, message: "[V] present from center")
+                    } dismiss: { [weak self] in
+                        self?.makeNavigationBarHidden(false)
+                        self?.emptyDataVC = nil
+                    }
+                } else {
+                    UIApplication.shared.cx_keyWindow?.cx.presentFromCenter(emptyDataVC.view) {
+                        CXLogger.log(level: .info, message: "[Window] present from center");
+                    } dismiss: { [weak self] in
+                        self?.emptyDataVC = nil
+                    }
                 }
                 fromCenter = false
                 return
             }
             emptyDataVC.isPresentedFromCenter = false
-            self.view.cx.present(emptyDataVC.view, overlayRatio: overlayRatio, overlayDirection: overlayDirection) {
-                CXLogger.log(level: .info, message: "[V] present")
+            if r == 0 {
+                self.view.cx.present(emptyDataVC.view, overlayRatio: overlayRatio, overlayDirection: overlayDirection) {
+                    CXLogger.log(level: .info, message: "[V] present")
+                } dismiss: { [weak self] in
+                    self?.emptyDataVC = nil
+                }
+            } else {
+                UIApplication.shared.cx.keyWindow?.cx.present(emptyDataVC.view, overlayRatio: overlayRatio, overlayDirection: overlayDirection) {
+                    CXLogger.log(level: .info, message: "[Window] present");
+                } dismiss: { [weak self] in
+                    self?.emptyDataVC = nil
+                }
             }
         } else {
+            makeNavigationBarHidden(true)
             emptyDataVC.useViewPresented = false
             if fromCenter {
                 emptyDataVC.isPresentedFromCenter = true
@@ -171,6 +196,9 @@ class CustomOverlayViewController: BaseViewController {
                 emptyDataVC.view.cx.cornerRadius = 10
                 self.cx.presentFromCenter(emptyDataVC) {
                     CXLogger.log(level: .info, message: "[VC] present from center")
+                } dismiss: { [weak self] in
+                    self?.makeNavigationBarHidden(false)
+                    self?.emptyDataVC = nil
                 }
                 fromCenter = false
                 return
@@ -178,6 +206,9 @@ class CustomOverlayViewController: BaseViewController {
             emptyDataVC.isPresentedFromCenter = false
             self.cx.present(emptyDataVC, overlayRatio: overlayRatio, overlayDirection: overlayDirection) {
                 CXLogger.log(level: .info, message: "[VC] present")
+            } dismiss: { [weak self] in
+                self?.makeNavigationBarHidden(false)
+                self?.emptyDataVC = nil
             }
         }
     }
