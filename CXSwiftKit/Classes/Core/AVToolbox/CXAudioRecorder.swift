@@ -17,7 +17,7 @@ import AVFAudio
         case .quiet:      return "Quiet"
         case .speaker:    return "Speaker"
         case .multiRoute: return "MultiRoute" //earphone
-        case .movie:      return "movie"
+        case .movie:      return "Movie"
         }
     }
 }

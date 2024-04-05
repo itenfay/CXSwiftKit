@@ -127,8 +127,8 @@ extension UIView: CXOverlayViewWrapable {
             .allowUserInteraction,
             .beginFromCurrentState
         ]
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
-            //UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
+        //UIView.animate(withDuration: 0.35, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
             switch overlayDirection {
             case .top: aView.cx.y = 0
             case .left: aView.cx.x = 0
@@ -142,7 +142,7 @@ extension UIView: CXOverlayViewWrapable {
     
     /// Dismiss the presenting view, the overlay view is subview of the view.
     public func cx_dismiss(completion: (() -> Void)? = nil) {
-        assert(cx_overlayDirection != nil, "Please invoke dismiss(::) method with the presenting view.")
+        assert(cx_overlayMaskView != nil, "Please invoke dismiss(::) method with the presenting view.")
         let overlayDirection = cx_overlayDirection!
         let maskView = cx_overlayMaskView
         let animationOptions: UIView.AnimationOptions = [
@@ -150,8 +150,8 @@ extension UIView: CXOverlayViewWrapable {
             .allowUserInteraction
         ]
         var aView = self
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
-            //UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
+        //UIView.animate(withDuration: 0.35, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
             switch overlayDirection {
             case .top: aView.cx.y = -CGFloat.cx.screenHeight
             case .left: aView.cx.x = -CGFloat.cx.screenWidth
@@ -187,7 +187,7 @@ extension UIView: CXOverlayViewWrapable {
             .beginFromCurrentState
         ]
         aView.alpha = 0.0
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
             //aView.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
             aView.alpha = 1.0
         } completion: { finished in
@@ -204,7 +204,7 @@ extension UIView: CXOverlayViewWrapable {
         ]
         let aView = self
         aView.alpha = 1.0
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
             aView.alpha = 0.0
         } completion: { finished in
             maskView?.removeFromSuperview()
@@ -336,8 +336,8 @@ extension UIViewController: CXOverlayViewControllerWrapable {
             .allowUserInteraction,
             .beginFromCurrentState
         ]
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
-            //UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
+        //UIView.animate(withDuration: 0.35, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
             switch overlayDirection {
             case .top: aView.cx.y = 0
             case .left: aView.cx.x = 0
@@ -352,7 +352,7 @@ extension UIViewController: CXOverlayViewControllerWrapable {
     /// Dismiss the view controller, the overlay view is subview of the controller's view
     public func cx_dismiss(completion: (() -> Void)? = nil) {
         guard let _ = parent else { return }
-        assert(cx_overlayDirection != nil, "Please invoke dismiss(::) method with the presenting view controller.")
+        assert(cx_overlayMaskView != nil, "Please invoke dismiss(:) method with the presenting view controller.")
         let overlayDirection = cx_overlayDirection!
         let maskView = self.cx_overlayMaskView
         let animationOptions: UIView.AnimationOptions = [
@@ -360,8 +360,8 @@ extension UIViewController: CXOverlayViewControllerWrapable {
             .allowUserInteraction
         ]
         var aView = view!
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
-            //UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
+        //UIView.animate(withDuration: 0.35, delay: 0.1, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: animationOptions) {
             switch overlayDirection {
             case .top: aView.cx.y = -CGFloat.cx.screenHeight
             case .left: aView.cx.x = -CGFloat.cx.screenWidth
@@ -399,7 +399,7 @@ extension UIViewController: CXOverlayViewControllerWrapable {
             .beginFromCurrentState
         ]
         aView.alpha = 0.0
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
             //aView.transform = CGAffineTransform(scaleX: 1.08, y: 1.08)
             aView.alpha = 1.0
         } completion: { finished in
@@ -417,7 +417,7 @@ extension UIViewController: CXOverlayViewControllerWrapable {
         ]
         let aView = view!
         aView.alpha = 1.0
-        UIView.animate(withDuration: 0.35, delay: 0, options: animationOptions) {
+        UIView.animate(withDuration: 0.35, delay: 0.1, options: animationOptions) {
             aView.alpha = 0.0
         } completion: { finished in
             maskView?.removeFromSuperview()

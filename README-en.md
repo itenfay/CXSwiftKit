@@ -36,95 +36,95 @@ pod 'CXSwiftKit/ApplePay', '~> 2.0.0'
 pod 'CXSwiftKit/AR', '~> 2.0.0'
 ```
 
-* NetWork
-```
-pod 'CXSwiftKit/NetWork', '~> 2.0.0'
-```
-
-* EmptyDataSet
-```
-pod 'CXSwiftKit/EmptyDataSet', '~> 2.0.0'
-```
-
-* HandyJSONHelper
-```
-pod 'CXSwiftKit/HandyJSONHelper', '~> 2.0.0'
-```
-
-* KingfisherWrapper
-```
-pod 'CXSwiftKit/KingfisherWrapper', '~> 2.0.0'
-```
-
-* OverlayView
-```
-pod 'CXSwiftKit/OverlayView', '~> 2.0.0'
-```
-
-* RxButton
-```
-pod 'CXSwiftKit/RxButton', '~> 2.0.0'
-```
-
-* RxEmptyDataSet
-```
-pod 'CXSwiftKit/RxEmptyDataSet', '~> 2.0.0'
-```
-
-* RxKafkaRefresh
-```
-pod 'CXSwiftKit/RxKafkaRefresh', '~> 2.0.0'
-```
-
-* RxKingfisher
-```
-pod 'CXSwiftKit/RxKingfisher', '~> 2.0.0'
-```
-
-* RxListDataSource
-```
-pod 'CXSwiftKit/RxListDataSource', '~> 2.0.0'
-```
-
-* RxMJRefresh
-```
-pod 'CXSwiftKit/RxMJRefresh', '~> 2.0.0'
-```
-
-* SDWebImageWrapper
-```
-pod 'CXSwiftKit/SDWebImageWrapper', '~> 2.0.0'
-```
-
-* SvgaPlay
-```
-pod 'CXSwiftKit/SvgaPlay', '~> 2.0.0'
-```
-
-* SVProgressHUDEx
-```
-pod 'CXSwiftKit/SVProgressHUDEx', '~> 2.0.0'
-```
-
-* SwiftMessagesEx
-```
-pod 'CXSwiftKit/SwiftMessagesEx', '~> 2.0.0'
-```
-
-* ToasterEx
-```
-pod 'CXSwiftKit/ToasterEx', '~> 2.0.0'
-```
-
-* ToastSwiftEx
-```
-pod 'CXSwiftKit/ToastSwiftEx', '~> 2.0.0'
-```
-
-* WebSocket
-```
-pod 'CXSwiftKit/WebSocket', '~> 2.0.0'
-```
+<!--* NetWork-->
+<!--```-->
+<!--pod 'CXSwiftKit/NetWork', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* EmptyDataSet-->
+<!--```-->
+<!--pod 'CXSwiftKit/EmptyDataSet', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* HandyJSONHelper-->
+<!--```-->
+<!--pod 'CXSwiftKit/HandyJSONHelper', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* KingfisherWrapper-->
+<!--```-->
+<!--pod 'CXSwiftKit/KingfisherWrapper', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* OverlayView-->
+<!--```-->
+<!--pod 'CXSwiftKit/OverlayView', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* RxButton-->
+<!--```-->
+<!--pod 'CXSwiftKit/RxButton', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* RxEmptyDataSet-->
+<!--```-->
+<!--pod 'CXSwiftKit/RxEmptyDataSet', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* RxKafkaRefresh-->
+<!--```-->
+<!--pod 'CXSwiftKit/RxKafkaRefresh', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* RxKingfisher-->
+<!--```-->
+<!--pod 'CXSwiftKit/RxKingfisher', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* RxListDataSource-->
+<!--```-->
+<!--pod 'CXSwiftKit/RxListDataSource', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* RxMJRefresh-->
+<!--```-->
+<!--pod 'CXSwiftKit/RxMJRefresh', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* SDWebImageWrapper-->
+<!--```-->
+<!--pod 'CXSwiftKit/SDWebImageWrapper', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* SvgaPlay-->
+<!--```-->
+<!--pod 'CXSwiftKit/SvgaPlay', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* SVProgressHUDEx-->
+<!--```-->
+<!--pod 'CXSwiftKit/SVProgressHUDEx', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* SwiftMessagesEx-->
+<!--```-->
+<!--pod 'CXSwiftKit/SwiftMessagesEx', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* ToasterEx-->
+<!--```-->
+<!--pod 'CXSwiftKit/ToasterEx', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* ToastSwiftEx-->
+<!--```-->
+<!--pod 'CXSwiftKit/ToastSwiftEx', '~> 2.0.0'-->
+<!--```-->
+<!---->
+<!--* WebSocket-->
+<!--```-->
+<!--pod 'CXSwiftKit/WebSocket', '~> 2.0.0'-->
+<!--```-->
 
 ## Preview
 
