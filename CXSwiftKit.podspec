@@ -114,7 +114,7 @@ Pod::Spec.new do |s|
     end
     
     core.subspec "Utils" do |uts|
-      uts.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
+      uts.source_files = 'CXSwiftKit/Classes/Core/Utils/*.{swift}'
       uts.dependency 'CXSwiftKit/Core/FileOperation'
       uts.dependency 'DYFSwiftKeychain'
     end
