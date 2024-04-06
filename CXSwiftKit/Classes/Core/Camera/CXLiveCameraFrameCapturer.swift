@@ -24,19 +24,19 @@ public class CXLiveCameraFrameCapturer: NSObject, ILiveCameraFrameCapture {
     private lazy var cameraDelegateQueue = DispatchQueue(label: "com.cx.cameraDelegateQueue")
     
     /// Configures capture behavior and coordinates the flow of data from input devices to capture outputs.
-    @Atomic private var captureSession: AVCaptureSession?
+    @atomic private var captureSession: AVCaptureSession?
     /// Represents a hardware or virtual capture device like a camera or microphone.
     //@Atomic private var inputCamera: AVCaptureDevice?
     /// Provides video input from a capture device to a capture session.
-    @Atomic private var videoInput: AVCaptureDeviceInput?
+    @atomic private var videoInput: AVCaptureDeviceInput?
     /// Records video and provides access to video frames for processing.
-    @Atomic private var videoOutput: AVCaptureVideoDataOutput?
+    @atomic private var videoOutput: AVCaptureVideoDataOutput?
     /// Provides audio input from a capture device to a capture session.
-    @Atomic private var audioInput: AVCaptureDeviceInput?
+    @atomic private var audioInput: AVCaptureDeviceInput?
     /// Represents a connection from a capture input to a capture output.
-    @Atomic private var videoConnection: AVCaptureConnection?
+    @atomic private var videoConnection: AVCaptureConnection?
     /// Processing timed metadata produced by a capture session.
-    ///@Atomic private var metaOutput: AVCaptureMetadataOutput?
+    ///@atomic private var metaOutput: AVCaptureMetadataOutput?
     
     /// Indicates to execute animation when switching camera.
     public var toggleAnimation: Bool = false
