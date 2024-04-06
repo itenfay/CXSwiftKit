@@ -474,7 +474,7 @@ extension CXSwiftBase where T : CXView {
         return self.base.cx_parentViewController
     }
     
-    #if !os(watchOS)
+    #if !os(watchOS) && canImport(UIKit)
     public func makeConstraints(maker: @escaping (CXConstraintMaker) -> Void)
     {
         self.base.cx_makeConstraints(maker: maker)
