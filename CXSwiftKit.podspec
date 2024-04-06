@@ -116,6 +116,7 @@ Pod::Spec.new do |s|
     core.subspec "Utils" do |uts|
       uts.source_files = 'CXSwiftKit/Classes/Core/Utils/*.{swift}'
       uts.dependency 'CXSwiftKit/Core/FileOperation'
+      uts.dependency 'CXSwiftKit/Core/Permissions'
       uts.dependency 'DYFSwiftKeychain'
     end
     

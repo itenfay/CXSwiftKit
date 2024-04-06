@@ -31,10 +31,10 @@ pod 'CXSwiftKit', '~> 2.0.0'
 pod 'CXSwiftKit/ApplePay', '~> 2.0.0'
 ```
 
-* AR
-```
-pod 'CXSwiftKit/AR', '~> 2.0.0'
-```
+<!--* AR-->
+<!--```-->
+<!--pod 'CXSwiftKit/AR', '~> 2.0.0'-->
+<!--```-->
 
 <!--* NetWork-->
 <!--```-->
@@ -153,8 +153,6 @@ CXSwiftKit
   ┣ Base
   ┃   ┣ CXAssociatedKey.swift
   ┃   ┣ CXConfig.swift              // The configuration of this kit.
-  ┃   ┣ CXConstraintMaker.swift  
-  ┃   ┣ CXGlobal.swift              // Provides some global methods
   ┃   ┣ CXLock.swift                // Includes multi-thread locks(`CXUnfairLock, CXMutex, CXRecursiveMutex, CXSpin, CXConditionLock`).
   ┃   ┣ CXLogger.swift              // Outputs logs to the console.
   ┃   ┗ CXSwiftBase.swift           // Declares a `CXSwiftBaseCompatible` protocol, etc. You can use `cx` in the app, e.g.: view.cx.right = 10
@@ -194,6 +192,8 @@ CXSwiftKit
   ┃   ┃   ┣ CALayer+Cx.swift
   ┃   ┃   ┣ CGFloat+Cx.swift
   ┃   ┃   ┣ Color+Cx.swift
+  ┃   ┃   ┣ CXConstraintMaker.swift  
+  ┃   ┃   ┣ CXGlobal.swift              // Provides some global methods
   ┃   ┃   ┣ Date+Cx.swift
   ┃   ┃   ┣ Device+Cx.swift
   ┃   ┃   ┣ Dictionary+Cx.swift
