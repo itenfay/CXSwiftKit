@@ -95,6 +95,7 @@ Pod::Spec.new do |s|
     
     core.subspec "LiveGift" do |livegift|
       livegift.source_files = 'CXSwiftKit/Classes/Core/LiveGift/*.{swift}'
+      livegift.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Permissions" do |pm|

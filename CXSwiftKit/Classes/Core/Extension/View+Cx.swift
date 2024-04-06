@@ -1406,7 +1406,7 @@ extension CXView {
 
 extension CXView {
     
-    #if !os(watchOS)
+    #if !os(watchOS) && canImport(UIKit)
     @objc public func cx_makeConstraints(maker: @escaping (CXConstraintMaker) -> Void) {
         assert(superview != nil, "The receiver’s superview is nil.")
         guard let spView = superview else { return }
