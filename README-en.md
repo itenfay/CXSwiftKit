@@ -320,7 +320,7 @@ CXSwiftKit
       ┗ CXWebSocket.swift // Uses `Starscream` to wraps the web socket.
 ```
 
-## 推荐
+## Recommendation
 
 - [CXDownload](https://github.com/chenxing640/CXDownload) - Realization of breakpoint transmission download with Swift, support Objective-C. Including large file download, background download, killing the process, continuing to download when restarting, setting the number of concurrent downloads, monitoring network changes and so on.
 
