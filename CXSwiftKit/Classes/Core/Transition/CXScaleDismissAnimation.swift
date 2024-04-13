@@ -62,10 +62,10 @@ public class CXScaleDismissAnimation: NSObject, UIViewControllerAnimatedTransiti
             //snapshotView?.transform = CGAffineTransform.init(scaleX: 1.0, y: 1.0)
             snapshotView?.frame = finalFrame
         }) { finished in
-            snapshotView?.alpha = 0.0
+            //snapshotView?.alpha = 0.0
+            snapshotView?.removeFromSuperview()
             transitionContext.finishInteractiveTransition()
             transitionContext.completeTransition(true)
-            snapshotView?.removeFromSuperview()
             self.cx.postNotification(withName: Self.scaleAnimationDidFinish.cx.asNotificationName()!)
         }
     }

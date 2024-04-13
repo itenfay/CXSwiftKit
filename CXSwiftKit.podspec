@@ -54,19 +54,18 @@ Pod::Spec.new do |s|
     base.source_files = 'CXSwiftKit/Classes/Base/*.{swift}'
   end
   
+  s.subspec "Extension" do |ext|
+    ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
+    ext.dependency 'CXSwiftKit/Base'
+  end
+  
   s.subspec "Core" do |core|
-    core.subspec "Atomic" do |atom|
-      atom.source_files = 'CXSwiftKit/Classes/Core/Atomic/*.{swift}'
-    end
-    
-    core.subspec "Extension" do |ext|
-      ext.source_files = 'CXSwiftKit/Classes/Core/Extension/*.{swift}'
-      ext.dependency 'CXSwiftKit/Base'
-    end
+    core.dependency 'CXSwiftKit/Base'
+    core.dependency 'CXSwiftKit/Extension'
     
     core.subspec "FileOperation" do |fo|
       fo.source_files = 'CXSwiftKit/Classes/Core/FileOperation/*.{swift}'
-      fo.dependency 'CXSwiftKit/Core/Extension'
+      fo.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "AVToolbox" do |avtb|
@@ -77,25 +76,20 @@ Pod::Spec.new do |s|
     core.subspec "Camera" do |cam|
       cam.source_files = 'CXSwiftKit/Classes/Core/Camera/*.{swift}'
       cam.dependency 'CXSwiftKit/Base'
-      cam.dependency 'CXSwiftKit/Core/Atomic'
     end
     
     core.subspec "CustomOverlayView" do |cov|
       cov.source_files = 'CXSwiftKit/Classes/Core/CustomOverlayView/*.{swift}'
-      cov.dependency 'CXSwiftKit/Core/Extension'
+      cov.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "DocumentPicker" do |dp|
       dp.source_files = 'CXSwiftKit/Classes/Core/DocumentPicker/*.{swift}'
     end
     
-    core.subspec "ImageBuffer" do |imgbuffer|
-      imgbuffer.source_files = 'CXSwiftKit/Classes/Core/ImageBuffer/*.{swift}'
-    end
-    
     core.subspec "LiveGift" do |livegift|
       livegift.source_files = 'CXSwiftKit/Classes/Core/LiveGift/*.{swift}'
-      livegift.dependency 'CXSwiftKit/Core/Extension'
+      livegift.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "Permissions" do |pm|
@@ -105,12 +99,12 @@ Pod::Spec.new do |s|
     
     core.subspec "Timer" do |timer|
       timer.source_files = 'CXSwiftKit/Classes/Core/Timer/*.{swift}'
-      timer.dependency 'CXSwiftKit/Core/Extension'
+      timer.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "Transition" do |transition|
       transition.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
-      transition.dependency 'CXSwiftKit/Core/Extension'
+      transition.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "Utils" do |uts|

@@ -404,6 +404,7 @@ import AdSupport
         var isSim = false
         #if arch(i386) || arch(x86_64)
         //#if TARGET_OS_SIMULATOR
+        //#if targetEnvironment(simulator)
         isSim = true
         #endif
         return isSim

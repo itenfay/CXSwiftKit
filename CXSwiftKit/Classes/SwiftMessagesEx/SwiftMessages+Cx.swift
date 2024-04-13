@@ -116,17 +116,17 @@ extension NSObject: SwiftMessagesWrapable {
         infoView.configureDropShadow()
         infoView.configureContent(title: title, body: body, iconImage: iconImage, iconText: iconText, buttonImage: buttonImage, buttonTitle: buttonTitle, buttonTapHandler: buttonTapHandler)
         infoView.backgroundView.backgroundColor = style == .dark
-        ? UIColor.cx_color(withHexString: "#000000", alpha: 0.8)
+        ? UIColor.cx_color(withHexString: "#000000", alpha: 0.6)
         : UIColor.cx_color(withHexString: "#FFFFFF")
         if title != nil {
             infoView.titleLabel?.textColor = style == .dark
-            ? UIColor.cx_color(withHexString: "#FFFFFF", alpha: 0.9)
+            ? UIColor.cx_color(withHexString: "#FFFFFF", alpha: 1.0)
             : UIColor.cx_color(withHexString: "0x333333")
             infoView.titleLabel?.textAlignment = textAlignment
         }
         if body != nil {
             infoView.bodyLabel?.textColor = style == .dark
-            ? UIColor.cx_color(withHexString: "#FFFFFF", alpha: 0.9)
+            ? UIColor.cx_color(withHexString: "#FFFFFF", alpha: 1.0)
             : UIColor.cx_color(withHexString: "0x333333")
             infoView.bodyLabel?.textAlignment = textAlignment
         }
@@ -134,7 +134,7 @@ extension NSObject: SwiftMessagesWrapable {
             infoView.button?.isHidden = false
             infoView.button?.backgroundColor = UIColor.cx_color(withHexString: "0xFFCD4D")
             infoView.button?.setTitleColor(style == .dark
-                                           ? UIColor.cx_color(withHexString: "#FFFFFF", alpha: 0.9)
+                                           ? UIColor.cx_color(withHexString: "#FFFFFF", alpha: 1.0)
                                            : UIColor.cx_color(withHexString: "0x333333"), for: .normal)
         } else {
             infoView.button?.isHidden = buttonImage != nil ? false : true

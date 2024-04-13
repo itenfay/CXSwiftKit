@@ -16,7 +16,7 @@ extension CXSwiftBase where T == CALayer {
     }
     
     /// Start rotating animation.
-    public func cx_startRotating() {
+    public func startRotating() {
         base.cx_startRotating()
     }
     

@@ -52,9 +52,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func checkApp() {
         let appCtx = CXAppContext()
+        // 检测APP是否被重签
         if appCtx.checkResign("ZH09RJOI") {
-            cx_showMessages(withStyle: .dark, body: "App被重签了！")
+            cx_showMessages(withStyle: .dark, body: "APP被重签了！")
         }
+        // 跳转到AppStore
+        //appCtx.toAppStore(withAppId: "")
+        // 跳转到AppStore写评论
+        //appCtx.toWriteReview(withAppId: "")
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

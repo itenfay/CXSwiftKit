@@ -48,26 +48,26 @@ extension CXSwiftBase where T : UIApplication {
         return base.cx_queryCurrentControllerBy(controller: controller)
     }
     
-    public static func instantiateView(
+    public func instantiateView(
         _ viewType: UIView.Type,
         inBundle bundle: Bundle? = nil) -> UIView?
     {
-        return UIApplication.cx_instantiateView(viewType, inBundle: bundle)
+        return base.cx_instantiateView(viewType, inBundle: bundle)
     }
     
-    public static func instantiateViewController(
+    public func instantiateViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle? = nil) -> UIViewController?
     {
-        return UIApplication.cx_instantiateViewController(viewControllerType, inBundle: bundle)
+        return base.cx_instantiateViewController(viewControllerType, inBundle: bundle)
     }
     
-    public static func instantiateSbViewController(
+    public func instantiateSbViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle? = nil,
         withIdentifier identifier: String? = nil) -> UIViewController?
     {
-        return UIApplication.cx_instantiateSbViewController(viewControllerType, inBundle: bundle, withIdentifier: identifier)
+        return base.cx_instantiateSbViewController(viewControllerType, inBundle: bundle, withIdentifier: identifier)
     }
     
 }
@@ -147,46 +147,46 @@ extension UIApplication {
 
 extension UIApplication {
     
-    @objc public static func cx_instantiateView(
+    @objc public func cx_instantiateView(
         _ viewType: UIView.Type) -> UIView?
     {
         return cx_instantiateView(viewType, inBundle: nil)
     }
     
-    @objc public static func cx_instantiateView(
+    @objc public func cx_instantiateView(
         _ viewType: UIView.Type,
         inBundle bundle: Bundle?) -> UIView?
     {
         return cxInstantiateXibView(viewType, bundle: bundle)
     }
     
-    @objc public static func cx_instantiateViewController(
+    @objc public func cx_instantiateViewController(
         _ viewControllerType: UIViewController.Type) -> UIViewController?
     {
         return cx_instantiateViewController(viewControllerType, inBundle: nil)
     }
     
-    @objc public static func cx_instantiateViewController(
+    @objc public func cx_instantiateViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle?) -> UIViewController?
     {
         return cxInstantiateXibViewController(viewControllerType, bundle: bundle)
     }
     
-    @objc public static func cx_instantiateSbViewController(
+    @objc public func cx_instantiateSbViewController(
         _ viewControllerType: UIViewController.Type) -> UIViewController?
     {
         return cx_instantiateSbViewController(viewControllerType, inBundle: nil)
     }
     
-    @objc public static func cx_instantiateSbViewController(
+    @objc public func cx_instantiateSbViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle?) -> UIViewController?
     {
         return cx_instantiateSbViewController(viewControllerType, inBundle: bundle, withIdentifier: nil)
     }
     
-    @objc public static func cx_instantiateSbViewController(
+    @objc public func cx_instantiateSbViewController(
         _ viewControllerType: UIViewController.Type,
         inBundle bundle: Bundle?,
         withIdentifier identifier: String?) -> UIViewController?

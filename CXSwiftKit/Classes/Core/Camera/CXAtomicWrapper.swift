@@ -18,20 +18,24 @@ public struct atomic<Value> {
     }
     
     public var wrappedValue: Value {
-        get { return load() }
-        set { store(newValue: newValue) }
+        get {
+            return load()
+        }
+        set {
+            store(newValue)
+        }
     }
     
     public func load() -> Value {
         lock.lock()
         defer { lock.unlock() }
-        return value
+        return self.value
     }
     
-    public mutating func store(newValue: Value) {
+    public mutating func store(_ newValue: Value) {
         lock.lock()
         defer { lock.unlock() }
-        value = newValue
+        self.value = newValue
     }
     
 }

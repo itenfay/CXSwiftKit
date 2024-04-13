@@ -17,7 +17,8 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
     typealias T = AlbumModel
     
     private var tableView: UITableView!
-    private let disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+    private var listDisposeBag = DisposeBag()
     private lazy var photoLibHandle = CXPhotoLibraryOperator()
     
     override func viewDidLoad() {
@@ -126,6 +127,7 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
             self?.itemDidSelect(at: indexPath)
         }).disposed(by: disposeBag)
     }
+    
     func configureCell(tv tableView: UITableView, indexPath: IndexPath, item: AlbumModel) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "AlbumCell")
         if cell == nil {
@@ -151,11 +153,13 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
     }
     
     private func saveToAssetCollection(with type: Int) {
-        cx.showProgressHUD(withStatus: "处理中...")
+        cx.showProgressHUD(withStatus: "正在处理...")
         if type == 1 {
             saveAvatarToPhotosAlbum()
             return
         } else if type == 4 {
+            cx.dismissProgressHUD()
+            listDisposeBag = DisposeBag()
             let scale = UIScreen.main.scale
             let albumModels = photoLibHandle.fetchAlbums()
             let sectionModel = ListSectionEntity()
@@ -184,12 +188,10 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
                 }
             }
             
-            cx.dismissProgressHUD()
-            
             let list = makeAnimatedListProvider {
                 Observable.just([AnimatableSectionModel(model: sectionModel, items: items)])
             }
-            list.bind(to: tableView.rx.items(dataSource: provideAnimatedDataSource())).disposed(by: disposeBag)
+            list.bind(to: tableView.rx.items(dataSource: provideAnimatedDataSource())).disposed(by: listDisposeBag)
             return
         }
         do {

@@ -10,28 +10,28 @@ import UIKit
 
 extension CXSwiftBase where T : UIDevice {
     
-    /// Triggers the medium impact feedback.
+    /// Triggers the medium impact feedback. If save the instance in the class, you can call `impactOccurred()` where needed.
     @discardableResult
     public func makeImpactFeedback() -> UIImpactFeedbackGenerator
     {
         return base.cx_makeImpactFeedback()
     }
     
-    /// Triggers impact feedback with feedback style.
+    /// Triggers impact feedback with feedback style. If save the instance in the class, you can call `impactOccurred()` where needed.
     @discardableResult
     public func makeImpactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
     {
         return base.cx_makeImpactFeedback(style: style)
     }
     
-    /// Triggers selection feedback.
+    /// Triggers selection feedback. If save the instance in the class, you can call `selectionChanged()` where needed.
     @discardableResult
     public func makeSelectionFeedback() -> UISelectionFeedbackGenerator
     {
         return base.cx_makeSelectionFeedback()
     }
     
-    /// Triggers notification feedback with notification type.
+    /// Triggers notification feedback with notification type. If save the instance in the class, you can call `notificationOccurred(type)` where needed.
     @discardableResult
     public func makeNotificationFeedback(type: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
     {
@@ -44,14 +44,14 @@ extension CXSwiftBase where T : UIDevice {
 
 extension UIDevice {
     
-    /// Triggers the medium impact feedback.
+    /// Triggers the medium impact feedback. If save the instance in the class, you can call `impactOccurred()` where needed.
     @discardableResult
     @objc public func cx_makeImpactFeedback() -> UIImpactFeedbackGenerator
     {
         return cx_makeImpactFeedback(style: .medium)
     }
     
-    /// Triggers impact feedback with feedback style.
+    /// Triggers impact feedback with feedback style. If save the instance in the class, you can call `impactOccurred()` where needed.
     @discardableResult
     @objc public func cx_makeImpactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) -> UIImpactFeedbackGenerator
     {
@@ -61,7 +61,7 @@ extension UIDevice {
         return impactFeedbackGenerator
     }
     
-    /// Triggers selection feedback.
+    /// Triggers selection feedback. If save the instance in the class, you can call `selectionChanged()` where needed.
     @discardableResult
     @objc public func cx_makeSelectionFeedback() -> UISelectionFeedbackGenerator
     {
@@ -71,7 +71,7 @@ extension UIDevice {
         return selectionFeedbackGenerator
     }
     
-    /// Triggers notification feedback with notification type.
+    /// Triggers notification feedback with notification type. If save the instance in the class, you can call `notificationOccurred(type)` where needed.
     @discardableResult
     @objc public func cx_makeNotificationFeedback(type: UINotificationFeedbackGenerator.FeedbackType) -> UINotificationFeedbackGenerator
     {
