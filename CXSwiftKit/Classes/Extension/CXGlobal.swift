@@ -34,10 +34,22 @@ public func cxAdaptW(_ value: CGFloat) -> CGFloat
     return value * cxWidthRatio
 }
 
+/// Adapt dimension to width.
+public func cxAdaptW(_ value: CGFloat, by ratio: CGFloat) -> CGFloat
+{
+    return value * ratio
+}
+
 /// Adapt dimension to height.
 public func cxAdaptH(_ value: CGFloat) -> CGFloat
 {
     return value * cxHeightRatio // ceil(value) * cxHeightRatio
+}
+
+/// Adapt dimension to height.
+public func cxAdaptH(_ value: CGFloat, by ratio: CGFloat) -> CGFloat
+{
+    return value * ratio // ceil(value) * cxHeightRatio
 }
 
 /// Fit scale by the specified demension.
@@ -47,6 +59,16 @@ public func cxAdaptH(_ value: CGFloat) -> CGFloat
 public func cxFitScaleBy(dimension: CGFloat) -> CGFloat
 {
     return (cxScreenWidth / 375) * dimension
+}
+
+/// Fit scale by the specified demension.
+///
+/// - Parameter base: The reference width to scale.
+/// - Parameter dimension: The dimension to scale.
+/// - Returns: A new fit dimension.
+public func cxFitScaleBy(_ base: CGFloat, dimension: CGFloat) -> CGFloat
+{
+    return (cxScreenWidth / base) * dimension
 }
 
 /// Represents the device whether is x series of iPhone.
