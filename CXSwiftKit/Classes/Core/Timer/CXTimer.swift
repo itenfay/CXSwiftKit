@@ -2,7 +2,7 @@
 //  CXTimer.swift
 //  CXSwiftKit
 //
-//  Created by chenxing on 2021/5/20.
+//  Created by Teng Fei on 2021/5/20.
 //
 
 import Foundation

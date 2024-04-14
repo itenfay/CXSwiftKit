@@ -2,7 +2,7 @@
 //  CXScreenRecorder.swift
 //  CXSwiftKit
 //
-//  Created by chenxing on 2023/3/16.
+//  Created by Teng Fei on 2023/3/16.
 //
 
 #if !os(watchOS)

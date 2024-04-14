@@ -2,7 +2,7 @@
 //  TransitionCollectionViewCell.swift
 //  CXSwiftKit_Example
 //
-//  Created by chenxing on 2023/7/25.
+//  Created by Teng Fei on 2023/7/25.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  CXPhotoLibraryOperator.swift
 //  CXSwiftKit
 //
-//  Created by chenxing on 2022/8/12.
+//  Created by Teng Fei on 2022/8/12.
 //
 
 import Foundation

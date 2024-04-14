@@ -14,8 +14,8 @@
 
 ## 要求
 
-* Xcode 14.0+
-* iOS 10.0, tvOS 10.0, macOS 11.0, watchOS 5.0
+* Xcode 13.0+
+* iOS 11.0, tvOS 11.0, macOS 11.0, watchOS 5.0
 
 ## 安装
 
@@ -30,100 +30,6 @@ pod 'CXSwiftKit', '~> 2.0.0'
 pod 'CXSwiftKit/ApplePay', '~> 2.0.0'
 ```
 
-<!--* AR-->
-<!--```-->
-<!--pod 'CXSwiftKit/AR', '~> 2.0.0'-->
-<!--```-->
-
-<!--* NetWork-->
-<!--```-->
-<!--pod 'CXSwiftKit/NetWork', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* EmptyDataSet-->
-<!--```-->
-<!--pod 'CXSwiftKit/EmptyDataSet', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* HandyJSONHelper-->
-<!--```-->
-<!--pod 'CXSwiftKit/HandyJSONHelper', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* KingfisherWrapper-->
-<!--```-->
-<!--pod 'CXSwiftKit/KingfisherWrapper', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* OverlayView-->
-<!--```-->
-<!--pod 'CXSwiftKit/OverlayView', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* RxButton-->
-<!--```-->
-<!--pod 'CXSwiftKit/RxButton', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* RxEmptyDataSet-->
-<!--```-->
-<!--pod 'CXSwiftKit/RxEmptyDataSet', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* RxKafkaRefresh-->
-<!--```-->
-<!--pod 'CXSwiftKit/RxKafkaRefresh', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* RxKingfisher-->
-<!--```-->
-<!--pod 'CXSwiftKit/RxKingfisher', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* RxListDataSource-->
-<!--```-->
-<!--pod 'CXSwiftKit/RxListDataSource', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* RxMJRefresh-->
-<!--```-->
-<!--pod 'CXSwiftKit/RxMJRefresh', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* SDWebImageWrapper-->
-<!--```-->
-<!--pod 'CXSwiftKit/SDWebImageWrapper', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* SvgaPlay-->
-<!--```-->
-<!--pod 'CXSwiftKit/SvgaPlay', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* SVProgressHUDEx-->
-<!--```-->
-<!--pod 'CXSwiftKit/SVProgressHUDEx', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* SwiftMessagesEx-->
-<!--```-->
-<!--pod 'CXSwiftKit/SwiftMessagesEx', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* ToasterEx-->
-<!--```-->
-<!--pod 'CXSwiftKit/ToasterEx', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* ToastSwiftEx-->
-<!--```-->
-<!--pod 'CXSwiftKit/ToastSwiftEx', '~> 2.0.0'-->
-<!--```-->
-<!---->
-<!--* WebSocket-->
-<!--```-->
-<!--pod 'CXSwiftKit/WebSocket', '~> 2.0.0'-->
-<!--```-->
 
 ## 预览
 
@@ -139,15 +45,6 @@ pod 'CXSwiftKit/ApplePay', '~> 2.0.0'
 CXSwiftKit
   ┣ ApplePay
   ┃   ┗ CXApplePayContext.swift     // The implementation for Apple payment.
-  ┃
-  ┣ AR
-  ┃   ┣ ARSCNView+Cx.swift          // Used to supply extensions of ARSCNView.
-  ┃   ┣ CXMetalVideoRecorder.swift  // Used to handle metal video recording.
-  ┃   ┣ CXSCNLinePainter.swift      // Draws line in augmented reality scene.
-  ┃   ┣ CXSCNTextPainter.swift      // Draws text in augmented reality scene.
-  ┃   ┣ float4x4+Cx.swift           // Used to supply extensions of float4x4.
-  ┃   ┣ SCNSceneRenderer+Cx.swift   // Used to supply extensions of SCNSceneRenderer.
-  ┃   ┗ SCNVector3+Cx.swift         // Used to supply extensions of SCNVector3.
   ┃
   ┣ Base
   ┃   ┣ 
@@ -256,73 +153,6 @@ CXSwiftKit
       ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
 ```
 
-```
-Other
-  ┣ EmptyDataSet
-  ┃   ┣ CXEmptyDataSetDecorator.swift
-  ┃   ┗ CXEmptyDataSetStyle.swift
-  ┃
-  ┣ HandyJSONHelper
-  ┃   ┗ HandyJSONHelper.swift
-  ┃
-  ┣ KingfisherWrapper
-  ┃   ┣ Button+kfwrapper.swift
-  ┃   ┣ CXKingfisherReferer.swift // Used to set the referer of image.
-  ┃   ┗ ImageView+kfwrapper.swift
-  ┃
-  ┣ NetWork // Moya + HandyJSON
-  ┃   ┣ CXNetWorkManager.swift  // CXNetWorkManager.shared.request(api: StreamAPI(downloadURL: URL(string: "imgurl")!, toDirectory: "Images")) { result in }
-  ┃   ┣ CXRequest.swift
-  ┃   ┣ CXRequestProtocol.swift // DataResponse<User>.request(api: APIType, response: { result in })
-  ┃   ┣ CXResponse.swift        // DataResponse<T>, ListResponse<T>, DataSetResponse<T>, MessageResponse
-  ┃   ┗ CXResponseResult.swift
-  ┃
-  ┣ OverlayView
-  ┃   ┗ OverlayView+Cx.swift
-  ┃
-  ┣ RxButton
-  ┃   ┗ RxButton+Cx.swift
-  ┃
-  ┣ RxEmptyDataSet
-  ┃   ┗ RxEmptyDataSet+Cx.swift
-  ┃
-  ┣ RxKafkaRefresh
-  ┃   ┗ RxKafkaRefresh+Cx.swift
-  ┃
-  ┣ RxKingfisher
-  ┃   ┗ RxKingfisher+Cx.swift
-  ┃
-  ┣ RxListDataSource
-  ┃   ┣ CXCollectionReusableView.swift
-  ┃   ┣ CXListDataSourceProvider.swift
-  ┃   ┗ CXListEntity.swift
-  ┃
-  ┣ RxMJRefresh
-  ┃   ┗ RxMJRefresh+Cx.swift
-  ┃
-  ┣ SDWebImageWrapper
-  ┃   ┗ SDWebImageWrapper.swift
-  ┃
-  ┣ SvgaPlay
-  ┃   ┣ CXSvgaPlayManager
-  ┃   ┗ CXSvgaPlayOperation.swift
-  ┃
-  ┣ SVProgressHUDEx
-  ┃   ┗ SVProgressHUD+Cx.swift
-  ┃
-  ┣ SwiftMessagesEx
-  ┃   ┗ SwiftMessages+Cx.swift
-  ┃
-  ┣ ToasterEx
-  ┃   ┗ Toaster+Cx.swift
-  ┃
-  ┣ ToastSwiftEx
-  ┃   ┗ ToastSwift+Cx.swift
-  ┃
-  ┣ WebSocket
-      ┗ CXWebSocket.swift // Uses `Starscream` to wraps the web socket.
-```
-
 ## 推荐
 
 - [CXDownload](https://github.com/chenxing640/CXDownload) - 实现Swift断点续传下载，支持Objective-C。包含大文件下载，后台下载，杀死进程，重新启动时继续下载，设置下载并发数，监听网络改变等。
@@ -348,7 +178,7 @@ Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid i
 
 ## 作者
 
-chenxing, chenxing640@foxmail.com
+Teng Fei, hansen981@126.com
 
 ## 许可
 

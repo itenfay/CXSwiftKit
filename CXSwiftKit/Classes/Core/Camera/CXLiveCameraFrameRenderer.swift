@@ -2,7 +2,7 @@
 //  CXLiveCameraFrameRenderer.swift
 //  CXSwiftKit
 //
-//  Created by chenxing on 2023/6/5.
+//  Created by Teng Fei on 2023/6/5.
 //
 
 import Foundation

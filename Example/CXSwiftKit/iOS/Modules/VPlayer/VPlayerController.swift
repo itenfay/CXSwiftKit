@@ -2,7 +2,7 @@
 //  VPlayerController.swift
 //  CXSwiftKit
 //
-//  Created by chenxing on 2023/7/17.
+//  Created by Teng Fei on 2023/7/17.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 
