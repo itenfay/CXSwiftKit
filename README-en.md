@@ -167,7 +167,7 @@ CXSwiftKit
   ┃    ┗ ImageView+kfwrapper.swift
   ┃
   ┣ KingfisherWrapper
-      ┗ SDWebImageWrapper.swift
+       ┗ SDWebImageWrapper.swift
 ```
 
 ## Recommendation
