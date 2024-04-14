@@ -85,7 +85,7 @@ extension DeviceInfoViewController: UITableViewDelegate, UITableViewDataSource {
         cell?.selectionStyle = .none
         //cell?.accessoryType = .disclosureIndicator
         cell?.accessoryType = .none
-
+        
         let contents = dataArray[indexPath.item].components(separatedBy: ":")
         cell?.textLabel?.text = contents[0] + ":"
         cell?.textLabel?.font = UIFont.cx.semiboldPingFang(ofSize: 16)

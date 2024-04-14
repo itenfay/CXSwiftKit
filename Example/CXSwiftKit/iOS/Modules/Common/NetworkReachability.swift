@@ -50,7 +50,7 @@ public class ReachabilityManager: NSObject {
             case .unknown:
                 self.reachSubject.onNext(false)
             }
-            self.cx.postNotification(withName: CXWebSocket.networkStatusDidChangeNotification, object: NSNumber(value: reachable))
+            //self.cx.postNotification(withName: CXWebSocket.networkStatusDidChangeNotification, object: NSNumber(value: reachable))
         })
     }
     

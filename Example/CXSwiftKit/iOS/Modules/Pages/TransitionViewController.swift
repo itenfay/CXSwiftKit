@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import CXSwiftKit
+import RxListDataSource
+import MarsUIKit
 
 class TransitionViewController: BaseViewController, CXCollectionViewDataSourceProvidable {
     typealias S = ListSectionEntity
@@ -57,10 +59,10 @@ class TransitionViewController: BaseViewController, CXCollectionViewDataSourcePr
     }
     
     func loadData() {
-        cx_showProgressHUD(withStatus: "正在加载数据...")
+        ms_showProgressHUD(withStatus: "正在加载数据...")
         cxDelayToDispatch(0.5) {
             self.fillInData()
-            self.cx_dismissProgressHUD()
+            self.ms_dismissProgressHUD()
         }
     }
     

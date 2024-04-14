@@ -10,13 +10,14 @@ import UIKit
 import RxSwift
 import RxCocoa
 import CXSwiftKit
+import MarsUIKit
 
 class EmptyDataViewController: BaseViewController {
     
     private var tableView: UITableView!
     
-    private lazy var eds: CXEmptyDataSetDecorator = CXEmptyDataSetDecorator()
-    private let subject = BehaviorSubject<CXEmptyDataSetType>(value: .emptyData(desc: ""))
+    private lazy var eds: MarsEmptyDataSetDecorator = MarsEmptyDataSetDecorator()
+    private let subject = BehaviorSubject<MarsEmptyDataSetType>(value: .emptyData(desc: ""))
     private let disposeBag = DisposeBag()
     private var dataArray: [String] = []
     
@@ -33,8 +34,8 @@ class EmptyDataViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loadData()
-        //DispatchQueue.cx.mainAsyncAfter(0.5) {
-            //self.bindAction()
+        //DispatchQueue.ms.mainAsyncAfter(0.5) {
+        //self.bindAction()
         //}
     }
     
@@ -43,9 +44,9 @@ class EmptyDataViewController: BaseViewController {
         eds.style.loadingAnimatedImage = cxLoadImage(named: "loading_imgBlue_40x40")
         eds.onReload = { [weak self] in
             CXLog.info("空数据刷新了")
-            self?.cx_makeToast(text: "空数据刷新了")
+            self?.ms_makeToast(text: "空数据刷新了")
         }
-        subject.bind(to: eds.rx.cx_empty).disposed(by: disposeBag)
+        subject.bind(to: eds.rx.ms_empty).disposed(by: disposeBag)
     }
     
     override func makeUI() {
@@ -88,9 +89,9 @@ class EmptyDataViewController: BaseViewController {
     }
     
     func loadData() {
-        cx_showProgressHUD(withStatus: "正在加载数据...")
+        ms_showProgressHUD(withStatus: "正在加载数据...")
         cxDelayToDispatch(0.3) {
-            self.cx_dismissProgressHUD()
+            self.ms_dismissProgressHUD()
             self.subject.onNext(.emptyData(desc: ""))
         }
     }
@@ -108,7 +109,7 @@ class EmptyDataViewController: BaseViewController {
     
     private func dismissController() {
         if ovcPresented {
-            view.cx.ovcDismiss()
+            view.ms.ovcDismiss()
         } else if customOverlay && !isPresentedFromCenter {
             useViewPresented 
             ? view.cx.dismiss()

@@ -10,7 +10,6 @@ import Foundation
 import HandyJSON
 
 //MARK: - CXHJBaseModel
-public protocol CXHJBaseModel: HandyJSON, CXBaseModel {}
 
 public class HandyJSONHelper {
     

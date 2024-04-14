@@ -5,6 +5,7 @@
 //  Created by chenxing on 2023/3/16.
 //
 
+import Foundation
 #if canImport(HandyJSON)
 import HandyJSON
 

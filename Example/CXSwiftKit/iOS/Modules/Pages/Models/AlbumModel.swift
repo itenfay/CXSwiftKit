@@ -7,9 +7,10 @@
 //
 
 import Foundation
-import CXSwiftKit
 import RxCocoa
 import RxSwift
+import CXSwiftKit
+import RxListDataSource
 
 class PermissionModel: CXCellEntity {
     let type = BehaviorRelay<CXPermissionType>(value: .none)

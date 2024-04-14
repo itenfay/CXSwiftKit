@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CXSwiftKit
+import RxListDataSource
 
 class AlbumModel: CXCellEntity {
     let id: String

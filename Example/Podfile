@@ -5,6 +5,7 @@ platform :ios, '11.0'
 
 target 'CXSwiftKit_Example' do
   pod 'CXSwiftKit', :path => '../'
+  pod 'CXSwiftKit/KingfisherWrapper', :path => '../'
   
   # Keychain
   pod 'DYFSwiftKeychain'
@@ -25,7 +26,8 @@ target 'CXSwiftKit_Example' do
   #pod 'Starscream'
   
   # MarsUIKit
-  pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '2.0.0'
+  #pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '2.0.0'
+  pod 'MarsUIKit'
   # EmptyDataSet
   pod 'MarsUIKit/EmptyDataSet'
   # RxEmptyDataSet
@@ -42,6 +44,9 @@ target 'CXSwiftKit_Example' do
   pod 'MarsUIKit/Toast'
   # SVGA
   pod 'MarsUIKit/SVGA'
+  
+  # RxListDataSource
+  pod 'RxListDataSource'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths

@@ -8,6 +8,9 @@
 
 import Foundation
 import CXSwiftKit
+import HandyJSON
+
+public protocol CXHJBaseModel: HandyJSON, CXBaseModel {}
 
 struct MemberModel: CXHJBaseModel {
     var id: String?

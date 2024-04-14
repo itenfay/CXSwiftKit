@@ -9,8 +9,9 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import SVGAPlayer
 import CXSwiftKit
+import MarsUIKit
+import SVGAPlayer
 
 class SvgaViewController: BaseViewController {
     
@@ -127,7 +128,7 @@ class SvgaViewController: BaseViewController {
     }
     
     private func bindSvgaPlayer() {
-        CXSvgaPlayManager.shared.svgaPlayer = svgaPlayer
+        MarsSvgaPlayManager.shared.svgaPlayer = svgaPlayer
     }
     
     func play(with tag: Int) {
@@ -139,15 +140,15 @@ class SvgaViewController: BaseViewController {
         //CXHaptics.weakBoom()
         //CXHaptics.threeWeakBooms()
         if tag == 1 {
-            CXSvgaPlayManager.shared.play(named: "Rocket")
+            MarsSvgaPlayManager.shared.play(named: "Rocket")
         } else if tag == 2 {
-            CXSvgaPlayManager.shared.play(named: "heartbeat")
+            MarsSvgaPlayManager.shared.play(named: "heartbeat")
         } else if tag == 3 {
-            CXSvgaPlayManager.shared.play(named: "rose_2.0.0")
+            MarsSvgaPlayManager.shared.play(named: "rose_2.0.0")
         } else if tag == 4 {
             let i = Int(arc4random_uniform(UInt32(items.count)))
             let url = items[i < items.count ? i : 0]
-            CXSvgaPlayManager.shared.play(url: url)
+            MarsSvgaPlayManager.shared.play(url: url)
         }
     }
     

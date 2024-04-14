@@ -10,6 +10,7 @@ import UIKit
 import CXSwiftKit
 import SVProgressHUD
 import Toaster
+import MarsUIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -54,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let appCtx = CXAppContext()
         // 检测APP是否被重签
         if appCtx.checkResign("ZH09RJOI") {
-            cx_showMessages(withStyle: .dark, body: "APP被重签了！")
+            ms_showMessages(withStyle: .dark, body: "APP被重签了！")
         }
         // 跳转到AppStore
         //appCtx.toAppStore(withAppId: "")

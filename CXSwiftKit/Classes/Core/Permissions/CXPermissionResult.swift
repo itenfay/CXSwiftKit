@@ -5,7 +5,6 @@
 //  Created by chenxing on 2023/3/16.
 //
 
-#if canImport(Foundation)
 import Foundation
 
 /// The result for a permission status request.
@@ -22,5 +21,3 @@ public class CXPermissionResult: NSObject {
         return "\(type): \(status)"
     }
 }
-
-#endif

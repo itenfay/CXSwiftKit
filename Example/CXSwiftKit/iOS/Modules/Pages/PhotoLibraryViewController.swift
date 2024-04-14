@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import CXSwiftKit
+import MarsUIKit
+import RxListDataSource
 
 class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvidable {
     typealias S = ListSectionEntity
@@ -149,16 +151,16 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
     
     func itemDidSelect(at indexPath: IndexPath) {
         CXLog.info("row-\(indexPath.row): did click!")
-        cx.makeToast(text: "Row-\(indexPath.row): did click!")
+        ms.makeToast(text: "Row-\(indexPath.row): did click!")
     }
     
     private func saveToAssetCollection(with type: Int) {
-        cx.showProgressHUD(withStatus: "正在处理...")
+        ms.showProgressHUD(withStatus: "正在处理...")
         if type == 1 {
             saveAvatarToPhotosAlbum()
             return
         } else if type == 4 {
-            cx.dismissProgressHUD()
+            ms.dismissProgressHUD()
             listDisposeBag = DisposeBag()
             let scale = UIScreen.main.scale
             let albumModels = photoLibHandle.fetchAlbums()
@@ -198,16 +200,16 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
             switch type {
             case 2:
                 guard let path = Bundle.main.path(forResource: "panorama_3", ofType: "jpg") else {
-                    cx.showMessages(withStyle: .light, body: "图片资源不存在！")
+                    ms.showMessages(withStyle: .light, body: "图片资源不存在！")
                     return
                 }
                 try photoLibHandle.addPhoto(URL(localFilePath: path), toAlbum: "CXAlbum", completionHandler: { [weak self] success, error in
                     DispatchQueue.cx.mainAsync {
                         if success {
                             CXLogger.log(level: .info, message: "panorama_3.jpg 保存成功!")
-                            self?.cx.showMessages(withStyle: .light, body: "panorama_3.jpg 保存成功!")
+                            self?.ms.showMessages(withStyle: .light, body: "panorama_3.jpg 保存成功!")
                         }
-                        self?.cx.dismissProgressHUD()
+                        self?.ms.dismissProgressHUD()
                     }
                 })
             case 3:
@@ -215,19 +217,19 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
                     DispatchQueue.cx.mainAsync {
                         if success {
                             CXLogger.log(level: .info, message: "sample_320x240.mp4 保存成功!")
-                            self?.cx.showMessages(withStyle: .dark, body: "sample_320x240.mp4 保存成功!")
+                            self?.ms.showMessages(withStyle: .dark, body: "sample_320x240.mp4 保存成功!")
                         }
-                        self?.cx.dismissProgressHUD()
+                        self?.ms.dismissProgressHUD()
                     }
                 })
             default: break
             }
         } catch CXPhotoLibraryOperator.PHLError.failed(let description) {
             CXLogger.log(level: .info, message:"\(description)")
-            cx.dismissProgressHUD()
+            ms.dismissProgressHUD()
         } catch {
             CXLogger.log(level: .info, message:"\(error.localizedDescription)")
-            cx.dismissProgressHUD()
+            ms.dismissProgressHUD()
         }
     }
     
@@ -237,11 +239,11 @@ class PhotoLibraryViewController: BaseViewController, CXTableViewDataSourceProvi
             DispatchQueue.cx.mainAsync {
                 if error == nil {
                     CXLogger.log(level: .info, message: "save complelely!")
-                    self?.cx.showMessages(withStyle: .light, body: "Avatar 保存成功!")
+                    self?.ms.showMessages(withStyle: .light, body: "Avatar 保存成功!")
                 } else {
                     CXLogger.log(level: .error, message: "error=\(error!)")
                 }
-                self?.cx.dismissProgressHUD()
+                self?.ms.dismissProgressHUD()
             }
         }
     }

@@ -11,6 +11,8 @@ import RxSwift
 import RxCocoa
 import RxDataSources
 import CXSwiftKit
+import RxListDataSource
+import MarsUIKit
 
 class PermissionsViewController: BaseViewController, CXTableViewDataSourceProvidable {
     typealias S = ListSectionEntity
@@ -191,7 +193,7 @@ class PermissionsViewController: BaseViewController, CXTableViewDataSourceProvid
                 self?.handlePermissionResult(result, with: indexPath)
             }
         } else {
-            cx.makeToast(text: "\(permission.type.description) 已授权！")
+            ms.makeToast(text: "\(permission.type.description) 已授权！")
         }
     }
     

@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 import CXSwiftKit
+import MarsUIKit
+import HandyJSON
 
 class NetworkViewController: BaseViewController {
     
@@ -121,7 +123,7 @@ class NetworkViewController: BaseViewController {
                 case .failure(let error):
                     CXLog.error("\(error.localizedDescription)")
                     DispatchQueue.cx.mainAsync {
-                        self?.cx_showMessages(withStyle: .light, body: "1509160178371523.png下载失败")
+                        self?.ms_showMessages(withStyle: .light, body: "1509160178371523.png下载失败")
                     }
                 }
             }
@@ -139,7 +141,7 @@ class NetworkViewController: BaseViewController {
                 case .failure(let error):
                     CXLog.error("\(error.localizedDescription)")
                     DispatchQueue.cx.mainAsync {
-                        self?.cx_showMessages(withStyle: .light, body: "获取图片验证码失败")
+                        self?.ms_showMessages(withStyle: .light, body: "获取图片验证码失败")
                     }
                 }
             }

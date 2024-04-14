@@ -134,9 +134,4 @@ Pod::Spec.new do |s|
     sdww.dependency 'SDWebImage'
   end
   
-  s.subspec "HandyJSONHelper" do |hjh|
-    hjh.source_files = 'CXSwiftKit/Classes/HandyJSONHelper/*.{swift}'
-    hjh.dependency 'HandyJSON'
-  end
-  
 end
