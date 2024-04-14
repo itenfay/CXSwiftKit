@@ -2,15 +2,21 @@
 
 # CXSwiftKit
 
+This kit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
+
 [![Version](https://img.shields.io/cocoapods/v/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 [![License](https://img.shields.io/cocoapods/l/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 [![Platform](https://img.shields.io/cocoapods/p/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 
-`CXSwiftKit` provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
+## Preview
 
-## Example
+**More content needs you to explore.**
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+<div align=left>
+&emsp; <img src="https://github.com/chenxing640/CXSwiftKit/raw/master/IMG_0716.gif" width="50%" />
+</div>
+
+> **If you think it's okay, please give it a `star`**
 
 ## Requirements
 
@@ -23,21 +29,24 @@ CXSwiftKit is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'CXSwiftKit', '~> 2.0.0'
+# CXSwiftKit
+pod 'CXSwiftKit' or pod 'CXSwiftKit', '~> 2.0.0'
 ```
 
 * ApplePay
 ```
-pod 'CXSwiftKit/ApplePay', '~> 2.0.0'
+pod 'CXSwiftKit/ApplePay'
 ```
 
-## Preview
+* KingfisherWrapper
+```
+pod 'CXSwiftKit/KingfisherWrapper'
+```
 
-**More content needs you to explore.**
-
-<div align=left>
-&emsp; <img src="https://github.com/chenxing640/CXSwiftKit/raw/master/IMG_0716.gif" width="50%" />
-</div>
+* SDWebImageWrapper
+```
+pod 'CXSwiftKit/SDWebImageWrapper'
+```
 
 ## Tree Structure Description
 
@@ -148,14 +157,24 @@ CXSwiftKit
   ┃   ┗ ViewController+Cx.swift
   ┃
   ┣ FileOperation
-      ┣ CXFileToolbox.swift  // The file toolbox.
-      ┣ CXLineReader.swift   // Read text file line by line in efficient way.
-      ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
+  ┃   ┣ CXFileToolbox.swift  // The file toolbox.
+  ┃   ┣ CXLineReader.swift   // Read text file line by line in efficient way.
+  ┃   ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
+  ┃
+  ┣ KingfisherWrapper
+  ┃    ┣ Button+kfwrapper.swift
+  ┃    ┣ CXKingfisherReferer.swift 
+  ┃    ┗ ImageView+kfwrapper.swift
+  ┃
+  ┣ KingfisherWrapper
+      ┗ SDWebImageWrapper.swift
 ```
 
 ## Recommendation
 
 - [CXDownload](https://github.com/chenxing640/CXDownload) - Realization of breakpoint transmission download with Swift, support Objective-C. Including large file download, background download, killing the process, continuing to download when restarting, setting the number of concurrent downloads, monitoring network changes and so on.
+- [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
+- [MarsUIKit](https://github.com/chenxing640/MarsUIKit) - `MarsUIKit` wraps some commonly used UI components.
 
 ## Handling Error
 
@@ -175,6 +194,10 @@ Add the header in `Svga.pbobjc.h` or `Svga.pbobjc.m`.
 ```
 #import <libkern/OSAtomic.h>
 ```
+
+## Example
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Author
 
