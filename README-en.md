@@ -173,8 +173,9 @@ CXSwiftKit
 ## Recommendation
 
 - [CXDownload](https://github.com/chenxing640/CXDownload) - Realization of breakpoint transmission download with Swift, support Objective-C. Including large file download, background download, killing the process, continuing to download when restarting, setting the number of concurrent downloads, monitoring network changes and so on.
-- [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
 - [MarsUIKit](https://github.com/chenxing640/MarsUIKit) - `MarsUIKit` wraps some commonly used UI components.
+- [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
+- [CXNetwork-Moya)](https://github.com/chenxing640/CXNetwork-Moya) - Encapsulates a network request library with Moya and ObjectMapper.
 
 ## Handling Error
 
