@@ -36,8 +36,8 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
-  #s.default_subspecs = 'Base', 'Core'
-  s.default_subspec = 'Core'
+  #s.default_subspec = 'Core'
+  s.default_subspecs = 'ApplePay', 'Core'
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
@@ -61,22 +61,31 @@ Pod::Spec.new do |s|
     applepay.dependency 'CXSwiftKit/Base'
   end
   
+  s.subspec "Extension" do |ext|
+    ext.source_files = 'CXSwiftKit/Classes/Core/Extension/*.{swift}'
+    ext.dependency 'CXSwiftKit/Base'
+  end
+  
+  s.subspec "FileOperation" do |fp|
+    fp.source_files = 'CXSwiftKit/Classes/Core/FileOperation/*.{swift}'
+    fp.dependency 'CXSwiftKit/Extension'
+  end
+  
   s.subspec "Core" do |core|
+    core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
     core.dependency 'CXSwiftKit/Base'
+    core.dependency 'CXSwiftKit/Extension'
+    core.dependency 'CXSwiftKit/FileOperation'
+    core.dependency 'DYFSwiftKeychain'
     
-    core.subspec "Extension" do |ext|
-      ext.source_files = 'CXSwiftKit/Classes/Core/Extension/*.{swift}'
-      ext.dependency 'CXSwiftKit/Base'
-    end
-    
-    core.subspec "FileOperation" do |fo|
-      fo.source_files = 'CXSwiftKit/Classes/Core/FileOperation/*.{swift}'
-      fo.dependency 'CXSwiftKit/Core/Extension'
+    core.subspec "Permissions" do |pm|
+      pm.source_files = 'CXSwiftKit/Classes/Core/Permissions/*.{swift}'
+      pm.dependency 'CXSwiftKit/Base'
     end
     
     core.subspec "AVToolbox" do |avtb|
       avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
-      avtb.dependency 'CXSwiftKit/Core/FileOperation'
+      avtb.dependency 'CXSwiftKit/FileOperation'
     end
     
     core.subspec "Camera" do |cam|
@@ -86,7 +95,7 @@ Pod::Spec.new do |s|
     
     core.subspec "CustomOverlayView" do |cov|
       cov.source_files = 'CXSwiftKit/Classes/Core/CustomOverlayView/*.{swift}'
-      cov.dependency 'CXSwiftKit/Core/Extension'
+      cov.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "DocumentPicker" do |dp|
@@ -95,29 +104,17 @@ Pod::Spec.new do |s|
     
     core.subspec "LiveGift" do |livegift|
       livegift.source_files = 'CXSwiftKit/Classes/Core/LiveGift/*.{swift}'
-      livegift.dependency 'CXSwiftKit/Core/Extension'
-    end
-    
-    core.subspec "Permissions" do |pm|
-      pm.source_files = 'CXSwiftKit/Classes/Core/Permissions/*.{swift}'
-      pm.dependency 'CXSwiftKit/Base'
+      livegift.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "Timer" do |timer|
       timer.source_files = 'CXSwiftKit/Classes/Core/Timer/*.{swift}'
-      timer.dependency 'CXSwiftKit/Core/Extension'
+      timer.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "Transition" do |transition|
       transition.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
-      transition.dependency 'CXSwiftKit/Core/Extension'
-    end
-    
-    core.subspec "Utils" do |uts|
-      uts.source_files = 'CXSwiftKit/Classes/Core/Utils/*.{swift}'
-      uts.dependency 'CXSwiftKit/Core/FileOperation'
-      uts.dependency 'CXSwiftKit/Core/Permissions'
-      uts.dependency 'DYFSwiftKeychain'
+      transition.dependency 'CXSwiftKit/Extension'
     end
     
     core.subspec "Widget" do |wd|

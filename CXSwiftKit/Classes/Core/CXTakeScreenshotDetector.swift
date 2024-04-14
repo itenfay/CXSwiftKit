@@ -20,11 +20,6 @@ public class CXTakeScreenshotDetector: NSObject {
     private var takeScreenshotAction: (() -> Void)?
     private var takeScreenshotHandler: ((Bool, UIImage?) -> Void)?
     
-    private lazy var photosPermission: CXPhotosPermission = {
-        let photosPermission = CXPhotosPermission()
-        return photosPermission
-    }()
-    
     private lazy var photoLibraryOperator: CXPhotoLibraryOperator = CXPhotoLibraryOperator()
     
     private func setup() {
@@ -34,7 +29,13 @@ public class CXTakeScreenshotDetector: NSObject {
     @objc private func userDidTakeScreenshot(_ notification: Notification) {
         CXLogger.log(level: .info, message: "The user takes screenshot.")
         takeScreenshotAction?()
-        if photosPermission.authorized {
+        var status: PHAuthorizationStatus
+        if #available(iOS 14, tvOS 14, macOS 11.0, *) {
+            status = PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            status = PHPhotoLibrary.authorizationStatus()
+        }
+        if status == .authorized {
             DispatchQueue.cx.mainAsyncAfter(3.0) {
                 self.fetchImage()
             }
