@@ -7,10 +7,19 @@
 //
 
 import Foundation
-import CXSwiftKit
+import ObjectMapper
 
-struct MemberModel: CXHJBaseModel {
+struct MemberModel: Mappable {
     var id: String?
     var name: String?
     var url: String?
+    
+    init?(map: ObjectMapper.Map) {
+    }
+    
+    mutating func mapping(map: ObjectMapper.Map) {
+        id   <- map["id"]
+        name <- map["name"]
+        url  <- map["url"]
+    }
 }

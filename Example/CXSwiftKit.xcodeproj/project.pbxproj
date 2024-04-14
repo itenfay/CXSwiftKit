@@ -9,11 +9,6 @@
 /* Begin PBXBuildFile section */
 		4983390F2B24BBA30076E91A /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4983390D2B24BBA30076E91A /* ListModel.swift */; };
 		49B6CF002BCC3A29002FD85A /* HandyJSONHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEF82BCC3A28002FD85A /* HandyJSONHelper.swift */; };
-		49B6CF012BCC3A29002FD85A /* CXNetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEFA2BCC3A28002FD85A /* CXNetWorkManager.swift */; };
-		49B6CF022BCC3A29002FD85A /* CXRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEFB2BCC3A28002FD85A /* CXRequest.swift */; };
-		49B6CF032BCC3A29002FD85A /* CXRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEFC2BCC3A28002FD85A /* CXRequestProtocol.swift */; };
-		49B6CF042BCC3A29002FD85A /* CXResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEFD2BCC3A28002FD85A /* CXResponse.swift */; };
-		49B6CF052BCC3A29002FD85A /* CXResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEFE2BCC3A28002FD85A /* CXResponseResult.swift */; };
 		49C132FB2B25A153009D97F7 /* CustomOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C132FA2B25A153009D97F7 /* CustomOverlayViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -100,11 +95,6 @@
 		4983390D2B24BBA30076E91A /* ListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		498339112B24C67B0076E91A /* CXSwiftKit_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CXSwiftKit_Example.entitlements; sourceTree = "<group>"; };
 		49B6CEF82BCC3A28002FD85A /* HandyJSONHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandyJSONHelper.swift; sourceTree = "<group>"; };
-		49B6CEFA2BCC3A28002FD85A /* CXNetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXNetWorkManager.swift; sourceTree = "<group>"; };
-		49B6CEFB2BCC3A28002FD85A /* CXRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXRequest.swift; sourceTree = "<group>"; };
-		49B6CEFC2BCC3A28002FD85A /* CXRequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXRequestProtocol.swift; sourceTree = "<group>"; };
-		49B6CEFD2BCC3A28002FD85A /* CXResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXResponse.swift; sourceTree = "<group>"; };
-		49B6CEFE2BCC3A28002FD85A /* CXResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXResponseResult.swift; sourceTree = "<group>"; };
 		49C132FA2B25A153009D97F7 /* CustomOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayViewController.swift; sourceTree = "<group>"; };
 		602685A8AB27453ECB711000 /* Pods_CXSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CXSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* CXSwiftKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CXSwiftKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,18 +210,6 @@
 				49B6CEF82BCC3A28002FD85A /* HandyJSONHelper.swift */,
 			);
 			path = HandyJSONHelper;
-			sourceTree = "<group>";
-		};
-		49B6CEFF2BCC3A28002FD85A /* CXNetWork */ = {
-			isa = PBXGroup;
-			children = (
-				49B6CEFA2BCC3A28002FD85A /* CXNetWorkManager.swift */,
-				49B6CEFB2BCC3A28002FD85A /* CXRequest.swift */,
-				49B6CEFC2BCC3A28002FD85A /* CXRequestProtocol.swift */,
-				49B6CEFD2BCC3A28002FD85A /* CXResponse.swift */,
-				49B6CEFE2BCC3A28002FD85A /* CXResponseResult.swift */,
-			);
-			path = CXNetWork;
 			sourceTree = "<group>";
 		};
 		607FACC71AFB9204008FA782 = {
@@ -456,11 +434,10 @@
 		79EBFDC62A6A4F7300242993 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				49B6CEFF2BCC3A28002FD85A /* CXNetWork */,
-				49B6CEF92BCC3A28002FD85A /* HandyJSONHelper */,
 				79EBFDC82A6A4F7300242993 /* ApiClient.swift */,
 				79EBFDCB2A6A4F7300242993 /* ApiResponse.swift */,
 				79EBFDC72A6A4F7300242993 /* DefaultURLSession.swift */,
+				49B6CEF92BCC3A28002FD85A /* HandyJSONHelper */,
 				79EBFDCA2A6A4F7300242993 /* JSON.swift */,
 				4983390D2B24BBA30076E91A /* ListModel.swift */,
 				79F08FF22A70EB2600E1E46C /* NetworkReachability.swift */,
@@ -775,6 +752,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-CXSwiftKit_Example/Pods-CXSwiftKit_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/CXNetwork/CXNetwork_Moya.framework",
 				"${BUILT_PRODUCTS_DIR}/CXSwiftKit/CXSwiftKit.framework",
 				"${BUILT_PRODUCTS_DIR}/DYFSwiftKeychain/DYFSwiftKeychain.framework",
 				"${BUILT_PRODUCTS_DIR}/DZNEmptyDataSet/DZNEmptyDataSet.framework",
@@ -785,6 +763,7 @@
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/MarsUIKit/MarsUIKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/OverlayController/OverlayController.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
@@ -803,6 +782,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CXNetwork_Moya.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CXSwiftKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DYFSwiftKeychain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DZNEmptyDataSet.framework",
@@ -813,6 +793,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarsUIKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OverlayController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
@@ -868,7 +849,6 @@
 				49C132FB2B25A153009D97F7 /* CustomOverlayViewController.swift in Sources */,
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				79AE5BD72A721E4900A6126F /* LiveGiftViewController.swift in Sources */,
-				49B6CF052BCC3A29002FD85A /* CXResponseResult.swift in Sources */,
 				79AA18812A6F9923003FC0F3 /* PhotoLibraryViewController.swift in Sources */,
 				79EBFE082A6A4F7400242993 /* Configurator.swift in Sources */,
 				790571052A73A909008D25D9 /* QuadCurveViewController.swift in Sources */,
@@ -890,7 +870,6 @@
 				79EBFE022A6A4F7400242993 /* MineView.swift in Sources */,
 				79EBFE002A6A4F7400242993 /* MineViewController.swift in Sources */,
 				79AA18862A6FCF53003FC0F3 /* TransitionCollectionViewCell.swift in Sources */,
-				49B6CF012BCC3A29002FD85A /* CXNetWorkManager.swift in Sources */,
 				79EBFE042A6A4F7400242993 /* BasePresenter.swift in Sources */,
 				79EBFDED2A6A4F7400242993 /* SettingsConfigurator.swift in Sources */,
 				79EBFDF22A6A4F7400242993 /* HomeTableViewCell.swift in Sources */,
@@ -900,8 +879,6 @@
 				79AE5BD52A721A8300A6126F /* AlbumModel.swift in Sources */,
 				79EBFDF62A6A4F7400242993 /* DefaultURLSession.swift in Sources */,
 				79EBFDEE2A6A4F7400242993 /* HomeConfigurator.swift in Sources */,
-				49B6CF042BCC3A29002FD85A /* CXResponse.swift in Sources */,
-				49B6CF032BCC3A29002FD85A /* CXRequestProtocol.swift in Sources */,
 				79EBFDEF2A6A4F7400242993 /* HomePresenter.swift in Sources */,
 				79EBFDF52A6A4F7400242993 /* TabBarController.swift in Sources */,
 				79AE5BDC2A723E8800A6126F /* MemberModel.swift in Sources */,
@@ -917,7 +894,6 @@
 				79AE5BDD2A723E8800A6126F /* MemberRequestEntity.swift in Sources */,
 				79EBFDFF2A6A4F7400242993 /* MinePresenter.swift in Sources */,
 				79EBFE072A6A4F7400242993 /* BaseView.swift in Sources */,
-				49B6CF022BCC3A29002FD85A /* CXRequest.swift in Sources */,
 				4983390F2B24BBA30076E91A /* ListModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1067,14 +1043,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CXSwiftKit_Example.entitlements;
-				CURRENT_PROJECT_VERSION = 0412;
+				CURRENT_PROJECT_VERSION = 0414;
 				DEVELOPMENT_TEAM = WL2647US2R;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CXSK;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.demo.cxswiftkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1093,14 +1069,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = CXSwiftKit_Example.entitlements;
-				CURRENT_PROJECT_VERSION = 0412;
+				CURRENT_PROJECT_VERSION = 0414;
 				DEVELOPMENT_TEAM = WL2647US2R;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = CXSwiftKit/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = CXSK;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.demo.cxswiftkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";

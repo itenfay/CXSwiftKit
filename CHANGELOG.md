@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
-### **2.0.0 (12/09/2023)**
+### **2.0.3 (04/14/2024)**
+
+- Updates some contents.
+- Adds some new modules.
+
+### **2.0.2 (12/09/2023)**
 
 - Readjust the directory structure.
 - Updates some contents.
