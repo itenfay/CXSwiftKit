@@ -37,7 +37,9 @@ Pod::Spec.new do |s|
   
   s.requires_arc = true
   #s.default_subspec = 'Core'
-  s.default_subspecs = 'Base', 'ApplePay', 'Core'
+  #s.default_subspecs = 'Base', 'ApplePay', 'Core'
+  s.default_subspecs = 'Base', 'Core'
+  
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
@@ -53,12 +55,6 @@ Pod::Spec.new do |s|
   
   s.subspec "Base" do |base|
     base.source_files = 'CXSwiftKit/Classes/Base/*.{swift}'
-  end
-  
-  s.subspec "ApplePay" do |applepay|
-    applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
-    applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
-    applepay.dependency 'CXSwiftKit/Base'
   end
   
   s.subspec "Extension" do |ext|
@@ -121,6 +117,12 @@ Pod::Spec.new do |s|
     end
   end
   
+  s.subspec "ApplePay" do |applepay|
+    applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
+    applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
+    applepay.dependency 'CXSwiftKit/Base'
+  end
+  
   s.subspec "KingfisherWrapper" do |kfw|
     kfw.source_files = 'CXSwiftKit/Classes/KingfisherWrapper/*.{swift}'
     kfw.ios.deployment_target = '11.0'
@@ -131,6 +133,7 @@ Pod::Spec.new do |s|
   
   s.subspec "SDWebImageWrapper" do |sdww|
     sdww.source_files = 'CXSwiftKit/Classes/SDWebImageWrapper/*.{swift}'
+    sdww.dependency 'CXSwiftKit/Base'
     sdww.dependency 'SDWebImage'
   end
   
