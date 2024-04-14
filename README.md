@@ -172,8 +172,9 @@ CXSwiftKit
 ## 推荐
 
 - [CXDownload](https://github.com/chenxing640/CXDownload) - 实现Swift断点续传下载，支持Objective-C。包含大文件下载，后台下载，杀死进程，重新启动时继续下载，设置下载并发数，监听网络改变等。
-- [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
 - [MarsUIKit](https://github.com/chenxing640/MarsUIKit) - `MarsUIKit` wraps some commonly used UI components.
+- [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
+- [CXNetwork-Moya)](https://github.com/chenxing640/CXNetwork-Moya) - Encapsulates a network request library with Moya and ObjectMapper.
 
 ## 处理错误
 
