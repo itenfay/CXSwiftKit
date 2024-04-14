@@ -11,19 +11,21 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+fileprivate var buttonCurrentText = "cx.button.currentText"
+
 extension Reactive where Base: UIButton {
     
     public var cx_isShowIndicator: Binder<Bool> {
         return Binder(self.base, binding: { button, active in
             if active {
-                objc_setAssociatedObject(button, &CXAssociatedKey.buttonCurrentText, button.currentTitle, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+                objc_setAssociatedObject(button, &buttonCurrentText, button.currentTitle, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
                 button.setTitle("", for: .normal)
                 button.cx_whiteIndicator.startAnimating()
                 button.isUserInteractionEnabled = false
             }
             else {
                 button.cx_whiteIndicator.stopAnimating()
-                if let title = objc_getAssociatedObject(button, &CXAssociatedKey.buttonCurrentText) as? String {
+                if let title = objc_getAssociatedObject(button, &buttonCurrentText) as? String {
                     button.setTitle(title, for: .normal)
                 }
                 button.isUserInteractionEnabled = true
