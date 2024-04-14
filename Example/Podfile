@@ -5,17 +5,19 @@ platform :ios, '11.0'
 
 target 'CXSwiftKit_Example' do
   pod 'CXSwiftKit', :path => '../'
+  pod 'CXSwiftKit/ApplePay', :path => '../'
   pod 'CXSwiftKit/KingfisherWrapper', :path => '../'
+  pod 'CXSwiftKit/SDWebImageWrapper', :path => '../'
   
   # Keychain
-  pod 'DYFSwiftKeychain'
+  #pod 'DYFSwiftKeychain'
   
   # RxSwift
-  pod 'RxSwift'
+  #pod 'RxSwift'
   # RxCocoa
-  pod 'RxCocoa'
+  #pod 'RxCocoa'
   # RxDataSources
-  pod 'RxDataSources'
+  #pod 'RxDataSources'
   
   # Moya
   pod 'Moya'

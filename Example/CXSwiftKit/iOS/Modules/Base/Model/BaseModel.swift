@@ -8,6 +8,10 @@
 
 import Foundation
 import CXSwiftKit
+import HandyJSON
+
+// MARK: - CXHJBaseModel
+public protocol CXHJBaseModel: HandyJSON, CXBaseModel {}
 
 class BaseModel: CXHJBaseModel {
     required init() {}

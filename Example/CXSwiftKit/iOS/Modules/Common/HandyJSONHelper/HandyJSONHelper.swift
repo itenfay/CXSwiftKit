@@ -9,8 +9,6 @@ import Foundation
 #if canImport(HandyJSON)
 import HandyJSON
 
-//MARK: - CXHJBaseModel
-
 public class HandyJSONHelper {
     
     /// Converts an object into a json string, and the object should comply with the HandyJSON protocol.
