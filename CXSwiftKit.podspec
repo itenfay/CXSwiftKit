@@ -36,7 +36,8 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
-  s.default_subspecs = 'Base', 'Core'
+  #s.default_subspecs = 'Base', 'Core'
+  s.default_subspec = 'Core'
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
@@ -54,18 +55,23 @@ Pod::Spec.new do |s|
     base.source_files = 'CXSwiftKit/Classes/Base/*.{swift}'
   end
   
-  s.subspec "Extension" do |ext|
-    ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
-    ext.dependency 'CXSwiftKit/Base'
+  s.subspec "ApplePay" do |applepay|
+    applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
+    applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
+    applepay.dependency 'CXSwiftKit/Base'
   end
   
   s.subspec "Core" do |core|
     core.dependency 'CXSwiftKit/Base'
-    core.dependency 'CXSwiftKit/Extension'
+    
+    core.subspec "Extension" do |ext|
+      ext.source_files = 'CXSwiftKit/Classes/Core/Extension/*.{swift}'
+      ext.dependency 'CXSwiftKit/Base'
+    end
     
     core.subspec "FileOperation" do |fo|
       fo.source_files = 'CXSwiftKit/Classes/Core/FileOperation/*.{swift}'
-      fo.dependency 'CXSwiftKit/Extension'
+      fo.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "AVToolbox" do |avtb|
@@ -80,7 +86,7 @@ Pod::Spec.new do |s|
     
     core.subspec "CustomOverlayView" do |cov|
       cov.source_files = 'CXSwiftKit/Classes/Core/CustomOverlayView/*.{swift}'
-      cov.dependency 'CXSwiftKit/Extension'
+      cov.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "DocumentPicker" do |dp|
@@ -89,7 +95,7 @@ Pod::Spec.new do |s|
     
     core.subspec "LiveGift" do |livegift|
       livegift.source_files = 'CXSwiftKit/Classes/Core/LiveGift/*.{swift}'
-      livegift.dependency 'CXSwiftKit/Extension'
+      livegift.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Permissions" do |pm|
@@ -99,12 +105,12 @@ Pod::Spec.new do |s|
     
     core.subspec "Timer" do |timer|
       timer.source_files = 'CXSwiftKit/Classes/Core/Timer/*.{swift}'
-      timer.dependency 'CXSwiftKit/Extension'
+      timer.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Transition" do |transition|
       transition.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
-      transition.dependency 'CXSwiftKit/Extension'
+      transition.dependency 'CXSwiftKit/Core/Extension'
     end
     
     core.subspec "Utils" do |uts|
@@ -118,12 +124,6 @@ Pod::Spec.new do |s|
       wd.source_files = 'CXSwiftKit/Classes/Core/Widget/*.{swift}'
       wd.dependency 'CXSwiftKit/Base'
     end
-  end
-  
-  s.subspec "ApplePay" do |applepay|
-    applepay.source_files = 'CXSwiftKit/Classes/ApplePay/*.{swift}'
-    applepay.resource = 'CXSwiftKit/Assets/ApplePay/*.png'
-    applepay.dependency 'CXSwiftKit/Base'
   end
   
 end
