@@ -6,12 +6,7 @@
 //
 
 import Foundation
-#if canImport(UIKit)
-import UIKit
-#endif
-
-//MARK: - SDWebImage
-
+#if os(iOS) || os(tvOS) || os(macOS)
 #if canImport(SDWebImage)
 import SDWebImage
 
@@ -57,4 +52,5 @@ public func cxClearSDWebImageExpiredFiles(completion: (() -> Void)? = nil) {
     }
 }
 
+#endif
 #endif
