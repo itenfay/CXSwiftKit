@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4983390F2B24BBA30076E91A /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4983390D2B24BBA30076E91A /* ListModel.swift */; };
+		49B6CEF32BCC3515002FD85A /* CXNetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEED2BCC3515002FD85A /* CXNetWorkManager.swift */; };
+		49B6CEF42BCC3515002FD85A /* CXRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEEE2BCC3515002FD85A /* CXRequest.swift */; };
+		49B6CEF52BCC3515002FD85A /* CXRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEEF2BCC3515002FD85A /* CXRequestProtocol.swift */; };
+		49B6CEF62BCC3515002FD85A /* CXResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEF02BCC3515002FD85A /* CXResponse.swift */; };
+		49B6CEF72BCC3515002FD85A /* CXResponseResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49B6CEF12BCC3515002FD85A /* CXResponseResult.swift */; };
 		49C132FB2B25A153009D97F7 /* CustomOverlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C132FA2B25A153009D97F7 /* CustomOverlayViewController.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -93,6 +98,11 @@
 		2847EF40D8473230FB01DC52 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		4983390D2B24BBA30076E91A /* ListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		498339112B24C67B0076E91A /* CXSwiftKit_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CXSwiftKit_Example.entitlements; sourceTree = "<group>"; };
+		49B6CEED2BCC3515002FD85A /* CXNetWorkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXNetWorkManager.swift; sourceTree = "<group>"; };
+		49B6CEEE2BCC3515002FD85A /* CXRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXRequest.swift; sourceTree = "<group>"; };
+		49B6CEEF2BCC3515002FD85A /* CXRequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXRequestProtocol.swift; sourceTree = "<group>"; };
+		49B6CEF02BCC3515002FD85A /* CXResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXResponse.swift; sourceTree = "<group>"; };
+		49B6CEF12BCC3515002FD85A /* CXResponseResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CXResponseResult.swift; sourceTree = "<group>"; };
 		49C132FA2B25A153009D97F7 /* CustomOverlayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayViewController.swift; sourceTree = "<group>"; };
 		602685A8AB27453ECB711000 /* Pods_CXSwiftKit_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CXSwiftKit_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* CXSwiftKit_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CXSwiftKit_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -201,6 +211,19 @@
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
+		};
+		49B6CEF22BCC3515002FD85A /* CXNetWork */ = {
+			isa = PBXGroup;
+			children = (
+				49B6CEED2BCC3515002FD85A /* CXNetWorkManager.swift */,
+				49B6CEEE2BCC3515002FD85A /* CXRequest.swift */,
+				49B6CEEF2BCC3515002FD85A /* CXRequestProtocol.swift */,
+				49B6CEF02BCC3515002FD85A /* CXResponse.swift */,
+				49B6CEF12BCC3515002FD85A /* CXResponseResult.swift */,
+			);
+			name = CXNetWork;
+			path = CXSwiftKit/iOS/Modules/CXNetWork;
+			sourceTree = SOURCE_ROOT;
 		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
@@ -424,6 +447,7 @@
 		79EBFDC62A6A4F7300242993 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				49B6CEF22BCC3515002FD85A /* CXNetWork */,
 				79EBFDC82A6A4F7300242993 /* ApiClient.swift */,
 				79EBFDCB2A6A4F7300242993 /* ApiResponse.swift */,
 				79EBFDC72A6A4F7300242993 /* DefaultURLSession.swift */,
@@ -854,19 +878,24 @@
 				79EBFDF02A6A4F7400242993 /* HomeViewController.swift in Sources */,
 				79AE5BD52A721A8300A6126F /* AlbumModel.swift in Sources */,
 				79EBFDF62A6A4F7400242993 /* DefaultURLSession.swift in Sources */,
+				49B6CEF62BCC3515002FD85A /* CXResponse.swift in Sources */,
 				79EBFDEE2A6A4F7400242993 /* HomeConfigurator.swift in Sources */,
 				79EBFDEF2A6A4F7400242993 /* HomePresenter.swift in Sources */,
 				79EBFDF52A6A4F7400242993 /* TabBarController.swift in Sources */,
 				79AE5BDC2A723E8800A6126F /* MemberModel.swift in Sources */,
+				49B6CEF52BCC3515002FD85A /* CXRequestProtocol.swift in Sources */,
 				79AE5BD92A72362800A6126F /* NetworkViewController.swift in Sources */,
 				79EBFDFE2A6A4F7400242993 /* MineConfigurator.swift in Sources */,
+				49B6CEF72BCC3515002FD85A /* CXResponseResult.swift in Sources */,
 				79EBFDFB2A6A4F7400242993 /* URLSessionStub.swift in Sources */,
+				49B6CEF32BCC3515002FD85A /* CXNetWorkManager.swift in Sources */,
 				79EBFDF82A6A4F7400242993 /* Result.swift in Sources */,
 				79EBFDE92A6A4F7400242993 /* SettingsPresenter.swift in Sources */,
 				79AE5BE12A725B9E00A6126F /* PermissionModel.swift in Sources */,
 				79EBFE062A6A4F7400242993 /* BaseModel.swift in Sources */,
 				79EBFE032A6A4F7400242993 /* VPlayerController.swift in Sources */,
 				79EBFDEA2A6A4F7400242993 /* SettingsViewController.swift in Sources */,
+				49B6CEF42BCC3515002FD85A /* CXRequest.swift in Sources */,
 				79AE5BDD2A723E8800A6126F /* MemberRequestEntity.swift in Sources */,
 				79EBFDFF2A6A4F7400242993 /* MinePresenter.swift in Sources */,
 				79EBFE072A6A4F7400242993 /* BaseView.swift in Sources */,

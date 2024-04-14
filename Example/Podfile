@@ -21,36 +21,27 @@ target 'CXSwiftKit_Example' do
   # HandyJSON
   pod 'HandyJSON', '~> 5.0.4-beta'
   
-  # Kingfisher
-  pod 'Kingfisher'
-  # SDWebImage
-  pod 'SDWebImage'
-  
-  # KafkaRefresh
-  pod 'KafkaRefresh'
-  # MJRefresh
-  pod 'MJRefresh'
-  
-  # DZNEmptyDataSet
-  pod 'DZNEmptyDataSet'
-  # SVProgressHUD
-  pod 'SVProgressHUD'
-  # SwiftMessages
-  pod 'SwiftMessages'
-  # Toaster
-  pod 'Toaster'
-  # Toast_Swift
-  pod 'Toast-Swift', '~> 5.0.1'
-  # OverlayController
-  pod 'OverlayController'
-  
   # Starscream
-  pod 'Starscream'
+  #pod 'Starscream'
   
-  # Deprecated
-  #pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '1.0.3'
-  # SVGA: /Pods/SVGAPlayer/Source/pbobjc/Svga.pbobjc.m: Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
-  #pod 'SVGAPlayer'
+  # MarsUIKit
+  pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '2.0.0'
+  # EmptyDataSet
+  pod 'MarsUIKit/EmptyDataSet'
+  # RxEmptyDataSet
+  pod 'MarsUIKit/RxEmptyDataSet'
+  # RxMJRefresh
+  pod 'MarsUIKit/RxMJRefresh'
+  # RxKafkaRefresh
+  pod 'MarsUIKit/RxKafkaRefresh'
+  # OverlayView
+  pod 'MarsUIKit/OverlayView'
+  # Messages
+  pod 'MarsUIKit/Messages'
+  # Toast
+  pod 'MarsUIKit/Toast'
+  # SVGA
+  pod 'MarsUIKit/SVGA'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths

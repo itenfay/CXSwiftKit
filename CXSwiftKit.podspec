@@ -18,21 +18,21 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   
   s.description      = <<-DESC
-  CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
+  TODU: CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
   DESC
   
   s.homepage         = 'https://github.com/chenxing640/CXSwiftKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'chenxing' => 'chenxing640@foxmail.com' }
+  s.author           = { 'Teng Fei' => 'hansen981@126.com' }
   s.source           = { :git => 'https://github.com/chenxing640/CXSwiftKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
   s.swift_versions = ['4.2', '5.0']
   
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '11.0'
   s.osx.deployment_target = '11.0'
-  s.tvos.deployment_target = '10.0'
+  s.tvos.deployment_target = '11.0'
   s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
@@ -119,6 +119,24 @@ Pod::Spec.new do |s|
       transition.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
       transition.dependency 'CXSwiftKit/Extension'
     end
+  end
+  
+  s.subspec "KingfisherWrapper" do |kfw|
+    kfw.source_files = 'CXSwiftKit/Classes/KingfisherWrapper/*.{swift}'
+    kfw.ios.deployment_target = '11.0'
+    kfw.tvos.deployment_target = '11.0'
+    kfw.dependency 'CXSwiftKit/Extension'
+    kfw.dependency 'Kingfisher'
+  end
+  
+  s.subspec "SDWebImageWrapper" do |sdww|
+    sdww.source_files = 'CXSwiftKit/Classes/SDWebImageWrapper/*.{swift}'
+    sdww.dependency 'SDWebImage'
+  end
+  
+  s.subspec "HandyJSONHelper" do |hjh|
+    hjh.source_files = 'CXSwiftKit/Classes/HandyJSONHelper/*.{swift}'
+    hjh.dependency 'HandyJSON'
   end
   
 end
