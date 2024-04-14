@@ -62,12 +62,12 @@ Pod::Spec.new do |s|
   end
   
   s.subspec "Extension" do |ext|
-    ext.source_files = 'CXSwiftKit/Classes/Core/Extension/*.{swift}'
+    ext.source_files = 'CXSwiftKit/Classes/Extension/*.{swift}'
     ext.dependency 'CXSwiftKit/Base'
   end
   
   s.subspec "FileOperation" do |fp|
-    fp.source_files = 'CXSwiftKit/Classes/Core/FileOperation/*.{swift}'
+    fp.source_files = 'CXSwiftKit/Classes/FileOperation/*.{swift}'
     fp.dependency 'CXSwiftKit/Extension'
   end
   
