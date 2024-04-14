@@ -10,17 +10,17 @@ Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
   s.version          = '2.0.0'
   s.summary          = 'CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
+  
+  # This description is used to generate tags and improve search results.
+  #   * Think: What does it do? Why did you write it? What is the focus?
+  #   * Try to keep it short, snappy and to the point.
+  #   * Write the description between the DESC delimiters below.
+  #   * Finally, don't worry about the indent, CocoaPods strips it!
+  
   s.description      = <<-DESC
-                       CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
-                       DESC
-
+  CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
+  DESC
+  
   s.homepage         = 'https://github.com/chenxing640/CXSwiftKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -37,7 +37,7 @@ Pod::Spec.new do |s|
   
   s.requires_arc = true
   #s.default_subspec = 'Core'
-  s.default_subspecs = 'ApplePay', 'Core'
+  s.default_subspecs = 'Base', 'ApplePay', 'Core'
   s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
   
@@ -46,7 +46,7 @@ Pod::Spec.new do |s|
   # s.resource_bundles = {
   #   'CXSwiftKit' => ['CXSwiftKit/Assets/*.png']
   # }
-
+  
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
@@ -73,8 +73,6 @@ Pod::Spec.new do |s|
   
   s.subspec "Core" do |core|
     core.source_files = 'CXSwiftKit/Classes/Core/*.{swift}'
-    core.dependency 'CXSwiftKit/Base'
-    core.dependency 'CXSwiftKit/Extension'
     core.dependency 'CXSwiftKit/FileOperation'
     core.dependency 'DYFSwiftKeychain'
     
@@ -83,23 +81,28 @@ Pod::Spec.new do |s|
       pm.dependency 'CXSwiftKit/Base'
     end
     
-    core.subspec "AVToolbox" do |avtb|
-      avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
-      avtb.dependency 'CXSwiftKit/FileOperation'
-    end
-    
     core.subspec "Camera" do |cam|
       cam.source_files = 'CXSwiftKit/Classes/Core/Camera/*.{swift}'
       cam.dependency 'CXSwiftKit/Base'
     end
     
+    core.subspec "DocumentPicker" do |dp|
+      dp.source_files = 'CXSwiftKit/Classes/Core/DocumentPicker/*.{swift}'
+    end
+    
+    core.subspec "Widget" do |wd|
+      wd.source_files = 'CXSwiftKit/Classes/Core/Widget/*.{swift}'
+      wd.dependency 'CXSwiftKit/Base'
+    end
+    
+    core.subspec "AVToolbox" do |avtb|
+      avtb.source_files = 'CXSwiftKit/Classes/Core/AVToolbox/*.{swift}'
+      avtb.dependency 'CXSwiftKit/FileOperation'
+    end
+    
     core.subspec "CustomOverlayView" do |cov|
       cov.source_files = 'CXSwiftKit/Classes/Core/CustomOverlayView/*.{swift}'
       cov.dependency 'CXSwiftKit/Extension'
-    end
-    
-    core.subspec "DocumentPicker" do |dp|
-      dp.source_files = 'CXSwiftKit/Classes/Core/DocumentPicker/*.{swift}'
     end
     
     core.subspec "LiveGift" do |livegift|
@@ -115,11 +118,6 @@ Pod::Spec.new do |s|
     core.subspec "Transition" do |transition|
       transition.source_files = 'CXSwiftKit/Classes/Core/Transition/*.{swift}'
       transition.dependency 'CXSwiftKit/Extension'
-    end
-    
-    core.subspec "Widget" do |wd|
-      wd.source_files = 'CXSwiftKit/Classes/Core/Widget/*.{swift}'
-      wd.dependency 'CXSwiftKit/Base'
     end
   end
   

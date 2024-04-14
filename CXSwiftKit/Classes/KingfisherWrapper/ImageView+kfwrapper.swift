@@ -38,7 +38,7 @@ extension UIImageView {
     @objc public func cx_setImage(withUrl url: String?, placeholder: UIImage? = nil, headers: [String : String] = [:], progressBlock: ((_ receivedSize: Int64, _ totalSize: Int64) -> Void)? = nil)
     {
         guard let _url = url, !_url.isEmpty else {
-            CXLogger.log(level: .info, message: "Invalid url string.")
+            debugPrint("[I] " + "Invalid url string.")
             return
         }
         var modifier: AnyModifier? = nil

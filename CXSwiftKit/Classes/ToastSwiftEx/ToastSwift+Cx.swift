@@ -38,49 +38,49 @@ public protocol ToastSwiftWrapable: AnyObject {
     func cx_hideToastActivity()
 }
 
-extension CXSwiftBase where T : UIView {
-    
-    public func showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        base.cx_showToast(message, completion: completion)
-    }
-    
-    public func showToast(_ message: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        base.cx_showToast(message, image: image, completion: completion)
-    }
-    
-    public func showToast(_ message: String?, title: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        base.cx_showToast(message, title: title, image: image, completion: completion)
-    }
-    
-    public func showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, position: ToastPosition = ToastManager.shared.position, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        base.cx_showToast(message, duration: duration, position: position, title: title, image: image, style: style, completion: completion)
-    }
-    
-    public func showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, point: CGPoint, title: String? = nil, image: UIImage? = nil, style: ToastStyle = ToastManager.shared.style, completion: ((_ didTap: Bool) -> Void)? = nil)
-    {
-        base.cx_showToast(message, duration: duration, point: point, title: title, image: image, style: style, completion: completion)
-    }
-    
-    public func hideAllToasts()
-    {
-        base.cx_hideAllToasts()
-    }
-    
-    public func showToastActivity(_ position: ToastPosition)
-    {
-        base.cx_showToastActivity(position)
-    }
-    
-    public func cx_hideToastActivity()
-    {
-        base.cx_hideToastActivity()
-    }
-    
-}
+//extension CXSwiftBase where T : UIView {
+//    
+//    public func showToast(_ message: String?, completion: ((_ didTap: Bool) -> Void)? = nil)
+//    {
+//        base.cx_showToast(message, completion: completion)
+//    }
+//    
+//    public func showToast(_ message: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
+//    {
+//        base.cx_showToast(message, image: image, completion: completion)
+//    }
+//    
+//    public func showToast(_ message: String?, title: String?, image: UIImage?, completion: ((_ didTap: Bool) -> Void)? = nil)
+//    {
+//        base.cx_showToast(message, title: title, image: image, completion: completion)
+//    }
+//    
+//    public func showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, position: ToastPosition = ToastManager.shared.position, title: String?, image: UIImage?, style: ToastStyle, completion: ((_ didTap: Bool) -> Void)? = nil)
+//    {
+//        base.cx_showToast(message, duration: duration, position: position, title: title, image: image, style: style, completion: completion)
+//    }
+//    
+//    public func showToast(_ message: String?, duration: TimeInterval = ToastManager.shared.duration, point: CGPoint, title: String? = nil, image: UIImage? = nil, style: ToastStyle = ToastManager.shared.style, completion: ((_ didTap: Bool) -> Void)? = nil)
+//    {
+//        base.cx_showToast(message, duration: duration, point: point, title: title, image: image, style: style, completion: completion)
+//    }
+//    
+//    public func hideAllToasts()
+//    {
+//        base.cx_hideAllToasts()
+//    }
+//    
+//    public func showToastActivity(_ position: ToastPosition)
+//    {
+//        base.cx_showToastActivity(position)
+//    }
+//    
+//    public func hideToastActivity()
+//    {
+//        base.cx_hideToastActivity()
+//    }
+//    
+//}
 
 extension UIView: ToastSwiftWrapable {
     

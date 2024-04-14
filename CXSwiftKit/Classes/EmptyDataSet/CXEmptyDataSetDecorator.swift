@@ -13,11 +13,11 @@ import QuartzCore
 #if canImport(DZNEmptyDataSet)
 import DZNEmptyDataSet
 
-@objc public protocol CXEmptyDataSettable: AnyObject {
+@objc public protocol CXEmptyDataPresentable: AnyObject {
     var listView: UIScrollView? { get set }
 }
 
-public class CXEmptyDataSetDecorator: NSObject, CXEmptyDataSettable {
+public class CXEmptyDataSetDecorator: NSObject, CXEmptyDataPresentable {
     
     /// The current list view.
     @objc public weak var listView: UIScrollView?
@@ -50,8 +50,8 @@ public class CXEmptyDataSetDecorator: NSObject, CXEmptyDataSettable {
         listView = view
     }
     
-    /// Bind empty data set.
-    @objc public func bindEmptyDataSet() {
+    /// Set the delegate for empty data.
+    @objc public func setEmptyDataDelegate() {
         listView?.emptyDataSetSource = self
         listView?.emptyDataSetDelegate = self
     }

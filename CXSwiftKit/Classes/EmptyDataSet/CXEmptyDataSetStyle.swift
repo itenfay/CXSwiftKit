@@ -8,22 +8,35 @@
 #if os(iOS)
 import UIKit
 
+/// Creates Color from RGB values with optional alpha.
+///
+/// - Parameters:
+///   - hex: Hex Int (example: 0xDEA3B6).
+///   - alpha: Optional alpha value (default is 1).
+public func cxMakeColorWithHex(_ hex: Int, alpha: CGFloat = 1) -> UIColor
+{
+    let red = (hex >> 16) & 0xff
+    let green = (hex >> 8) & 0xff
+    let blue = hex & 0xff
+    return UIColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: alpha)
+}
+
 //MARK: - EmptyDataSetStyle
 
 public class CXEmptyDataSetStyle: NSObject {
     /// The background color for empty data set.
-    @objc public var backgroundColor: UIColor = UIColor.cx_color(withHexString: "#FFFFFF")!
+    @objc public var backgroundColor: UIColor = cxMakeColorWithHex(0xFFFFFF)
     /// The title for empty data set.
     @objc public var title: String?
     /// The title color for empty data set.
-    @objc public var titleColor: UIColor = UIColor.cx_color(withHexString: "#333333")!
+    @objc public var titleColor: UIColor = cxMakeColorWithHex(0x333333)
     /// The title font for empty data set.
     @objc public var titleFont: UIFont = UIFont.systemFont(ofSize: 13, weight: .medium)
     
     /// The description for empty data set.
     @objc public var descriptionString: String?
     /// The description color for empty data set.
-    @objc public var descriptionColor: UIColor = UIColor.cx_color(withHexString: "#333333")!
+    @objc public var descriptionColor: UIColor = cxMakeColorWithHex(0x333333)
     /// The description font for empty data set.
     @objc public var descriptionFont: UIFont = UIFont.systemFont(ofSize: 13, weight: .medium)
     
@@ -35,7 +48,7 @@ public class CXEmptyDataSetStyle: NSObject {
     /// The button title for empty data set.
     @objc public var buttonTitle: String?
     /// The button color for empty data set.
-    @objc public var buttonColor: UIColor = UIColor.cx_color(withHexString: "#9D1420")!
+    @objc public var buttonColor: UIColor = cxMakeColorWithHex(0x9D1420)
     /// The button font for empty data set.
     @objc public var buttonFont: UIFont = UIFont.systemFont(ofSize: 13, weight: .medium)
     /// The button normal image font for empty data set.

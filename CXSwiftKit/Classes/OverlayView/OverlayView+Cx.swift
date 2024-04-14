@@ -10,6 +10,9 @@ import UIKit
 #if canImport(OverlayController)
 import OverlayController
 
+/// The key for presenting view by overlay controller.
+fileprivate var presentByOverlayController = "cx.presentView.overlayController"
+
 //MARK: - OverlayViewWrapable
 
 public protocol OverlayViewWrapable: AnyObject {
@@ -17,50 +20,50 @@ public protocol OverlayViewWrapable: AnyObject {
     func cx_ovcDismiss(duration: TimeInterval, completion: (() -> Void)?)
 }
 
-extension CXSwiftBase where T : UIView {
-    
-    public func ovcPresent(
-        _ view: UIView?,
-        maskStyle: OverlayMaskStyle = .black(opacity: 0.7),
-        position: OverlayLayoutPosition = .bottom,
-        positionOffset: CGFloat = 0,
-        style: OverlaySlideStyle = .fromToBottom,
-        windowLevel: OverlayWindowLevel = .low,
-        isDismissOnMaskTouched: Bool = true,
-        isPanGestureEnabled: Bool = true,
-        panDismissPercent: CGFloat = 0.5,
-        duration: TimeInterval = 0.3,
-        completion: (() -> Void)? = nil,
-        didDismiss: @escaping () -> Void)
-    {
-        base.cx_ovcPresent(view,
-                           maskStyle: maskStyle,
-                           position: position,
-                           positionOffset: positionOffset,
-                           style: style,
-                           windowLevel: windowLevel,
-                           isDismissOnMaskTouched: isDismissOnMaskTouched,
-                           isPanGestureEnabled: isPanGestureEnabled,
-                           panDismissPercent: panDismissPercent,
-                           duration: duration,
-                           completion: completion,
-                           didDismiss: didDismiss)
-    }
-    
-    public func ovcDismiss(duration: TimeInterval = 0.3, completion: (() -> Void)? = nil) {
-        base.cx_ovcDismiss(duration: duration, completion: completion)
-    }
-    
-}
+//extension CXSwiftBase where T : UIView {
+//
+//    public func ovcPresent(
+//        _ view: UIView?,
+//        maskStyle: OverlayMaskStyle = .black(opacity: 0.7),
+//        position: OverlayLayoutPosition = .bottom,
+//        positionOffset: CGFloat = 0,
+//        style: OverlaySlideStyle = .fromToBottom,
+//        windowLevel: OverlayWindowLevel = .low,
+//        isDismissOnMaskTouched: Bool = true,
+//        isPanGestureEnabled: Bool = true,
+//        panDismissPercent: CGFloat = 0.5,
+//        duration: TimeInterval = 0.3,
+//        completion: (() -> Void)? = nil,
+//        didDismiss: @escaping () -> Void)
+//    {
+//        base.cx_ovcPresent(view,
+//                           maskStyle: maskStyle,
+//                           position: position,
+//                           positionOffset: positionOffset,
+//                           style: style,
+//                           windowLevel: windowLevel,
+//                           isDismissOnMaskTouched: isDismissOnMaskTouched,
+//                           isPanGestureEnabled: isPanGestureEnabled,
+//                           panDismissPercent: panDismissPercent,
+//                           duration: duration,
+//                           completion: completion,
+//                           didDismiss: didDismiss)
+//    }
+//
+//    public func ovcDismiss(duration: TimeInterval = 0.3, completion: (() -> Void)? = nil) {
+//        base.cx_ovcDismiss(duration: duration, completion: completion)
+//    }
+//
+//}
 
 extension UIView: OverlayViewWrapable {
     
     private var cx_overlayController: OverlayController? {
         get {
-            return objc_getAssociatedObject(self, &CXAssociatedKey.presentByOverlayController) as? OverlayController
+            return objc_getAssociatedObject(self, &presentByOverlayController) as? OverlayController
         }
         set (ovc) {
-            objc_setAssociatedObject(self, &CXAssociatedKey.presentByOverlayController, ovc, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &presentByOverlayController, ovc, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

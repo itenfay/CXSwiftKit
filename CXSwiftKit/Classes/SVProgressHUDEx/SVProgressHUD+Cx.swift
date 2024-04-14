@@ -21,33 +21,33 @@ import SVProgressHUD
     func cx_dismissProgressHUD(withDelay delay: TimeInterval)
 }
 
-extension CXSwiftBase where T : NSObject {
-    
-    /// Show progress HUD with the status.
-    public func showProgressHUD(withStatus status: String?)
-    {
-        base.cx_showProgressHUD(withStatus: status)
-    }
-    
-    /// Show progress HUD with the status and delay.
-    public func showProgressHUD(withStatus status: String?, delay: TimeInterval)
-    {
-        base.cx_showProgressHUD(withStatus: status, delay: delay)
-    }
-    
-    /// Dismiss progress HUD.
-    public func dismissProgressHUD()
-    {
-        base.cx_dismissProgressHUD()
-    }
-    
-    /// Dismiss progress HUD with the delay.
-    public func dismissProgressHUD(withDelay delay: TimeInterval)
-    {
-        base.cx_dismissProgressHUD(withDelay: delay)
-    }
-    
-}
+//extension CXSwiftBase where T : NSObject {
+//    
+//    /// Show progress HUD with the status.
+//    public func showProgressHUD(withStatus status: String?)
+//    {
+//        base.cx_showProgressHUD(withStatus: status)
+//    }
+//    
+//    /// Show progress HUD with the status and delay.
+//    public func showProgressHUD(withStatus status: String?, delay: TimeInterval)
+//    {
+//        base.cx_showProgressHUD(withStatus: status, delay: delay)
+//    }
+//    
+//    /// Dismiss progress HUD.
+//    public func dismissProgressHUD()
+//    {
+//        base.cx_dismissProgressHUD()
+//    }
+//    
+//    /// Dismiss progress HUD with the delay.
+//    public func dismissProgressHUD(withDelay delay: TimeInterval)
+//    {
+//        base.cx_dismissProgressHUD(withDelay: delay)
+//    }
+//    
+//}
 
 extension NSObject: SVProgressHUDWrapable {
     

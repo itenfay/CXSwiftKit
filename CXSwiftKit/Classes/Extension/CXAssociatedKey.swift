@@ -21,9 +21,6 @@ internal struct CXAssociatedKey {
     static var labelRichTextHasClickAction = "cx.label.richText.hasClickAction"
     static var labelRichTextClickAction = "cx.label.richText.clickAction"
     
-    /// The key for the white indicator of button.
-    static var buttonWhiteIndicator = "cx.button.whiteIndicator"
-    
     /// The key for saving image to photos album.
     static var imageSavedToPhotosAlbum = "cx.imageSavedTo.photosalbum"
     
@@ -32,7 +29,4 @@ internal struct CXAssociatedKey {
     static var presentOverlayMask = "cx.present.overlayMask"
     static var dismissOverlayAction = "cx.dismiss.overlayAction"
     static var overlayIsFromCenter = "cx.present.isFromCenter"
-    
-    /// The key for presenting view by overlay controller.
-    static var presentByOverlayController = "cx.presentView.overlayController"
 }

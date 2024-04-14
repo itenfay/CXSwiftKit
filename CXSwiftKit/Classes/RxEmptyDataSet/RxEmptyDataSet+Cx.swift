@@ -7,10 +7,10 @@
 
 #if os(iOS) || os(tvOS)
 import UIKit
-#if canImport(RxSwift) && canImport(RxCocoa) && canImport(DZNEmptyDataSet)
+#if canImport(RxSwift) && canImport(RxCocoa) && canImport(CXEmptyDataSet)
 import RxSwift
 import RxCocoa
-import DZNEmptyDataSet
+import CXEmptyDataSet
 
 public enum CXEmptyDataSetType {
     // Customize title decription, use the default title if nil.
@@ -40,7 +40,7 @@ extension Reactive where Base: CXEmptyDataSetDecorator {
                 }
                 target.style = style
             }
-            target.bindEmptyDataSet()
+            target.setEmptyDataDelegate()
             target.forceRefreshEmptyData()
         }
     }

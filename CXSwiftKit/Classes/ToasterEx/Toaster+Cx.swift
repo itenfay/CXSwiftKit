@@ -43,44 +43,44 @@ import Toaster
     func cx_makeToast(attributedString: NSAttributedString, delay: TimeInterval, duration: TimeInterval)
 }
 
-extension CXSwiftBase where T : NSObject {
-    
-    public func restoreToastAppearance()
-    {
-        base.cx_restoreToastAppearance()
-    }
-    
-    public func updateToastAppearance(with bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
-    {
-        base.cx_updateToastAppearance(with: bottomOffsetPortrait, maxWidthRatio: maxWidthRatio)
-    }
-    
-    public func getToastDuration(type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
-    {
-        return base.cx_getToastDuration(type: type, block: block)
-    }
-    
-    public func makeToast(text: String)
-    {
-        base.cx_makeToast(text: text)
-    }
-    
-    public func makeToast(text: String, delay: TimeInterval, duration: TimeInterval)
-    {
-        base.cx_makeToast(text: text, delay: delay, duration: duration)
-    }
-    
-    public func makeToast(attributedString: NSAttributedString)
-    {
-        base.cx_makeToast(attributedString: attributedString)
-    }
-    
-    public func makeToast(attributedString: NSAttributedString, delay: TimeInterval, duration: TimeInterval)
-    {
-        base.cx_makeToast(attributedString: attributedString, delay: delay, duration: duration)
-    }
-    
-}
+//extension CXSwiftBase where T : NSObject {
+//    
+//    public func restoreToastAppearance()
+//    {
+//        base.cx_restoreToastAppearance()
+//    }
+//    
+//    public func updateToastAppearance(with bottomOffsetPortrait: CGFloat, maxWidthRatio: CGFloat)
+//    {
+//        base.cx_updateToastAppearance(with: bottomOffsetPortrait, maxWidthRatio: maxWidthRatio)
+//    }
+//    
+//    public func getToastDuration(type: CXToasterDurationType, block: (() -> TimeInterval)?) -> TimeInterval
+//    {
+//        return base.cx_getToastDuration(type: type, block: block)
+//    }
+//    
+//    public func makeToast(text: String)
+//    {
+//        base.cx_makeToast(text: text)
+//    }
+//    
+//    public func makeToast(text: String, delay: TimeInterval, duration: TimeInterval)
+//    {
+//        base.cx_makeToast(text: text, delay: delay, duration: duration)
+//    }
+//    
+//    public func makeToast(attributedString: NSAttributedString)
+//    {
+//        base.cx_makeToast(attributedString: attributedString)
+//    }
+//    
+//    public func makeToast(attributedString: NSAttributedString, delay: TimeInterval, duration: TimeInterval)
+//    {
+//        base.cx_makeToast(attributedString: attributedString, delay: delay, duration: duration)
+//    }
+//    
+//}
 
 extension NSObject: ToasterWrapable {
     

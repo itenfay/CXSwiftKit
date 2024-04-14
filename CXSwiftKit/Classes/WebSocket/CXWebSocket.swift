@@ -113,7 +113,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
             socket = WebSocket(request: request)
         } else {
             guard let url = URL(string: urlString) else {
-                CXLogger.log(level: .error, message: "[WS] WS occurs an error: the url is null.")
+                debugPrint("[E] " + "[WS] WS occurs an error: the url is null.")
                 delegate?.cxWebSocketDidFailWithError(nil)
                 return
             }
@@ -142,7 +142,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
     public func sendMessage(_ message: String) {
         // Disconnected, unable to send message.
         if !isConnected {
-            CXLogger.log(level: .warning, message: "[WS] WS is disconnected, unable to send message.")
+            debugPrint("[I] " + "[WS] WS is disconnected, unable to send message.")
             return
         }
         socket?.write(string: message)
@@ -151,7 +151,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
     public func sendData(_ data: Data) {
         // Disconnected, unable to send data.
         if !isConnected {
-            CXLogger.log(level: .warning, message: "[WS] WS is disconnected, unable to send data.")
+            debugPrint("[I] " + "[WS] WS is disconnected, unable to send data.")
             return
         }
         socket?.write(data: data)
@@ -214,7 +214,7 @@ public class CXWebSocket: NSObject, ISKWebSocket {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        CXLogger.log(level: .info, message: "[WS] \(type(of: self)) deinit.")
+        debugPrint("[I] " + "[WS] \(type(of: self)) deinit.")
     }
     
 }
@@ -224,31 +224,31 @@ extension CXWebSocket: WebSocketDelegate {
     public func didReceive(event: Starscream.WebSocketEvent, client: Starscream.WebSocket) {
         switch event {
         case .connected(let headers):
-            CXLogger.log(level: .info, message: "[WS] Websocket is connected: \(headers)")
+            debugPrint("[I] " + "[WS] Websocket is connected: \(headers)")
             isConnected = true
             resetConnectTime()
             startHeartbeat()
             delegate?.cxWebSocketDidConnect(headers)
         case .disconnected(let reason, let code):
-            CXLogger.log(level: .info, message: "[WS] Websocket is disconnected: \(reason) with code: \(code)")
+            debugPrint("[I] " + "[WS] Websocket is disconnected: \(reason) with code: \(code)")
             isConnected = false
             delegate?.cxWebSocketDidDisconnect(code, reason: reason)
         case .text(let text):
-            CXLogger.log(level: .info, message: "[WS] Received text: \(text)")
+            debugPrint("[I] " + "[WS] Received text: \(text)")
             delegate?.cxWebSocketDidReceiveMessage(text)
         case .binary(let data):
-            CXLogger.log(level: .info, message: "[WS] Received data: \(data.count)")
+            debugPrint("[I] " + "[WS] Received data: \(data.count)")
             delegate?.cxWebSocketDidReceiveData(data)
         case .ping(_):
-            CXLogger.log(level: .info, message: "[WS] Ping")
+            debugPrint("[I] " + "[WS] Ping")
         case .pong(_):
-            CXLogger.log(level: .info, message: "[WS] Pong")
+            debugPrint("[I] " + "[WS] Pong")
         case .viabilityChanged(_):
-            CXLogger.log(level: .info, message: "[WS] ViabilityChanged")
+            debugPrint("[I] " + "[WS] ViabilityChanged")
         case .reconnectSuggested(_):
-            CXLogger.log(level: .info, message: "[WS] ReconnectSuggested")
+            debugPrint("[I] " + "[WS] ReconnectSuggested")
         case .cancelled:
-            CXLogger.log(level: .info, message: "[WS] ReconnectSuggested")
+            debugPrint("[I] " + "[WS] Cancelled")
             isConnected = false
             delegate?.cxWebSocketDidCancel()
         case .error(let error):
@@ -259,11 +259,11 @@ extension CXWebSocket: WebSocketDelegate {
     
     private func handleError(_ error: Error?) {
         if let e = error as? WSError {
-            CXLogger.log(level: .error, message: "[WS] websocket encountered an error: \(e.message)")
+            debugPrint("[E] " + "[WS] websocket encountered an error: \(e.message)")
         } else if let e = error {
-            CXLogger.log(level: .error, message: "[WS] websocket encountered an error: \(e.localizedDescription)")
+            debugPrint("[E] " + "[WS] websocket encountered an error: \(e.localizedDescription)")
         } else {
-            CXLogger.log(level: .error, message: "[WS] websocket encountered an error")
+            debugPrint("[E] " + "[WS] websocket encountered an error")
         }
         delegate?.cxWebSocketDidFailWithError(error)
     }

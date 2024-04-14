@@ -33,51 +33,51 @@ import SwiftMessages
     func cx_hideMessages()
 }
 
-extension CXSwiftBase where T : NSObject {
-    
-    public func showMessages(withStyle style: CXMessagesBoxStyle, body: String?)
-    {
-        base.cx_showMessages(withStyle: style, body: body)
-    }
-    
-    public func showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?)
-    {
-        base.cx_showMessages(withStyle: style, title: title, body: body)
-    }
-    
-    public func showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?, textAlignment: NSTextAlignment)
-    {
-        base.cx_showMessages(withStyle: style, title: title, body: body, textAlignment: textAlignment)
-    }
-    
-    public func showMessages(
-        withStyle style: CXMessagesBoxStyle,
-        title: String?,
-        body: String?,
-        textAlignment: NSTextAlignment,
-        iconImage: UIImage?,
-        iconText: String?,
-        buttonImage: UIImage?,
-        buttonTitle: String?,
-        buttonTapHandler: ((_ button: UIButton) -> Void)?)
-    {
-        base.cx_showMessages(withStyle: style,
-                             title: title,
-                             body: body,
-                             textAlignment: textAlignment,
-                             iconImage: iconImage,
-                             iconText: iconText,
-                             buttonImage: buttonImage,
-                             buttonTitle: buttonTitle,
-                             buttonTapHandler: buttonTapHandler)
-    }
-    
-    public func hideMessages()
-    {
-        base.cx_hideMessages()
-    }
-    
-}
+//extension CXSwiftBase where T : NSObject {
+//    
+//    public func showMessages(withStyle style: CXMessagesBoxStyle, body: String?)
+//    {
+//        base.cx_showMessages(withStyle: style, body: body)
+//    }
+//    
+//    public func showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?)
+//    {
+//        base.cx_showMessages(withStyle: style, title: title, body: body)
+//    }
+//    
+//    public func showMessages(withStyle style: CXMessagesBoxStyle, title: String?, body: String?, textAlignment: NSTextAlignment)
+//    {
+//        base.cx_showMessages(withStyle: style, title: title, body: body, textAlignment: textAlignment)
+//    }
+//    
+//    public func showMessages(
+//        withStyle style: CXMessagesBoxStyle,
+//        title: String?,
+//        body: String?,
+//        textAlignment: NSTextAlignment,
+//        iconImage: UIImage?,
+//        iconText: String?,
+//        buttonImage: UIImage?,
+//        buttonTitle: String?,
+//        buttonTapHandler: ((_ button: UIButton) -> Void)?)
+//    {
+//        base.cx_showMessages(withStyle: style,
+//                             title: title,
+//                             body: body,
+//                             textAlignment: textAlignment,
+//                             iconImage: iconImage,
+//                             iconText: iconText,
+//                             buttonImage: buttonImage,
+//                             buttonTitle: buttonTitle,
+//                             buttonTapHandler: buttonTapHandler)
+//    }
+//    
+//    public func hideMessages()
+//    {
+//        base.cx_hideMessages()
+//    }
+//    
+//}
 
 extension NSObject: SwiftMessagesWrapable {
     

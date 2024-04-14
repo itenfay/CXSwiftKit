@@ -53,7 +53,7 @@ public func cxDownloadImage(withUrl url: String,
                 completionHandler(imageResult.image, nil)
             }
         case .failure(let error):
-            CXLogger.log(level: .error, message: "error: \(error)")
+            debugPrint("[E] " + "error: \(error)")
             DispatchQueue.main.async { completionHandler(nil, error) }
         }
     }
@@ -71,7 +71,7 @@ public func cxCalculateKingfisherDiskStorageSize(completionHandler handler: @esc
             )
             handler(sizeString)
         case .failure(let error):
-            CXLogger.log(level: .error, message: "error: \(error)")
+            debugPrint("[E] " + "error: \(error)")
             handler(nil)
         }
     }

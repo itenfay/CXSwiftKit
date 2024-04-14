@@ -20,16 +20,6 @@ extension CXSwiftBase where T : UIButton {
         self.base.cx_adjustEdgeInsets(by: alignment, padding: padding)
     }
     
-    public var whiteIndicator: UIActivityIndicatorView
-    {
-        get {
-            return base.cx_whiteIndicator
-        }
-        set (indicator) {
-            base.cx_whiteIndicator = indicator
-        }
-    }
-    
 }
 
 /// An enum for button image and text alignment.
@@ -177,34 +167,6 @@ extension UIButton {
         } else {
             titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        }
-    }
-    
-}
-
-extension UIButton {
-    
-    @objc public var cx_whiteIndicator: UIActivityIndicatorView {
-        get {
-            var indicator = objc_getAssociatedObject(self, &CXAssociatedKey.buttonWhiteIndicator) as? UIActivityIndicatorView
-            if indicator == nil {
-                if #available(iOS 13.0, tvOS 13.0, *) {
-                    indicator = UIActivityIndicatorView(style: .medium)
-                } else {
-                    indicator = UIActivityIndicatorView(style: .white)
-                }
-                indicator!.center = CGPoint(x: self.bounds.width / 2,
-                                            y: self.bounds.height / 2)
-                addSubview(indicator!)
-            }
-            self.cx_whiteIndicator = indicator!
-            // Reset its center.
-            indicator!.center = CGPoint(x: self.bounds.width / 2,
-                                        y: self.bounds.height / 2)
-            return indicator!
-        }
-        set {
-            objc_setAssociatedObject(self, &CXAssociatedKey.buttonWhiteIndicator, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     

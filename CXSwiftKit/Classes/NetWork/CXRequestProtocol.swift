@@ -125,7 +125,7 @@ public extension CXRequestProtocol {
             switch result {
             case .success(let data):
                 let jsonStr = String(data: data, encoding: .utf8)
-                CXLogger.log(level: .info, message: "response=\(jsonStr ?? "")")
+                debugPrint("[I] " + "response=\(jsonStr ?? "")")
                 guard let jsonObj = self.self.deserialize(from: jsonStr) else {
                     response?(.failure(.deserializeFailed))
                     return

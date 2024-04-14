@@ -34,7 +34,7 @@ public class CXMetalVideoRecorder: NSObject {
         do {
             assetWriter = try AVAssetWriter(outputURL: url, fileType: AVFileType.mp4)
         } catch {
-            CXLogger.log(level: .error, message: "\(error.localizedDescription)")
+            debugPrint("[E] " + "\(error.localizedDescription)")
             return nil
         }
         
@@ -50,7 +50,7 @@ public class CXMetalVideoRecorder: NSObject {
         ]
         assetWriterPixelBufferAdaptor = AVAssetWriterInputPixelBufferAdaptor(assetWriterInput: assetWriterVideoInput,
                                                                              sourcePixelBufferAttributes: sourcePixelBufferAttributes)
-        //CXLogger.log(level: .info, message: "PixelBuffer input: \(assetWriterPixelBufferAdaptor)")
+        //debugPrint("[I] " + "PixelBuffer input: \(assetWriterPixelBufferAdaptor)")
         
         assetWriter.add(assetWriterVideoInput)
     }
@@ -60,13 +60,13 @@ public class CXMetalVideoRecorder: NSObject {
         do {
             try FileManager.default.removeItem(at: outputURL)
         } catch let error {
-            CXLogger.log(level: .info, message: "\(error.localizedDescription)")
+            debugPrint("[E] " + "\(error.localizedDescription)")
         }
     }
     
     /// Starts recording the video.
     @objc public func start() {
-        CXLogger.log(level: .info, message: "Start recording")
+        debugPrint("[I] " + "Start recording")
         deleteOutputFile()
         
         assetWriter.startWriting()
@@ -103,22 +103,22 @@ public class CXMetalVideoRecorder: NSObject {
             return
         }
         if !assetWriterVideoInput.isReadyForMoreMediaData {
-            //CXLogger.log(level: .error, message: "Not ready for more media data")
+            //debugPrint("[E]" + "Not ready for more media data")
             return
         }
         guard let pixelBufferPool = assetWriterPixelBufferAdaptor.pixelBufferPool else {
-            //CXLogger.log(level: .error, message: "Pixel buffer asset writer input did not have a pixel buffer pool available; cannot retrieve frame")
+            //debugPrint("[E]" + "Pixel buffer asset writer input did not have a pixel buffer pool available; cannot retrieve frame")
             return
         }
         
         var maybePixelBuffer: CVPixelBuffer? = nil
         let status = CVPixelBufferPoolCreatePixelBuffer(nil, pixelBufferPool, &maybePixelBuffer)
         if status != kCVReturnSuccess {
-            CXLogger.log(level: .error, message: "Could not get pixel buffer from asset writer input; dropping frame...")
+            debugPrint("[E] " + "Could not get pixel buffer from asset writer input; dropping frame...")
             return
         }
         guard let pixelBuffer = maybePixelBuffer else {
-            CXLogger.log(level: .error, message: "No pixelBuffer")
+            debugPrint("[E]" + "No pixelBuffer")
             return
         }
         CVPixelBufferLockBaseAddress(pixelBuffer, [])

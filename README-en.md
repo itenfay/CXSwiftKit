@@ -151,15 +151,23 @@ CXSwiftKit
   ┃   ┗ SCNVector3+Cx.swift         // Used to supply extensions of SCNVector3.
   ┃
   ┣ Base
-  ┃   ┣ CXAssociatedKey.swift
+  ┃   ┣ 
   ┃   ┣ CXConfig.swift              // The configuration of this kit.
+  ┃   ┣ CXDefines.swift             // The definitions of this kit.
   ┃   ┣ CXLock.swift                // Includes multi-thread locks(`CXUnfairLock, CXMutex, CXRecursiveMutex, CXSpin, CXConditionLock`).
-  ┃   ┣ CXLogger.swift              // Outputs logs to the console.
-  ┃   ┗ CXSwiftBase.swift           // Declares a `CXSwiftBaseCompatible` protocol, etc. You can use `cx` in the app, e.g.: view.cx.right = 10
+  ┃   ┗ CXLogger.swift              // Outputs logs to the console.
   ┃
   ┣ Core
-  ┃   ┣ Atomic
-  ┃   ┃   ┗ AtomicWrapper.swift       // Used to wrap atomic property.
+  ┃   ┣ CXAppContext.swift
+  ┃   ┣ CXDevice.swift                 // Used to provide some device informations.
+  ┃   ┣ CXDeviceScreenMonitor.swift    // Used to observe some changes of device screen.
+  ┃   ┣ CXHaptics.swift                // Some haptic feedback that works on iPhone 6 and up.
+  ┃   ┣ CXImageBufferProcessor.swift   // Used to process image buffer.
+  ┃   ┣ CXPhotoLibraryOperator.swift   // Used to operate the photo library.
+  ┃   ┣ CXScreenRecorder.swift         // The recorder that provides the ability to record audio and video of your app.
+  ┃   ┣ CXSwiftUtils.swift
+  ┃   ┣ CXSwipeInteractor.swift        // Add swipe gesture for the view, and observe its action.
+  ┃   ┗ CXTakeScreenshotDetector.swift // The detector for taking screenshot.
   ┃   ┣ AVToolbox
   ┃   ┃   ┣ CXAudioRecorder.swift     // The audio recorder that records audio data to a file.
   ┃   ┃   ┣ CXAudioToolbox.swift      // Used to handle audio format.
@@ -167,6 +175,7 @@ CXSwiftKit
   ┃   ┃   ┣ CXAVToolbox.swift         // Used to handle audio and video mix.
   ┃   ┃   ┗ CXVideoToolbox.swift      // Used to convert mp4 video format.
   ┃   ┣ Camera
+  ┃   ┃   ┣ AtomicWrapper.swift       // Used to wrap atomic property.
   ┃   ┃   ┣ CXLiveCameraConfiguration.swift // The configuration for live camera.
   ┃   ┃   ┣ CXLiveCameraFrameCapturer.swift      
   ┃   ┃   ┣ CXLiveCameraFrameRenderer.swift 
@@ -184,43 +193,6 @@ CXSwiftKit
   ┃   ┃   ┣ CXDocumentDelegate.swift
   ┃   ┃   ┣ CXDocumentPicker.swift
   ┃   ┃   ┗ CXDocumentDelegate.swift
-  ┃   ┣ Extension // Provides some rich extensions
-  ┃   ┃   ┣ Application+Cx.swift
-  ┃   ┃   ┣ Array+Cx.swift
-  ┃   ┃   ┣ AVAsset+Cx.swift
-  ┃   ┃   ┣ Button+Cx.swift
-  ┃   ┃   ┣ CALayer+Cx.swift
-  ┃   ┃   ┣ CGFloat+Cx.swift
-  ┃   ┃   ┣ Color+Cx.swift
-  ┃   ┃   ┣ CXConstraintMaker.swift  
-  ┃   ┃   ┣ CXGlobal.swift              // Provides some global methods
-  ┃   ┃   ┣ Date+Cx.swift
-  ┃   ┃   ┣ Device+Cx.swift
-  ┃   ┃   ┣ Dictionary+Cx.swift
-  ┃   ┃   ┣ DispatchQueue+Cx.swift
-  ┃   ┃   ┣ Double+Cx.swift
-  ┃   ┃   ┣ Font+Cx.swift
-  ┃   ┃   ┣ Image+Cx.swift
-  ┃   ┃   ┣ ImageView+Cx.swift
-  ┃   ┃   ┣ Int+Cx.swift
-  ┃   ┃   ┣ Label+Cx.swift 
-  ┃   ┃   ┣ NSAttributedString+Cx.swift 
-  ┃   ┃   ┣ NSObject+Cx.swift
-  ┃   ┃   ┣ Optional+Cx.swift
-  ┃   ┃   ┣ ScrollView+Cx.swift
-  ┃   ┃   ┣ String+Cx.swift
-  ┃   ┃   ┣ TableView+Cx.swift
-  ┃   ┃   ┣ TextField+Cx.swift
-  ┃   ┃   ┣ TextView+Cx.swift
-  ┃   ┃   ┣ URL+Cx.swift
-  ┃   ┃   ┣ View+Cx.swift
-  ┃   ┃   ┗ ViewController+Cx.swift
-  ┃   ┣ FileOperation
-  ┃   ┃   ┣ CXFileToolbox.swift  // The file toolbox.
-  ┃   ┃   ┣ CXLineReader.swift   // Read text file line by line in efficient way.
-  ┃   ┃   ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
-  ┃   ┣ ImageBuffer // Used to process image buffer.
-  ┃   ┃   ┗ CXImageBufferProcessor.swift 
   ┃   ┣ LiveGift // Used to show live gifts.
   ┃   ┃   ┣ CXLiveGiftLabel.swift
   ┃   ┃   ┣ CXLiveGiftManager.swift
@@ -240,21 +212,53 @@ CXSwiftKit
   ┃   ┣ Transition // Views the demo in CXScalePresentAnimation.swift.
   ┃   ┃   ┣ CXScaleDismissAnimation.swift
   ┃   ┃   ┣ CXScalePresentAnimation.swift
-  ┃   ┃   ┗ CXSwipeLeftInteractiveTransition.swift
-  ┃   ┣ Utils 
-  ┃   ┃   ┣ CXAppContext.swift
-  ┃   ┃   ┣ CXDevice.swift                 // Used to provide some device informations.
-  ┃   ┃   ┣ CXDeviceScreenMonitor.swift    // Used to observe some changes of device screen.
-  ┃   ┃   ┣ CXHaptics.swift                // Some haptic feedback that works on iPhone 6 and up.
-  ┃   ┃   ┣ CXPhotoLibraryOperator.swift   // Used to operate the photo library.
-  ┃   ┃   ┣ CXScreenRecorder.swift         // The recorder that provides the ability to record audio and video of your app.
-  ┃   ┃   ┣ CXSwiftUtils.swift
-  ┃   ┃   ┣ CXSwipeInteractor.swift        // Add swipe gesture for the view, and observe its action.
-  ┃   ┃   ┗ CXTakeScreenshotDetector.swift // The detector for taking screenshot.
+  ┃   ┃   ┗ CXSwipeLeftInteractiveTransition.swift  
   ┃   ┗ Widget
   ┃       ┣ CXCircleProgressButton.swift   // The circle progress button for iOS or tvOS.
   ┃       ┗ CXVerticalSlider.swift         // The vertical slider for iOS or tvOS.
   ┃
+  ┣ Extension // Provides some rich extensions
+  ┃   ┣ Application+Cx.swift
+  ┃   ┣ Array+Cx.swift
+  ┃   ┣ AVAsset+Cx.swift
+  ┃   ┣ Button+Cx.swift
+  ┃   ┣ CALayer+Cx.swift
+  ┃   ┣ CGFloat+Cx.swift
+  ┃   ┣ Color+Cx.swift
+  ┃   ┣ CXAssociatedKey.swift // Includes the associated keys.
+  ┃   ┣ CXConstraintMaker.swift  
+  ┃   ┣ CXGlobal.swift     // Provides some global methods
+  ┃   ┣ CXSwiftBase.swift  // Declares a `CXSwiftBaseCompatible` protocol, etc. You can use `cx` in the app, e.g.: view.cx.right = 10
+  ┃   ┣ Date+Cx.swift
+  ┃   ┣ Device+Cx.swift
+  ┃   ┣ Dictionary+Cx.swift
+  ┃   ┣ DispatchQueue+Cx.swift
+  ┃   ┣ Double+Cx.swift
+  ┃   ┣ Font+Cx.swift
+  ┃   ┣ Image+Cx.swift
+  ┃   ┣ ImageView+Cx.swift
+  ┃   ┣ Int+Cx.swift
+  ┃   ┣ Label+Cx.swift 
+  ┃   ┣ NSAttributedString+Cx.swift 
+  ┃   ┣ NSObject+Cx.swift
+  ┃   ┣ Optional+Cx.swift
+  ┃   ┣ ScrollView+Cx.swift
+  ┃   ┣ String+Cx.swift
+  ┃   ┣ TableView+Cx.swift
+  ┃   ┣ TextField+Cx.swift
+  ┃   ┣ TextView+Cx.swift
+  ┃   ┣ URL+Cx.swift
+  ┃   ┣ View+Cx.swift
+  ┃   ┗ ViewController+Cx.swift
+  ┃
+  ┣ FileOperation
+      ┣ CXFileToolbox.swift  // The file toolbox.
+      ┣ CXLineReader.swift   // Read text file line by line in efficient way.
+      ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
+```
+
+```
+Other
   ┣ EmptyDataSet
   ┃   ┣ CXEmptyDataSetDecorator.swift
   ┃   ┗ CXEmptyDataSetStyle.swift
