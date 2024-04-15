@@ -2,11 +2,11 @@
 
 # CXSwiftKit
 
-提供了Swift语言实用工具和丰富的扩展，并大多数支持了Objective-C。
+`CXSwiftKit`提供了Swift语言实用工具和丰富的扩展。
 
- [![Version](https://img.shields.io/cocoapods/v/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
- [![License](https://img.shields.io/cocoapods/l/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
- [![Platform](https://img.shields.io/cocoapods/p/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
+[![Version](https://img.shields.io/cocoapods/v/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
+[![License](https://img.shields.io/cocoapods/l/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
+[![Platform](https://img.shields.io/cocoapods/p/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 
 ## 预览
 
@@ -27,9 +27,9 @@
 
 CXSwiftKit可通过[CocoaPods](https://cocoapods.org)获得。安装只需将下面一行添加到您的Podfile中:
 
+* CXSwiftKit
 ```ruby
-# CXSwiftKit
-pod 'CXSwiftKit' or pod 'CXSwiftKit', '~> 2.0.0'
+pod 'CXSwiftKit'
 ```
 
 * ApplePay
@@ -162,11 +162,11 @@ CXSwiftKit
   ┃
   ┣ KingfisherWrapper
   ┃    ┣ Button+kfwrapper.swift
-  ┃    ┣ CXKingfisherReferer.swift 
+  ┃    ┣ CXKingfisherReferer.swift // Anti theft chains for files such as images and videos, and so on.
   ┃    ┗ ImageView+kfwrapper.swift
   ┃
   ┣ KingfisherWrapper
-       ┗ SDWebImageWrapper.swift
+       ┗ SDWebImageWrapper.swift // The wrapper for SDWebImage.
 ```
 
 ## 推荐
@@ -174,26 +174,26 @@ CXSwiftKit
 - [CXDownload](https://github.com/chenxing640/CXDownload) - 实现Swift断点续传下载，支持Objective-C。包含大文件下载，后台下载，杀死进程，重新启动时继续下载，设置下载并发数，监听网络改变等。
 - [MarsUIKit](https://github.com/chenxing640/MarsUIKit) - `MarsUIKit` wraps some commonly used UI components.
 - [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
-- [CXNetwork-Moya)](https://github.com/chenxing640/CXNetwork-Moya) - Encapsulates a network request library with Moya and ObjectMapper.
+- [CXNetwork-Moya](https://github.com/chenxing640/CXNetwork-Moya) - `CXNetwork-Moya` encapsulates a network request library with Moya and ObjectMapper.
 
-## 处理错误
-
-如果在`SVGAPlayer`库中报以下错误：
-
-```
-Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
-Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid in C99
-```
-
-> if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
->    [worker release];
-> }
-
-那么在`Svga.pbobjc.h`或者`Svga.pbobjc.m`文件中添加以下头文件。
-
-```
-#import <libkern/OSAtomic.h>
-```
+<!--## 处理错误-->
+<!---->
+<!--如果在`SVGAPlayer`库中报以下错误：-->
+<!---->
+<!--```-->
+<!--Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'-->
+<!--Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid in C99-->
+<!--```-->
+<!---->
+<!--> if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {-->
+<!-->    [worker release];-->
+<!--> }-->
+<!---->
+<!--那么在`Svga.pbobjc.h`或者`Svga.pbobjc.m`文件中添加以下头文件。-->
+<!---->
+<!--```-->
+<!--#import <libkern/OSAtomic.h>-->
+<!--```-->
 
 ## 示例
 
