@@ -9,21 +9,8 @@ target 'CXSwiftKit_Example' do
   pod 'CXSwiftKit/KingfisherWrapper', :path => '../'
   pod 'CXSwiftKit/SDWebImageWrapper', :path => '../'
   
-  # Keychain
-  #pod 'DYFSwiftKeychain'
-  
-  # RxSwift
-  #pod 'RxSwift'
-  # RxCocoa
-  #pod 'RxCocoa'
-  # RxDataSources
-  #pod 'RxDataSources'
-  
-  # Moya
-  pod 'Moya'
   # HandyJSON
   pod 'HandyJSON', '~> 5.0.4-beta'
-  
   # Starscream
   #pod 'Starscream'
   
