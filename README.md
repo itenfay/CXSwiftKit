@@ -176,25 +176,6 @@ CXSwiftKit
 - [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
 - [CXNetwork-Moya](https://github.com/chenxing640/CXNetwork-Moya) - `CXNetwork-Moya` encapsulates a network request library with Moya and ObjectMapper.
 
-<!--## 处理错误-->
-<!---->
-<!--如果在`SVGAPlayer`库中报以下错误：-->
-<!---->
-<!--```-->
-<!--Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'-->
-<!--Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid in C99-->
-<!--```-->
-<!---->
-<!--> if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {-->
-<!-->    [worker release];-->
-<!--> }-->
-<!---->
-<!--那么在`Svga.pbobjc.h`或者`Svga.pbobjc.m`文件中添加以下头文件。-->
-<!---->
-<!--```-->
-<!--#import <libkern/OSAtomic.h>-->
-<!--```-->
-
 ## 示例
 
 要运行示例项目，首先克隆repo，并从示例目录运行“pod install”。
