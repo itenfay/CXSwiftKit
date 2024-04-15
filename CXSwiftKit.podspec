@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '2.0.3'
-  s.summary          = 'CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.'
+  s.version          = '2.0.4'
+  s.summary          = 'CXSwiftKit provides the utilities and rich extensions of Swift language.'
   
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   
   s.description      = <<-DESC
-  TODU: CXSwiftKit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
+  TODU: CXSwiftKit provides the utilities and rich extensions of Swift language.
   DESC
   
   s.homepage         = 'https://github.com/chenxing640/CXSwiftKit'
