@@ -2,7 +2,7 @@
 
 # CXSwiftKit
 
-This kit provides the utilities and rich extensions of Swift language, and most of them supported Objective-C.
+`CXSwiftKit` provides the utilities and rich extensions of Swift language.
 
 [![Version](https://img.shields.io/cocoapods/v/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
 [![License](https://img.shields.io/cocoapods/l/CXSwiftKit.svg?style=flat)](https://cocoapods.org/pods/CXSwiftKit)
@@ -28,9 +28,9 @@ This kit provides the utilities and rich extensions of Swift language, and most 
 CXSwiftKit is available through [CocoaPods](https://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
+* CXSwiftKit
 ```ruby
-# CXSwiftKit
-pod 'CXSwiftKit' or pod 'CXSwiftKit', '~> 2.0.0'
+pod 'CXSwiftKit'
 ```
 
 * ApplePay
@@ -163,11 +163,11 @@ CXSwiftKit
   ┃
   ┣ KingfisherWrapper
   ┃    ┣ Button+kfwrapper.swift
-  ┃    ┣ CXKingfisherReferer.swift 
+  ┃    ┣ CXKingfisherReferer.swift // Anti theft chains for files such as images and videos, and so on.
   ┃    ┗ ImageView+kfwrapper.swift
   ┃
   ┣ KingfisherWrapper
-       ┗ SDWebImageWrapper.swift
+       ┗ SDWebImageWrapper.swift // The wrapper for SDWebImage.
 ```
 
 ## Recommendation
@@ -175,26 +175,26 @@ CXSwiftKit
 - [CXDownload](https://github.com/chenxing640/CXDownload) - Realization of breakpoint transmission download with Swift, support Objective-C. Including large file download, background download, killing the process, continuing to download when restarting, setting the number of concurrent downloads, monitoring network changes and so on.
 - [MarsUIKit](https://github.com/chenxing640/MarsUIKit) - `MarsUIKit` wraps some commonly used UI components.
 - [RxListDataSource](https://github.com/chenxing640/RxListDataSource) - `RxListDataSource` provides data sources for UITableView or UICollectionView.
-- [CXNetwork-Moya)](https://github.com/chenxing640/CXNetwork-Moya) - Encapsulates a network request library with Moya and ObjectMapper.
+- [CXNetwork-Moya](https://github.com/chenxing640/CXNetwork-Moya) - `CXNetwork-Moya` encapsulates a network request library with Moya and ObjectMapper.
 
-## Handling Error
-
-if `SVGAPlayer` library occurs this error：
-
-```
-Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'
-Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid in C99
-```
-
-> if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {
->    [worker release];
-> }
-
-Add the header in `Svga.pbobjc.h` or `Svga.pbobjc.m`.
-
-```
-#import <libkern/OSAtomic.h>
-```
+<!--## Handling Error-->
+<!---->
+<!--if `SVGAPlayer` library occurs this error：-->
+<!---->
+<!--```-->
+<!--Conflicting types for 'OSAtomicCompareAndSwapPtrBarrier'-->
+<!--Implicit declaration of function 'OSAtomicCompareAndSwapPtrBarrier' is invalid in C99-->
+<!--```-->
+<!---->
+<!--> if (!OSAtomicCompareAndSwapPtrBarrier(nil, worker, (void * volatile *)&descriptor)) {-->
+<!-->    [worker release];-->
+<!--> }-->
+<!---->
+<!--Add the header in `Svga.pbobjc.h` or `Svga.pbobjc.m`.-->
+<!---->
+<!--```-->
+<!--#import <libkern/OSAtomic.h>-->
+<!--```-->
 
 ## Example
 
