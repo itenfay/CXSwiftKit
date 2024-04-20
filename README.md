@@ -18,9 +18,29 @@
 
 > **如果觉得还行呢，就麻烦顺手给个`star`。**
 
+## 功能
+
+- **ApplePay**`(可选)`：用于苹果支付。
+- **AVToolbox**：用于录音、音视频格式转换。
+- **Base**：包含配置、定义和日志输出等。
+- **Core**：包含APP重签检测、获取设备信息、相册操作、录屏、截屏检测、跳转等。
+- **Camera**：用于iOS相机采样数据捕获。
+- **DocumentPicker**：用于系统文件操作。
+- **Extension**：包含`Array、Dictionary、Int、Double、CGFloat、String、NSAttributedString、CALayer、NSObject、DispatchQueue、UIDevice、UIColor、UIImage、UIImageView、UIView、UIViewController`等扩展。
+- **FileOperation**：用于iOS沙盒文件操作。
+- **HandyJSONHelper**`(可选)`：HandyJSONHelper封装了JSON的转换。
+- **KingfisherWrapper**`(可选)`：Kingfisher的防盗链设置、UIButton/UIImageView快速设置图片扩展，常用功能封装。
+- **LiveGift**：用于展示直播小礼物🎁赠送
+- **OverlayView**：用于弹出上下左右各个方向的覆盖视图。
+-  **Permissions**：用于iOS的照片库、相机、麦克风、位置、蓝牙、通讯录、提醒、日历、Siri、通知、追踪等各种权限。
+- **Timer**：封装了DispatchTimer和Timer。
+- **Transition**：用于过渡场景切换。
+- **Widget**：自定义控件。
+- **SDWebImageWrapper**`(可选)`：SDWebImage的防盗链设置和常用功能封装。
+
 ## 要求
 
-* Xcode 13.0+
+* Xcode 14.0+
 * iOS 11.0, tvOS 11.0, macOS 11.0, watchOS 5.0
 
 ## 安装
@@ -35,6 +55,11 @@ pod 'CXSwiftKit'
 * ApplePay
 ```
 pod 'CXSwiftKit/ApplePay'
+```
+
+* HandyJSONHelper
+```
+pod 'CXSwiftKit/HandyJSONHelper'
 ```
 
 * KingfisherWrapper
@@ -159,13 +184,16 @@ CXSwiftKit
   ┃   ┣ CXFileToolbox.swift  // The file toolbox.
   ┃   ┣ CXLineReader.swift   // Read text file line by line in efficient way.
   ┃   ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
+  ┃  
+  ┣ HandyJSONHelper
+  ┃   ┗ HandyJSONHelper.swift // The helper for HandJSON.
   ┃
   ┣ KingfisherWrapper
   ┃    ┣ Button+kfwrapper.swift
   ┃    ┣ CXKingfisherReferer.swift // Anti theft chains for files such as images and videos, and so on.
   ┃    ┗ ImageView+kfwrapper.swift
   ┃
-  ┣ KingfisherWrapper
+  ┣ SDWebImageWrapper
        ┗ SDWebImageWrapper.swift // The wrapper for SDWebImage.
 ```
 
