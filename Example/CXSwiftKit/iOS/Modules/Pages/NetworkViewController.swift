@@ -152,11 +152,11 @@ class NetworkViewController: BaseViewController {
             }
         } else if tag == 3 {
             // Post
-            ListResponse<MemberModel>.request(api: API(path: "https://xxx.xxx.xxx/getMembers", entity: MemberRequestEntity(id: "19384563"))) { result in
+            DataResponse<MemberModel>.request(api: API(path: "https://xxx.xxx.xxx/createMember", entity: MemberRequestEntity(id: "19384563"))) { result in
                 switch result {
                 case .success(let r):
-                    if let members = r.data {
-                        CXLog.info("members=\(members)")
+                    if let member = r.data {
+                        CXLog.info("member=\(member)")
                     }
                 case .failure(let error):
                     CXLog.error("\(error.localizedDescription)")
