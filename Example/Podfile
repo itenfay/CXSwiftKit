@@ -6,12 +6,11 @@ platform :ios, '12.0'
 target 'CXSwiftKit_Example' do
   pod 'CXSwiftKit', :path => '../'
   pod 'CXSwiftKit/ApplePay', :path => '../'
-  pod 'CXSwiftKit/HandyJSONHelper', :path => '../'
   pod 'CXSwiftKit/KingfisherWrapper', :path => '../'
   pod 'CXSwiftKit/SDWebImageWrapper', :path => '../'
   
   # MarsUIKit
-  #pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '2.0.4'
+  #pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '2.0.5'
   pod 'MarsUIKit'
   # EmptyDataSet
   pod 'MarsUIKit/EmptyDataSet'
@@ -39,6 +38,9 @@ target 'CXSwiftKit_Example' do
   pod 'CXWebSocket'
   # AR
   pod 'CXARKit'
+  
+  # HandyJSON
+  pod 'HandyJSON', '~> 5.0.4-beta'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths
