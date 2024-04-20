@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '2.0.4'
+  s.version          = '2.0.5'
   s.summary          = 'CXSwiftKit provides the utilities and rich extensions of Swift language.'
   
   # This description is used to generate tags and improve search results.
@@ -31,8 +31,8 @@ Pod::Spec.new do |s|
   s.swift_versions = ['4.2', '5.0']
   
   s.ios.deployment_target = '11.0'
-  s.osx.deployment_target = '11.0'
   s.tvos.deployment_target = '11.0'
+  s.osx.deployment_target = '10.10'
   s.watchos.deployment_target = "5.0"
   
   s.requires_arc = true
@@ -123,18 +123,26 @@ Pod::Spec.new do |s|
     applepay.dependency 'CXSwiftKit/Base'
   end
   
+  s.subspec "HandyJSONHelper" do |hjson|
+    hjson.source_files = 'CXSwiftKit/Classes/HandyJSONHelper/*.{swift}'
+    hjson.ios.deployment_target = '11.0'
+    hjson.tvos.deployment_target = '11.0'
+    hjson.watchos.deployment_target = "5.0"
+    hjson.dependency 'HandyJSON', '~> 5.0.4-beta'
+  end
+  
   s.subspec "KingfisherWrapper" do |kfw|
     kfw.source_files = 'CXSwiftKit/Classes/KingfisherWrapper/*.{swift}'
     kfw.ios.deployment_target = '11.0'
     kfw.tvos.deployment_target = '11.0'
     kfw.dependency 'CXSwiftKit/Extension'
-    kfw.dependency 'Kingfisher'
+    kfw.dependency 'Kingfisher', '~> 6.3.1' #supports iOS 10+
   end
   
   s.subspec "SDWebImageWrapper" do |sdww|
     sdww.source_files = 'CXSwiftKit/Classes/SDWebImageWrapper/*.{swift}'
     sdww.dependency 'CXSwiftKit/Base'
-    sdww.dependency 'SDWebImage'
+    sdww.dependency 'SDWebImage', '~> 5.19.1'
   end
   
 end
