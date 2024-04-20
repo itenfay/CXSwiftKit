@@ -125,13 +125,6 @@ Pod::Spec.new do |s|
     applepay.dependency 'CXSwiftKit/Base'
   end
   
-  s.subspec "HandyJSONHelper" do |hjson|
-    hjson.source_files = 'CXSwiftKit/Classes/HandyJSONHelper/*.{swift}'
-    hjson.ios.deployment_target = '11.0'
-    hjson.tvos.deployment_target = '11.0'
-    hjson.dependency 'HandyJSON', '~> 5.0.4-beta'
-  end
-  
   s.subspec "KingfisherWrapper" do |kfw|
     kfw.source_files = 'CXSwiftKit/Classes/KingfisherWrapper/*.{swift}'
     kfw.ios.deployment_target = '11.0'
