@@ -28,7 +28,7 @@
 - **DocumentPicker**：用于系统文件操作。
 - **Extension**：包含`Array、Dictionary、Int、Double、CGFloat、String、NSAttributedString、CALayer、NSObject、DispatchQueue、UIDevice、UIColor、UIImage、UIImageView、UIView、UIViewController`等扩展。
 - **FileOperation**：用于iOS沙盒文件操作。
-- **HandyJSONHelper**`(可选)`：HandyJSONHelper封装了JSON的转换。
+<!--- **HandyJSONHelper**`(可选)`：HandyJSONHelper封装了JSON的转换。-->
 - **KingfisherWrapper**`(可选)`：Kingfisher的防盗链设置、UIButton/UIImageView快速设置图片扩展，常用功能封装。
 - **LiveGift**：用于展示直播小礼物🎁赠送
 - **OverlayView**：用于弹出上下左右各个方向的覆盖视图。
