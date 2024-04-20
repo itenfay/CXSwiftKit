@@ -28,7 +28,7 @@
 - **DocumentPicker**：This is used for system file operations.
 - **Extension**：Includes the extensions of `Array、Dictionary、Int、Double、CGFloat、String、NSAttributedString、CALayer、NSObject、DispatchQueue、UIDevice、UIColor、UIImage、UIImageView、UIView、UIViewController, etc.`. 
 - **FileOperation**：This is used for iOS sandbox file operations.
-- **HandyJSONHelper**`(Optional)`：`HandyJSONHelper` wraps the JSON conversion.
+<!--- **HandyJSONHelper**`(Optional)`：`HandyJSONHelper` wraps the JSON conversion.-->
 - **KingfisherWrapper**`(Optional)`：`Kingfisher`'s anti-theft chain settings, `UIButton/UIImageView`'s extensions is used to set the image, and wraps commonly used functions.
 - **LiveGift**：This is used to showcase small gifts for live streaming.
 - **OverlayView**：This is used to pop up overlay views in all directions up, down, left, and right.
