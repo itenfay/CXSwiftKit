@@ -1,21 +1,17 @@
 use_frameworks!
 
-platform :ios, '11.0'
+platform :ios, '12.0'
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'CXSwiftKit_Example' do
   pod 'CXSwiftKit', :path => '../'
   pod 'CXSwiftKit/ApplePay', :path => '../'
+  pod 'CXSwiftKit/HandyJSONHelper', :path => '../'
   pod 'CXSwiftKit/KingfisherWrapper', :path => '../'
   pod 'CXSwiftKit/SDWebImageWrapper', :path => '../'
   
-  # HandyJSON
-  pod 'HandyJSON', '~> 5.0.4-beta'
-  # Starscream
-  #pod 'Starscream'
-  
   # MarsUIKit
-  #pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '2.0.0'
+  #pod 'MarsUIKit', :git => "https://github.com/chenxing640/MarsUIKit.git", :tag => '2.0.4'
   pod 'MarsUIKit'
   # EmptyDataSet
   pod 'MarsUIKit/EmptyDataSet'
@@ -36,8 +32,13 @@ target 'CXSwiftKit_Example' do
   
   # RxListDataSource
   pod 'RxListDataSource'
-  # CXNetwork
-  pod 'CXNetwork', :git => 'https://github.com/chenxing640/CXNetwork-Moya.git', :tag => '1.0.1'
+  # Network
+  pod 'CXNetwork', :git => 'https://github.com/chenxing640/CXNetwork-Moya.git', :tag => '1.0.2'
+  # WebSocket
+  #pod 'CXWebSocket', :git => 'https://github.com/chenxing640/CXWebSocket.git', :tag => '1.0.1'
+  pod 'CXWebSocket'
+  # AR
+  pod 'CXARKit'
   
   target 'CXSwiftKit_Tests' do
     inherit! :search_paths
