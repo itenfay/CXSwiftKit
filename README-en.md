@@ -18,9 +18,29 @@
 
 > **If you think it's okay, please give it a `star`**
 
+## Fetures
+
+- **ApplePay**`(Optional)`：This is used for Apple payment.
+- **AVToolbox**：This is used for audio and video format conversion.
+- **Base**：Includes configuration, definition, and log output.
+- **Core**：Includes APP resignature detection, obtaining device information, album operation, screen recording, screenshot detection, redirection, etc.
+- **Camera**：This is used for iOS camera sampling data capture.
+- **DocumentPicker**：This is used for system file operations.
+- **Extension**：Includes the extensions of `Array、Dictionary、Int、Double、CGFloat、String、NSAttributedString、CALayer、NSObject、DispatchQueue、UIDevice、UIColor、UIImage、UIImageView、UIView、UIViewController, etc.`. 
+- **FileOperation**：This is used for iOS sandbox file operations.
+- **HandyJSONHelper**`(Optional)`：`HandyJSONHelper` wraps the JSON conversion.
+- **KingfisherWrapper**`(Optional)`：`Kingfisher`'s anti-theft chain settings, `UIButton/UIImageView`'s extensions is used to set the image, and wraps commonly used functions.
+- **LiveGift**：This is used to showcase small gifts for live streaming.
+- **OverlayView**：This is used to pop up overlay views in all directions up, down, left, and right.
+-  **Permissions**：Various permissions for iOS, including `photo library, camera, microphone, location, Bluetooth, contacts, reminders, calendar, Siri, notifications, tracking, and more`.
+- **Timer**：Encapsulated `Dispatch Timer` and `Timer`.
+- **Transition**：This is for switching transitional scene.
+- **Widget**：The custom widgets.
+- **SDWebImageWrapper**`(Optional)`：`SDWebImage`'s anti-theft chain settings and common functions encapsulation.
+
 ## Requirements
 
-* Xcode 13.0+
+* Xcode 14.0+
 * iOS 11.0, tvOS 11.0, macOS 11.0, watchOS 5.0
 
 ## Installation
@@ -36,6 +56,11 @@ pod 'CXSwiftKit'
 * ApplePay
 ```
 pod 'CXSwiftKit/ApplePay'
+```
+
+* HandyJSONHelper
+```
+pod 'CXSwiftKit/HandyJSONHelper'
 ```
 
 * KingfisherWrapper
@@ -160,13 +185,16 @@ CXSwiftKit
   ┃   ┣ CXFileToolbox.swift  // The file toolbox.
   ┃   ┣ CXLineReader.swift   // Read text file line by line in efficient way.
   ┃   ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
+  ┃  
+  ┣ HandyJSONHelper
+  ┃   ┗ HandyJSONHelper.swift // The helper for HandJSON.
   ┃
   ┣ KingfisherWrapper
   ┃    ┣ Button+kfwrapper.swift
   ┃    ┣ CXKingfisherReferer.swift // Anti theft chains for files such as images and videos, and so on.
   ┃    ┗ ImageView+kfwrapper.swift
   ┃
-  ┣ KingfisherWrapper
+  ┣ SDWebImageWrapper
        ┗ SDWebImageWrapper.swift // The wrapper for SDWebImage.
 ```
 
