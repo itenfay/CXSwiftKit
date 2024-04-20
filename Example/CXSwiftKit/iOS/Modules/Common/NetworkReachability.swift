@@ -9,6 +9,7 @@
 import Foundation
 import RxSwift
 import Alamofire
+import CXWebSocket
 import CXSwiftKit
 
 // An observable that completes when the app gets online (possibly completes immediately).
@@ -50,7 +51,7 @@ public class ReachabilityManager: NSObject {
             case .unknown:
                 self.reachSubject.onNext(false)
             }
-            //self.cx.postNotification(withName: CXWebSocket.networkStatusDidChangeNotification, object: NSNumber(value: reachable))
+            self.cx.postNotification(withName: CXWebSocket.networkStatusDidChangeNotification, object: NSNumber(value: reachable))
         })
     }
     

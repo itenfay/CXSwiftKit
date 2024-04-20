@@ -59,7 +59,7 @@ struct VoidResponse: Decodable { }
 
 extension NSError {
     static func createPraseError() -> NSError {
-        return NSError(domain: "com.cx.download",
+        return NSError(domain: "com.cx.apiclient",
                        code: ApiParseError.code,
                        userInfo: [NSLocalizedDescriptionKey: "A parsing error occured"])
     }

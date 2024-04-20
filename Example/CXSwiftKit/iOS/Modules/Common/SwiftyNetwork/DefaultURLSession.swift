@@ -50,9 +50,32 @@ class DefaultURLSession: NSObject, URLSessionProtocol {
 
 extension DefaultURLSession: URLSessionDataDelegate {
     
-    //func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
-    //    completionHandler(.useCredential, nil)
-    //}
+    private func trustServer(_ challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let protectionSpace = challenge.protectionSpace
+        let secTrust = protectionSpace.serverTrust
+        
+        assert(secTrust != nil)
+        
+        if let trust = secTrust {
+            let urlCredential = URLCredential(trust: trust)
+            challenge.sender?.use(urlCredential, for: challenge)
+            completionHandler(.useCredential, urlCredential)
+        } else {
+            completionHandler(.cancelAuthenticationChallenge, nil)
+        }
+    }
+    
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let method = challenge.protectionSpace.authenticationMethod
+        switch method {
+        case NSURLAuthenticationMethodServerTrust: // Perform server trust authentication (certificate validation) for this protection space.
+            trustServer(challenge, completionHandler: completionHandler)
+        case NSURLAuthenticationMethodClientCertificate: // Use client certificate authentication for this protection space.
+            completionHandler(.performDefaultHandling, nil)
+        default:
+            completionHandler(.performDefaultHandling, nil)
+        }
+    }
     
     func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         urlResponse = response
