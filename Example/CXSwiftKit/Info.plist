@@ -69,7 +69,11 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationPortrait</string>
 	</array>
 	<key>kTCCServiceMediaLibrary</key>
 	<string>请允许app访问Apple Music，在您同意后，您才可以使用Apple Music功能</string>
