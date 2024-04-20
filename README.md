@@ -178,16 +178,13 @@ CXSwiftKit
   ┃   ┣ CXFileToolbox.swift  // The file toolbox.
   ┃   ┣ CXLineReader.swift   // Read text file line by line in efficient way.
   ┃   ┗ CXStreamReader.swift // The file descriptor accesses data associated with files.
-  ┃  
-  ┣ HandyJSONHelper
-  ┃   ┗ HandyJSONHelper.swift // The helper for HandJSON.
   ┃
   ┣ KingfisherWrapper
   ┃    ┣ Button+kfwrapper.swift
   ┃    ┣ CXKingfisherReferer.swift // Anti theft chains for files such as images and videos, and so on.
   ┃    ┗ ImageView+kfwrapper.swift
   ┃
-  ┣ SDWebImageWrapper
+  ┗ SDWebImageWrapper
        ┗ SDWebImageWrapper.swift // The wrapper for SDWebImage.
 ```
 
