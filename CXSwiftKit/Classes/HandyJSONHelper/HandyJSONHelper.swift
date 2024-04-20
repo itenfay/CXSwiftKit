@@ -6,7 +6,8 @@
 //
 
 import Foundation
-#if !os(macOS) && canImport(HandyJSON)
+#if os(iOS) || os(tvOS)
+#if canImport(HandyJSON)
 import HandyJSON
 
 public class HandyJSONHelper {
@@ -50,4 +51,5 @@ public class HandyJSONHelper {
     
 }
 
+#endif
 #endif
