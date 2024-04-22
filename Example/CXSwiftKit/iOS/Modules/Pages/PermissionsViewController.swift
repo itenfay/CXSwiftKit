@@ -79,7 +79,7 @@ class PermissionsViewController: BaseViewController, CXTableViewDataSourceProvid
         let devicePasscodePermission = CXDevicePasscodePermission()
         let devicePasscodeModel = PermissionModel()
         devicePasscodeModel.type.accept(.devicePasscode)
-        deviceBiometricsModel.status.accept(devicePasscodePermission.status)
+        devicePasscodeModel.status.accept(devicePasscodePermission.status)
         items.append(devicePasscodeModel)
         permissions.append(devicePasscodePermission)
         
