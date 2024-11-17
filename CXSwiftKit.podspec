@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'CXSwiftKit'
-  s.version          = '2.0.6'
+  s.version          = '2.1.0'
   s.summary          = 'CXSwiftKit provides the utilities and rich extensions of Swift language.'
   
   # This description is used to generate tags and improve search results.
@@ -21,14 +21,15 @@ Pod::Spec.new do |s|
   TODU: CXSwiftKit provides the utilities and rich extensions of Swift language.
   DESC
   
-  s.homepage         = 'https://github.com/chenxing640/CXSwiftKit'
+  s.homepage         = 'https://github.com/itenfay/CXSwiftKit'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Teng Fei' => 'hansen981@126.com' }
-  s.source           = { :git => 'https://github.com/chenxing640/CXSwiftKit.git', :tag => s.version.to_s }
+  s.author           = { 'Tenfay' => 'itenfay@163.com' }
+  s.source           = { :git => 'https://github.com/itenfay/CXSwiftKit.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
   
-  s.swift_versions = ['4.2', '5.0']
+  #s.swift_versions = ['4.2', '5.0']
+  s.swift_version = '5.0'
   
   s.ios.deployment_target = '11.0'
   s.tvos.deployment_target = '11.0'
