@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 11/14/2022.
-//  Copyright (c) 2022 Teng Fei. All rights reserved.
+//  Created by Tenfay on 11/14/2022.
+//  Copyright (c) 2022 Tenfay. All rights reserved.
 //
 
 import UIKit

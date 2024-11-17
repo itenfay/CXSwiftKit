@@ -2,7 +2,7 @@
 //  DocumentModel.swift
 //  CXSwiftKit_Example
 //
-//  Created by Teng Fei on 2023/7/26.
+//  Created by Tenfay on 2023/7/26.
 //  Copyright © 2023 CocoaPods. All rights reserved.
 //
 
