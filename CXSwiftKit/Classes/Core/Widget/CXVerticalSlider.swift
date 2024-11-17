@@ -2,7 +2,7 @@
 //  CXVerticalSlider.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 2022/6/8.
+//  Created by Tenfay on 2022/6/8.
 //
 
 #if os(iOS) || os(tvOS)

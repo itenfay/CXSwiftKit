@@ -2,7 +2,7 @@
 //  CXCircleProgressButton.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 2021/5/19.
+//  Created by Tenfay on 2021/5/19.
 //
 
 #if os(iOS) || os(tvOS)

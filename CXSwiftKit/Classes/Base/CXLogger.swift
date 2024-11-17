@@ -2,7 +2,7 @@
 //  CXLogger.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 2022/11/10.
+//  Created by Tenfay on 2022/11/10.
 //
 
 import Foundation

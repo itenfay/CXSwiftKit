@@ -2,7 +2,7 @@
 //  CXHaptics.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 2022/8/12.
+//  Created by Tenfay on 2022/8/12.
 //
 
 import Foundation

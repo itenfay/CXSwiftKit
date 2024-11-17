@@ -2,7 +2,7 @@
 //  CXSwipeLeftInteractiveTransition.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 2022/8/11.
+//  Created by Tenfay on 2022/8/11.
 //
 
 #if os(iOS) || os(tvOS)

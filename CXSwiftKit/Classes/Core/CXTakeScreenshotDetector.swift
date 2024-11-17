@@ -2,7 +2,7 @@
 //  CXTakeScreenshotDetector.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 2023/3/16.
+//  Created by Tenfay on 2023/3/16.
 //
 
 #if os(iOS) || os(tvOS)

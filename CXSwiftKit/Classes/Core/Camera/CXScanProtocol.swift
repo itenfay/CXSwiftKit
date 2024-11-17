@@ -2,7 +2,7 @@
 //  CXScanProtocol.swift
 //  CXSwiftKit
 //
-//  Created by Teng Fei on 2023/6/5.
+//  Created by Tenfay on 2023/6/5.
 //
 
 import Foundation
