@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+### **2.1.0 (11/17/2024)**
+
+- Updates some contents.
+
 ### **2.0.3 (04/14/2024)**
 
 - Updates some contents.
